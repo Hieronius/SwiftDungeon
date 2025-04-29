@@ -33,18 +33,9 @@ class CharacterManager {
 						  minDamage: 5)
 	}
 
-	func spawnEnemy() -> Character? {
-		guard !enemyList.isEmpty else { return nil }
-		return enemyList.removeFirst()
+	func spawnEnemy(at index: Int) -> Character {
+		return enemyList[index]
 	}
 
-//	func resetCharacters() {
-//		scene.hero.currentHealth = scene.hero.maxHealth
-//		scene.hero.currentMana = scene.hero.maxMana
-//		scene.hero.currentEnergy = scene.hero.maxEnergy
-//		scene.enemy.currentHealth = scene.enemy.maxHealth
-//		scene.enemy.currentMana = scene.enemy.maxMana
-//		scene.enemy.currentEnergy = scene.enemy.maxEnergy
-//	}
 }
 
