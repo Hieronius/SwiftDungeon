@@ -12,6 +12,7 @@ class CombatManager {
 
 	}
 
+	// should be refactored so the method only calculates heal instead of using game state properties
 	func heal(_ host: Character) {
 		host.currentHealth = host.maxHealth
 	}

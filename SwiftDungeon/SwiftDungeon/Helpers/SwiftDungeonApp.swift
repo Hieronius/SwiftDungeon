@@ -4,7 +4,15 @@ import SwiftUI
 struct SwiftDungeonApp: App {
     var body: some Scene {
         WindowGroup {
-            RoomView()
+
+			let gameState = GameState()
+			let combatManager = CombatManager()
+			let characterManager = CharacterManager()
+			let viewModel = RoomViewModel(gameState: gameState,
+										  combatManager: combatManager,
+										  characterManager: characterManager)
+
+            RoomView(viewModel: viewModel)
         }
     }
 }

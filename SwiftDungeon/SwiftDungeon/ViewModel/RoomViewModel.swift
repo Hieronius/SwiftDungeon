@@ -2,9 +2,18 @@ import SwiftUI
 
 class RoomViewModel: ObservableObject {
 
-	var gameState: GameState
-	var combatManager: CombatManager
-	var characterManager: CharacterManager
+	// MARK: - Dependencies
+
+	@Published private var gameState: GameState
+	private let combatManager: CombatManager
+	private let characterManager: CharacterManager
+
+	// MARK: - Properties
+
+	var currentRoom: Int { gameState.currentRoom }
+	var currentRound: Int { gameState.currentRound }
+
+	// MARK: - Initialization
 
 	init(gameState: GameState,
 		 combatManager: CombatManager,
@@ -15,6 +24,8 @@ class RoomViewModel: ObservableObject {
 		self.characterManager = characterManager
 	}
 
+	// MARK: - Game Flow
+
 	func startFight() {
 		gameState.isGameOn = true
 		gameState.isHeroTurn = true
@@ -23,5 +34,31 @@ class RoomViewModel: ObservableObject {
 		gameState.enemyIndex = 0
 		let position = gameState.enemyIndex
 		gameState.enemy = characterManager.spawnEnemy(at: position)
+	}
+
+	func attack() {
+
+		guard let hero = gameState.hero else { return }
+		guard let enemy = gameState.enemy else { return }
+
+		if gameState.isHeroTurn {
+			combatManager.attack(hero, enemy)
+		} else {
+			combatManager.attack(enemy, hero)
+		}
+	}
+
+	func heal() {
+
+		if gameState.isHeroTurn {
+
+			guard let target = gameState.hero else { return }
+			combatManager.heal(target)
+
+		} else {
+
+			guard let target = gameState.enemy else { return }
+			combatManager.heal(target)
+		}
 	}
 }
