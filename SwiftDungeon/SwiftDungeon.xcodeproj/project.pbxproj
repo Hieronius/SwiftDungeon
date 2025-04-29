@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DDA59C492DC07582007877A6 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA59C482DC07582007877A6 /* GameState.swift */; };
 		DDA940612DBF4FC600837F9F /* SwiftDungeonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */; };
 		DDA940632DBF4FC600837F9F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940622DBF4FC600837F9F /* ContentView.swift */; };
 		DDA940652DBF4FCD00837F9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDA940642DBF4FCD00837F9F /* Assets.xcassets */; };
@@ -14,12 +15,12 @@
 		DDA940732DBF519200837F9F /* RoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940722DBF519200837F9F /* RoomViewModel.swift */; };
 		DDA940752DBF51C800837F9F /* Creature.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940742DBF51C800837F9F /* Creature.swift */; };
 		DDA940772DBF522300837F9F /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940762DBF522300837F9F /* Character.swift */; };
-		DDA9407A2DBF531B00837F9F /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940792DBF531B00837F9F /* GameManager.swift */; };
 		DDA9407C2DBF538700837F9F /* CombatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9407B2DBF538700837F9F /* CombatManager.swift */; };
 		DDA9407E2DBF53E000837F9F /* CharactersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9407D2DBF53E000837F9F /* CharactersManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DDA59C482DC07582007877A6 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		DDA9405D2DBF4FC600837F9F /* SwiftDungeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDungeon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDungeonApp.swift; sourceTree = "<group>"; };
 		DDA940622DBF4FC600837F9F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -28,7 +29,6 @@
 		DDA940722DBF519200837F9F /* RoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewModel.swift; sourceTree = "<group>"; };
 		DDA940742DBF51C800837F9F /* Creature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.swift; sourceTree = "<group>"; };
 		DDA940762DBF522300837F9F /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
-		DDA940792DBF531B00837F9F /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		DDA9407B2DBF538700837F9F /* CombatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatManager.swift; sourceTree = "<group>"; };
 		DDA9407D2DBF53E000837F9F /* CharactersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,9 +118,9 @@
 		DDA940782DBF530700837F9F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				DDA940792DBF531B00837F9F /* GameManager.swift */,
 				DDA9407B2DBF538700837F9F /* CombatManager.swift */,
 				DDA9407D2DBF53E000837F9F /* CharactersManager.swift */,
+				DDA59C482DC07582007877A6 /* GameState.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -197,10 +197,10 @@
 			files = (
 				DDA9407C2DBF538700837F9F /* CombatManager.swift in Sources */,
 				DDA940772DBF522300837F9F /* Character.swift in Sources */,
-				DDA9407A2DBF531B00837F9F /* GameManager.swift in Sources */,
 				DDA940632DBF4FC600837F9F /* ContentView.swift in Sources */,
 				DDA940732DBF519200837F9F /* RoomViewModel.swift in Sources */,
 				DDA9407E2DBF53E000837F9F /* CharactersManager.swift in Sources */,
+				DDA59C492DC07582007877A6 /* GameState.swift in Sources */,
 				DDA940612DBF4FC600837F9F /* SwiftDungeonApp.swift in Sources */,
 				DDA940752DBF51C800837F9F /* Creature.swift in Sources */,
 			);
