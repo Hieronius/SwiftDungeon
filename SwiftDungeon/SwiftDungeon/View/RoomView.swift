@@ -3,162 +3,128 @@ import SwiftUI
 struct RoomView: View {
 
 	// MARK: - State Properties
-
 	@StateObject private var viewModel: RoomViewModel
 
 	// MARK: - Initialization
-
 	init(viewModel: RoomViewModel) {
 		_viewModel = StateObject(wrappedValue: viewModel)
 	}
 
 	// MARK: - Body
-
-    var body: some View {
-
+	var body: some View {
 		ZStack {
 			Color.black
-			.edgesIgnoringSafeArea(.all)
+				.edgesIgnoringSafeArea(.all)
 
 			VStack {
-
-//				Spacer()
-
-				// MARK: - Info Layer (Top)
-
-				HStack {
-
-					Spacer()
-
-					HStack {
-
-						Text("Current Room:")
-							.font(.title2)
-							.foregroundColor(.white)
-
-						Text("\(viewModel.currentRoom)")
-							.font(.title2)
-							.foregroundColor(.white)
-
-					}
-
-					Spacer()
-
-					HStack {
-						Text("Current Round:")
-							.font(.title2)
-							.foregroundColor(.white)
-						Text("\(viewModel.currentRound)")
-							.font(.title2)
-							.foregroundColor(.white)
-					}
-
-					Spacer()
-				}
-
+				gameInfoSection()
 				Spacer()
-
-				// MARK: - Character's Stats (Top - Middle)
-
-				HStack {
-
-					VStack {
-						Text("Hero")
-							.font(.title2)
-							.foregroundColor(.white)
-						HealthBar(health: 100)
-						ManaBar(mana: 100)
-						EnergyBar(energy: 5)
-					}
-
-					Spacer()
-					Spacer()
-
-					VStack {
-						Text("Enemy")
-							.font(.title2)
-							.foregroundColor(.white)
-						HealthBar(health: 100)
-						ManaBar(mana: 100)
-						EnergyBar(energy: 5)
-					}
-				}
-
+				characterStatsSection()
 				Spacer()
-
+				battleFieldSection()
 				Spacer()
-
-				// MARK: - Battle Field Layer (Middle)
-
-				HStack {
-
-					Spacer()
-
-					ZStack {
-						Rectangle()
-							.frame(width: 100, height: 100)
-							.foregroundColor(.black)
-							.border(.white)
-						Text("H")
-							.font(.title2)
-							.foregroundColor(.white)
-					}
-
-					Spacer()
-
-					ZStack {
-						Rectangle()
-							.frame(width: 100, height: 100)
-							.foregroundColor(.red)
-							.border(.white)
-						Text("H")
-							.font(.title2)
-							.foregroundColor(.white)
-					}
-
-					Spacer()
-
-				}
-
+				actionButtons()
 				Spacer()
-				Spacer()
-
-				// MARK: - Buttons Layer (Bottom)
-
-				HStack {
-					Spacer()
-					Button("Attack") {
-						viewModel.attack()
-					}
-					.buttonStyle(.bordered)
-					.font(.title)
-					.foregroundColor(.white)
-					Spacer()
-					Button("Heal") {
-						viewModel.heal()
-					}
-					.buttonStyle(.bordered)
-					.font(.title)
-					.foregroundColor(.white)
-					Spacer()
-				}
-
-				Spacer()
-
 			}
 		}
-    }
+	}
+
+	// MARK: - Info Layer (Room & Round)
+	@ViewBuilder
+	private func gameInfoSection() -> some View {
+		HStack {
+			Spacer()
+			infoText(label: "Current Room:", value: viewModel.currentRoom)
+			Spacer()
+			infoText(label: "Current Round:", value: viewModel.currentRound)
+			Spacer()
+		}
+	}
+
+	private func infoText(label: String, value: Int) -> some View {
+		HStack {
+			Text(label)
+				.font(.title2)
+				.foregroundColor(.white)
+			Text("\(value)")
+				.font(.title2)
+				.foregroundColor(.white)
+		}
+	}
+
+	// MARK: - Character Stats (Hero & Enemy)
+	@ViewBuilder
+	private func characterStatsSection() -> some View {
+		HStack {
+			characterStats(name: "Hero", health: 100, mana: 100, energy: 5)
+			Spacer()
+			characterStats(name: "Enemy", health: 100, mana: 100, energy: 5)
+		}
+	}
+
+	private func characterStats(name: String, health: CGFloat, mana: CGFloat, energy: Int) -> some View {
+		VStack {
+			Text(name)
+				.font(.title2)
+				.foregroundColor(.white)
+			HealthBar(health: health)
+			ManaBar(mana: mana)
+			EnergyBar(energy: energy)
+		}
+	}
+
+	// MARK: - Battle Field Layer
+	@ViewBuilder
+	private func battleFieldSection() -> some View {
+		HStack {
+			Spacer()
+			battlefieldTile(color: .black, label: "H")
+			Spacer()
+			battlefieldTile(color: .red, label: "E")
+			Spacer()
+		}
+	}
+
+	private func battlefieldTile(color: Color, label: String) -> some View {
+		ZStack {
+			Rectangle()
+				.frame(width: 100, height: 100)
+				.foregroundColor(color)
+				.border(Color.white)
+			Text(label)
+				.font(.title2)
+				.foregroundColor(.white)
+		}
+	}
+
+	// MARK: - Action Buttons
+	@ViewBuilder
+	private func actionButtons() -> some View {
+		HStack {
+			Spacer()
+			actionButton(title: "Attack", action: viewModel.attack)
+			Spacer()
+			actionButton(title: "Heal", action: viewModel.heal)
+			Spacer()
+		}
+	}
+
+	private func actionButton(title: String, action: @escaping () -> Void) -> some View {
+		Button(title, action: action)
+			.buttonStyle(.bordered)
+			.font(.title)
+			.foregroundColor(.white)
+	}
 }
 
-// MARK: Health/Mana/Energy Bars
-
+// MARK: Health Bar
 struct HealthBar: View {
 	var health: CGFloat // Value between 0 and 100
 
 	var body: some View {
 		ZStack(alignment: .leading) {
 			Rectangle()
-				.frame(width: health * 1.25, height: 20)
+				.frame(width: 125, height: 20)
 				.foregroundColor(.gray) // Background bar
 
 			Rectangle()
@@ -169,23 +135,25 @@ struct HealthBar: View {
 	}
 }
 
+// MARK: Mana Bar
 struct ManaBar: View {
 	var mana: CGFloat // Value between 0 and 100
 
 	var body: some View {
 		ZStack(alignment: .leading) {
 			Rectangle()
-				.frame(width: mana * 1.25, height: 20)
+				.frame(width: 125, height: 20)
 				.foregroundColor(.gray) // Background bar
 
 			Rectangle()
 				.frame(width: mana * 1.25, height: 20) // Adjust width dynamically
-				.foregroundColor(.blue) // Health bar
+				.foregroundColor(.blue) // Mana bar
 		}
 		.cornerRadius(5)
 	}
 }
 
+// MARK: Energy Bar
 struct EnergyBar: View {
 	var energy: Int // Value between 1 and 5
 
@@ -200,11 +168,9 @@ struct EnergyBar: View {
 	}
 }
 
-
-// MARK: ContentView
-
+// MARK: - ContentView Previews
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
+	static var previews: some View {
 		let gameState = GameState()
 		let combatManager = CombatManager()
 		let characterManager = CharacterManager()
@@ -213,5 +179,5 @@ struct ContentView_Previews: PreviewProvider {
 									  characterManager: characterManager)
 
 		RoomView(viewModel: viewModel)
-    }
+	}
 }
