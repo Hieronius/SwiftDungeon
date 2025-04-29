@@ -14,6 +14,9 @@
 		DDA940732DBF519200837F9F /* RoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940722DBF519200837F9F /* RoomViewModel.swift */; };
 		DDA940752DBF51C800837F9F /* Creature.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940742DBF51C800837F9F /* Creature.swift */; };
 		DDA940772DBF522300837F9F /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940762DBF522300837F9F /* Character.swift */; };
+		DDA9407A2DBF531B00837F9F /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940792DBF531B00837F9F /* GameManager.swift */; };
+		DDA9407C2DBF538700837F9F /* CombatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9407B2DBF538700837F9F /* CombatManager.swift */; };
+		DDA9407E2DBF53E000837F9F /* CharactersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9407D2DBF53E000837F9F /* CharactersManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +28,9 @@
 		DDA940722DBF519200837F9F /* RoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewModel.swift; sourceTree = "<group>"; };
 		DDA940742DBF51C800837F9F /* Creature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creature.swift; sourceTree = "<group>"; };
 		DDA940762DBF522300837F9F /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		DDA940792DBF531B00837F9F /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		DDA9407B2DBF538700837F9F /* CombatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatManager.swift; sourceTree = "<group>"; };
+		DDA9407D2DBF53E000837F9F /* CharactersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +63,7 @@
 		DDA9405F2DBF4FC600837F9F /* SwiftDungeon */ = {
 			isa = PBXGroup;
 			children = (
+				DDA940782DBF530700837F9F /* Managers */,
 				DDA940712DBF50FF00837F9F /* Helpers */,
 				DDA940702DBF50E800837F9F /* ViewModel */,
 				DDA9406F2DBF50E400837F9F /* Model */,
@@ -106,6 +113,16 @@
 				DDA940642DBF4FCD00837F9F /* Assets.xcassets */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DDA940782DBF530700837F9F /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				DDA940792DBF531B00837F9F /* GameManager.swift */,
+				DDA9407B2DBF538700837F9F /* CombatManager.swift */,
+				DDA9407D2DBF53E000837F9F /* CharactersManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,9 +195,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDA9407C2DBF538700837F9F /* CombatManager.swift in Sources */,
 				DDA940772DBF522300837F9F /* Character.swift in Sources */,
+				DDA9407A2DBF531B00837F9F /* GameManager.swift in Sources */,
 				DDA940632DBF4FC600837F9F /* ContentView.swift in Sources */,
 				DDA940732DBF519200837F9F /* RoomViewModel.swift in Sources */,
+				DDA9407E2DBF53E000837F9F /* CharactersManager.swift in Sources */,
 				DDA940612DBF4FC600837F9F /* SwiftDungeonApp.swift in Sources */,
 				DDA940752DBF51C800837F9F /* Creature.swift in Sources */,
 			);
