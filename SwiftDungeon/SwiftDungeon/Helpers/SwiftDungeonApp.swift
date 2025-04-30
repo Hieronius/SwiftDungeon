@@ -2,7 +2,9 @@ import SwiftUI
 
 @main
 struct SwiftDungeonApp: App {
+
     var body: some Scene {
+		
         WindowGroup {
 
 			let gameState = GameState()

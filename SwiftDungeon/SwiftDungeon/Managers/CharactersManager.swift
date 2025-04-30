@@ -2,6 +2,7 @@ import Foundation
 
 /// CharacterManager - Manages spawning and resetting Characters
 class CharacterManager {
+	
 	private var enemyList: [Character] = [
 
 					Character(name: "Skeleton", maxHealth: 15, currentHealth: 15, maxMana: 0, currentMana: 0, maxEnergy: 1, currentEnergy: 1, maxDamage: 5, minDamage: 2),
