@@ -68,41 +68,41 @@ class RoomViewModel: ObservableObject {
 
 	func block() {
 
-		if gameState.isHeroTurn {
+		guard gameState.isGameOn else { return }
 
-			guard let caster = gameState.hero else { return }
-			guard caster.currentEnergy >= 1 else { return }
-			caster.currentArmor += combatManager.block(caster)
-			caster.currentEnergy -= 1
-
-		} else {
-
-			guard let caster = gameState.enemy else { return }
-			guard caster.currentEnergy >= 1 else { return }
-			caster.currentArmor += combatManager.block(caster)
-			caster.currentEnergy -= 1
-		}
+		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
+		guard let target else { return }
+		guard target.currentEnergy >= 1 else { return }
+		target.currentArmor += combatManager.block(target)
+		target.currentEnergy -= 1
 	}
 
 	func heal() {
 
-		if gameState.isHeroTurn {
+		guard gameState.isGameOn else { return }
 
-			guard let target = gameState.hero else { return }
-			guard target.currentEnergy >= 1 else { return }
-			guard target.currentMana >= 10 else { return }
-			target.currentHealth = max(combatManager.heal(target), target.maxHealth)
-			target.currentMana -= 10
-			target.currentEnergy -= 1
+		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
+		guard let target else { return }
+		guard target.currentEnergy >= 1, target.currentMana >= 10 else { return }
 
-		} else {
+		let result = combatManager.heal(target)
+		target.currentHealth = min(target.currentHealth + result, target.maxHealth)
+		target.currentMana -= 10
+		target.currentEnergy -= 1
+	}
 
-			guard let target = gameState.enemy else { return }
-			guard target.currentEnergy >= 1 else { return }
-			guard target.currentMana >= 10 else { return }
-			target.currentHealth = max(combatManager.heal(target), target.maxHealth)
-			target.currentMana -= 10
-			target.currentEnergy -= 1
-		}
+	func buff() {
+
+		guard gameState.isGameOn else { return }
+
+		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
+		guard let target else { return }
+		guard target.currentEnergy >= 1, target.currentMana >= 10 else { return }
+
+		let result = combatManager.buff(target)
+		target.minDamage += result
+		target.maxDamage += result
+		target.currentMana -= 10
+		target.currentEnergy -= 1
 	}
 }
