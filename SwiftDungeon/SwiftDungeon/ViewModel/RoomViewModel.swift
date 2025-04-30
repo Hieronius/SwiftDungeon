@@ -163,6 +163,7 @@ class RoomViewModel: ObservableObject {
 	}
 
 	func restoreHero() {
+		
 		guard let hero = gameState.hero else { return }
 		hero.currentHealth = hero.maxHealth
 		hero.currentMana = hero.maxMana
@@ -172,6 +173,7 @@ class RoomViewModel: ObservableObject {
 	}
 
 	func enterNewRoom() {
+
 		gameState.isGameOn = true
 		gameState.isHeroTurn = true
 		gameState.isHeroWon = false
@@ -198,7 +200,6 @@ class RoomViewModel: ObservableObject {
 
 			guard hero.currentEnergy >= 1 else { return }
 			let result = combatManager.attack(hero, enemy)
-			print(result)
 			enemy.currentHealth = max(enemy.currentHealth - result, 0)
 			hero.currentEnergy -= 1
 
@@ -224,7 +225,7 @@ class RoomViewModel: ObservableObject {
 		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
 		guard let target else { return }
 		guard target.currentEnergy >= 1 else { return }
-		
+
 		let blockValue = combatManager.block(target)
 		let buff = Effect(type: .buff(.armor(value: blockValue)),
 						  duration: 1)

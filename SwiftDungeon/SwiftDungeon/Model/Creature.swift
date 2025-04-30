@@ -17,4 +17,10 @@ protocol Creature {
 	var isAffected: Bool { get set }
 	var activeEffects: [Effect] { get set }
 
+	func applyEffect(_ effect: Effect)
+	func revertEffect(_ effect: Effect)
+	func clearAllEffects()
+	func clearDebuffs()
+	func clearBuffs()
+
 }
