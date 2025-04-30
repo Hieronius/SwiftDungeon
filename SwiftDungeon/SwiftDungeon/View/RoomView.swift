@@ -1,5 +1,7 @@
 import SwiftUI
 
+// MARK: Note to implement
+// ifVisibleInventory/ifVisibleSkills property can be used in GameState or even here in the view to display a bunch of views/buttons/screens accordingly
 struct RoomView: View {
 
 	// MARK: - State Properties
@@ -90,14 +92,14 @@ struct RoomView: View {
 	private func battleFieldSection() -> some View {
 		HStack {
 			Spacer()
-			characterTile(
+			CharacterTileView(
 				color: .black,
 				label: "H",
 				isActive: viewModel.isHeroTurn,
 				activeColor: .gray
 			)
 			Spacer()
-			characterTile(
+			CharacterTileView(
 				color: .red,
 				label: "E",
 				isActive: !viewModel.isHeroTurn,
@@ -194,41 +196,53 @@ struct EnergyBar: View {
 
 // MARK: Special Effects
 
-private func characterTile(color: Color, label: String, isActive: Bool, activeColor: Color) -> some View {
-	ZStack {
-		// Aura/Pulse effect
-		if isActive {
-			Circle()
-				.stroke(activeColor.opacity(0.6), lineWidth: 2)
-				.frame(width: 130, height: 130)
-				.scaleEffect(1.2)
-				.opacity(0)
+struct CharacterTileView: View {
+	let color: Color
+	let label: String
+	let isActive: Bool
+	let activeColor: Color
+
+	@State private var pulse = false
+
+	var body: some View {
+		ZStack {
+			if isActive {
+				Circle()
+					.stroke(activeColor, lineWidth: 3)
+					.frame(width: 130, height: 130)
+					.scaleEffect(pulse ? 1.6 : 1.2)
+					.opacity( pulse ? 0.0 : 0.6 )
+					.onAppear { startPulse() }
+					.onChange(of: isActive) { newValue in
+						if newValue { startPulse() }
+					}
+					.onDisappear {
+						// Reset so next time we can restart
+						pulse = false
+					}
+			}
+
+			Rectangle()
+				.frame(width: 100, height: 100)
+				.foregroundColor(color)
 				.overlay(
-					Circle()
-						.stroke(activeColor, lineWidth: 3)
-						.frame(width: 130, height: 130)
-						.scaleEffect(1.5)
-						.opacity(0)
+					Rectangle()
+						.stroke(isActive ? activeColor : .white,
+								lineWidth: isActive ? 3 : 1)
 				)
-				.animation(
-					Animation.easeInOut(duration: 1.5)
-						.repeatForever(autoreverses: false),
-					value: isActive
-				)
+
+			Text(label)
+				.font(.title2)
+				.foregroundColor(.white)
 		}
+	}
 
-		// Main tile
-		Rectangle()
-			.frame(width: 100, height: 100)
-			.foregroundColor(color)
-			.overlay(
-				Rectangle()
-					.stroke(isActive ? activeColor : Color.white, lineWidth: isActive ? 3 : 1)
-			)
-
-		Text(label)
-			.font(.title2)
-			.foregroundColor(.white)
+	private func startPulse() {
+		// Ensure we start from the “small, opaque” state
+		pulse = false
+		withAnimation(.easeOut(duration: 1.5).repeatForever(autoreverses: false)) {
+			pulse = true
+		}
 	}
 }
 

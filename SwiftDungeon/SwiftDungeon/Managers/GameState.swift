@@ -1,5 +1,12 @@
 import SwiftUI
 
+// MARK: Things to add
+// Add toggles for different areas or screens to display
+// isInventoryOpen: Bool = false
+// ifSkillSetOpen: Bool = false
+// isFightOn: Bool = false
+// and so on
+
 class GameState {
 
 	var hero: Character?
