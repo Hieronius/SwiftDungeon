@@ -237,12 +237,12 @@ class RoomViewModel: ObservableObject {
 
 		guard gameState.isGameOn else { return }
 
-		let isHero = gameState.isHeroTurn
-			triggerEffect(forHero: isHero, color: .blue)
-
 		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
 		guard let target else { return }
 		guard target.currentEnergy >= 1 else { return }
+
+		let isHero = gameState.isHeroTurn
+			triggerEffect(forHero: isHero, color: .blue)
 
 		let blockValue = combatManager.block(target)
 		let buff = Effect(type: .buff(.armor(value: blockValue)),
@@ -258,12 +258,11 @@ class RoomViewModel: ObservableObject {
 
 		guard gameState.isGameOn else { return }
 
-		let isHero = gameState.isHeroTurn
-			triggerEffect(forHero: isHero, color: .green)
-
 		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
 		guard let target else { return }
 		guard target.currentEnergy >= 1, target.currentMana >= 10 else { return }
+		let isHero = gameState.isHeroTurn
+			triggerEffect(forHero: isHero, color: .green)
 
 		let result = combatManager.heal(target)
 		target.currentHealth = min(target.currentHealth + result, target.maxHealth)
@@ -277,12 +276,12 @@ class RoomViewModel: ObservableObject {
 
 		guard gameState.isGameOn else { return }
 
-		let isHero = gameState.isHeroTurn
-			triggerEffect(forHero: isHero, color: .yellow)
-
 		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
 		guard let target else { return }
 		guard target.currentEnergy >= 1, target.currentMana >= 10 else { return }
+
+		let isHero = gameState.isHeroTurn
+			triggerEffect(forHero: isHero, color: .yellow)
 
 		let result = combatManager.buff(target)
 		let buff = Effect(type: .buff(.attack(value: result)),
