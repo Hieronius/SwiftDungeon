@@ -34,6 +34,11 @@ class RoomViewModel: ObservableObject {
 	@Published var enemyMaxEnergy: Int
 	@Published var enemyCurrentEnergy: Int
 
+	// Utility
+
+	@Published var heroEffectColor: Color? = nil
+	@Published var enemyEffectColor: Color? = nil
+
 
 	// MARK: - Initialization
 
@@ -229,6 +234,9 @@ class RoomViewModel: ObservableObject {
 
 		guard gameState.isGameOn else { return }
 
+		let isHero = gameState.isHeroTurn
+			triggerEffect(forHero: isHero, color: .blue)
+
 		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
 		guard let target else { return }
 		guard target.currentEnergy >= 1 else { return }
@@ -247,6 +255,9 @@ class RoomViewModel: ObservableObject {
 
 		guard gameState.isGameOn else { return }
 
+		let isHero = gameState.isHeroTurn
+			triggerEffect(forHero: isHero, color: .green)
+
 		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
 		guard let target else { return }
 		guard target.currentEnergy >= 1, target.currentMana >= 10 else { return }
@@ -263,6 +274,9 @@ class RoomViewModel: ObservableObject {
 
 		guard gameState.isGameOn else { return }
 
+		let isHero = gameState.isHeroTurn
+			triggerEffect(forHero: isHero, color: .yellow)
+
 		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
 		guard let target else { return }
 		guard target.currentEnergy >= 1, target.currentMana >= 10 else { return }
@@ -276,5 +290,21 @@ class RoomViewModel: ObservableObject {
 		target.currentEnergy -= 1
 
 		syncGameState()
+	}
+
+	// MARK: Helpers
+
+	private func triggerEffect(forHero: Bool, color: Color) {
+		if forHero {
+			heroEffectColor = color
+			DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+				if self.gameState.isHeroTurn { self.heroEffectColor = nil }
+			}
+		} else {
+			enemyEffectColor = color
+			DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+				if !self.gameState.isHeroTurn { self.enemyEffectColor = nil }
+			}
+		}
 	}
 }

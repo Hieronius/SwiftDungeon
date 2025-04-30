@@ -108,22 +108,23 @@ struct RoomView: View {
 
 	// MARK: - Battle Field Layer
 
-	@ViewBuilder
 	private func battleFieldSection() -> some View {
 		HStack {
 			Spacer()
 			CharacterTileView(
-				color: .black,
+				baseColor: .black,
 				label: "H",
 				isActive: viewModel.isHeroTurn,
-				activeColor: .gray
+				activeColor: .gray,
+				effectColor: viewModel.heroEffectColor
 			)
 			Spacer()
 			CharacterTileView(
-				color: .red,
+				baseColor: .red,
 				label: "E",
 				isActive: !viewModel.isHeroTurn,
-				activeColor: .orange
+				activeColor: .orange,
+				effectColor: viewModel.enemyEffectColor
 			)
 			Spacer()
 		}
@@ -229,54 +230,66 @@ struct EnergyBar: View {
 // MARK: Special Effects
 
 struct CharacterTileView: View {
-	let color: Color
+	let baseColor: Color
 	let label: String
 	let isActive: Bool
 	let activeColor: Color
+	let effectColor: Color?
 
 	@State private var pulse = false
+	@State private var internalEffectColor: Color? = nil
 
 	var body: some View {
 		ZStack {
+			// Aura pulse
 			if isActive {
 				Circle()
 					.stroke(activeColor, lineWidth: 3)
 					.frame(width: 130, height: 130)
 					.scaleEffect(pulse ? 1.6 : 1.2)
-					.opacity( pulse ? 0.0 : 0.6 )
-					.onAppear { startPulse() }
-					.onChange(of: isActive) { newValue in
-						if newValue { startPulse() }
-					}
-					.onDisappear {
-						// Reset so next time we can restart
-						pulse = false
-					}
+					.opacity(pulse ? 0.0 : 0.6)
+					.onAppear(perform: startPulse)
 			}
 
 			Rectangle()
 				.frame(width: 100, height: 100)
-				.foregroundColor(color)
+				.foregroundColor(internalEffectColor ?? baseColor)
 				.overlay(
-					Rectangle()
-						.stroke(isActive ? activeColor : .white,
-								lineWidth: isActive ? 3 : 1)
+					Rectangle().stroke(isActive ? activeColor : .white,
+									   lineWidth: isActive ? 3 : 1)
 				)
+				.animation(.easeInOut(duration: 0.2), value: internalEffectColor)
 
 			Text(label)
 				.font(.title2)
 				.foregroundColor(.white)
 		}
+		.onChange(of: effectColor) { newColor in
+			if let color = newColor {
+				internalEffectColor = color
+			} else {
+				internalEffectColor = nil
+			}
+		}
 	}
 
 	private func startPulse() {
-		// Ensure we start from the “small, opaque” state
-		pulse = false
-		withAnimation(.easeOut(duration: 1.5).repeatForever(autoreverses: false)) {
+		withAnimation(Animation.easeOut(duration: 1.5).repeatForever(autoreverses: false)) {
 			pulse = true
 		}
 	}
+
+//	private func animateEffect() {
+//		guard effectColor != nil else { return }
+//		showEffect = true
+//		DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+//			withAnimation(.easeOut(duration: 1.0)) {
+//				showEffect = false
+//			}
+//		}
+//	}
 }
+
 
 // MARK: - ContentView Previews
 struct ContentView_Previews: PreviewProvider {
