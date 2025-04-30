@@ -112,6 +112,7 @@ class RoomViewModel: ObservableObject {
 		gameState.enemyIndex = 0
 		let position = gameState.enemyIndex
 		gameState.enemy = characterManager.spawnEnemy(at: position)
+
 		syncGameState()
 	}
 
@@ -119,19 +120,30 @@ class RoomViewModel: ObservableObject {
 
 		guard gameState.isGameOn else { return }
 
-
 		if !gameState.isHeroTurn {
 
 			gameState.currentRound += 1
 			guard let hero = gameState.hero else { return }
 			hero.currentEnergy = hero.maxEnergy
 
+			for buff in hero.activeBuffs {
+				hero.revertBuff(buff)
+			}
+			hero.activeBuffs = []
+			hero.isBuffed = false
+
 		} else if gameState.isHeroTurn {
 
 			guard let enemy = gameState.enemy else { return }
 			enemy.currentEnergy = enemy.maxEnergy
+			for buff in enemy.activeBuffs {
+				enemy.revertBuff(buff)
+			}
+			enemy.activeBuffs = []
+			enemy.isBuffed = false
 		}
 		gameState.isHeroTurn.toggle()
+
 		syncGameState()
 
 	}
@@ -144,11 +156,25 @@ class RoomViewModel: ObservableObject {
 		if hero.currentHealth < 1 {
 			gameState.isGameOn = false
 			gameState.isGameOver = true
+			startFight()
+			print("Game over -> start new game")
 
 		} else if enemy.currentHealth < 1 {
 			gameState.isGameOn = false
 			gameState.isHeroWon = true
+			enterNewRoom()
+			print("New room should be intered")
 		}
+
+		syncGameState()
+	}
+
+	func restoreHero() {
+		guard let hero = gameState.hero else { return }
+		hero.currentHealth = hero.maxHealth
+		hero.currentMana = hero.maxMana
+		hero.currentEnergy = hero.maxEnergy
+
 		syncGameState()
 	}
 
@@ -163,22 +189,13 @@ class RoomViewModel: ObservableObject {
 		gameState.enemyIndex += 1
 		let position = gameState.enemyIndex
 		gameState.enemy = characterManager.spawnEnemy(at: position)
-		syncGameState()
-	}
 
-	func restoreHero() {
-		guard let hero = gameState.hero else { return }
-		hero.currentHealth = hero.maxHealth
-		hero.currentMana = hero.maxMana
-		hero.currentEnergy = hero.maxEnergy
 		syncGameState()
 	}
 
 	// MARK: - Fight Mechanics
 
 	func attack() {
-
-		print("pressed attack button")
 
 		guard gameState.isGameOn else { return }
 		guard let hero = gameState.hero else { return }
@@ -188,10 +205,11 @@ class RoomViewModel: ObservableObject {
 
 			guard hero.currentEnergy >= 1 else { return }
 			let result = combatManager.attack(hero, enemy)
+			print(result)
 			enemy.currentHealth = max(enemy.currentHealth - result, 0)
 			hero.currentEnergy -= 1
 
-			// checkWinLoseCondition()
+			 checkWinLoseCondition()
 
 		} else {
 
@@ -200,7 +218,7 @@ class RoomViewModel: ObservableObject {
 			hero.currentHealth = max(hero.currentHealth - result, 0)
 			enemy.currentEnergy -= 1
 
-			// checkWinLoseCondition()
+			 checkWinLoseCondition()
 
 		}
 		syncGameState()
@@ -213,8 +231,12 @@ class RoomViewModel: ObservableObject {
 		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
 		guard let target else { return }
 		guard target.currentEnergy >= 1 else { return }
-		target.currentArmor += combatManager.block(target)
+		let blockValue = combatManager.block(target)
+		let buff = Buff(type: .armor(value: blockValue), duration: 1)
+		target.addBuff(buff)
+		target.isBuffed = true
 		target.currentEnergy -= 1
+
 		syncGameState()
 	}
 
@@ -230,6 +252,7 @@ class RoomViewModel: ObservableObject {
 		target.currentHealth = min(target.currentHealth + result, target.maxHealth)
 		target.currentMana -= 10
 		target.currentEnergy -= 1
+
 		syncGameState()
 	}
 
@@ -246,6 +269,7 @@ class RoomViewModel: ObservableObject {
 		target.maxDamage += result
 		target.currentMana -= 10
 		target.currentEnergy -= 1
+
 		syncGameState()
 	}
 }

@@ -14,6 +14,8 @@ class Character: Creature {
 	var minDamage: Int
 	var blockValue: Int
 	var currentArmor: Int
+	var isBuffed: Bool
+	var activeBuffs: [Buff]
 
 	init(name: String,
 		 maxHealth: Int,
@@ -26,7 +28,9 @@ class Character: Creature {
 		 blockValue: Int,
 		 currentArmor: Int,
 		 maxDamage: Int,
-		 minDamage: Int)
+		 minDamage: Int,
+		 isBuffed: Bool,
+		 activeBuffs: [Buff])
 	{
 		self.name = name
 		self.maxHealth = maxHealth
@@ -40,5 +44,32 @@ class Character: Creature {
 		self.minDamage = minDamage
 		self.blockValue = blockValue
 		self.currentArmor = currentArmor
+		self.isBuffed = isBuffed
+		self.activeBuffs = activeBuffs
 	}
-}
+
+	func addBuff(_ buff: Buff) {
+		activeBuffs.append(buff)
+			   applyBuff(buff)
+	}
+
+	func applyBuff(_ buff: Buff) {
+			switch buff.type {
+			case .attack(let value):
+				minDamage += value
+				maxDamage += value
+			case .armor(let value):
+				currentArmor += value
+			}
+		}
+
+	func revertBuff(_ buff: Buff) {
+			switch buff.type {
+			case .attack(let value):
+				minDamage -= value
+				maxDamage -= value
+			case .armor(let value):
+				currentArmor -= value
+			}
+		}
+	}

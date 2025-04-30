@@ -1,7 +1,7 @@
 Current Plan
-1. Implement correct stats/scale of the person
+1. Implement correct Block Mechanic so it will add armor only for 1 turn
 
-
+3. add isGameOn toggle to the View and create a separate GameOverScreen so it will be presented only is toggle is true
 
 // Notes and ideas
 

@@ -4,7 +4,8 @@ class CombatManager {
 
 	/// Calculates average from host min/max damage and subtracting target's current armor
 	func attack(_ host: Character, _ target: Character) -> Int {
-		Int.random(in: host.minDamage...host.maxDamage) - target.currentArmor
+		let damage = Int.random(in: host.minDamage...host.maxDamage) - target.currentArmor
+		return damage > 0 ? damage : 0
 	}
 
 	/// Adds blockValue to caster currentArmor for one turn

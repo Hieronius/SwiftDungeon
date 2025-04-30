@@ -14,4 +14,8 @@ protocol Creature {
 	var spellPower: Int { get set }
 	var blockValue: Int { get set }
 	var currentArmor: Int { get set }
+	var isBuffed: Bool { get set }
+	var activeBuffs: [Buff] { get set }
+
+	func addBuff(_ buff: Buff)
 }
