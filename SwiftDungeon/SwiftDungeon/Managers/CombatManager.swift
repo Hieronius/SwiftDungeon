@@ -13,8 +13,12 @@ class CombatManager {
 	}
 
 	/// Heals host by his spellPower value
-	func heal(_ host: Character) -> Int {
-		host.spellPower
+	func heal(_ caster: Character) -> Int {
+		caster.spellPower
+	}
+
+	func buff(_ caster: Character) -> Int {
+		caster.spellPower / 4
 	}
 
 }
