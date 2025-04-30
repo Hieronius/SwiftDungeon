@@ -15,6 +15,10 @@ struct RoomView: View {
 		ZStack {
 			Color.black
 				.edgesIgnoringSafeArea(.all)
+				.contentShape(Rectangle())
+				.onTapGesture(count: 3) {
+					viewModel.restoreHero()
+				}
 
 			VStack {
 				gameInfoSection()
@@ -26,6 +30,12 @@ struct RoomView: View {
 				actionButtons()
 				Spacer()
 			}
+
+		}
+
+		// Entry point for Game Flow
+		.onAppear {
+			viewModel.startFight()
 		}
 	}
 
@@ -39,6 +49,7 @@ struct RoomView: View {
 			infoText(label: "Current Round:", value: viewModel.currentRound)
 			Spacer()
 		}
+		
 	}
 
 	private func infoText(label: String, value: Int) -> some View {
@@ -119,6 +130,8 @@ struct RoomView: View {
 						 action: viewModel.buff)
 			Spacer()
 		}
+		actionButton(title: "End Turn",
+					 action: viewModel.endTurn)
 	}
 
 	private func actionButton(title: String, action: @escaping () -> Void) -> some View {
