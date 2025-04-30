@@ -3,6 +3,7 @@ import Foundation
 protocol Creature {
 	
 	var name: String { get }
+//	var stats: Stats { get set }
 	var maxHealth: Int { get }
 	var currentHealth: Int { get set }
 	var maxMana: Int { get }

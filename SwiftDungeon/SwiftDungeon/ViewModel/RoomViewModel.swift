@@ -39,6 +39,9 @@ class RoomViewModel: ObservableObject {
 	@Published var heroEffectColor: Color? = nil
 	@Published var enemyEffectColor: Color? = nil
 
+	@Published var heroWasHit = false
+	@Published var enemyWasHit = false
+
 
 	// MARK: - Initialization
 
@@ -214,8 +217,7 @@ class RoomViewModel: ObservableObject {
 			let result = combatManager.attack(hero, enemy)
 			enemy.currentHealth = max(enemy.currentHealth - result, 0)
 			hero.currentEnergy -= 1
-
-			 checkWinLoseCondition()
+			triggerHit(onHero: false)
 
 		} else {
 
@@ -223,10 +225,11 @@ class RoomViewModel: ObservableObject {
 			let result = combatManager.attack(enemy, hero)
 			hero.currentHealth = max(hero.currentHealth - result, 0)
 			enemy.currentEnergy -= 1
-
-			 checkWinLoseCondition()
+			triggerHit(onHero: true)
 
 		}
+		checkWinLoseCondition()
+
 		syncGameState()
 	}
 
@@ -292,7 +295,7 @@ class RoomViewModel: ObservableObject {
 		syncGameState()
 	}
 
-	// MARK: Helpers
+	// MARK: - Helpers
 
 	private func triggerEffect(forHero: Bool, color: Color) {
 		if forHero {
@@ -307,4 +310,20 @@ class RoomViewModel: ObservableObject {
 			}
 		}
 	}
+
+	// helper to trigger a 1s “hit” animation on the target
+		private func triggerHit(onHero: Bool) {
+			if onHero {
+				heroWasHit = true
+				DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+					self.heroWasHit = false
+				}
+			} else {
+				enemyWasHit = true
+				DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+					self.enemyWasHit = false
+				}
+			}
+		}
+
 }
