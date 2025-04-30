@@ -11,4 +11,7 @@ protocol Creature {
 	var currentEnergy: Int { get set }
 	var maxDamage: Int { get set }
 	var minDamage: Int { get set }
+	var spellPower: Int { get set }
+	var blockValue: Int { get set }
+	var currentArmor: Int { get set }
 }

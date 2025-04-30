@@ -9,8 +9,11 @@ class Character: Creature {
 	var currentMana: Int
 	let maxEnergy: Int
 	var currentEnergy: Int
+	var spellPower: Int
 	var maxDamage: Int
 	var minDamage: Int
+	var blockValue: Int
+	var currentArmor: Int
 
 	init(name: String,
 		 maxHealth: Int,
@@ -18,7 +21,10 @@ class Character: Creature {
 		 maxMana: Int,
 		 currentMana: Int,
 		 maxEnergy: Int,
+		 spellPower: Int,
 		 currentEnergy: Int,
+		 blockValue: Int,
+		 currentArmor: Int,
 		 maxDamage: Int,
 		 minDamage: Int)
 	{
@@ -28,8 +34,11 @@ class Character: Creature {
 		self.maxMana = maxMana
 		self.currentMana = currentMana
 		self.maxEnergy = maxEnergy
+		self.spellPower = spellPower
 		self.currentEnergy = currentEnergy
 		self.maxDamage = maxDamage
 		self.minDamage = minDamage
+		self.blockValue = blockValue
+		self.currentArmor = currentArmor
 	}
 }

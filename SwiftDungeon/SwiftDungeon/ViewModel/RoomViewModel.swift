@@ -66,21 +66,43 @@ class RoomViewModel: ObservableObject {
 		}
 	}
 
+	func block() {
+
+		if gameState.isHeroTurn {
+
+			guard let caster = gameState.hero else { return }
+			guard caster.currentEnergy >= 1 else { return }
+			caster.currentArmor += combatManager.block(caster)
+			caster.currentEnergy -= 1
+
+		} else {
+
+			guard let caster = gameState.enemy else { return }
+			guard caster.currentEnergy >= 1 else { return }
+			caster.currentArmor += combatManager.block(caster)
+			caster.currentEnergy -= 1
+		}
+	}
+
 	func heal() {
 
 		if gameState.isHeroTurn {
 
 			guard let target = gameState.hero else { return }
+			guard target.currentEnergy >= 1 else { return }
 			guard target.currentMana >= 10 else { return }
-			target.currentHealth = combatManager.heal(target)
+			target.currentHealth = max(combatManager.heal(target), target.maxHealth)
 			target.currentMana -= 10
+			target.currentEnergy -= 1
 
 		} else {
 
 			guard let target = gameState.enemy else { return }
+			guard target.currentEnergy >= 1 else { return }
 			guard target.currentMana >= 10 else { return }
-			target.currentHealth = combatManager.heal(target)
+			target.currentHealth = max(combatManager.heal(target), target.maxHealth)
 			target.currentMana -= 10
+			target.currentEnergy -= 1
 		}
 	}
 }
