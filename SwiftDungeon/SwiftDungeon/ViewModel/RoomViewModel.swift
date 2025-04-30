@@ -146,6 +146,13 @@ class RoomViewModel: ObservableObject {
 		guard let hero = gameState.hero else { return }
 		guard let enemy = gameState.enemy else { return }
 
+		if gameState.currentRoom > 14 {
+			gameState.isGameCompleted = true
+			gameState.isGameOn = false
+			print("Game has been complete")
+			return
+		}
+
 		if hero.currentHealth < 1 {
 			gameState.isGameOn = false
 			gameState.isGameOver = true
@@ -174,12 +181,12 @@ class RoomViewModel: ObservableObject {
 
 	func enterNewRoom() {
 
+		gameState.currentRoom += 1
 		gameState.isGameOn = true
 		gameState.isHeroTurn = true
 		gameState.isHeroWon = false
 		gameState.isGameOver = false
 		gameState.currentRound = 1
-		gameState.currentRoom += 1
 		restoreHero()
 		gameState.enemyIndex += 1
 		let position = gameState.enemyIndex

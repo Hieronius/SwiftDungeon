@@ -7,6 +7,7 @@ class GameState {
 	var enemyIndex = 1
 	var isGameOn = true
 	var isGameOver = false
+	var isGameCompleted = false
 	var isHeroWon = false
 	var isHeroTurn = true
 	var currentRound = 0
