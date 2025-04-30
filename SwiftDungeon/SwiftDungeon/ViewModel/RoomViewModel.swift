@@ -171,6 +171,7 @@ class RoomViewModel: ObservableObject {
 		hero.currentHealth = hero.maxHealth
 		hero.currentMana = hero.maxMana
 		hero.currentEnergy = hero.maxEnergy
+		syncGameState()
 	}
 
 	// MARK: - Fight Mechanics
@@ -202,6 +203,7 @@ class RoomViewModel: ObservableObject {
 			// checkWinLoseCondition()
 
 		}
+		syncGameState()
 	}
 
 	func block() {
@@ -213,6 +215,7 @@ class RoomViewModel: ObservableObject {
 		guard target.currentEnergy >= 1 else { return }
 		target.currentArmor += combatManager.block(target)
 		target.currentEnergy -= 1
+		syncGameState()
 	}
 
 	func heal() {
@@ -227,6 +230,7 @@ class RoomViewModel: ObservableObject {
 		target.currentHealth = min(target.currentHealth + result, target.maxHealth)
 		target.currentMana -= 10
 		target.currentEnergy -= 1
+		syncGameState()
 	}
 
 	func buff() {
@@ -242,5 +246,6 @@ class RoomViewModel: ObservableObject {
 		target.maxDamage += result
 		target.currentMana -= 10
 		target.currentEnergy -= 1
+		syncGameState()
 	}
 }

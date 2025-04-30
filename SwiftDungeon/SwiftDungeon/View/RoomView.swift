@@ -69,9 +69,17 @@ struct RoomView: View {
 	@ViewBuilder
 	private func characterStatsSection() -> some View {
 		HStack {
-			characterStats(name: "Hero", health: 100, mana: 100, energy: 5)
+			// Hero
+			characterStats(name: "Hero",
+						   health: CGFloat(viewModel.heroCurrentHealth),
+						   mana: CGFloat(viewModel.heroCurrentMana),
+						   energy: viewModel.heroCurrentEnergy)
 			Spacer()
-			characterStats(name: "Enemy", health: 100, mana: 100, energy: 5)
+			// Enemy
+			characterStats(name: "Enemy",
+						   health: CGFloat(viewModel.enemyCurrentHealth),
+						   mana: CGFloat(viewModel.enemyCurrentMana),
+						   energy: viewModel.enemyCurrentEnergy)
 		}
 	}
 

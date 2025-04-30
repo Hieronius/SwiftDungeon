@@ -1,0 +1,17 @@
+Current Plan
+1. Implement all fight properties to ViewModel
+2. Connect with View by observing it
+
+
+
+// Notes and ideas
+
+// MARK: Things to add
+// Add toggles for different areas or screens to display
+// isInventoryOpen: Bool = false
+// ifSkillSetOpen: Bool = false
+// isFightOn: Bool = false
+// and so on
+
+
+// Narrator should be the hero own voice of madness 
