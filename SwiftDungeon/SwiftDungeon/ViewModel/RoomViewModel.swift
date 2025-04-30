@@ -26,7 +26,16 @@ class RoomViewModel: ObservableObject {
 
 	// MARK: - Game Flow
 
+	func pauseGame() {
+		gameState.isGameOn = false
+	}
+
+	func resumeGame() {
+		gameState.isGameOn = true
+	}
+
 	func startFight() {
+
 		gameState.isGameOn = true
 		gameState.isHeroTurn = true
 		gameState.currentRound = 1
@@ -38,13 +47,22 @@ class RoomViewModel: ObservableObject {
 
 	func attack() {
 
+		guard gameState.isGameOn else { return }
 		guard let hero = gameState.hero else { return }
 		guard let enemy = gameState.enemy else { return }
 
 		if gameState.isHeroTurn {
-			combatManager.attack(hero, enemy)
+			guard hero.currentEnergy >= 1 else { return }
+			let result = combatManager.attack(hero, enemy)
+			enemy.currentHealth = max(enemy.currentHealth - result, 0)
+			hero.currentEnergy -= 1
+
 		} else {
-			combatManager.attack(enemy, hero)
+			guard enemy.currentEnergy >= 1 else { return }
+			let result = combatManager.attack(enemy, hero)
+			hero.currentHealth = max(hero.currentHealth - result, 0)
+			enemy.currentEnergy -= 1
+
 		}
 	}
 
@@ -53,12 +71,16 @@ class RoomViewModel: ObservableObject {
 		if gameState.isHeroTurn {
 
 			guard let target = gameState.hero else { return }
-			combatManager.heal(target)
+			guard target.currentMana >= 10 else { return }
+			target.currentHealth = combatManager.heal(target)
+			target.currentMana -= 10
 
 		} else {
 
 			guard let target = gameState.enemy else { return }
-			combatManager.heal(target)
+			guard target.currentMana >= 10 else { return }
+			target.currentHealth = combatManager.heal(target)
+			target.currentMana -= 10
 		}
 	}
 }
