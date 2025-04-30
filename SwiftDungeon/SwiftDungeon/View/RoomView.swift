@@ -109,29 +109,29 @@ struct RoomView: View {
 	// MARK: - Battle Field Layer
 
 	@ViewBuilder
-	   private func battleFieldSection() -> some View {
-		   HStack {
-			   Spacer()
-			   CharacterTileView(
-				   baseColor: .black,
-				   label:    "H",
-				   isActive: viewModel.isHeroTurn,
-				   activeColor: .gray,
-				   effectColor: viewModel.heroEffectColor,
-				   didHit: viewModel.heroWasHit
-			   )
-			   Spacer()
-			   CharacterTileView(
-				   baseColor: .red,
-				   label:    "E",
-				   isActive: !viewModel.isHeroTurn,
-				   activeColor: .orange,
-				   effectColor: viewModel.enemyEffectColor,
-				   didHit: viewModel.enemyWasHit
-			   )
-			   Spacer()
-		   }
-	   }
+	private func battleFieldSection() -> some View {
+		HStack {
+			Spacer()
+			CharacterTileView(
+				baseColor: .black,
+				label:    "H",
+				isActive: viewModel.isHeroTurn,
+				activeColor: .gray,
+				effectColor: viewModel.heroEffectColor,
+				didHit: viewModel.heroWasHit
+			)
+			Spacer()
+			CharacterTileView(
+				baseColor: .red,
+				label:    "E",
+				isActive: !viewModel.isHeroTurn,
+				activeColor: .orange,
+				effectColor: viewModel.enemyEffectColor,
+				didHit: viewModel.enemyWasHit
+			)
+			Spacer()
+		}
+	}
 
 
 	// MARK: - Action Buttons
@@ -233,32 +233,41 @@ struct EnergyBar: View {
 
 // MARK: Special Effects
 
+import SwiftUI
+
 struct CharacterTileView: View {
-	let baseColor:   Color
-	let label:       String
-	let isActive:    Bool
+	let baseColor: Color
+	let label: String
+	let isActive: Bool
 	let activeColor: Color
 	let effectColor: Color?
-	let didHit:      Bool
+	let didHit: Bool
 
 	@State private var pulse = false
 	@State private var internalEffect: Color? = nil
-
 	@State private var shaking = false
 
 	var body: some View {
 		ZStack {
-			// 1) Aura pulse (unchanged)
+			// Aura pulse
 			if isActive {
 				Circle()
 					.stroke(activeColor, lineWidth: 3)
 					.frame(width: 130, height: 130)
 					.scaleEffect(pulse ? 1.6 : 1.2)
 					.opacity(pulse ? 0 : 0.6)
-					.onAppear(perform: startPulse)
+					.onAppear {
+						pulse = false
+						startPulse()
+					}
+					.onChange(of: isActive) { newValue in
+						guard newValue else { return }
+						pulse = false
+						startPulse()
+					}
 			}
 
-			// 2) The square with optional spell-fill + shake
+			// Main square with optional effect color + shake
 			Rectangle()
 				.frame(width: 100, height: 100)
 				.foregroundColor(internalEffect ?? baseColor)
@@ -267,25 +276,24 @@ struct CharacterTileView: View {
 						.stroke(isActive ? activeColor : .white,
 								lineWidth: isActive ? 3 : 1)
 				)
-				.offset(x: shaking ? 8 : 0, y: 0)
+				.offset(x: shaking ? 8 : 0)
 				.animation(
 					shaking
-						? Animation.linear(duration: 0.05)
-							.repeatCount(6, autoreverses: true)
-						: .default,
+					? Animation.linear(duration: 0.05)
+						.repeatCount(6, autoreverses: true)
+					: .default,
 					value: shaking
 				)
 
-			// 3) Label
+			// Label
 			Text(label)
 				.font(.title2)
 				.foregroundColor(.white)
 		}
-		// when effectColor changes (buff/heal), update fill
-		.onChange(of: effectColor) { new in
-			internalEffect = new
+		.frame(width: 130, height: 130)
+		.onChange(of: effectColor) { newColor in
+			internalEffect = newColor
 		}
-		// when didHit flips true, run the shake
 		.onChange(of: didHit) { hit in
 			if hit { animateHit() }
 		}
@@ -301,26 +309,12 @@ struct CharacterTileView: View {
 	}
 
 	private func animateHit() {
-		// Kick off a 0.3s shake
 		shaking = true
-
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
 			shaking = false
 		}
 	}
 }
-
-//	private func animateEffect() {
-//		guard effectColor != nil else { return }
-//		showEffect = true
-//		DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-//			withAnimation(.easeOut(duration: 1.0)) {
-//				showEffect = false
-//			}
-//		}
-//	}
-//}
-
 
 // MARK: - ContentView Previews
 struct ContentView_Previews: PreviewProvider {
