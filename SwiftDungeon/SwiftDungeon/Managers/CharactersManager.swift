@@ -17,8 +17,8 @@ class CharacterManager {
 				  currentArmor: 0,
 				  maxDamage: 5,
 				  minDamage: 2,
-				  isBuffed: false,
-				  activeBuffs: []),
+				  isAffected: false,
+				  activeEffects: []),
 
 		Character(name: "Zombie",
 				  maxHealth: 17,
@@ -32,8 +32,8 @@ class CharacterManager {
 				  currentArmor: 0,
 				  maxDamage: 6,
 				  minDamage: 3,
-				  isBuffed: false,
-				  activeBuffs: []),
+				  isAffected: false,
+				  activeEffects: []),
 
 		Character(name: "Golem",
 				  maxHealth: 19,
@@ -47,8 +47,8 @@ class CharacterManager {
 				  currentArmor: 0,
 				  maxDamage: 7,
 				  minDamage: 4,
-				  isBuffed: false,
-				  activeBuffs: []),
+				  isAffected: false,
+				  activeEffects: []),
 
 		Character(name: "Witch",
 				  maxHealth: 18,
@@ -62,8 +62,8 @@ class CharacterManager {
 				  currentArmor: 0,
 				  maxDamage: 6,
 				  minDamage: 3,
-				  isBuffed: false,
-				  activeBuffs: []),
+				  isAffected: false,
+				  activeEffects: []),
 
 		Character(name: "Vampire",
 				  maxHealth: 20,
@@ -77,8 +77,8 @@ class CharacterManager {
 				  currentArmor: 0,
 				  maxDamage: 7,
 				  minDamage: 4,
-				  isBuffed: false,
-				  activeBuffs: []),
+				  isAffected: false,
+				  activeEffects: []),
 		
 		Character(name: "Mummy",
 				  maxHealth: 22,
@@ -92,8 +92,8 @@ class CharacterManager {
 				  currentArmor: 0,
 				  maxDamage: 8,
 				  minDamage: 5,
-				  isBuffed: false,
-				  activeBuffs: []),
+				  isAffected: false,
+				  activeEffects: []),
 
 		Character(name: "Giant Spider",
 				  maxHealth: 21,
@@ -107,8 +107,8 @@ class CharacterManager {
 				  currentArmor: 0,
 				  maxDamage: 8,
 				  minDamage: 4,
-				  isBuffed: false,
-				  activeBuffs: []),
+				  isAffected: false,
+				  activeEffects: []),
 
 		Character(name: "Werewolf",
 				  maxHealth: 23,
@@ -122,8 +122,8 @@ class CharacterManager {
 				  currentArmor: 0,
 				  maxDamage: 9,
 				  minDamage: 5,
-				  isBuffed: false,
-				  activeBuffs: []),
+				  isAffected: false,
+				  activeEffects: []),
 
 		Character(name: "Goblin",
 				  maxHealth: 16,
@@ -137,8 +137,8 @@ class CharacterManager {
 				  currentArmor: 0,
 				  maxDamage: 5,
 				  minDamage: 2,
-				  isBuffed: false,
-				  activeBuffs: []),
+				  isAffected: false,
+				  activeEffects: []),
 
 		Character(name: "Ogre",
 				  maxHealth: 25,
@@ -152,8 +152,8 @@ class CharacterManager {
 				  currentArmor: 0,
 				  maxDamage: 10,
 				  minDamage: 6,
-				  isBuffed: false,
-				  activeBuffs: []),
+				  isAffected: false,
+				  activeEffects: []),
 
 		Character(name: "Troll",
 				  maxHealth: 28,
@@ -167,8 +167,8 @@ class CharacterManager {
 				  currentArmor: 0,
 				  maxDamage: 12,
 				  minDamage: 7,
-				  isBuffed: false,
-				  activeBuffs: []),
+				  isAffected: false,
+				  activeEffects: []),
 
 		Character(name: "Dark Knight",
 				  maxHealth: 30,
@@ -182,8 +182,8 @@ class CharacterManager {
 				  currentArmor: 0,
 				  maxDamage: 13,
 				  minDamage: 8,
-				  isBuffed: false,
-				  activeBuffs: []),
+				  isAffected: false,
+				  activeEffects: []),
 
 		Character(name: "Dragon",
 				  maxHealth: 35,
@@ -197,8 +197,8 @@ class CharacterManager {
 				  currentArmor: 0,
 				  maxDamage: 15,
 				  minDamage: 10,
-				  isBuffed: false,
-				  activeBuffs: []),
+				  isAffected: false,
+				  activeEffects: []),
 
 		Character(name: "Demon",
 				  maxHealth: 32,
@@ -212,8 +212,8 @@ class CharacterManager {
 				  currentArmor: 0,
 				  maxDamage: 14,
 				  minDamage: 9,
-				  isBuffed: false,
-				  activeBuffs: []),
+				  isAffected: false,
+				  activeEffects: []),
 
 		Character(name: "Griffin",
 				  maxHealth: 28,
@@ -227,8 +227,8 @@ class CharacterManager {
 				  currentArmor: 0,
 				  maxDamage: 12,
 				  minDamage: 7,
-				  isBuffed: false,
-				  activeBuffs: [])
+				  isAffected: false,
+				  activeEffects: [])
 	]
 
 
@@ -245,8 +245,8 @@ class CharacterManager {
 						 currentArmor: 1,
 						  maxDamage: 3,
 						  minDamage: 2,
-						 isBuffed: false,
-						 activeBuffs: [])
+						 isAffected: false,
+						 activeEffects: [])
 	}
 
 	func spawnEnemy(at index: Int) -> Character {

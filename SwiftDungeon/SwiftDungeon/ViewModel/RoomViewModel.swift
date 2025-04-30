@@ -126,21 +126,14 @@ class RoomViewModel: ObservableObject {
 			guard let hero = gameState.hero else { return }
 			hero.currentEnergy = hero.maxEnergy
 
-			for buff in hero.activeBuffs {
-				hero.revertBuff(buff)
-			}
-			hero.activeBuffs = []
-			hero.isBuffed = false
+			hero.clearAllEffects()
 
 		} else if gameState.isHeroTurn {
 
 			guard let enemy = gameState.enemy else { return }
 			enemy.currentEnergy = enemy.maxEnergy
-			for buff in enemy.activeBuffs {
-				enemy.revertBuff(buff)
-			}
-			enemy.activeBuffs = []
-			enemy.isBuffed = false
+
+			enemy.clearAllEffects()
 		}
 		gameState.isHeroTurn.toggle()
 
@@ -231,10 +224,12 @@ class RoomViewModel: ObservableObject {
 		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
 		guard let target else { return }
 		guard target.currentEnergy >= 1 else { return }
+		
 		let blockValue = combatManager.block(target)
-		let buff = Buff(type: .armor(value: blockValue), duration: 1)
-		target.addBuff(buff)
-		target.isBuffed = true
+		let buff = Effect(type: .buff(.armor(value: blockValue)),
+						  duration: 1)
+
+		target.applyEffect(buff)
 		target.currentEnergy -= 1
 
 		syncGameState()
@@ -265,8 +260,10 @@ class RoomViewModel: ObservableObject {
 		guard target.currentEnergy >= 1, target.currentMana >= 10 else { return }
 
 		let result = combatManager.buff(target)
-		target.minDamage += result
-		target.maxDamage += result
+		let buff = Effect(type: .buff(.attack(value: result)),
+						  duration: 1)
+
+		target.applyEffect(buff)
 		target.currentMana -= 10
 		target.currentEnergy -= 1
 
