@@ -98,13 +98,25 @@ struct RoomView: View {
 	}
 
 	// MARK: - Action Buttons
+
 	@ViewBuilder
 	private func actionButtons() -> some View {
 		HStack {
 			Spacer()
-			actionButton(title: "Attack", action: viewModel.attack)
+			actionButton(title: "Attack",
+						 action: viewModel.attack)
 			Spacer()
-			actionButton(title: "Heal", action: viewModel.heal)
+			actionButton(title: "Heal",
+						 action: viewModel.heal)
+			Spacer()
+		}
+		HStack {
+			Spacer()
+			actionButton(title: "Block",
+						 action: viewModel.block)
+			Spacer()
+			actionButton(title: "Buff",
+						 action: viewModel.buff)
 			Spacer()
 		}
 	}
