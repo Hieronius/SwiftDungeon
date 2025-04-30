@@ -1,14 +1,14 @@
 import SwiftUI
 
-class GameState: ObservableObject {
+class GameState {
 
-	@Published var hero: Character?
-	@Published var enemy: Character?
-	@Published var enemyIndex = 1
-	@Published var isGameOn = true
-	@Published var isGameOver = false
-	@Published var isHeroWon = false
-	@Published var isHeroTurn = true
-	@Published var currentRound = 0
-	@Published var currentRoom = 1
+	var hero: Character?
+	var enemy: Character?
+	var enemyIndex = 1
+	var isGameOn = true
+	var isGameOver = false
+	var isHeroWon = false
+	var isHeroTurn = true
+	var currentRound = 0
+	var currentRoom = 1
 }

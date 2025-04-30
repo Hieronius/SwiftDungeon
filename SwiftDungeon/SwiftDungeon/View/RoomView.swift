@@ -85,26 +85,25 @@ struct RoomView: View {
 	}
 
 	// MARK: - Battle Field Layer
+
 	@ViewBuilder
 	private func battleFieldSection() -> some View {
 		HStack {
 			Spacer()
-			battlefieldTile(color: .black, label: "H")
+			characterTile(
+				color: .black,
+				label: "H",
+				isActive: viewModel.isHeroTurn,
+				activeColor: .gray
+			)
 			Spacer()
-			battlefieldTile(color: .red, label: "E")
+			characterTile(
+				color: .red,
+				label: "E",
+				isActive: !viewModel.isHeroTurn,
+				activeColor: .orange
+			)
 			Spacer()
-		}
-	}
-
-	private func battlefieldTile(color: Color, label: String) -> some View {
-		ZStack {
-			Rectangle()
-				.frame(width: 100, height: 100)
-				.foregroundColor(color)
-				.border(Color.white)
-			Text(label)
-				.font(.title2)
-				.foregroundColor(.white)
 		}
 	}
 
@@ -190,6 +189,46 @@ struct EnergyBar: View {
 					.foregroundColor(index < energy ? .yellow : .gray) // Filled or empty
 			}
 		}
+	}
+}
+
+// MARK: Special Effects
+
+private func characterTile(color: Color, label: String, isActive: Bool, activeColor: Color) -> some View {
+	ZStack {
+		// Aura/Pulse effect
+		if isActive {
+			Circle()
+				.stroke(activeColor.opacity(0.6), lineWidth: 2)
+				.frame(width: 130, height: 130)
+				.scaleEffect(1.2)
+				.opacity(0)
+				.overlay(
+					Circle()
+						.stroke(activeColor, lineWidth: 3)
+						.frame(width: 130, height: 130)
+						.scaleEffect(1.5)
+						.opacity(0)
+				)
+				.animation(
+					Animation.easeInOut(duration: 1.5)
+						.repeatForever(autoreverses: false),
+					value: isActive
+				)
+		}
+
+		// Main tile
+		Rectangle()
+			.frame(width: 100, height: 100)
+			.foregroundColor(color)
+			.overlay(
+				Rectangle()
+					.stroke(isActive ? activeColor : Color.white, lineWidth: isActive ? 3 : 1)
+			)
+
+		Text(label)
+			.font(.title2)
+			.foregroundColor(.white)
 	}
 }
 

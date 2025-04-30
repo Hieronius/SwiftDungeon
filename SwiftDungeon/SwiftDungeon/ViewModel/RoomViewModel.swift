@@ -4,14 +4,15 @@ class RoomViewModel: ObservableObject {
 
 	// MARK: - Dependencies
 
-	@Published private var gameState: GameState
+	private let gameState: GameState
 	private let combatManager: CombatManager
 	private let characterManager: CharacterManager
 
 	// MARK: - Properties
 
-	var currentRoom: Int { gameState.currentRoom }
-	var currentRound: Int { gameState.currentRound }
+	@Published var currentRoom: Int
+	@Published var currentRound: Int
+	@Published var isHeroTurn: Bool
 
 	// MARK: - Initialization
 
@@ -22,6 +23,17 @@ class RoomViewModel: ObservableObject {
 		self.gameState = gameState
 		self.combatManager = combatManager
 		self.characterManager = characterManager
+		self.currentRoom = gameState.currentRoom
+		self.currentRound = gameState.currentRound
+		self.isHeroTurn = gameState.isHeroTurn
+	}
+
+	// MARK: Sync Game State
+
+	func syncGameState() {
+		currentRoom = gameState.currentRoom
+		currentRound = gameState.currentRound
+		isHeroTurn = gameState.isHeroTurn
 	}
 
 	// MARK: - Game Flow States
@@ -45,11 +57,13 @@ class RoomViewModel: ObservableObject {
 		gameState.enemyIndex = 0
 		let position = gameState.enemyIndex
 		gameState.enemy = characterManager.spawnEnemy(at: position)
+		syncGameState()
 	}
 
 	func endTurn() {
 
 		guard gameState.isGameOn else { return }
+
 
 		if !gameState.isHeroTurn {
 
@@ -63,6 +77,8 @@ class RoomViewModel: ObservableObject {
 			enemy.currentEnergy = enemy.maxEnergy
 		}
 		gameState.isHeroTurn.toggle()
+		syncGameState()
+
 	}
 
 	func checkWinLoseCondition() {
@@ -91,17 +107,14 @@ class RoomViewModel: ObservableObject {
 		gameState.enemyIndex += 1
 		let position = gameState.enemyIndex
 		gameState.enemy = characterManager.spawnEnemy(at: position)
+		syncGameState()
 	}
 
 	func restoreHero() {
-		print("restore button")
-		print(gameState.hero)
 		guard let hero = gameState.hero else { return }
-		print("got response")
 		hero.currentHealth = hero.maxHealth
 		hero.currentMana = hero.maxMana
 		hero.currentEnergy = hero.maxEnergy
-		print(hero.currentHealth)
 	}
 
 	// MARK: - Fight Mechanics
