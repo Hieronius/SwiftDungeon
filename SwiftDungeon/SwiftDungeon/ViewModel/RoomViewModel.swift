@@ -10,9 +10,30 @@ class RoomViewModel: ObservableObject {
 
 	// MARK: - Properties
 
+	// State
+
 	@Published var currentRoom: Int
 	@Published var currentRound: Int
 	@Published var isHeroTurn: Bool
+
+	// Hero Stats
+
+	@Published var heroMaxHealth: Int
+	@Published var heroCurrentHealth: Int
+	@Published var heroMaxMana: Int
+	@Published var heroCurrentMana: Int
+	@Published var heroMaxEnergy: Int
+	@Published var heroCurrentEnergy: Int
+
+	// Enemy Stats
+
+	@Published var enemyMaxHealth: Int
+	@Published var enemyCurrentHealth: Int
+	@Published var enemyMaxMana: Int
+	@Published var enemyCurrentMana: Int
+	@Published var enemyMaxEnergy: Int
+	@Published var enemyCurrentEnergy: Int
+
 
 	// MARK: - Initialization
 
@@ -23,17 +44,52 @@ class RoomViewModel: ObservableObject {
 		self.gameState = gameState
 		self.combatManager = combatManager
 		self.characterManager = characterManager
+
 		self.currentRoom = gameState.currentRoom
 		self.currentRound = gameState.currentRound
 		self.isHeroTurn = gameState.isHeroTurn
+
+
+		self.heroMaxHealth = gameState.hero?.maxHealth ?? 0
+		self.heroCurrentHealth = gameState.hero?.currentHealth ?? 0
+		self.heroMaxMana = gameState.hero?.maxMana ?? 0
+		self.heroCurrentMana = gameState.hero?.currentMana ?? 0
+		self.heroMaxEnergy = gameState.hero?.maxEnergy ?? 0
+		self.heroCurrentEnergy = gameState.hero?.currentEnergy ?? 0
+
+		self.enemyMaxHealth = gameState.enemy?.maxHealth ?? 0
+		self.enemyCurrentHealth = gameState.enemy?.currentHealth ?? 0
+		self.enemyMaxMana = gameState.enemy?.maxMana ?? 0
+		self.enemyCurrentMana = gameState.enemy?.currentMana ?? 0
+		self.enemyMaxEnergy = gameState.enemy?.maxEnergy ?? 0
+		self.enemyCurrentEnergy = gameState.enemy?.currentEnergy ?? 0
 	}
 
 	// MARK: Sync Game State
 
 	func syncGameState() {
+
 		currentRoom = gameState.currentRoom
 		currentRound = gameState.currentRound
 		isHeroTurn = gameState.isHeroTurn
+
+		guard let hero = gameState.hero else { return }
+		guard let enemy = gameState.enemy else { return }
+
+		heroMaxHealth = hero.maxHealth
+		heroCurrentHealth = hero.currentHealth
+		heroMaxMana = hero.maxMana
+		heroCurrentMana = hero.currentMana
+		heroMaxEnergy = hero.maxEnergy
+		heroCurrentEnergy = hero.currentEnergy
+
+		enemyMaxHealth = enemy.maxHealth
+		enemyCurrentHealth = enemy.currentHealth
+		enemyMaxMana = enemy.maxMana
+		enemyCurrentMana = enemy.currentMana
+		enemyMaxEnergy = enemy.maxEnergy
+		enemyCurrentEnergy = enemy.currentEnergy
+
 	}
 
 	// MARK: - Game Flow States
