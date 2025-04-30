@@ -24,7 +24,7 @@ class RoomViewModel: ObservableObject {
 		self.characterManager = characterManager
 	}
 
-	// MARK: - Game Flow
+	// MARK: - Game Flow States
 
 	func pauseGame() {
 		gameState.isGameOn = false
@@ -38,12 +38,60 @@ class RoomViewModel: ObservableObject {
 
 		gameState.isGameOn = true
 		gameState.isHeroTurn = true
+		gameState.isHeroWon = false
+		gameState.isGameOver = false
 		gameState.currentRound = 1
 		gameState.hero = characterManager.setupHero()
 		gameState.enemyIndex = 0
 		let position = gameState.enemyIndex
 		gameState.enemy = characterManager.spawnEnemy(at: position)
 	}
+
+	func endTurn() {
+
+		guard gameState.isGameOn else { return }
+		if !gameState.isHeroTurn { gameState.currentRound += 1 }
+		gameState.isHeroTurn.toggle()
+
+	}
+
+	func checkWinLoseCondition() {
+
+		guard let hero = gameState.hero else { return }
+		guard let enemy = gameState.enemy else { return }
+
+		if hero.currentHealth < 1 {
+			gameState.isGameOn = false
+			gameState.isGameOver = true
+
+		} else if enemy.currentHealth < 1 {
+			gameState.isGameOn = false
+			gameState.isHeroWon = true
+		}
+	}
+
+	func enterNewRoom() {
+		gameState.isGameOn = true
+		gameState.isHeroTurn = true
+		gameState.isHeroWon = false
+		gameState.isGameOver = false
+		gameState.currentRound = 1
+		gameState.currentRoom += 1
+		restoreHero()
+		gameState.enemyIndex += 1
+		let position = gameState.enemyIndex
+		gameState.enemy = characterManager.spawnEnemy(at: position)
+	}
+
+	func restoreHero() {
+
+		guard let hero = gameState.hero else { return }
+		hero.currentHealth = hero.maxHealth
+		hero.currentMana = hero.maxMana
+		hero.currentEnergy = hero.maxEnergy
+	}
+
+	// MARK: - Fight Mechanics
 
 	func attack() {
 
@@ -52,16 +100,22 @@ class RoomViewModel: ObservableObject {
 		guard let enemy = gameState.enemy else { return }
 
 		if gameState.isHeroTurn {
+
 			guard hero.currentEnergy >= 1 else { return }
 			let result = combatManager.attack(hero, enemy)
 			enemy.currentHealth = max(enemy.currentHealth - result, 0)
 			hero.currentEnergy -= 1
 
+			// checkWinLoseCondition()
+
 		} else {
+			
 			guard enemy.currentEnergy >= 1 else { return }
 			let result = combatManager.attack(enemy, hero)
 			hero.currentHealth = max(hero.currentHealth - result, 0)
 			enemy.currentEnergy -= 1
+
+			// checkWinLoseCondition()
 
 		}
 	}
