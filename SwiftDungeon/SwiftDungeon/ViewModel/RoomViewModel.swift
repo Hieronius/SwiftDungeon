@@ -50,9 +50,19 @@ class RoomViewModel: ObservableObject {
 	func endTurn() {
 
 		guard gameState.isGameOn else { return }
-		if !gameState.isHeroTurn { gameState.currentRound += 1 }
-		gameState.isHeroTurn.toggle()
 
+		if !gameState.isHeroTurn {
+
+			gameState.currentRound += 1
+			guard let hero = gameState.hero else { return }
+			hero.currentEnergy = hero.maxEnergy
+
+		} else if gameState.isHeroTurn {
+
+			guard let enemy = gameState.enemy else { return }
+			enemy.currentEnergy = enemy.maxEnergy
+		}
+		gameState.isHeroTurn.toggle()
 	}
 
 	func checkWinLoseCondition() {
@@ -84,16 +94,21 @@ class RoomViewModel: ObservableObject {
 	}
 
 	func restoreHero() {
-
+		print("restore button")
+		print(gameState.hero)
 		guard let hero = gameState.hero else { return }
+		print("got response")
 		hero.currentHealth = hero.maxHealth
 		hero.currentMana = hero.maxMana
 		hero.currentEnergy = hero.maxEnergy
+		print(hero.currentHealth)
 	}
 
 	// MARK: - Fight Mechanics
 
 	func attack() {
+
+		print("pressed attack button")
 
 		guard gameState.isGameOn else { return }
 		guard let hero = gameState.hero else { return }
@@ -109,7 +124,7 @@ class RoomViewModel: ObservableObject {
 			// checkWinLoseCondition()
 
 		} else {
-			
+
 			guard enemy.currentEnergy >= 1 else { return }
 			let result = combatManager.attack(enemy, hero)
 			hero.currentHealth = max(hero.currentHealth - result, 0)
