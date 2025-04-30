@@ -71,21 +71,26 @@ struct RoomView: View {
 		HStack {
 			// Hero
 			characterStats(name: "Hero",
-						   health: CGFloat(viewModel.heroCurrentHealth),
+						   currentHealth: CGFloat(viewModel.heroCurrentHealth),
+						   maxHealth:
+							CGFloat(viewModel.heroMaxHealth),
 						   maxMana: CGFloat(viewModel.heroMaxMana),
 						   currentMana: CGFloat(viewModel.heroCurrentMana),
 						   energy: viewModel.heroCurrentEnergy)
 			Spacer()
 			// Enemy
 			characterStats(name: "Enemy",
-						   health: CGFloat(viewModel.enemyCurrentHealth),
+						   currentHealth: CGFloat(viewModel.enemyCurrentHealth),
+						   maxHealth:
+							CGFloat(viewModel.enemyMaxHealth),
 						   maxMana: CGFloat(viewModel.enemyMaxMana), currentMana: CGFloat(viewModel.enemyCurrentMana),
 						   energy: viewModel.enemyCurrentEnergy)
 		}
 	}
 
 	private func characterStats(name: String,
-								health: CGFloat,
+								currentHealth: CGFloat,
+								maxHealth: CGFloat,
 								maxMana: CGFloat,
 								currentMana: CGFloat,
 								energy: Int) -> some View {
@@ -93,8 +98,10 @@ struct RoomView: View {
 			Text(name)
 				.font(.title2)
 				.foregroundColor(.white)
-			HealthBar(health: health)
-			ManaBar(currentMana: currentMana, maxMana: maxMana)
+			HealthBar(currentHealth: currentHealth,
+					  maxHealth: maxHealth)
+			ManaBar(currentMana: currentMana,
+					maxMana: maxMana)
 			EnergyBar(energy: energy)
 		}
 	}
@@ -158,7 +165,13 @@ struct RoomView: View {
 
 // MARK: Health Bar
 struct HealthBar: View {
-	var health: CGFloat // Value between 0 and 100
+	var currentHealth: CGFloat // Value between 0 and 100
+	var maxHealth: CGFloat
+
+	private var healthPercentage: CGFloat {
+		guard maxHealth > 0 else { return 0 }
+		return (currentHealth / maxHealth) * 100
+	}
 
 	var body: some View {
 		ZStack(alignment: .leading) {
@@ -167,7 +180,7 @@ struct HealthBar: View {
 				.foregroundColor(.gray) // Background bar
 
 			Rectangle()
-				.frame(width: health * 1.25, height: 20) // Adjust width dynamically
+				.frame(width: healthPercentage, height: 20) // Adjust width dynamically
 				.foregroundColor(.red) // Health bar
 		}
 		.cornerRadius(5)
