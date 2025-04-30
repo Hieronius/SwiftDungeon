@@ -72,24 +72,29 @@ struct RoomView: View {
 			// Hero
 			characterStats(name: "Hero",
 						   health: CGFloat(viewModel.heroCurrentHealth),
-						   mana: CGFloat(viewModel.heroCurrentMana),
+						   maxMana: CGFloat(viewModel.heroMaxMana),
+						   currentMana: CGFloat(viewModel.heroCurrentMana),
 						   energy: viewModel.heroCurrentEnergy)
 			Spacer()
 			// Enemy
 			characterStats(name: "Enemy",
 						   health: CGFloat(viewModel.enemyCurrentHealth),
-						   mana: CGFloat(viewModel.enemyCurrentMana),
+						   maxMana: CGFloat(viewModel.enemyMaxMana), currentMana: CGFloat(viewModel.enemyCurrentMana),
 						   energy: viewModel.enemyCurrentEnergy)
 		}
 	}
 
-	private func characterStats(name: String, health: CGFloat, mana: CGFloat, energy: Int) -> some View {
+	private func characterStats(name: String,
+								health: CGFloat,
+								maxMana: CGFloat,
+								currentMana: CGFloat,
+								energy: Int) -> some View {
 		VStack {
 			Text(name)
 				.font(.title2)
 				.foregroundColor(.white)
 			HealthBar(health: health)
-			ManaBar(mana: mana)
+			ManaBar(currentMana: currentMana, maxMana: maxMana)
 			EnergyBar(energy: energy)
 		}
 	}
@@ -158,7 +163,7 @@ struct HealthBar: View {
 	var body: some View {
 		ZStack(alignment: .leading) {
 			Rectangle()
-				.frame(width: 125, height: 20)
+				.frame(width: 100, height: 20)
 				.foregroundColor(.gray) // Background bar
 
 			Rectangle()
@@ -171,16 +176,22 @@ struct HealthBar: View {
 
 // MARK: Mana Bar
 struct ManaBar: View {
-	var mana: CGFloat // Value between 0 and 100
+	var currentMana: CGFloat // Value between 0 and 100
+	var maxMana: CGFloat
+
+	private var manaPercentage: CGFloat {
+		guard maxMana > 0 else { return 0 }
+		return (currentMana / maxMana) * 100
+	}
 
 	var body: some View {
 		ZStack(alignment: .leading) {
 			Rectangle()
-				.frame(width: 125, height: 20)
+				.frame(width: 100, height: 20)
 				.foregroundColor(.gray) // Background bar
 
 			Rectangle()
-				.frame(width: mana * 1.25, height: 20) // Adjust width dynamically
+				.frame(width: manaPercentage, height: 20) // Adjust width dynamically
 				.foregroundColor(.blue) // Mana bar
 		}
 		.cornerRadius(5)

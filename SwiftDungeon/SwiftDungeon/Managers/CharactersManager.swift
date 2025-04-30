@@ -206,15 +206,15 @@ class CharacterManager {
 		return Character(name: "Hieronius",
 						  maxHealth: 100,
 						  currentHealth: 100,
-						  maxMana: 50,
-						  currentMana: 50,
+						  maxMana: 100,
+						  currentMana: 100,
 						  maxEnergy: 5,
 						 spellPower: 20,
 						 currentEnergy: 5,
 						 blockValue: 5,
 						 currentArmor: 1,
-						  maxDamage: 10,
-						  minDamage: 5)
+						  maxDamage: 20,
+						  minDamage: 15)
 	}
 
 	func spawnEnemy(at index: Int) -> Character {

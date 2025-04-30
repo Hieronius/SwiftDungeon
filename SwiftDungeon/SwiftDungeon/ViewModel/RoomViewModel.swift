@@ -49,7 +49,6 @@ class RoomViewModel: ObservableObject {
 		self.currentRound = gameState.currentRound
 		self.isHeroTurn = gameState.isHeroTurn
 
-
 		self.heroMaxHealth = gameState.hero?.maxHealth ?? 0
 		self.heroCurrentHealth = gameState.hero?.currentHealth ?? 0
 		self.heroMaxMana = gameState.hero?.maxMana ?? 0
@@ -150,6 +149,7 @@ class RoomViewModel: ObservableObject {
 			gameState.isGameOn = false
 			gameState.isHeroWon = true
 		}
+		syncGameState()
 	}
 
 	func enterNewRoom() {
