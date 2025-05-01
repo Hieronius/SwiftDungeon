@@ -178,6 +178,7 @@ struct RoomView: View {
 // MARK: Experience Bar
 
 struct ExperienceBar: View {
+	
 	var currentExperience: CGFloat // Value between 0 and 100
 	var maxExperience: CGFloat
 
