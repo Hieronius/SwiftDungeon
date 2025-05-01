@@ -27,6 +27,7 @@ class RoomViewModel: ObservableObject {
 	@Published var heroCurrentEnergy: Int
 	@Published var heroCurrentExperience: Int
 	@Published var heroMaxExperience: Int
+	@Published var heroActiveEffects: [Effect]
 
 	// Enemy Stats
 
@@ -37,6 +38,7 @@ class RoomViewModel: ObservableObject {
 	@Published var enemyCurrentMana: Int
 	@Published var enemyMaxEnergy: Int
 	@Published var enemyCurrentEnergy: Int
+	@Published var enemyActiveEffects: [Effect]
 
 	// Utility
 
@@ -70,6 +72,7 @@ class RoomViewModel: ObservableObject {
 		self.heroCurrentEnergy = gameState.hero?.currentEnergy ?? 0
 		self.heroCurrentExperience = gameState.hero?.stats.currentExperience ?? 0
 		self.heroMaxExperience = gameState.hero?.stats.maxExperience ?? 0
+		self.heroActiveEffects = gameState.hero?.activeEffects ?? []
 
 		self.enemyCurrentLevel = gameState.enemy?.stats.level ?? 0
 		self.enemyMaxHealth = gameState.enemy?.maxHealth ?? 0
@@ -78,6 +81,7 @@ class RoomViewModel: ObservableObject {
 		self.enemyCurrentMana = gameState.enemy?.currentMana ?? 0
 		self.enemyMaxEnergy = gameState.enemy?.maxEnergy ?? 0
 		self.enemyCurrentEnergy = gameState.enemy?.currentEnergy ?? 0
+		self.enemyActiveEffects = gameState.enemy?.activeEffects ?? []
 	}
 
 	// MARK: Sync Game State
@@ -100,6 +104,7 @@ class RoomViewModel: ObservableObject {
 		heroCurrentMana = hero.currentMana
 		heroMaxEnergy = hero.maxEnergy
 		heroCurrentEnergy = hero.currentEnergy
+		heroActiveEffects = hero.activeEffects
 
 		enemyCurrentLevel = enemy.stats.level
 		enemyMaxHealth = enemy.maxHealth
@@ -108,6 +113,7 @@ class RoomViewModel: ObservableObject {
 		enemyCurrentMana = enemy.currentMana
 		enemyMaxEnergy = enemy.maxEnergy
 		enemyCurrentEnergy = enemy.currentEnergy
+		enemyActiveEffects = enemy.activeEffects
 
 	}
 

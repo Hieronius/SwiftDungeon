@@ -80,7 +80,8 @@ struct RoomView: View {
 							CGFloat(viewModel.heroMaxHealth),
 						   maxMana: CGFloat(viewModel.heroMaxMana),
 						   currentMana: CGFloat(viewModel.heroCurrentMana),
-						   energy: viewModel.heroCurrentEnergy)
+						   energy: viewModel.heroCurrentEnergy,
+						   effects: viewModel.heroActiveEffects)
 			Spacer()
 			// Enemy
 			characterStats(name: "Enemy",
@@ -91,7 +92,8 @@ struct RoomView: View {
 						   maxHealth:
 							CGFloat(viewModel.enemyMaxHealth),
 						   maxMana: CGFloat(viewModel.enemyMaxMana), currentMana: CGFloat(viewModel.enemyCurrentMana),
-						   energy: viewModel.enemyCurrentEnergy)
+						   energy: viewModel.enemyCurrentEnergy,
+						   effects: viewModel.enemyActiveEffects)
 		}
 	}
 
@@ -103,7 +105,8 @@ struct RoomView: View {
 								maxHealth: CGFloat,
 								maxMana: CGFloat,
 								currentMana: CGFloat,
-								energy: Int) -> some View {
+								energy: Int,
+								effects: [Effect]) -> some View {
 		VStack {
 			HStack {
 				ZStack {
@@ -127,6 +130,7 @@ struct RoomView: View {
 			ManaBar(currentMana: currentMana,
 					maxMana: maxMana)
 			EnergyBar(energy: energy)
+			EffectBar(effects: effects)
 		}
 	}
 
@@ -285,6 +289,69 @@ struct EnergyBar: View {
 		}
 	}
 }
+
+// MARK: Effect Bar
+
+//struct EffectBar: View {
+//	var effects: [Effect]
+//
+//	var buffEffects: [Effect] {
+//		effects.filter { !$0.isDebuff }
+//	}
+//
+//	var debuffEffects: [Effect] {
+//		effects.filter { $0.isDebuff }
+//	}
+//
+//	var body: some View {
+//		HStack {
+//			if !buffEffects.isEmpty {
+//				ArrowEffectIcon(isUp: true, color: .cyan)
+//			}
+//
+//			if !debuffEffects.isEmpty {
+//				ArrowEffectIcon(isUp: false, color: .purple)
+//			}
+//		}
+//	}
+//}
+//
+//struct ArrowEffectIcon: View {
+//	let isUp: Bool
+//	let color: Color
+//
+//	var body: some View {
+//		Image(systemName: isUp ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill")
+//			.foregroundColor(color)
+//			.font(.system(size: 20))
+//	}
+//}
+
+struct EffectBar: View {
+	var effects: [Effect]
+
+	private var hasBuff: Bool { effects.contains { !$0.isDebuff } }
+	private var hasDebuff: Bool { effects.contains { $0.isDebuff } }
+
+	var body: some View {
+		HStack(spacing: 4) {
+			// Buff slot
+			Image(systemName: "arrowtriangle.up.fill")
+				.foregroundColor(.cyan)
+				.font(.system(size: 20))
+				.opacity(hasBuff ? 1 : 0)            // always present, just invisible
+				.frame(width: 20, height: 20)        // reserve exact size
+
+			// Debuff slot
+			Image(systemName: "arrowtriangle.down.fill")
+				.foregroundColor(.purple)
+				.font(.system(size: 20))
+				.opacity(hasDebuff ? 1 : 0)          // always present
+				.frame(width: 20, height: 20)        // reserve exact size
+		}
+	}
+}
+
 
 // MARK: Special Effects
 
