@@ -1,5 +1,7 @@
 Current Plan
 
+1. Implement Debuff ability and button
+
 3. add isGameOn toggle to the View and create a separate GameOverScreen so it will be presented only is toggle is true
 
 // Notes and ideas

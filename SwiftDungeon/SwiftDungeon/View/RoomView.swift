@@ -292,42 +292,8 @@ struct EnergyBar: View {
 
 // MARK: Effect Bar
 
-//struct EffectBar: View {
-//	var effects: [Effect]
-//
-//	var buffEffects: [Effect] {
-//		effects.filter { !$0.isDebuff }
-//	}
-//
-//	var debuffEffects: [Effect] {
-//		effects.filter { $0.isDebuff }
-//	}
-//
-//	var body: some View {
-//		HStack {
-//			if !buffEffects.isEmpty {
-//				ArrowEffectIcon(isUp: true, color: .cyan)
-//			}
-//
-//			if !debuffEffects.isEmpty {
-//				ArrowEffectIcon(isUp: false, color: .purple)
-//			}
-//		}
-//	}
-//}
-//
-//struct ArrowEffectIcon: View {
-//	let isUp: Bool
-//	let color: Color
-//
-//	var body: some View {
-//		Image(systemName: isUp ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill")
-//			.foregroundColor(color)
-//			.font(.system(size: 20))
-//	}
-//}
-
 struct EffectBar: View {
+
 	var effects: [Effect]
 
 	private var hasBuff: Bool { effects.contains { !$0.isDebuff } }
@@ -351,7 +317,6 @@ struct EffectBar: View {
 		}
 	}
 }
-
 
 // MARK: Special Effects
 
