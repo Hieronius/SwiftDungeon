@@ -18,6 +18,7 @@ class RoomViewModel: ObservableObject {
 
 	// Hero Stats
 
+	@Published var heroCurrentLevel: Int
 	@Published var heroMaxHealth: Int
 	@Published var heroCurrentHealth: Int
 	@Published var heroMaxMana: Int
@@ -29,6 +30,7 @@ class RoomViewModel: ObservableObject {
 
 	// Enemy Stats
 
+	@Published var enemyCurrentLevel: Int
 	@Published var enemyMaxHealth: Int
 	@Published var enemyCurrentHealth: Int
 	@Published var enemyMaxMana: Int
@@ -59,6 +61,7 @@ class RoomViewModel: ObservableObject {
 		self.currentRound = gameState.currentRound
 		self.isHeroTurn = gameState.isHeroTurn
 
+		self.heroCurrentLevel = gameState.hero?.stats.level ?? 0
 		self.heroMaxHealth = gameState.hero?.maxHealth ?? 0
 		self.heroCurrentHealth = gameState.hero?.currentHealth ?? 0
 		self.heroMaxMana = gameState.hero?.maxMana ?? 0
@@ -68,6 +71,7 @@ class RoomViewModel: ObservableObject {
 		self.heroCurrentExperience = gameState.hero?.stats.currentExperience ?? 0
 		self.heroMaxExperience = gameState.hero?.stats.maxExperience ?? 0
 
+		self.enemyCurrentLevel = gameState.enemy?.stats.level ?? 0
 		self.enemyMaxHealth = gameState.enemy?.maxHealth ?? 0
 		self.enemyCurrentHealth = gameState.enemy?.currentHealth ?? 0
 		self.enemyMaxMana = gameState.enemy?.maxMana ?? 0
@@ -87,6 +91,7 @@ class RoomViewModel: ObservableObject {
 		guard let hero = gameState.hero else { return }
 		guard let enemy = gameState.enemy else { return }
 
+		heroCurrentLevel = hero.stats.level
 		heroMaxExperience = hero.stats.maxExperience
 		heroCurrentExperience = hero.stats.currentExperience
 		heroMaxHealth = hero.maxHealth
@@ -96,6 +101,7 @@ class RoomViewModel: ObservableObject {
 		heroMaxEnergy = hero.maxEnergy
 		heroCurrentEnergy = hero.currentEnergy
 
+		enemyCurrentLevel = enemy.stats.level
 		enemyMaxHealth = enemy.maxHealth
 		enemyCurrentHealth = enemy.currentHealth
 		enemyMaxMana = enemy.maxMana
@@ -163,7 +169,6 @@ class RoomViewModel: ObservableObject {
 		if gameState.currentRoom > 14 {
 			gameState.isGameCompleted = true
 			gameState.isGameOn = false
-			print("Game has been complete")
 			return
 		}
 
@@ -171,23 +176,18 @@ class RoomViewModel: ObservableObject {
 			gameState.isGameOn = false
 			gameState.isGameOver = true
 			startFight()
-			print("Game over -> start new game")
 
 		} else if enemy.currentHealth < 1 {
 
 			gameState.isGameOn = false
 			gameState.isHeroWon = true
 			let experience = currentRoom * 50
-			print(hero.stats.currentExperience)
-			print(hero.stats.maxExperience)
-			print(experience)
 			if (heroCurrentExperience + experience) >= hero.stats.maxExperience {
 				heroLevelUP()
 			} else {
 				hero.stats.currentExperience += experience
 			}
 			enterNewRoom()
-			print("New room should be intered")
 		}
 
 		syncGameState()
@@ -211,7 +211,6 @@ class RoomViewModel: ObservableObject {
 		restoreHero()
 
 		syncGameState()
-		print("Your level now is \(hero.stats.level)")
 	}
 
 	func restoreHero() {

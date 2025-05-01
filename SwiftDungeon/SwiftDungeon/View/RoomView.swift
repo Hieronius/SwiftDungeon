@@ -31,7 +31,6 @@ struct RoomView: View {
 				battleFieldSection()
 				Spacer()
 				actionButtons()
-				Spacer()
 			}
 
 		}
@@ -72,6 +71,7 @@ struct RoomView: View {
 		HStack {
 			// Hero
 			characterStats(name: "Hero",
+						   level: "\(viewModel.heroCurrentLevel)",
 						   currentExperience: CGFloat(viewModel.heroCurrentExperience),
 						   maxExperience:
 							CGFloat(viewModel.heroMaxExperience),
@@ -84,6 +84,7 @@ struct RoomView: View {
 			Spacer()
 			// Enemy
 			characterStats(name: "Enemy",
+						   level: "\(viewModel.enemyCurrentLevel)",
 						   currentExperience: 0,
 						   maxExperience: 0,
 						   currentHealth: CGFloat(viewModel.enemyCurrentHealth),
@@ -95,6 +96,7 @@ struct RoomView: View {
 	}
 
 	private func characterStats(name: String,
+								level: String,
 								currentExperience: CGFloat,
 								maxExperience: CGFloat,
 								currentHealth: CGFloat,
@@ -103,9 +105,21 @@ struct RoomView: View {
 								currentMana: CGFloat,
 								energy: Int) -> some View {
 		VStack {
-			Text(name)
-				.font(.title2)
-				.foregroundColor(.white)
+			HStack {
+				ZStack {
+					Rectangle()
+						.frame(width: 30, height: 30)
+						.foregroundColor(.gray)
+					Text(level)
+						.font(.title2)
+						.foregroundColor(.white)
+				}
+				.cornerRadius(10)
+				Text(name)
+					.font(.title)
+					.bold(true)
+					.foregroundColor(.white)
+			}
 			ExperienceBar(currentExperience: currentExperience,
 						  maxExperience: maxExperience)
 			HealthBar(currentHealth: currentHealth,
