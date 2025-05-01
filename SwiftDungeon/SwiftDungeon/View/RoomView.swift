@@ -172,6 +172,8 @@ struct RoomView: View {
 						 action: viewModel.attack)
 			actionButton(title: "Heal",
 						 action: viewModel.heal)
+			actionButton(title: "Cut",
+						 action: viewModel.cut)
 			Spacer()
 		}
 		HStack {

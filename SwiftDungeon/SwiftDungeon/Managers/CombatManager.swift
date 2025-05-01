@@ -22,4 +22,9 @@ class CombatManager {
 		caster.spellPower / 4
 	}
 
+	func cut(_ host: Character, _ target: Character) -> Int {
+		let damage = (Int.random(in: host.minDamage...host.maxDamage) - target.currentArmor) / 2
+		return damage > 0 ? damage : 0
+	}
+
 }

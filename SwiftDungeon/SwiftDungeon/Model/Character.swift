@@ -91,7 +91,7 @@ class Character: Creature {
 		case .debuff(let debuff):
 			switch debuff {
 			case .bleeding(let value):
-				currentHealth -= value
+				print("reversed debuff")
 			case .energy(let value):
 				currentEnergy -= value
 			}

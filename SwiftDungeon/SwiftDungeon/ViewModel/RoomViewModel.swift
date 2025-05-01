@@ -336,6 +336,40 @@ class RoomViewModel: ObservableObject {
 		syncGameState()
 	}
 
+	func cut() {
+
+		guard gameState.isGameOn else { return }
+		guard let hero = gameState.hero else { return }
+		guard let enemy = gameState.enemy else { return }
+
+		if gameState.isHeroTurn {
+
+			guard hero.currentEnergy >= 1 else { return }
+			hero.currentEnergy -= 1
+			let result = combatManager.cut(hero, enemy)
+			let debuff = Effect(type: .debuff(.bleeding(value: result)),
+							  duration: 1)
+			enemy.applyEffect(debuff)
+			triggerHit(onHero: false)
+
+		} else {
+
+			guard enemy.currentEnergy >= 1 else { return }
+			enemy.currentEnergy -= 1
+			let result = combatManager.cut(enemy, hero)
+			let debuff = Effect(type: .debuff(.bleeding(value: result)),
+							  duration: 1)
+			hero.applyEffect(debuff)
+			triggerHit(onHero: true)
+
+		}
+		checkWinLoseCondition()
+
+		syncGameState()
+
+
+	}
+
 	// MARK: - Helpers
 
 	private func triggerEffect(forHero: Bool, color: Color) {
