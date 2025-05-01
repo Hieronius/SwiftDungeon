@@ -6,6 +6,7 @@ struct RoomView: View {
 
 	// MARK: - State Properties
 	@StateObject private var viewModel: RoomViewModel
+	@State private var isEnemyUI = true
 
 	// MARK: - Initialization
 	init(viewModel: RoomViewModel) {
@@ -184,6 +185,7 @@ struct ExperienceBar: View {
 
 	private var experiencePercentage: CGFloat {
 		guard maxExperience > 0 else { return 0 }
+		guard currentExperience > 0 else { return 1 }
 		return (currentExperience / maxExperience) * 100
 	}
 
@@ -198,6 +200,7 @@ struct ExperienceBar: View {
 				.foregroundColor(.orange) // Health bar
 		}
 		.cornerRadius(5)
+		.opacity(experiencePercentage > 0 ? 1 : 0)
 	}
 }
 

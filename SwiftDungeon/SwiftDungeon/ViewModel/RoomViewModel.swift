@@ -199,7 +199,7 @@ class RoomViewModel: ObservableObject {
 
 		hero.stats.level += 1
 		hero.stats.maxExperience += 100
-		hero.stats.currentExperience = 0
+		hero.stats.currentExperience = 1
 		hero.stats.strength += 2
 		hero.stats.agility += 2
 		hero.stats.vitality += 2
