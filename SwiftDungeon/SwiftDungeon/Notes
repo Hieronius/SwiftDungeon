@@ -1,5 +1,6 @@
 Current Plan
-1. Implement correct Block Mechanic so it will add armor only for 1 turn
+
+1. Fix Experience Bar
 
 3. add isGameOn toggle to the View and create a separate GameOverScreen so it will be presented only is toggle is true
 
@@ -16,3 +17,15 @@ Current Plan
 // Narrator should be the hero own voice of madness 
 
 // add animation when you enter new room. Just a simple visual effect on the screen borders like a light should move from top to bottom and vice versa. Something simple
+
+// Kill monsters fast / think less to get a bonus of collecting soul/black power because of your cold heart decision making. To increase game speed especially on easier levels
+
+// Swipes on the screen in special order to activate special skills and improve it's damage/effect. Analogue is GearsOfWars with nice recharge -> more damage/slower recharge
+
+// Map of Locations:
+- Town (In, BlackSmith, Store, Alch)
+- Dungeon
+- Cursed Charch
+- Place to rechard inside the Dungeon
+- Dungeon Room
+- Dungeon Corridor

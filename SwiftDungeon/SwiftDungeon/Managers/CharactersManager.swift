@@ -6,6 +6,7 @@ class CharacterManager {
 	private var enemyList: [Character] = [
 
 		Character(name: "Skeleton",
+				  stats: Stats(),
 				  maxHealth: 15,
 				  currentHealth: 15,
 				  maxMana: 0,
@@ -21,6 +22,7 @@ class CharacterManager {
 				  activeEffects: []),
 
 		Character(name: "Zombie",
+				  stats: Stats(),
 				  maxHealth: 17,
 				  currentHealth: 17,
 				  maxMana: 0,
@@ -36,6 +38,7 @@ class CharacterManager {
 				  activeEffects: []),
 
 		Character(name: "Golem",
+				  stats: Stats(),
 				  maxHealth: 19,
 				  currentHealth: 19,
 				  maxMana: 0,
@@ -51,6 +54,7 @@ class CharacterManager {
 				  activeEffects: []),
 
 		Character(name: "Witch",
+				  stats: Stats(),
 				  maxHealth: 18,
 				  currentHealth: 18,
 				  maxMana: 10,
@@ -66,6 +70,7 @@ class CharacterManager {
 				  activeEffects: []),
 
 		Character(name: "Vampire",
+				  stats: Stats(),
 				  maxHealth: 20,
 				  currentHealth: 20,
 				  maxMana: 0,
@@ -81,6 +86,7 @@ class CharacterManager {
 				  activeEffects: []),
 		
 		Character(name: "Mummy",
+				  stats: Stats(),
 				  maxHealth: 22,
 				  currentHealth: 22,
 				  maxMana: 0,
@@ -96,6 +102,7 @@ class CharacterManager {
 				  activeEffects: []),
 
 		Character(name: "Giant Spider",
+				  stats: Stats(),
 				  maxHealth: 21,
 				  currentHealth: 21,
 				  maxMana: 0,
@@ -111,6 +118,7 @@ class CharacterManager {
 				  activeEffects: []),
 
 		Character(name: "Werewolf",
+				  stats: Stats(),
 				  maxHealth: 23,
 				  currentHealth: 23,
 				  maxMana: 0,
@@ -126,6 +134,7 @@ class CharacterManager {
 				  activeEffects: []),
 
 		Character(name: "Goblin",
+				  stats: Stats(),
 				  maxHealth: 16,
 				  currentHealth: 16,
 				  maxMana: 0,
@@ -141,6 +150,7 @@ class CharacterManager {
 				  activeEffects: []),
 
 		Character(name: "Ogre",
+				  stats: Stats(),
 				  maxHealth: 25,
 				  currentHealth: 25,
 				  maxMana: 0,
@@ -156,6 +166,7 @@ class CharacterManager {
 				  activeEffects: []),
 
 		Character(name: "Troll",
+				  stats: Stats(),
 				  maxHealth: 28,
 				  currentHealth: 28,
 				  maxMana: 0,
@@ -171,6 +182,7 @@ class CharacterManager {
 				  activeEffects: []),
 
 		Character(name: "Dark Knight",
+				  stats: Stats(),
 				  maxHealth: 30,
 				  currentHealth: 30,
 				  maxMana: 0,
@@ -186,6 +198,7 @@ class CharacterManager {
 				  activeEffects: []),
 
 		Character(name: "Dragon",
+				  stats: Stats(),
 				  maxHealth: 35,
 				  currentHealth: 35,
 				  maxMana: 0,
@@ -201,6 +214,7 @@ class CharacterManager {
 				  activeEffects: []),
 
 		Character(name: "Demon",
+				  stats: Stats(),
 				  maxHealth: 32,
 				  currentHealth: 32,
 				  maxMana: 0,
@@ -216,6 +230,7 @@ class CharacterManager {
 				  activeEffects: []),
 
 		Character(name: "Griffin",
+				  stats: Stats(),
 				  maxHealth: 28,
 				  currentHealth: 28,
 				  maxMana: 0,
@@ -234,6 +249,7 @@ class CharacterManager {
 
 	func setupHero() -> Character {
 		return Character(name: "Hieronius",
+						 stats: Stats(),
 						  maxHealth: 100,
 						  currentHealth: 100,
 						  maxMana: 100,

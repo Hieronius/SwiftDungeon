@@ -24,6 +24,8 @@ class RoomViewModel: ObservableObject {
 	@Published var heroCurrentMana: Int
 	@Published var heroMaxEnergy: Int
 	@Published var heroCurrentEnergy: Int
+	@Published var heroCurrentExperience: Int
+	@Published var heroMaxExperience: Int
 
 	// Enemy Stats
 
@@ -63,6 +65,8 @@ class RoomViewModel: ObservableObject {
 		self.heroCurrentMana = gameState.hero?.currentMana ?? 0
 		self.heroMaxEnergy = gameState.hero?.maxEnergy ?? 0
 		self.heroCurrentEnergy = gameState.hero?.currentEnergy ?? 0
+		self.heroCurrentExperience = gameState.hero?.stats.currentExperience ?? 0
+		self.heroMaxExperience = gameState.hero?.stats.maxExperience ?? 0
 
 		self.enemyMaxHealth = gameState.enemy?.maxHealth ?? 0
 		self.enemyCurrentHealth = gameState.enemy?.currentHealth ?? 0
@@ -170,11 +174,32 @@ class RoomViewModel: ObservableObject {
 		} else if enemy.currentHealth < 1 {
 			gameState.isGameOn = false
 			gameState.isHeroWon = true
+			if (heroCurrentExperience + currentRoom * 50) >= heroMaxExperience {
+				heroLevelUP()
+			}
 			enterNewRoom()
 			print("New room should be intered")
 		}
 
 		syncGameState()
+	}
+
+	func heroLevelUP() {
+
+		guard let hero = gameState.hero else { return }
+
+		hero.stats.level += 1
+		hero.stats.maxExperience += 50
+		hero.stats.strength += 2
+		hero.stats.agility += 2
+		hero.stats.vitality += 2
+		hero.stats.intellect += 1
+		hero.maxHealth += 10
+		hero.maxMana += 10
+		hero.maxDamage += 1
+		hero.minDamage += 1
+		restoreHero()
+		print("Your level now is \(hero.stats.level)")
 	}
 
 	func restoreHero() {

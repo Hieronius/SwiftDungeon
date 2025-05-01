@@ -2,9 +2,11 @@ import Foundation
 
 struct Stats {
 
-	var level: Int
-	var strength: Int
-	var agility: Int
-	var vitality: Int
-	var intellect: Int
+	var level = 1
+	var currentExperience = 50
+	var maxExperience = 100
+	var strength = 5
+	var agility = 5
+	var vitality = 5
+	var intellect = 5
 }

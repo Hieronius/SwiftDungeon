@@ -71,6 +71,9 @@ struct RoomView: View {
 		HStack {
 			// Hero
 			characterStats(name: "Hero",
+						   currentExperience: CGFloat(viewModel.heroCurrentExperience),
+						   maxExperience:
+							CGFloat(viewModel.heroMaxExperience),
 						   currentHealth: CGFloat(viewModel.heroCurrentHealth),
 						   maxHealth:
 							CGFloat(viewModel.heroMaxHealth),
@@ -80,6 +83,8 @@ struct RoomView: View {
 			Spacer()
 			// Enemy
 			characterStats(name: "Enemy",
+						   currentExperience: 0,
+						   maxExperience: 0,
 						   currentHealth: CGFloat(viewModel.enemyCurrentHealth),
 						   maxHealth:
 							CGFloat(viewModel.enemyMaxHealth),
@@ -89,6 +94,8 @@ struct RoomView: View {
 	}
 
 	private func characterStats(name: String,
+								currentExperience: CGFloat,
+								maxExperience: CGFloat,
 								currentHealth: CGFloat,
 								maxHealth: CGFloat,
 								maxMana: CGFloat,
@@ -98,6 +105,8 @@ struct RoomView: View {
 			Text(name)
 				.font(.title2)
 				.foregroundColor(.white)
+			ExperienceBar(currentExperience: currentExperience,
+						  maxExperience: maxExperience)
 			HealthBar(currentHealth: currentHealth,
 					  maxHealth: maxHealth)
 			ManaBar(currentMana: currentMana,
@@ -142,7 +151,6 @@ struct RoomView: View {
 			Spacer()
 			actionButton(title: "Attack",
 						 action: viewModel.attack)
-			Spacer()
 			actionButton(title: "Heal",
 						 action: viewModel.heal)
 			Spacer()
@@ -151,7 +159,6 @@ struct RoomView: View {
 			Spacer()
 			actionButton(title: "Block",
 						 action: viewModel.block)
-			Spacer()
 			actionButton(title: "Buff",
 						 action: viewModel.buff)
 			Spacer()
@@ -168,8 +175,35 @@ struct RoomView: View {
 	}
 }
 
+// MARK: Experience Bar
+
+struct ExperienceBar: View {
+	var currentExperience: CGFloat // Value between 0 and 100
+	var maxExperience: CGFloat
+
+	private var experiencePercentage: CGFloat {
+		guard maxExperience > 0 else { return 0 }
+		return (currentExperience / maxExperience) * 100
+	}
+
+	var body: some View {
+		ZStack(alignment: .leading) {
+			Rectangle()
+				.frame(width: 100, height: 20)
+				.foregroundColor(.gray) // Background bar
+
+			Rectangle()
+				.frame(width: experiencePercentage, height: 20) // Adjust width dynamically
+				.foregroundColor(.orange) // Health bar
+		}
+		.cornerRadius(5)
+	}
+}
+
 // MARK: Health Bar
+
 struct HealthBar: View {
+
 	var currentHealth: CGFloat // Value between 0 and 100
 	var maxHealth: CGFloat
 
@@ -193,7 +227,9 @@ struct HealthBar: View {
 }
 
 // MARK: Mana Bar
+
 struct ManaBar: View {
+
 	var currentMana: CGFloat // Value between 0 and 100
 	var maxMana: CGFloat
 
@@ -217,6 +253,7 @@ struct ManaBar: View {
 }
 
 // MARK: Energy Bar
+
 struct EnergyBar: View {
 	var energy: Int // Value between 1 and 5
 

@@ -3,11 +3,12 @@ import Foundation
 class Character: Creature {
 
 	let name: String
-	let maxHealth: Int
+	var stats: Stats
+	var maxHealth: Int
 	var currentHealth: Int
-	let maxMana: Int
+	var maxMana: Int
 	var currentMana: Int
-	let maxEnergy: Int
+	var maxEnergy: Int
 	var currentEnergy: Int
 	var spellPower: Int
 	var maxDamage: Int
@@ -18,6 +19,7 @@ class Character: Creature {
 	var activeEffects: [Effect]
 
 	init(name: String,
+		 stats: Stats,
 		 maxHealth: Int,
 		 currentHealth: Int,
 		 maxMana: Int,
@@ -33,6 +35,7 @@ class Character: Creature {
 		 activeEffects: [Effect])
 	{
 		self.name = name
+		self.stats = stats
 		self.maxHealth = maxHealth
 		self.currentHealth = currentHealth
 		self.maxMana = maxMana
