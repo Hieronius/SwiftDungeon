@@ -8,21 +8,11 @@ class RoomViewModel: ObservableObject {
 	private let combatManager: CombatManager
 	private let characterManager: CharacterManager
 
-	// MARK: - Properties
+	// MARK: - Published Properties
 
 	@Published var roomState: RoomState
 	@Published var heroState: HeroState
-
-	// Enemy Stats
-
-	@Published var enemyCurrentLevel: Int
-	@Published var enemyMaxHealth: Int
-	@Published var enemyCurrentHealth: Int
-	@Published var enemyMaxMana: Int
-	@Published var enemyCurrentMana: Int
-	@Published var enemyMaxEnergy: Int
-	@Published var enemyCurrentEnergy: Int
-	@Published var enemyActiveEffects: [Effect]
+	@Published var enemyState: EnemyState
 
 	// Utility
 
@@ -54,19 +44,23 @@ class RoomViewModel: ObservableObject {
 			heroActiveEffects: gameState.hero?.activeEffects ?? []
 		)
 
-		self.enemyCurrentLevel = gameState.enemy?.stats.level ?? 0
-		self.enemyMaxHealth = gameState.enemy?.maxHealth ?? 0
-		self.enemyCurrentHealth = gameState.enemy?.currentHealth ?? 0
-		self.enemyMaxMana = gameState.enemy?.maxMana ?? 0
-		self.enemyCurrentMana = gameState.enemy?.currentMana ?? 0
-		self.enemyMaxEnergy = gameState.enemy?.maxEnergy ?? 0
-		self.enemyCurrentEnergy = gameState.enemy?.currentEnergy ?? 0
-		self.enemyActiveEffects = gameState.enemy?.activeEffects ?? []
+		self.enemyState = EnemyState(
+			enemyCurrentLevel: gameState.enemy?.stats.level ?? 0,
+			enemyMaxHealth: gameState.enemy?.maxHealth ?? 0,
+			enemyCurrentHealth: gameState.enemy?.currentHealth ?? 0,
+			enemyMaxMana: gameState.enemy?.maxMana ?? 0,
+			enemyCurrentMana: gameState.enemy?.currentMana ?? 0,
+			enemyMaxEnergy: gameState.enemy?.maxEnergy ?? 0,
+			enemyCurrentEnergy: gameState.enemy?.currentEnergy ?? 0,
+			enemyActiveEffects: gameState.enemy?.activeEffects ?? []
+		)
 	}
 
 	// MARK: Sync Game State
 
 	func syncGameState() {
+
+		// Save/Load function can be implemented here
 
 		roomState = RoomState(
 			currentRoom: gameState.currentRoom,
@@ -92,15 +86,16 @@ class RoomViewModel: ObservableObject {
 			heroActiveEffects: hero.activeEffects
 		)
 
-		enemyCurrentLevel = enemy.stats.level
-		enemyMaxHealth = enemy.maxHealth
-		enemyCurrentHealth = enemy.currentHealth
-		enemyMaxMana = enemy.maxMana
-		enemyCurrentMana = enemy.currentMana
-		enemyMaxEnergy = enemy.maxEnergy
-		enemyCurrentEnergy = enemy.currentEnergy
-		enemyActiveEffects = enemy.activeEffects
-
+		enemyState = EnemyState(
+			enemyCurrentLevel: enemy.stats.level,
+			enemyMaxHealth: enemy.maxHealth,
+			enemyCurrentHealth: enemy.currentHealth,
+			enemyMaxMana: enemy.maxMana,
+			enemyCurrentMana: enemy.currentMana,
+			enemyMaxEnergy: enemy.maxEnergy,
+			enemyCurrentEnergy: enemy.currentEnergy,
+			enemyActiveEffects: enemy.activeEffects
+		)
 	}
 
 	// MARK: - Game Flow States

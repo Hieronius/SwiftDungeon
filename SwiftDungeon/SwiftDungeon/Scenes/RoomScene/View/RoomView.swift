@@ -5,15 +5,18 @@ import SwiftUI
 struct RoomView: View {
 
 	// MARK: - State Properties
+
 	@StateObject private var viewModel: RoomViewModel
 	@State private var isEnemyUI = true
 
 	// MARK: - Initialization
+
 	init(viewModel: RoomViewModel) {
 		_viewModel = StateObject(wrappedValue: viewModel)
 	}
 
 	// MARK: - Body
+
 	var body: some View {
 		ZStack {
 			Color.black
@@ -35,13 +38,14 @@ struct RoomView: View {
 
 		}
 
-		// Entry point for Game Flow
+		// MARK: ENTRY POINT TO THE GAME
 		.onAppear {
 			viewModel.startFight()
 		}
 	}
 
 	// MARK: - Info Layer (Room & Round)
+
 	@ViewBuilder
 	private func gameInfoSection() -> some View {
 		HStack {
@@ -66,6 +70,7 @@ struct RoomView: View {
 	}
 
 	// MARK: - Character Stats (Hero & Enemy)
+
 	@ViewBuilder
 	private func characterStatsSection() -> some View {
 		HStack {
@@ -85,15 +90,15 @@ struct RoomView: View {
 			Spacer()
 			// Enemy
 			characterStats(name: "Enemy",
-						   level: "\(viewModel.enemyCurrentLevel)",
+						   level: "\(viewModel.enemyState.enemyCurrentLevel)",
 						   currentExperience: 0,
 						   maxExperience: 0,
-						   currentHealth: CGFloat(viewModel.enemyCurrentHealth),
+						   currentHealth: CGFloat(viewModel.enemyState.enemyCurrentHealth),
 						   maxHealth:
-							CGFloat(viewModel.enemyMaxHealth),
-						   maxMana: CGFloat(viewModel.enemyMaxMana), currentMana: CGFloat(viewModel.enemyCurrentMana),
-						   energy: viewModel.enemyCurrentEnergy,
-						   effects: viewModel.enemyActiveEffects)
+							CGFloat(viewModel.enemyState.enemyMaxHealth),
+						   maxMana: CGFloat(viewModel.enemyState.enemyMaxMana), currentMana: CGFloat(viewModel.enemyState.enemyCurrentMana),
+						   energy: viewModel.enemyState.enemyCurrentEnergy,
+						   effects: viewModel.enemyState.enemyActiveEffects)
 		}
 	}
 

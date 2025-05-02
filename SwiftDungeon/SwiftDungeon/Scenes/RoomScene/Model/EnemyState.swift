@@ -1,8 +1,13 @@
-//
-//  EnemyState.swift
-//  SwiftDungeon
-//
-//  Created by Арсентий Халимовский on 02.05.2025.
-//
-
 import Foundation
+
+struct EnemyState {
+
+	var enemyCurrentLevel: Int
+	var enemyMaxHealth: Int
+	var enemyCurrentHealth: Int
+	var enemyMaxMana: Int
+	var enemyCurrentMana: Int
+	var enemyMaxEnergy: Int
+	var enemyCurrentEnergy: Int
+	var enemyActiveEffects: [Effect]
+}
