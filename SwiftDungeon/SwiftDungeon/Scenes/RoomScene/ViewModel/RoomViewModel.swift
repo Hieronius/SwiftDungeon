@@ -11,19 +11,7 @@ class RoomViewModel: ObservableObject {
 	// MARK: - Properties
 
 	@Published var roomState: RoomState
-
-	// Hero Stats
-
-	@Published var heroCurrentLevel: Int
-	@Published var heroMaxHealth: Int
-	@Published var heroCurrentHealth: Int
-	@Published var heroMaxMana: Int
-	@Published var heroCurrentMana: Int
-	@Published var heroMaxEnergy: Int
-	@Published var heroCurrentEnergy: Int
-	@Published var heroCurrentExperience: Int
-	@Published var heroMaxExperience: Int
-	@Published var heroActiveEffects: [Effect]
+	@Published var heroState: HeroState
 
 	// Enemy Stats
 
@@ -53,16 +41,18 @@ class RoomViewModel: ObservableObject {
 
 		self.roomState = RoomState()
 
-		self.heroCurrentLevel = gameState.hero?.stats.level ?? 0
-		self.heroMaxHealth = gameState.hero?.maxHealth ?? 0
-		self.heroCurrentHealth = gameState.hero?.currentHealth ?? 0
-		self.heroMaxMana = gameState.hero?.maxMana ?? 0
-		self.heroCurrentMana = gameState.hero?.currentMana ?? 0
-		self.heroMaxEnergy = gameState.hero?.maxEnergy ?? 0
-		self.heroCurrentEnergy = gameState.hero?.currentEnergy ?? 0
-		self.heroCurrentExperience = gameState.hero?.stats.currentExperience ?? 0
-		self.heroMaxExperience = gameState.hero?.stats.maxExperience ?? 0
-		self.heroActiveEffects = gameState.hero?.activeEffects ?? []
+		self.heroState = HeroState(
+			heroCurrentLevel: gameState.hero?.stats.level ?? 0,
+			heroMaxHealth: gameState.hero?.maxHealth ?? 0,
+			heroCurrentHealth: gameState.hero?.currentHealth ?? 0,
+			heroMaxMana: gameState.hero?.maxMana ?? 0,
+			heroCurrentMana: gameState.hero?.currentMana ?? 0,
+			heroMaxEnergy: gameState.hero?.maxEnergy ?? 0,
+			heroCurrentEnergy: gameState.hero?.currentEnergy ?? 0,
+			heroCurrentExperience: gameState.hero?.stats.currentExperience ?? 0,
+			heroMaxExperience: gameState.hero?.stats.maxExperience ?? 0,
+			heroActiveEffects: gameState.hero?.activeEffects ?? []
+		)
 
 		self.enemyCurrentLevel = gameState.enemy?.stats.level ?? 0
 		self.enemyMaxHealth = gameState.enemy?.maxHealth ?? 0
@@ -84,21 +74,23 @@ class RoomViewModel: ObservableObject {
 			isHeroTurn: gameState.isHeroTurn,
 			heroWasHit: roomState.heroWasHit,
 			enemyWasHit: roomState.enemyWasHit
-			)
+		)
 
 		guard let hero = gameState.hero else { return }
 		guard let enemy = gameState.enemy else { return }
 
-		heroCurrentLevel = hero.stats.level
-		heroMaxExperience = hero.stats.maxExperience
-		heroCurrentExperience = hero.stats.currentExperience
-		heroMaxHealth = hero.maxHealth
-		heroCurrentHealth = hero.currentHealth
-		heroMaxMana = hero.maxMana
-		heroCurrentMana = hero.currentMana
-		heroMaxEnergy = hero.maxEnergy
-		heroCurrentEnergy = hero.currentEnergy
-		heroActiveEffects = hero.activeEffects
+		heroState = HeroState(
+			heroCurrentLevel: hero.stats.level,
+			heroMaxHealth: hero.maxHealth,
+			heroCurrentHealth: hero.currentHealth,
+			heroMaxMana: hero.maxMana,
+			heroCurrentMana: hero.currentMana,
+			heroMaxEnergy: hero.maxEnergy,
+			heroCurrentEnergy: hero.currentEnergy,
+			heroCurrentExperience: hero.stats.currentExperience,
+			heroMaxExperience: hero.stats.maxExperience,
+			heroActiveEffects: hero.activeEffects
+		)
 
 		enemyCurrentLevel = enemy.stats.level
 		enemyMaxHealth = enemy.maxHealth
@@ -182,7 +174,7 @@ class RoomViewModel: ObservableObject {
 			gameState.isGameOn = false
 			gameState.isHeroWon = true
 			let experience = roomState.currentRoom * 50
-			if (heroCurrentExperience + experience) >= hero.stats.maxExperience {
+			if (heroState.heroCurrentExperience + experience) >= hero.stats.maxExperience {
 				heroLevelUP()
 			} else {
 				hero.stats.currentExperience += experience
@@ -214,7 +206,7 @@ class RoomViewModel: ObservableObject {
 	}
 
 	func restoreHero() {
-		
+
 		guard let hero = gameState.hero else { return }
 		hero.currentHealth = hero.maxHealth
 		hero.currentMana = hero.maxMana
@@ -278,7 +270,7 @@ class RoomViewModel: ObservableObject {
 		guard target.currentEnergy >= 1 else { return }
 
 		let isHero = gameState.isHeroTurn
-			triggerEffect(forHero: isHero, color: .blue)
+		triggerEffect(forHero: isHero, color: .blue)
 
 		let blockValue = combatManager.block(target)
 		let buff = Effect(type: .buff(.armor(value: blockValue)),
@@ -298,7 +290,7 @@ class RoomViewModel: ObservableObject {
 		guard let target else { return }
 		guard target.currentEnergy >= 1, target.currentMana >= 10 else { return }
 		let isHero = gameState.isHeroTurn
-			triggerEffect(forHero: isHero, color: .green)
+		triggerEffect(forHero: isHero, color: .green)
 
 		let result = combatManager.heal(target)
 		target.currentHealth = min(target.currentHealth + result, target.maxHealth)
@@ -317,7 +309,7 @@ class RoomViewModel: ObservableObject {
 		guard target.currentEnergy >= 1, target.currentMana >= 10 else { return }
 
 		let isHero = gameState.isHeroTurn
-			triggerEffect(forHero: isHero, color: .yellow)
+		triggerEffect(forHero: isHero, color: .yellow)
 
 		let result = combatManager.buff(target)
 		let buff = Effect(type: .buff(.attack(value: result)),
@@ -342,7 +334,7 @@ class RoomViewModel: ObservableObject {
 			hero.currentEnergy -= 1
 			let result = combatManager.cut(hero, enemy)
 			let debuff = Effect(type: .debuff(.bleeding(value: result)),
-							  duration: 1)
+								duration: 1)
 			enemy.applyEffect(debuff)
 			triggerHit(onHero: false)
 
@@ -352,7 +344,7 @@ class RoomViewModel: ObservableObject {
 			enemy.currentEnergy -= 1
 			let result = combatManager.cut(enemy, hero)
 			let debuff = Effect(type: .debuff(.bleeding(value: result)),
-							  duration: 1)
+								duration: 1)
 			hero.applyEffect(debuff)
 			triggerHit(onHero: true)
 
@@ -380,18 +372,17 @@ class RoomViewModel: ObservableObject {
 	}
 
 	// helper to trigger a 1s “hit” animation on the target
-		private func triggerHit(onHero: Bool) {
-			if onHero {
-				roomState.heroWasHit = true
-				DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-					self.roomState.heroWasHit = false
-				}
-			} else {
-				roomState.enemyWasHit = true
-				DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-					self.roomState.enemyWasHit = false
-				}
+	private func triggerHit(onHero: Bool) {
+		if onHero {
+			roomState.heroWasHit = true
+			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+				self.roomState.heroWasHit = false
+			}
+		} else {
+			roomState.enemyWasHit = true
+			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+				self.roomState.enemyWasHit = false
 			}
 		}
-
+	}
 }

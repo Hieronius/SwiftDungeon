@@ -71,17 +71,17 @@ struct RoomView: View {
 		HStack {
 			// Hero
 			characterStats(name: "Hero",
-						   level: "\(viewModel.heroCurrentLevel)",
-						   currentExperience: CGFloat(viewModel.heroCurrentExperience),
+						   level: "\(viewModel.heroState.heroCurrentLevel)",
+						   currentExperience: CGFloat(viewModel.heroState.heroCurrentExperience),
 						   maxExperience:
-							CGFloat(viewModel.heroMaxExperience),
-						   currentHealth: CGFloat(viewModel.heroCurrentHealth),
+							CGFloat(viewModel.heroState.heroMaxExperience),
+						   currentHealth: CGFloat(viewModel.heroState.heroCurrentHealth),
 						   maxHealth:
-							CGFloat(viewModel.heroMaxHealth),
-						   maxMana: CGFloat(viewModel.heroMaxMana),
-						   currentMana: CGFloat(viewModel.heroCurrentMana),
-						   energy: viewModel.heroCurrentEnergy,
-						   effects: viewModel.heroActiveEffects)
+							CGFloat(viewModel.heroState.heroMaxHealth),
+						   maxMana: CGFloat(viewModel.heroState.heroMaxMana),
+						   currentMana: CGFloat(viewModel.heroState.heroCurrentMana),
+						   energy: viewModel.heroState.heroCurrentEnergy,
+						   effects: viewModel.heroState.heroActiveEffects)
 			Spacer()
 			// Enemy
 			characterStats(name: "Enemy",

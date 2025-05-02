@@ -1,8 +1,15 @@
-//
-//  HeroState.swift
-//  SwiftDungeon
-//
-//  Created by Арсентий Халимовский on 02.05.2025.
-//
-
 import Foundation
+
+struct HeroState {
+
+	var heroCurrentLevel: Int
+	var heroMaxHealth: Int
+	var heroCurrentHealth: Int
+	var heroMaxMana: Int
+	var heroCurrentMana: Int
+	var heroMaxEnergy: Int
+	var heroCurrentEnergy: Int
+	var heroCurrentExperience: Int
+	var heroMaxExperience: Int
+	var heroActiveEffects: [Effect]
+}
