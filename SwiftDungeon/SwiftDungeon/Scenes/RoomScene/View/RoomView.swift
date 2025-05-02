@@ -1,7 +1,5 @@
 import SwiftUI
 
-// MARK: Note to implement
-// ifVisibleInventory/ifVisibleSkills property can be used in GameState or even here in the view to display a bunch of views/buttons/screens accordingly
 struct RoomView: View {
 
 	// MARK: - State Properties
@@ -15,10 +13,12 @@ struct RoomView: View {
 		_viewModel = StateObject(wrappedValue: viewModel)
 	}
 
-	// MARK: - Body
+	// MARK: - Main Structure of the RoomScene
 
 	var body: some View {
 		ZStack {
+
+			// Make screen tappable to implement different functions
 			Color.black
 				.edgesIgnoringSafeArea(.all)
 				.contentShape(Rectangle())
@@ -74,6 +74,7 @@ struct RoomView: View {
 	@ViewBuilder
 	private func characterStatsSection() -> some View {
 		HStack {
+
 			// Hero
 			characterStats(name: "Hero",
 						   level: "\(viewModel.heroState.heroCurrentLevel)",
@@ -88,6 +89,7 @@ struct RoomView: View {
 						   energy: viewModel.heroState.heroCurrentEnergy,
 						   effects: viewModel.heroState.heroActiveEffects)
 			Spacer()
+
 			// Enemy
 			characterStats(name: "Enemy",
 						   level: "\(viewModel.enemyState.enemyCurrentLevel)",
@@ -165,7 +167,6 @@ struct RoomView: View {
 			Spacer()
 		}
 	}
-
 
 	// MARK: - Action Buttons
 
@@ -325,9 +326,7 @@ struct EffectBar: View {
 	}
 }
 
-// MARK: Special Effects
-
-import SwiftUI
+// MARK: Special Effects For Hero/Enemy Tiles
 
 struct CharacterTileView: View {
 	let baseColor: Color
@@ -411,6 +410,7 @@ struct CharacterTileView: View {
 }
 
 // MARK: - ContentView Previews
+
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
 		let gameState = GameState()
