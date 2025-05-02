@@ -155,6 +155,10 @@
 		DDAA040B2DC46E4D00C801B4 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				DDAA04182DC487BA00C801B4 /* TownScene */,
+				DDAA04172DC487B100C801B4 /* CorridorScene */,
+				DDAA04162DC487A400C801B4 /* DungeonScene */,
+				DDAA04152DC4879E00C801B4 /* MenuScene */,
 				DDAA040C2DC46EA600C801B4 /* RoomScene */,
 			);
 			path = Scenes;
@@ -168,6 +172,34 @@
 				DDA9406E2DBF50DE00837F9F /* View */,
 			);
 			path = RoomScene;
+			sourceTree = "<group>";
+		};
+		DDAA04152DC4879E00C801B4 /* MenuScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MenuScene;
+			sourceTree = "<group>";
+		};
+		DDAA04162DC487A400C801B4 /* DungeonScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DungeonScene;
+			sourceTree = "<group>";
+		};
+		DDAA04172DC487B100C801B4 /* CorridorScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CorridorScene;
+			sourceTree = "<group>";
+		};
+		DDAA04182DC487BA00C801B4 /* TownScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TownScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
