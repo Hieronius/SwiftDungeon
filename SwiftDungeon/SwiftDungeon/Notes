@@ -1,6 +1,17 @@
 Current Plan
 
-1. Implement Debuff ability and button
+1. Refactor 20 published placeholder in viewModel as struct like:
+
+struct HeroStats {
+var currentHealth
+var currentLevel
+}
+
+ViewModel {
+@Published heroStats: HeroStats
+
+init() -> Inject
+}
 
 3. add isGameOn toggle to the View and create a separate GameOverScreen so it will be presented only is toggle is true
 

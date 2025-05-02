@@ -367,7 +367,6 @@ class RoomViewModel: ObservableObject {
 
 		syncGameState()
 
-
 	}
 
 	// MARK: - Helpers
