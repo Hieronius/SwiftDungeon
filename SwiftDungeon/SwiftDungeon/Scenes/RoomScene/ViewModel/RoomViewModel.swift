@@ -55,8 +55,11 @@ class RoomViewModel: ObservableObject {
 			enemyActiveEffects: gameState.enemy?.activeEffects ?? []
 		)
 	}
+}
 
-	// MARK: Sync Game State
+// MARK: - Sync Game State
+
+extension RoomViewModel {
 
 	func syncGameState() {
 
@@ -97,8 +100,11 @@ class RoomViewModel: ObservableObject {
 			enemyActiveEffects: enemy.activeEffects
 		)
 	}
+}
 
-	// MARK: - Game Flow States
+// MARK: - Game Options
+
+extension RoomViewModel {
 
 	func pauseGame() {
 		gameState.isGameOn = false
@@ -107,6 +113,11 @@ class RoomViewModel: ObservableObject {
 	func resumeGame() {
 		gameState.isGameOn = true
 	}
+}
+
+// MARK: - Game Flow States
+
+extension RoomViewModel {
 
 	func startFight() {
 
@@ -180,8 +191,29 @@ class RoomViewModel: ObservableObject {
 		syncGameState()
 	}
 
-	func heroLevelUP() {
+	func enterNewRoom() {
 
+		gameState.currentRoom += 1
+		gameState.isGameOn = true
+		gameState.isHeroTurn = true
+		gameState.isHeroWon = false
+		gameState.isGameOver = false
+		gameState.currentRound = 1
+		restoreHero()
+		gameState.enemyIndex += 1
+		let position = gameState.enemyIndex
+		gameState.enemy = characterManager.spawnEnemy(at: position)
+
+		syncGameState()
+	}
+}
+
+// MARK: - Hero Updates
+
+extension RoomViewModel {
+
+	func heroLevelUP() {
+		
 		guard let hero = gameState.hero else { return }
 
 		hero.stats.level += 1
@@ -209,24 +241,11 @@ class RoomViewModel: ObservableObject {
 
 		syncGameState()
 	}
+}
 
-	func enterNewRoom() {
+// MARK: - Fight Mechanics
 
-		gameState.currentRoom += 1
-		gameState.isGameOn = true
-		gameState.isHeroTurn = true
-		gameState.isHeroWon = false
-		gameState.isGameOver = false
-		gameState.currentRound = 1
-		restoreHero()
-		gameState.enemyIndex += 1
-		let position = gameState.enemyIndex
-		gameState.enemy = characterManager.spawnEnemy(at: position)
-
-		syncGameState()
-	}
-
-	// MARK: - Fight Mechanics
+extension RoomViewModel {
 
 	func attack() {
 
@@ -349,8 +368,11 @@ class RoomViewModel: ObservableObject {
 		syncGameState()
 
 	}
+}
 
-	// MARK: - Helpers
+// MARK: - Helpers
+
+extension RoomViewModel {
 
 	private func triggerEffect(forHero: Bool, color: Color) {
 		if forHero {
