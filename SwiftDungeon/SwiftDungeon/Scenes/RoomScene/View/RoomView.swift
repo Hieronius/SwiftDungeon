@@ -46,9 +46,9 @@ struct RoomView: View {
 	private func gameInfoSection() -> some View {
 		HStack {
 			Spacer()
-			infoText(label: "Current Room:", value: viewModel.currentRoom)
+			infoText(label: "Current Room:", value: viewModel.roomState.currentRoom)
 			Spacer()
-			infoText(label: "Current Round:", value: viewModel.currentRound)
+			infoText(label: "Current Round:", value: viewModel.roomState.currentRound)
 			Spacer()
 		}
 		
@@ -143,19 +143,19 @@ struct RoomView: View {
 			CharacterTileView(
 				baseColor: .black,
 				label:    "H",
-				isActive: viewModel.isHeroTurn,
+				isActive: viewModel.roomState.isHeroTurn,
 				activeColor: .gray,
 				effectColor: viewModel.heroEffectColor,
-				didHit: viewModel.heroWasHit
+				didHit: viewModel.roomState.heroWasHit
 			)
 			Spacer()
 			CharacterTileView(
 				baseColor: .red,
 				label:    "E",
-				isActive: !viewModel.isHeroTurn,
+				isActive: !viewModel.roomState.isHeroTurn,
 				activeColor: .orange,
 				effectColor: viewModel.enemyEffectColor,
-				didHit: viewModel.enemyWasHit
+				didHit: viewModel.roomState.enemyWasHit
 			)
 			Spacer()
 		}

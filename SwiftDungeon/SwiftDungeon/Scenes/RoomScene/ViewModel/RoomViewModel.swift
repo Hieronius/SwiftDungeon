@@ -10,11 +10,7 @@ class RoomViewModel: ObservableObject {
 
 	// MARK: - Properties
 
-	// State
-
-	@Published var currentRoom: Int
-	@Published var currentRound: Int
-	@Published var isHeroTurn: Bool
+	@Published var roomState: RoomState
 
 	// Hero Stats
 
@@ -45,10 +41,6 @@ class RoomViewModel: ObservableObject {
 	@Published var heroEffectColor: Color? = nil
 	@Published var enemyEffectColor: Color? = nil
 
-	@Published var heroWasHit = false
-	@Published var enemyWasHit = false
-
-
 	// MARK: - Initialization
 
 	init(gameState: GameState,
@@ -59,9 +51,7 @@ class RoomViewModel: ObservableObject {
 		self.combatManager = combatManager
 		self.characterManager = characterManager
 
-		self.currentRoom = gameState.currentRoom
-		self.currentRound = gameState.currentRound
-		self.isHeroTurn = gameState.isHeroTurn
+		self.roomState = RoomState()
 
 		self.heroCurrentLevel = gameState.hero?.stats.level ?? 0
 		self.heroMaxHealth = gameState.hero?.maxHealth ?? 0
@@ -88,9 +78,13 @@ class RoomViewModel: ObservableObject {
 
 	func syncGameState() {
 
-		currentRoom = gameState.currentRoom
-		currentRound = gameState.currentRound
-		isHeroTurn = gameState.isHeroTurn
+		roomState = RoomState(
+			currentRoom: gameState.currentRoom,
+			currentRound: gameState.currentRound,
+			isHeroTurn: gameState.isHeroTurn,
+			heroWasHit: roomState.heroWasHit,
+			enemyWasHit: roomState.enemyWasHit
+			)
 
 		guard let hero = gameState.hero else { return }
 		guard let enemy = gameState.enemy else { return }
@@ -187,7 +181,7 @@ class RoomViewModel: ObservableObject {
 
 			gameState.isGameOn = false
 			gameState.isHeroWon = true
-			let experience = currentRoom * 50
+			let experience = roomState.currentRoom * 50
 			if (heroCurrentExperience + experience) >= hero.stats.maxExperience {
 				heroLevelUP()
 			} else {
@@ -388,14 +382,14 @@ class RoomViewModel: ObservableObject {
 	// helper to trigger a 1s “hit” animation on the target
 		private func triggerHit(onHero: Bool) {
 			if onHero {
-				heroWasHit = true
+				roomState.heroWasHit = true
 				DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-					self.heroWasHit = false
+					self.roomState.heroWasHit = false
 				}
 			} else {
-				enemyWasHit = true
+				roomState.enemyWasHit = true
 				DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-					self.enemyWasHit = false
+					self.roomState.enemyWasHit = false
 				}
 			}
 		}
