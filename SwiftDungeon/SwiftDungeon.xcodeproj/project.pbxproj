@@ -21,6 +21,7 @@
 		DDAA04102DC46F5700C801B4 /* UIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA040F2DC46F5700C801B4 /* UIState.swift */; };
 		DDAA04122DC46F7900C801B4 /* HeroState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA04112DC46F7900C801B4 /* HeroState.swift */; };
 		DDAA04142DC46F8100C801B4 /* EnemyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA04132DC46F8100C801B4 /* EnemyState.swift */; };
+		DDAF16462DC5C67100D4109C /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAF16452DC5C67100D4109C /* GameConfig.swift */; };
 		DDC129F12DC25858006CBC41 /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = DDC129F02DC25858006CBC41 /* Notes */; };
 		DDC129F32DC26AF6006CBC41 /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC129F22DC26AF6006CBC41 /* Effect.swift */; };
 		DDC129F52DC27EE6006CBC41 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC129F42DC27EE6006CBC41 /* Stats.swift */; };
@@ -42,6 +43,7 @@
 		DDAA040F2DC46F5700C801B4 /* UIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIState.swift; sourceTree = "<group>"; };
 		DDAA04112DC46F7900C801B4 /* HeroState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroState.swift; sourceTree = "<group>"; };
 		DDAA04132DC46F8100C801B4 /* EnemyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyState.swift; sourceTree = "<group>"; };
+		DDAF16452DC5C67100D4109C /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
 		DDC129F02DC25858006CBC41 /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
 		DDC129F22DC26AF6006CBC41 /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
 		DDC129F42DC27EE6006CBC41 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				DDA940762DBF522300837F9F /* Character.swift */,
 				DDC129F42DC27EE6006CBC41 /* Stats.swift */,
 				DDA940742DBF51C800837F9F /* Creature.swift */,
+				DDAF16452DC5C67100D4109C /* GameConfig.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 		DDAA040B2DC46E4D00C801B4 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				DDAA04192DC48AD700C801B4 /* CampScene */,
 				DDAA04182DC487BA00C801B4 /* TownScene */,
 				DDAA04172DC487B100C801B4 /* CorridorScene */,
 				DDAA04162DC487A400C801B4 /* DungeonScene */,
@@ -200,6 +204,13 @@
 			children = (
 			);
 			path = TownScene;
+			sourceTree = "<group>";
+		};
+		DDAA04192DC48AD700C801B4 /* CampScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CampScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDA9407C2DBF538700837F9F /* CombatManager.swift in Sources */,
+				DDAF16462DC5C67100D4109C /* GameConfig.swift in Sources */,
 				DDC129F52DC27EE6006CBC41 /* Stats.swift in Sources */,
 				DDC129F32DC26AF6006CBC41 /* Effect.swift in Sources */,
 				DDA940772DBF522300837F9F /* Character.swift in Sources */,

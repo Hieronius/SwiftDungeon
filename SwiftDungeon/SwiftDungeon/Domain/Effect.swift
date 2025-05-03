@@ -1,7 +1,8 @@
 import Foundation
 
 struct Effect {
-	let type: EffectType  // Now properly nested
+
+	let type: EffectType
 	var duration: Int     // Turns remaining
 	var isDebuff: Bool {
 		if case .debuff = type {
@@ -12,6 +13,7 @@ struct Effect {
 }
 
 enum EffectType {
+	
 	case buff(Buff)
 	case debuff(Debuff)
 

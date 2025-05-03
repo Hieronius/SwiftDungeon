@@ -172,7 +172,9 @@ struct RoomView: View {
 
 	@ViewBuilder
 	private func actionButtons() -> some View {
+
 		HStack {
+
 			Spacer()
 			actionButton(title: "Attack",
 						 action: viewModel.attack)
@@ -182,7 +184,9 @@ struct RoomView: View {
 						 action: viewModel.cut)
 			Spacer()
 		}
+
 		HStack {
+
 			Spacer()
 			actionButton(title: "Block",
 						 action: viewModel.block)
@@ -310,14 +314,14 @@ struct EffectBar: View {
 	var body: some View {
 		HStack(spacing: 4) {
 			// Buff slot
-			Image(systemName: "arrowtriangle.up.fill")
+			Image(systemName: "arrowtriangle.up")
 				.foregroundColor(.cyan)
 				.font(.system(size: 20))
 				.opacity(hasBuff ? 1 : 0)            // always present, just invisible
 				.frame(width: 20, height: 20)        // reserve exact size
 
 			// Debuff slot
-			Image(systemName: "arrowtriangle.down.fill")
+			Image(systemName: "arrowtriangle.down")
 				.foregroundColor(.purple)
 				.font(.system(size: 20))
 				.opacity(hasDebuff ? 1 : 0)          // always present

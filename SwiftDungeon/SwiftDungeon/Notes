@@ -1,17 +1,10 @@
 Current Plan
 
-1. Refactor 20 published placeholder in viewModel as struct like:
+0. Implement ticking system. Bleeding dealt damage for 3 turns so something should monitor it. Add turns to spells/combat
+1. BattleLog Scene
+2. Inventory/Skills/Spells/TargetInfo Scenes
+3. Put repeated checks of mana/health/energy/hero/enemy into separate method
 
-struct HeroStats {
-var currentHealth
-var currentLevel
-}
-
-ViewModel {
-@Published heroStats: HeroStats
-
-init() -> Inject
-}
 
 3. add isGameOn toggle to the View and create a separate GameOverScreen so it will be presented only is toggle is true
 
@@ -40,3 +33,24 @@ init() -> Inject
 - Place to rechard inside the Dungeon
 - Dungeon Room
 - Dungeon Corridor
+
+
+What I meant is separating logic out of the ViewModel entirely — into dedicated classes or services, for example:
+
+class HeroActionManager {
+	func performAttack(hero: inout Character, enemy: inout Character) -> Int { ... }
+	func performHeal(hero: inout Character) -> Bool { ... }
+	// etc
+}
+
+Then in RoomViewModel, you'd just call:
+let damage = heroActions.performAttack(hero: &hero, enemy: &enemy)
+
+GameState Over-Reliance
+
+class GameState {
+	var dungeonState: DungeonState
+	var roomState: RoomState
+	var combatState: CombatState
+	// etc.
+}
