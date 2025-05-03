@@ -164,7 +164,7 @@ extension RoomViewModel {
 		guard let hero = gameState.hero else { return }
 		guard let enemy = gameState.enemy else { return }
 
-		if gameState.currentRoom > 14 {
+		if gameState.currentRoom > GameConfig.dungeonLength {
 			gameState.isGameCompleted = true
 			gameState.isGameOn = false
 			return
@@ -179,7 +179,7 @@ extension RoomViewModel {
 
 			gameState.isGameOn = false
 			gameState.isHeroWon = true
-			let experience = roomState.currentRoom * 50
+			let experience = roomState.currentRoom * GameConfig.expPerRoom
 			if (heroState.heroCurrentExperience + experience) >= hero.stats.maxExperience {
 				heroLevelUP()
 			} else {
@@ -255,18 +255,18 @@ extension RoomViewModel {
 
 		if gameState.isHeroTurn {
 
-			guard hero.currentEnergy >= 1 else { return }
+			guard hero.currentEnergy >= GameConfig.attackEnergyCost else { return }
 			let result = combatManager.attack(hero, enemy)
 			enemy.currentHealth = max(enemy.currentHealth - result, 0)
-			hero.currentEnergy -= 1
+			hero.currentEnergy -= GameConfig.attackEnergyCost
 			triggerHit(onHero: false)
 
 		} else {
 
-			guard enemy.currentEnergy >= 1 else { return }
+			guard enemy.currentEnergy >= GameConfig.attackEnergyCost else { return }
 			let result = combatManager.attack(enemy, hero)
 			hero.currentHealth = max(hero.currentHealth - result, 0)
-			enemy.currentEnergy -= 1
+			enemy.currentEnergy -= GameConfig.attackEnergyCost
 			triggerHit(onHero: true)
 
 		}
@@ -281,17 +281,17 @@ extension RoomViewModel {
 
 		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
 		guard let target else { return }
-		guard target.currentEnergy >= 1 else { return }
+		guard target.currentEnergy >= GameConfig.blockEnergyCost else { return }
 
 		let isHero = gameState.isHeroTurn
 		triggerEffect(forHero: isHero, color: .blue)
 
 		let blockValue = combatManager.block(target)
 		let buff = Effect(type: .buff(.armor(value: blockValue)),
-						  duration: 1)
+						  duration: GameConfig.blockDuration)
 
 		target.applyEffect(buff)
-		target.currentEnergy -= 1
+		target.currentEnergy -= GameConfig.blockEnergyCost
 
 		syncGameState()
 	}
@@ -302,14 +302,17 @@ extension RoomViewModel {
 
 		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
 		guard let target else { return }
-		guard target.currentEnergy >= 1, target.currentMana >= 10 else { return }
+		guard target.currentEnergy >= GameConfig.spellEnergyCost,
+			  target.currentMana >= GameConfig.healManaCost else {
+			return
+		}
 		let isHero = gameState.isHeroTurn
 		triggerEffect(forHero: isHero, color: .green)
 
 		let result = combatManager.heal(target)
 		target.currentHealth = min(target.currentHealth + result, target.maxHealth)
-		target.currentMana -= 10
-		target.currentEnergy -= 1
+		target.currentMana -= GameConfig.healManaCost
+		target.currentEnergy -= GameConfig.spellEnergyCost
 
 		syncGameState()
 	}
@@ -320,18 +323,22 @@ extension RoomViewModel {
 
 		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
 		guard let target else { return }
-		guard target.currentEnergy >= 1, target.currentMana >= 10 else { return }
+		guard target.currentEnergy >= GameConfig.spellEnergyCost,
+			  target.currentMana >= GameConfig.buffManaCost else {
+			return
+
+		}
 
 		let isHero = gameState.isHeroTurn
 		triggerEffect(forHero: isHero, color: .yellow)
 
 		let result = combatManager.buff(target)
 		let buff = Effect(type: .buff(.attack(value: result)),
-						  duration: 1)
+						  duration: GameConfig.buffDuration)
 
 		target.applyEffect(buff)
-		target.currentMana -= 10
-		target.currentEnergy -= 1
+		target.currentMana -= GameConfig.buffManaCost
+		target.currentEnergy -= GameConfig.spellEnergyCost
 
 		syncGameState()
 	}
@@ -344,21 +351,21 @@ extension RoomViewModel {
 
 		if gameState.isHeroTurn {
 
-			guard hero.currentEnergy >= 1 else { return }
-			hero.currentEnergy -= 1
+			guard hero.currentEnergy >= GameConfig.cutEnergyCost else { return }
+			hero.currentEnergy -= GameConfig.cutEnergyCost
 			let result = combatManager.cut(hero, enemy)
 			let debuff = Effect(type: .debuff(.bleeding(value: result)),
-								duration: 1)
+								duration: GameConfig.cutDuration)
 			enemy.applyEffect(debuff)
 			triggerHit(onHero: false)
 
 		} else {
 
-			guard enemy.currentEnergy >= 1 else { return }
-			enemy.currentEnergy -= 1
+			guard enemy.currentEnergy >= GameConfig.cutEnergyCost else { return }
+			enemy.currentEnergy -= GameConfig.cutEnergyCost
 			let result = combatManager.cut(enemy, hero)
 			let debuff = Effect(type: .debuff(.bleeding(value: result)),
-								duration: 1)
+								duration: GameConfig.cutDuration)
 			hero.applyEffect(debuff)
 			triggerHit(onHero: true)
 
