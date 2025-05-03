@@ -54,64 +54,89 @@ class Character: Creature {
 	func applyEffect(_ effect: Effect) {
 
 		switch effect.type {
-		case .buff(let buff):
-			switch buff {
-			case .attack(let value):
-				minDamage += value
-				maxDamage += value
-			case .armor(let value):
-				currentArmor += value
-			}
-
-		case .debuff(let debuff):
-			switch debuff {
-			case .bleeding(let value):
-				currentHealth -= value
-			case .energy(let value):
-				currentEnergy -= value
-			}
+			
+		case .block(let value):
+			currentArmor += value
+			print("armor up")
+		case .healthRegen(let initialHeal, let perRound):
+			currentHealth = min(currentHealth + initialHeal, maxHealth)
+		case .bleeding(let initialDamage, let perRound):
+			currentHealth -= initialDamage
+			print("initil cut damage")
 		}
 		activeEffects.append(effect)
 	}
 
-	func revertEffect(_ effect: Effect) {
+	// 2) START OF TURN: tick & expire
+	func processEffectsAtTurnStart() {
+		// iterate backwards so removals don’t shift indices
+		for idx in (0..<activeEffects.count).reversed() {
+			var effect = activeEffects[idx]
 
-		switch effect.type {
+			// ticking: apply per-turn
+			if effect.type.isTicking {
+				switch effect.type {
+				case .healthRegen(let initialHeal, let perTurn):
+					currentHealth = min(currentHealth + perTurn, maxHealth)
+				case .bleeding(let initialDamage, let perTurn):
+					currentHealth -= perTurn
+				default:
+					break
+				}
+			}
 
-		case .buff(let buff):
-			switch buff {
-			case .attack(let value):
-				minDamage -= value
-				maxDamage -= value
-			case .armor(let value):
+			// decrement duration
+			effect.duration -= 1
+			activeEffects[idx] = effect
+
+			// expired? revert any static buff & remove
+			if effect.duration <= 0 {
+				if case .block(let value) = effect.type {
+					currentArmor -= value
+				}
+				activeEffects.remove(at: idx)
+			}
+		}
+	}
+
+	// convenience filters
+	func clearAllEffects() {
+		// revert all remaining buffs first
+		for effect in activeEffects {
+			if case .block(let value) = effect.type {
 				currentArmor -= value
 			}
-
-			// MARK: NEED REFACTORING
-		case .debuff(let debuff):
-			switch debuff {
-			case .bleeding(let value):
-				print("reversed debuff")
-			case .energy(let value):
-				currentEnergy -= value
+		}
+		activeEffects.removeAll()
+	}
+	func clearBuffs() {
+		let (buffs, rest) = activeEffects.partitioned { !$0.type.isDebuff }
+		buffs.forEach {
+			if case .block(let value) = $0.type {
+				currentArmor -= value
 			}
 		}
+		activeEffects = rest
 	}
-
-		func clearAllEffects() {
-			activeEffects.forEach { revertEffect($0) }
-			activeEffects.removeAll()
-		}
-
-		func clearDebuffs() {
-			activeEffects.filter { $0.isDebuff }.forEach { revertEffect($0) }
-			activeEffects.removeAll { $0.isDebuff }
-		}
-
-		func clearBuffs() {
-			activeEffects.filter { !$0.isDebuff }.forEach { revertEffect($0) }
-			activeEffects.removeAll { !$0.isDebuff }
-		}
+	func clearDebuffs() {
+		let (debuffs, rest) = activeEffects.partitioned { $0.type.isDebuff }
+		// no static debuffs today, but you’d revert them here
+		activeEffects = rest
 	}
+}
 
-
+// helper to split an array
+extension Array {
+	func partitioned(by isFirst: (Element) -> Bool) -> (first: [Element], second: [Element]) {
+		var a = [Element]()
+		var b = [Element]()
+		for x in self {
+			if isFirst(x) {
+				a.append(x)
+			} else {
+				b.append(x)
+			}
+		}
+		return (first: a, second: b)
+	}
+}

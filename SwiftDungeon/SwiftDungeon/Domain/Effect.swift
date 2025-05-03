@@ -3,29 +3,28 @@ import Foundation
 struct Effect {
 
 	let type: EffectType
-	var duration: Int     // Turns remaining
-	var isDebuff: Bool {
-		if case .debuff = type {
-			return true
-		}
-		return false
-	}
+	var duration: Int
+
+
 }
 
 enum EffectType {
-	
-	case buff(Buff)
-	case debuff(Debuff)
 
-	enum Buff {
-		case attack(value: Int)
-		case armor(value: Int)
-		// Add more buffs here
+	case block(value: Int)
+	case healthRegen(initialHeal: Int, healthPerTurn: Int)
+	case bleeding(initialDamage: Int, damagePerTurn: Int)
+
+	var isDebuff: Bool {
+		switch self {
+		case .bleeding: return true
+		default: return false
+		}
 	}
 
-	enum Debuff {
-		case bleeding(value: Int)
-		case energy(value: Int)
-		// Add more debuffs here
+	var isTicking: Bool {
+		switch self {
+		case .healthRegen, .bleeding: return true
+		default: return false
+		}
 	}
 }

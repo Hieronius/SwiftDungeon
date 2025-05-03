@@ -28,3 +28,32 @@ class CombatManager {
 	}
 
 }
+
+/*
+ ROUND 1
+
+ Hero Turn
+ Check for Effects
+ Positive effects: 0, Negative effects: 0
+ cast block, duration 3
+ End Turn
+
+ Enemy Turn
+ Positive effects: 0, Negative effects: 0
+ cast bleeding, duration 3
+ End Turn
+
+ ROUND 2
+
+ Hero Turn
+ Check for Effects
+ Positive efects: 1, Negative effects: 1
+ if buff -> if static { duration -1 } else { applyEffect, duration -1 }
+ keep block up, cut duration by 1
+ if debuff -> if static { duration -1 } else { applyEffect, duration -1 }
+ apply bleeding effect, cur duration by 1
+ End Round
+
+ Enemy Turn
+ Check for Effects
+ */

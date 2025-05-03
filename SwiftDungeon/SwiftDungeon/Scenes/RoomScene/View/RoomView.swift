@@ -308,8 +308,8 @@ struct EffectBar: View {
 
 	var effects: [Effect]
 
-	private var hasBuff: Bool { effects.contains { !$0.isDebuff } }
-	private var hasDebuff: Bool { effects.contains { $0.isDebuff } }
+	private var hasBuff: Bool { effects.contains { !$0.type.isDebuff } }
+	private var hasDebuff: Bool { effects.contains { $0.type.isDebuff } }
 
 	var body: some View {
 		HStack(spacing: 4) {

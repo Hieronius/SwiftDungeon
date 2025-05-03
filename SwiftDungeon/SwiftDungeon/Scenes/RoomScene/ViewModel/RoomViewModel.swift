@@ -144,14 +144,14 @@ extension RoomViewModel {
 			guard let hero = gameState.hero else { return }
 			hero.currentEnergy = hero.maxEnergy
 
-			hero.clearAllEffects()
+			hero.processEffectsAtTurnStart()
 
 		} else if gameState.isHeroTurn {
 
 			guard let enemy = gameState.enemy else { return }
 			enemy.currentEnergy = enemy.maxEnergy
 
-			enemy.clearAllEffects()
+			enemy.processEffectsAtTurnStart()
 		}
 		gameState.isHeroTurn.toggle()
 
@@ -287,8 +287,7 @@ extension RoomViewModel {
 		triggerEffect(forHero: isHero, color: .blue)
 
 		let blockValue = combatManager.block(target)
-		let buff = Effect(type: .buff(.armor(value: blockValue)),
-						  duration: GameConfig.blockDuration)
+		let buff = Effect(type: .block(value: blockValue), duration: 3)
 
 		target.applyEffect(buff)
 		target.currentEnergy -= GameConfig.blockEnergyCost
@@ -333,10 +332,10 @@ extension RoomViewModel {
 		triggerEffect(forHero: isHero, color: .yellow)
 
 		let result = combatManager.buff(target)
-		let buff = Effect(type: .buff(.attack(value: result)),
-						  duration: GameConfig.buffDuration)
-
-		target.applyEffect(buff)
+//		let buff = Effect(type: .buff(.attack(value: result)),
+//						  duration: GameConfig.buffDuration)
+//
+//		target.applyEffect(buff)
 		target.currentMana -= GameConfig.buffManaCost
 		target.currentEnergy -= GameConfig.spellEnergyCost
 
@@ -354,8 +353,7 @@ extension RoomViewModel {
 			guard hero.currentEnergy >= GameConfig.cutEnergyCost else { return }
 			hero.currentEnergy -= GameConfig.cutEnergyCost
 			let result = combatManager.cut(hero, enemy)
-			let debuff = Effect(type: .debuff(.bleeding(value: result)),
-								duration: GameConfig.cutDuration)
+			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
 			enemy.applyEffect(debuff)
 			triggerHit(onHero: false)
 
@@ -364,8 +362,7 @@ extension RoomViewModel {
 			guard enemy.currentEnergy >= GameConfig.cutEnergyCost else { return }
 			enemy.currentEnergy -= GameConfig.cutEnergyCost
 			let result = combatManager.cut(enemy, hero)
-			let debuff = Effect(type: .debuff(.bleeding(value: result)),
-								duration: GameConfig.cutDuration)
+			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
 			hero.applyEffect(debuff)
 			triggerHit(onHero: true)
 
