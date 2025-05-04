@@ -338,14 +338,14 @@ struct EffectBar: View {
 	var body: some View {
 		HStack(spacing: 4) {
 			// Buff slot
-			Image(systemName: "arrowtriangle.up")
+			Image(systemName: "arrow.up")
 				.foregroundColor(.cyan)
 				.font(.system(size: 20))
 				.opacity(hasBuff ? 1 : 0)            // always present, just invisible
 				.frame(width: 20, height: 20)        // reserve exact size
 
 			// Debuff slot
-			Image(systemName: "arrowtriangle.down")
+			Image(systemName: "arrow.down")
 				.foregroundColor(.purple)
 				.font(.system(size: 20))
 				.opacity(hasDebuff ? 1 : 0)          // always present
