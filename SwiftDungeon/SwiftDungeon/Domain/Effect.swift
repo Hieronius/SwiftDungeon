@@ -8,7 +8,7 @@ struct Effect {
 
 }
 
-enum EffectType {
+enum EffectType: Equatable {
 
 	// Static Buffs
 

@@ -334,6 +334,7 @@ struct EffectBar: View {
 
 	private var hasBuff: Bool { effects.contains { !$0.type.isDebuff } }
 	private var hasDebuff: Bool { effects.contains { $0.type.isDebuff } }
+	private var isStunned: Bool { effects.contains { $0.type == .stun } }
 
 	var body: some View {
 		HStack(spacing: 4) {
@@ -346,10 +347,17 @@ struct EffectBar: View {
 
 			// Debuff slot
 			Image(systemName: "arrow.down")
-				.foregroundColor(.purple)
+				.foregroundColor(.red)
 				.font(.system(size: 20))
 				.opacity(hasDebuff ? 1 : 0)          // always present
 				.frame(width: 20, height: 20)        // reserve exact size
+
+			// Stun slot
+			Image(systemName: "zzz")
+				.foregroundColor(.purple)
+				.font(.system(size: 20))
+				.opacity(isStunned ? 1 : 0)
+				.frame(width: 20, height: 20)
 		}
 	}
 }
