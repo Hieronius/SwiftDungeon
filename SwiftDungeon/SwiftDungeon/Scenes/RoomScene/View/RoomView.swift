@@ -154,19 +154,23 @@ struct RoomView: View {
 			CharacterTileView(
 				baseColor: .black,
 				label:    "H",
+				effectLabel: "\(viewModel.heroState.heroActionLabel)",
 				isActive: viewModel.roomState.isHeroTurn,
-				activeColor: .gray,
+				activeColor: .white,
 				effectColor: viewModel.heroEffectColor,
-				didHit: viewModel.roomState.heroWasHit
+				didHit: viewModel.roomState.heroWasHit,
+				effectTextColor: viewModel.heroState.heroActionColor
 			)
 			Spacer()
 			CharacterTileView(
-				baseColor: .red,
+				baseColor: .black,
 				label:    "E",
+				effectLabel: "\(viewModel.enemyState.enemyActionLabel)",
 				isActive: !viewModel.roomState.isHeroTurn,
-				activeColor: .orange,
+				activeColor: .red,
 				effectColor: viewModel.enemyEffectColor,
-				didHit: viewModel.roomState.enemyWasHit
+				didHit: viewModel.roomState.enemyWasHit,
+				effectTextColor: viewModel.enemyState.enemyActionColor
 			)
 			Spacer()
 		}
@@ -367,14 +371,17 @@ struct EffectBar: View {
 struct CharacterTileView: View {
 	let baseColor: Color
 	let label: String
+	let effectLabel: String        // The number or text to show ("3", "10", etc.)
 	let isActive: Bool
 	let activeColor: Color
 	let effectColor: Color?
 	let didHit: Bool
+	let effectTextColor: Color?    // New: color of the label (red, green, etc.)
 
 	@State private var pulse = false
 	@State private var internalEffect: Color? = nil
 	@State private var shaking = false
+	@State private var showEffectLabel = false  // New: controls label visibility
 
 	var body: some View {
 		ZStack {
@@ -414,17 +421,35 @@ struct CharacterTileView: View {
 					value: shaking
 				)
 
-			// Label
+			// Main character label (e.g., "H", "E")
 			Text(label)
-				.font(.title2)
+				.font(.title)
 				.foregroundColor(.white)
+
+			// New: Effect text overlay (e.g. "3", "10")
+			if showEffectLabel && !effectLabel.isEmpty {
+				Text(effectLabel)
+					.font(.title2)
+					.bold()
+					.foregroundColor(effectTextColor ?? .white)
+					.offset(y: -30) // Appears above the square
+					.transition(.opacity)
+			}
 		}
 		.frame(width: 130, height: 130)
 		.onChange(of: effectColor) { newColor in
 			internalEffect = newColor
 		}
 		.onChange(of: didHit) { hit in
-			if hit { animateHit() }
+			if hit {
+				animateHit()
+			}
+		}
+		.onChange(of: effectLabel) { _ in
+			showEffectLabel = true
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+				showEffectLabel = false
+			}
 		}
 	}
 

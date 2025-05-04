@@ -44,6 +44,8 @@ class RoomViewModel: ObservableObject {
 			heroCurrentEnergy: gameState.hero?.currentEnergy ?? 0,
 			heroCurrentExperience: gameState.hero?.stats.currentExperience ?? 0,
 			heroMaxExperience: gameState.hero?.stats.maxExperience ?? 0,
+			heroActionColor: .white,
+			heroActionLabel: 99,
 			heroActiveEffects: gameState.hero?.activeEffects ?? []
 		)
 
@@ -55,6 +57,8 @@ class RoomViewModel: ObservableObject {
 			enemyCurrentMana: gameState.enemy?.currentMana ?? 0,
 			enemyMaxEnergy: gameState.enemy?.maxEnergy ?? 0,
 			enemyCurrentEnergy: gameState.enemy?.currentEnergy ?? 0,
+			enemyActionColor: .white,
+			enemyActionLabel: 100,
 			enemyActiveEffects: gameState.enemy?.activeEffects ?? []
 		)
 	}
@@ -89,6 +93,8 @@ extension RoomViewModel {
 			heroCurrentEnergy: hero.currentEnergy,
 			heroCurrentExperience: hero.stats.currentExperience,
 			heroMaxExperience: hero.stats.maxExperience,
+			heroActionColor: heroState.heroActionColor,
+			heroActionLabel: heroState.heroActionLabel,
 			heroActiveEffects: hero.activeEffects
 		)
 
@@ -100,6 +106,8 @@ extension RoomViewModel {
 			enemyCurrentMana: enemy.currentMana,
 			enemyMaxEnergy: enemy.maxEnergy,
 			enemyCurrentEnergy: enemy.currentEnergy,
+			enemyActionColor: enemyState.enemyActionColor,
+			enemyActionLabel: enemyState.enemyActionLabel,
 			enemyActiveEffects: enemy.activeEffects
 		)
 	}
@@ -297,6 +305,7 @@ extension RoomViewModel {
 			let result = combatManager.attack(hero, enemy)
 			enemy.currentHealth = max(enemy.currentHealth - result, 0)
 			hero.currentEnergy -= GameConfig.attackEnergyCost
+			passActionVisualResult(.red, result)
 			triggerHit(onHero: false)
 
 		} else {
@@ -305,6 +314,7 @@ extension RoomViewModel {
 			let result = combatManager.attack(enemy, hero)
 			hero.currentHealth = max(hero.currentHealth - result, 0)
 			enemy.currentEnergy -= GameConfig.attackEnergyCost
+			passActionVisualResult(.red, result)
 			triggerHit(onHero: true)
 
 		}
@@ -488,6 +498,17 @@ extension RoomViewModel {
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 				self.roomState.enemyWasHit = false
 			}
+		}
+	}
+
+	private func passActionVisualResult(_ color: Color, _ label: Int) {
+
+		if gameState.isHeroTurn {
+			enemyState.enemyActionColor = color
+			enemyState.enemyActionLabel = label
+		} else {
+			heroState.heroActionColor = color
+			heroState.heroActionLabel = label
 		}
 	}
 }

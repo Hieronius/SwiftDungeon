@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 
 struct EnemyState {
 
@@ -9,5 +9,7 @@ struct EnemyState {
 	var enemyCurrentMana: Int
 	var enemyMaxEnergy: Int
 	var enemyCurrentEnergy: Int
+	var enemyActionColor: Color
+	var enemyActionLabel: Int
 	var enemyActiveEffects: [Effect]
 }

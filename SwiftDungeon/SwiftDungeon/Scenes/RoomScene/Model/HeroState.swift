@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 
 struct HeroState {
 
@@ -11,5 +11,7 @@ struct HeroState {
 	var heroCurrentEnergy: Int
 	var heroCurrentExperience: Int
 	var heroMaxExperience: Int
+	var heroActionColor: Color
+	var heroActionLabel: Int
 	var heroActiveEffects: [Effect]
 }
