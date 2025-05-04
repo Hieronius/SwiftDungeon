@@ -199,7 +199,7 @@ extension RoomViewModel {
 		gameState.isHeroWon = false
 		gameState.isGameOver = false
 		gameState.currentRound = 1
-		restoreHero()
+		restoreCharacter(isHeroTurn: true)
 		gameState.enemyIndex += 1
 		let position = gameState.enemyIndex
 		gameState.enemy = characterManager.spawnEnemy(at: position)
@@ -227,17 +227,18 @@ extension RoomViewModel {
 		hero.maxMana += 10
 		hero.maxDamage += 1
 		hero.minDamage += 1
-		restoreHero()
+		restoreCharacter(isHeroTurn: true)
 
 		syncGameState()
 	}
 
-	func restoreHero() {
+	func restoreCharacter(isHeroTurn: Bool) {
 
-		guard let hero = gameState.hero else { return }
-		hero.currentHealth = hero.maxHealth
-		hero.currentMana = hero.maxMana
-		hero.currentEnergy = hero.maxEnergy
+		let target = isHeroTurn ? gameState.hero : gameState.enemy
+		guard let target else { return }
+		target.currentHealth = target.maxHealth
+		target.currentMana = target.maxMana
+		target.currentEnergy = target.maxEnergy
 
 		syncGameState()
 	}

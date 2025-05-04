@@ -1,0 +1,15 @@
+Current Plan
+
+0.Add more spells
+1. Add HP/Mana regen effects and buttons
+2. Add Fireboll direct spell with button
+3. Add button For full HP/Mana/Energy restoration of the current char
+4. Add a debuff like decrease target's armor/attack/stats
+5. Add a special view or screen to display the effects of spells and attacks
+
+1. BattleLog Scene
+2. Inventory/Skills/Spells/TargetInfo Scenes
+3. Put repeated checks of mana/health/energy/hero/enemy into separate method
+
+
+3. add isGameOn toggle to the View and create a separate GameOverScreen so it will be presented only is toggle is true

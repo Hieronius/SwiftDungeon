@@ -21,6 +21,8 @@
 		DDAA04102DC46F5700C801B4 /* UIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA040F2DC46F5700C801B4 /* UIState.swift */; };
 		DDAA04122DC46F7900C801B4 /* HeroState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA04112DC46F7900C801B4 /* HeroState.swift */; };
 		DDAA04142DC46F8100C801B4 /* EnemyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA04132DC46F8100C801B4 /* EnemyState.swift */; };
+		DDAB3E4D2DC72B5800DBA1C8 /* CurrentPlan in Resources */ = {isa = PBXBuildFile; fileRef = DDAB3E4C2DC72B5800DBA1C8 /* CurrentPlan */; };
+		DDAB3E4F2DC72B6800DBA1C8 /* Bugs in Resources */ = {isa = PBXBuildFile; fileRef = DDAB3E4E2DC72B6800DBA1C8 /* Bugs */; };
 		DDAF16462DC5C67100D4109C /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAF16452DC5C67100D4109C /* GameConfig.swift */; };
 		DDC129F12DC25858006CBC41 /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = DDC129F02DC25858006CBC41 /* Notes */; };
 		DDC129F32DC26AF6006CBC41 /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC129F22DC26AF6006CBC41 /* Effect.swift */; };
@@ -43,6 +45,8 @@
 		DDAA040F2DC46F5700C801B4 /* UIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIState.swift; sourceTree = "<group>"; };
 		DDAA04112DC46F7900C801B4 /* HeroState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroState.swift; sourceTree = "<group>"; };
 		DDAA04132DC46F8100C801B4 /* EnemyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyState.swift; sourceTree = "<group>"; };
+		DDAB3E4C2DC72B5800DBA1C8 /* CurrentPlan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CurrentPlan; sourceTree = "<group>"; };
+		DDAB3E4E2DC72B6800DBA1C8 /* Bugs */ = {isa = PBXFileReference; lastKnownFileType = text; path = Bugs; sourceTree = "<group>"; };
 		DDAF16452DC5C67100D4109C /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
 		DDC129F02DC25858006CBC41 /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
 		DDC129F22DC26AF6006CBC41 /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
@@ -79,7 +83,7 @@
 		DDA9405F2DBF4FC600837F9F /* SwiftDungeon */ = {
 			isa = PBXGroup;
 			children = (
-				DDC129F02DC25858006CBC41 /* Notes */,
+				DDAB3E502DC72B7800DBA1C8 /* Documentation */,
 				DDAA040A2DC46E3400C801B4 /* Domain */,
 				DDA940782DBF530700837F9F /* Managers */,
 				DDAA040B2DC46E4D00C801B4 /* Scenes */,
@@ -213,6 +217,16 @@
 			path = CampScene;
 			sourceTree = "<group>";
 		};
+		DDAB3E502DC72B7800DBA1C8 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				DDAB3E4C2DC72B5800DBA1C8 /* CurrentPlan */,
+				DDC129F02DC25858006CBC41 /* Notes */,
+				DDAB3E4E2DC72B6800DBA1C8 /* Bugs */,
+			);
+			path = Documentation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -272,8 +286,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDC129F12DC25858006CBC41 /* Notes in Resources */,
+				DDAB3E4D2DC72B5800DBA1C8 /* CurrentPlan in Resources */,
 				DDA940682DBF4FCD00837F9F /* Preview Assets.xcassets in Resources */,
 				DDA940652DBF4FCD00837F9F /* Assets.xcassets in Resources */,
+				DDAB3E4F2DC72B6800DBA1C8 /* Bugs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

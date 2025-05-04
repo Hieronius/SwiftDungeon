@@ -23,7 +23,7 @@ struct RoomView: View {
 				.edgesIgnoringSafeArea(.all)
 				.contentShape(Rectangle())
 				.onTapGesture(count: 3) {
-					viewModel.restoreHero()
+					viewModel.restoreCharacter(isHeroTurn: viewModel.roomState.isHeroTurn)
 				}
 
 			VStack {

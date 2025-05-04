@@ -58,9 +58,9 @@ class Character: Creature {
 		case .block(let value):
 			currentArmor += value
 			print("armor up")
-		case .healthRegen(let initialHeal, let perRound):
+		case .healthRegen(let initialHeal, _):
 			currentHealth = min(currentHealth + initialHeal, maxHealth)
-		case .bleeding(let initialDamage, let perRound):
+		case .bleeding(let initialDamage, _):
 			currentHealth -= initialDamage
 			print("initil cut damage")
 		}
@@ -76,9 +76,9 @@ class Character: Creature {
 			// ticking: apply per-turn
 			if effect.type.isTicking {
 				switch effect.type {
-				case .healthRegen(let initialHeal, let perTurn):
+				case .healthRegen(_, let perTurn):
 					currentHealth = min(currentHealth + perTurn, maxHealth)
-				case .bleeding(let initialDamage, let perTurn):
+				case .bleeding(_, let perTurn):
 					currentHealth -= perTurn
 				default:
 					break

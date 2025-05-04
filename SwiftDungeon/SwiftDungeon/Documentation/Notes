@@ -1,15 +1,3 @@
-Current Plan
-
-0.Add more spells
-1. Fix bleeding/healing/buffing stacking
-
-1. BattleLog Scene
-2. Inventory/Skills/Spells/TargetInfo Scenes
-3. Put repeated checks of mana/health/energy/hero/enemy into separate method
-
-
-3. add isGameOn toggle to the View and create a separate GameOverScreen so it will be presented only is toggle is true
-
 // Notes and ideas
 
 // MARK: Things to add
