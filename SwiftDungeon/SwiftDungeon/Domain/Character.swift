@@ -54,15 +54,31 @@ class Character: Creature {
 	func applyEffect(_ effect: Effect) {
 
 		switch effect.type {
-			
-		case .block(let value):
+
+		// Buffs
+
+		case .blockUP(let value):
 			currentArmor += value
 			print("armor up")
+		case .attackUP(value: let value):
+			minDamage += value
+			maxDamage += value
 		case .healthRegen(let initialHeal, _):
 			currentHealth = min(currentHealth + initialHeal, maxHealth)
+		case .manaRegen(initialMana: let initialMana, _):
+			currentMana = min(currentMana + initialMana, maxMana)
+
+		// Debuffs
 		case .bleeding(let initialDamage, _):
 			currentHealth -= initialDamage
 			print("initil cut damage")
+		case .blockDOWN(value: let value):
+			currentArmor -= value
+		case .exaustion(initialEnergy: let initialEnergy, _):
+			currentEnergy = max(currentEnergy - initialEnergy, 0)
+		case .attackDOWN(value: let value):
+			minDamage -= value
+			maxDamage -= value
 		}
 		activeEffects.append(effect)
 	}
@@ -73,13 +89,22 @@ class Character: Creature {
 		for idx in (0..<activeEffects.count).reversed() {
 			var effect = activeEffects[idx]
 
-			// ticking: apply per-turn
+			// TICKING: apply per-turn
+
 			if effect.type.isTicking {
 				switch effect.type {
+
+				// Buffs
+
 				case .healthRegen(_, let perTurn):
 					currentHealth = min(currentHealth + perTurn, maxHealth)
+
+				// Debuffs
+
 				case .bleeding(_, let perTurn):
-					currentHealth -= perTurn
+					currentHealth = max(currentHealth - perTurn, 0)
+				case .exaustion(_, let perTurn):
+					currentEnergy = max(currentEnergy - perTurn, 0)
 				default:
 					break
 				}
@@ -89,11 +114,27 @@ class Character: Creature {
 			effect.duration -= 1
 			activeEffects[idx] = effect
 
-			// expired? revert any static buff & remove
+			// STATIC expired? revert any static buff & remove
 			if effect.duration <= 0 {
-				if case .block(let value) = effect.type {
+
+				if case .blockUP(let value) = effect.type {
 					currentArmor -= value
 				}
+
+				if case .blockDOWN(let value) = effect.type {
+					currentArmor += value
+				}
+
+				if case .attackUP(let value) = effect.type {
+					minDamage -= value
+					maxDamage -= value
+				}
+
+				if case .attackDOWN(let value) = effect.type {
+					minDamage += value
+					maxDamage += value
+				}
+				
 				activeEffects.remove(at: idx)
 			}
 		}
@@ -103,7 +144,7 @@ class Character: Creature {
 	func clearAllEffects() {
 		// revert all remaining buffs first
 		for effect in activeEffects {
-			if case .block(let value) = effect.type {
+			if case .blockUP(let value) = effect.type {
 				currentArmor -= value
 			}
 		}
@@ -112,7 +153,7 @@ class Character: Creature {
 	func clearBuffs() {
 		let (buffs, rest) = activeEffects.partitioned { !$0.type.isDebuff }
 		buffs.forEach {
-			if case .block(let value) = $0.type {
+			if case .blockUP(let value) = $0.type {
 				currentArmor -= value
 			}
 		}

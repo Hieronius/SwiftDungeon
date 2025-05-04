@@ -154,6 +154,7 @@ extension RoomViewModel {
 			enemy.processEffectsAtTurnStart()
 		}
 		gameState.isHeroTurn.toggle()
+		checkWinLoseCondition()
 
 		syncGameState()
 
@@ -288,7 +289,7 @@ extension RoomViewModel {
 		triggerEffect(forHero: isHero, color: .blue)
 
 		let blockValue = combatManager.block(target)
-		let buff = Effect(type: .block(value: blockValue), duration: 3)
+		let buff = Effect(type: .blockUP(value: blockValue), duration: 3)
 
 		target.applyEffect(buff)
 		target.currentEnergy -= GameConfig.blockEnergyCost
@@ -333,10 +334,9 @@ extension RoomViewModel {
 		triggerEffect(forHero: isHero, color: .yellow)
 
 		let result = combatManager.buff(target)
-//		let buff = Effect(type: .buff(.attack(value: result)),
-//						  duration: GameConfig.buffDuration)
-//
-//		target.applyEffect(buff)
+		let buff = Effect(type: .attackUP(value: result), duration: 3)
+		target.applyEffect(buff)
+
 		target.currentMana -= GameConfig.buffManaCost
 		target.currentEnergy -= GameConfig.spellEnergyCost
 
