@@ -10,9 +10,11 @@ struct SwiftDungeonApp: App {
 			let gameState = GameState()
 			let combatManager = CombatManager()
 			let characterManager = CharacterManager()
+			let effectManager = EffectManager()
 			let viewModel = RoomViewModel(gameState: gameState,
 										  combatManager: combatManager,
-										  characterManager: characterManager)
+										  characterManager: characterManager,
+										  effectManager: effectManager)
 
             RoomView(viewModel: viewModel)
         }

@@ -7,6 +7,7 @@ class RoomViewModel: ObservableObject {
 	private let gameState: GameState
 	private let combatManager: CombatManager
 	private let characterManager: CharacterManager
+	private let effectManager: EffectManager
 
 	// MARK: - Published Properties
 
@@ -23,11 +24,13 @@ class RoomViewModel: ObservableObject {
 
 	init(gameState: GameState,
 		 combatManager: CombatManager,
-		 characterManager: CharacterManager) {
+		 characterManager: CharacterManager,
+		 effectManager: EffectManager) {
 
 		self.gameState = gameState
 		self.combatManager = combatManager
 		self.characterManager = characterManager
+		self.effectManager = effectManager
 
 		self.roomState = RoomState()
 
@@ -144,14 +147,14 @@ extension RoomViewModel {
 			guard let hero = gameState.hero else { return }
 			hero.currentEnergy = hero.maxEnergy
 
-			hero.processEffectsAtTurnStart()
+			effectManager.processEffectsAtTurnStart(hero)
 
 		} else if gameState.isHeroTurn {
 
 			guard let enemy = gameState.enemy else { return }
 			enemy.currentEnergy = enemy.maxEnergy
 
-			enemy.processEffectsAtTurnStart()
+			effectManager.processEffectsAtTurnStart(enemy)
 		}
 		gameState.isHeroTurn.toggle()
 		checkWinLoseCondition()
@@ -291,7 +294,7 @@ extension RoomViewModel {
 		let blockValue = combatManager.block(target)
 		let buff = Effect(type: .blockUP(value: blockValue), duration: 3)
 
-		target.applyEffect(buff)
+		effectManager.applyEffect(buff, target)
 		target.currentEnergy -= GameConfig.blockEnergyCost
 
 		syncGameState()
@@ -335,7 +338,7 @@ extension RoomViewModel {
 
 		let result = combatManager.buff(target)
 		let buff = Effect(type: .attackUP(value: result), duration: 3)
-		target.applyEffect(buff)
+		effectManager.applyEffect(buff, target)
 
 		target.currentMana -= GameConfig.buffManaCost
 		target.currentEnergy -= GameConfig.spellEnergyCost
@@ -355,7 +358,7 @@ extension RoomViewModel {
 			hero.currentEnergy -= GameConfig.cutEnergyCost
 			let result = combatManager.cut(hero, enemy)
 			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
-			enemy.applyEffect(debuff)
+			effectManager.applyEffect(debuff, hero)
 			triggerHit(onHero: false)
 
 		} else {
@@ -364,7 +367,7 @@ extension RoomViewModel {
 			enemy.currentEnergy -= GameConfig.cutEnergyCost
 			let result = combatManager.cut(enemy, hero)
 			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
-			hero.applyEffect(debuff)
+			effectManager.applyEffect(debuff, enemy)
 			triggerHit(onHero: true)
 
 		}

@@ -23,6 +23,7 @@
 		DDAA04142DC46F8100C801B4 /* EnemyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA04132DC46F8100C801B4 /* EnemyState.swift */; };
 		DDAB3E4D2DC72B5800DBA1C8 /* CurrentPlan in Resources */ = {isa = PBXBuildFile; fileRef = DDAB3E4C2DC72B5800DBA1C8 /* CurrentPlan */; };
 		DDAB3E4F2DC72B6800DBA1C8 /* Bugs in Resources */ = {isa = PBXBuildFile; fileRef = DDAB3E4E2DC72B6800DBA1C8 /* Bugs */; };
+		DDAB3E522DC7362A00DBA1C8 /* EffectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB3E512DC7362A00DBA1C8 /* EffectManager.swift */; };
 		DDAF16462DC5C67100D4109C /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAF16452DC5C67100D4109C /* GameConfig.swift */; };
 		DDC129F12DC25858006CBC41 /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = DDC129F02DC25858006CBC41 /* Notes */; };
 		DDC129F32DC26AF6006CBC41 /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC129F22DC26AF6006CBC41 /* Effect.swift */; };
@@ -47,6 +48,7 @@
 		DDAA04132DC46F8100C801B4 /* EnemyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyState.swift; sourceTree = "<group>"; };
 		DDAB3E4C2DC72B5800DBA1C8 /* CurrentPlan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CurrentPlan; sourceTree = "<group>"; };
 		DDAB3E4E2DC72B6800DBA1C8 /* Bugs */ = {isa = PBXFileReference; lastKnownFileType = text; path = Bugs; sourceTree = "<group>"; };
+		DDAB3E512DC7362A00DBA1C8 /* EffectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectManager.swift; sourceTree = "<group>"; };
 		DDAF16452DC5C67100D4109C /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
 		DDC129F02DC25858006CBC41 /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
 		DDC129F22DC26AF6006CBC41 /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				DDA9407B2DBF538700837F9F /* CombatManager.swift */,
 				DDA9407D2DBF53E000837F9F /* CharactersManager.swift */,
 				DDA59C482DC07582007877A6 /* GameState.swift */,
+				DDAB3E512DC7362A00DBA1C8 /* EffectManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				DDC129F32DC26AF6006CBC41 /* Effect.swift in Sources */,
 				DDA940772DBF522300837F9F /* Character.swift in Sources */,
 				DDA940632DBF4FC600837F9F /* RoomView.swift in Sources */,
+				DDAB3E522DC7362A00DBA1C8 /* EffectManager.swift in Sources */,
 				DDAA04122DC46F7900C801B4 /* HeroState.swift in Sources */,
 				DDAA040E2DC46F4400C801B4 /* RoomState.swift in Sources */,
 				DDA940732DBF519200837F9F /* RoomViewModel.swift in Sources */,
