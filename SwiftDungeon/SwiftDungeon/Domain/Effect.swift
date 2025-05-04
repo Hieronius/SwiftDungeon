@@ -12,7 +12,7 @@ enum EffectType {
 
 	// Static Buffs
 
-	case blockUP(value: Int)
+	case armorUP(value: Int)
 	case attackUP(value: Int)
 
 	// Ticking Buffs
@@ -22,24 +22,25 @@ enum EffectType {
 
 	// Static Debuffs
 
-	case blockDOWN(value: Int)
+	case armorDOWN(value: Int)
 	case attackDOWN(value: Int)
+	case stun
 
 	// Ticking Debuffs
 
 	case bleeding(initialDamage: Int, damagePerTurn: Int)
-	case exaustion(initialEnergy: Int, energyPerTurn: Int)
+	case exhaustion(initialEnergy: Int, energyPerTurn: Int)
 
 	var isDebuff: Bool {
 		switch self {
-		case .bleeding, .exaustion, .attackDOWN, .blockDOWN: return true
+		case .bleeding, .exhaustion, .attackDOWN, .armorDOWN, .stun: return true
 		default: return false
 		}
 	}
 
 	var isTicking: Bool {
 		switch self {
-		case .healthRegen, .bleeding, .manaRegen, .exaustion: return true
+		case .healthRegen, .bleeding, .manaRegen, .exhaustion: return true
 		default: return false
 		}
 	}

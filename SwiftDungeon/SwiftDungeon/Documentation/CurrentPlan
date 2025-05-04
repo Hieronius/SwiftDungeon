@@ -1,11 +1,19 @@
 Current Plan
 
 0.Add more spells
-1. Add HP/Mana regen effects and buttons
-2. Add Fireboll direct spell with button
-3. Add button For full HP/Mana/Energy restoration of the current char
-4. Add a debuff like decrease target's armor/attack/stats
+1. Add HP/Mana regen effects, debuffs, fireboll buttons, shield slame (stun)
 5. Add a special view or screen to display the effects of spells and attacks
+
+- Add accuracy
+- Add armor pen
+- Add stun effect
+
+// MARK: Things to add
+// Add toggles for different areas or screens to display
+// isInventoryOpen: Bool = false
+// ifSkillSetOpen: Bool = false
+// isFightOn: Bool = false
+// and so on
 
 1. BattleLog Scene
 2. Inventory/Skills/Spells/TargetInfo Scenes

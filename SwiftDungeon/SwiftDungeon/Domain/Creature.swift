@@ -16,6 +16,7 @@ protocol Creature {
 	var blockValue: Int { get set }
 	var currentArmor: Int { get set }
 	var isAffected: Bool { get set }
+	var isStunned: Bool { get set }
 	var activeEffects: [Effect] { get set }
 
 }

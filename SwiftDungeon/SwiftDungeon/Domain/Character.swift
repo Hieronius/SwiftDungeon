@@ -16,6 +16,7 @@ class Character: Creature {
 	var blockValue: Int
 	var currentArmor: Int
 	var isAffected: Bool
+	var isStunned: Bool
 	var activeEffects: [Effect]
 
 	init(name: String,
@@ -32,6 +33,7 @@ class Character: Creature {
 		 maxDamage: Int,
 		 minDamage: Int,
 		 isAffected: Bool,
+		 isStunned: Bool,
 		 activeEffects: [Effect])
 	{
 		self.name = name
@@ -48,6 +50,7 @@ class Character: Creature {
 		self.blockValue = blockValue
 		self.currentArmor = currentArmor
 		self.isAffected = isAffected
+		self.isStunned = isStunned
 		self.activeEffects = activeEffects
 	}
 }

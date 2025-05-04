@@ -18,8 +18,12 @@ class CombatManager {
 		caster.spellPower
 	}
 
-	func buff(_ caster: Character) -> Int {
+	func attackUP(_ caster: Character) -> Int {
 		caster.spellPower / 4
+	}
+
+	func armorUP(_ caster: Character) -> Int {
+		caster.spellPower / 5
 	}
 
 	func cut(_ host: Character, _ target: Character) -> Int {

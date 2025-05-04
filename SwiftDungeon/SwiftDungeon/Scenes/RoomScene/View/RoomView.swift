@@ -69,7 +69,7 @@ struct RoomView: View {
 		}
 	}
 
-	// MARK: - Character Stats (Hero & Enemy)
+	// MARK: - Character Stats Layer
 
 	@ViewBuilder
 	private func characterStatsSection() -> some View {
@@ -86,7 +86,8 @@ struct RoomView: View {
 							CGFloat(viewModel.heroState.heroMaxHealth),
 						   maxMana: CGFloat(viewModel.heroState.heroMaxMana),
 						   currentMana: CGFloat(viewModel.heroState.heroCurrentMana),
-						   energy: viewModel.heroState.heroCurrentEnergy,
+						   currentEnergy: viewModel.heroState.heroCurrentEnergy,
+						   maxEnergy: viewModel.heroState.heroMaxEnergy,
 						   effects: viewModel.heroState.heroActiveEffects)
 			Spacer()
 
@@ -99,7 +100,8 @@ struct RoomView: View {
 						   maxHealth:
 							CGFloat(viewModel.enemyState.enemyMaxHealth),
 						   maxMana: CGFloat(viewModel.enemyState.enemyMaxMana), currentMana: CGFloat(viewModel.enemyState.enemyCurrentMana),
-						   energy: viewModel.enemyState.enemyCurrentEnergy,
+						   currentEnergy: viewModel.enemyState.enemyCurrentEnergy,
+						   maxEnergy: viewModel.enemyState.enemyMaxEnergy,
 						   effects: viewModel.enemyState.enemyActiveEffects)
 		}
 	}
@@ -112,7 +114,8 @@ struct RoomView: View {
 								maxHealth: CGFloat,
 								maxMana: CGFloat,
 								currentMana: CGFloat,
-								energy: Int,
+								currentEnergy: Int,
+								maxEnergy: Int,
 								effects: [Effect]) -> some View {
 		VStack {
 			HStack {
@@ -136,7 +139,8 @@ struct RoomView: View {
 					  maxHealth: maxHealth)
 			ManaBar(currentMana: currentMana,
 					maxMana: maxMana)
-			EnergyBar(energy: energy)
+			EnergyBar(currentEnergy: currentEnergy,
+					  maxEnergy: maxEnergy)
 			EffectBar(effects: effects)
 		}
 	}
@@ -168,7 +172,7 @@ struct RoomView: View {
 		}
 	}
 
-	// MARK: - Action Buttons
+	// MARK: - Action Buttons Layer
 
 	@ViewBuilder
 	private func actionButtons() -> some View {
@@ -180,8 +184,20 @@ struct RoomView: View {
 						 action: viewModel.attack)
 			actionButton(title: "Heal",
 						 action: viewModel.heal)
-			actionButton(title: "Cut",
+			actionButton(title: "Bleed",
 						 action: viewModel.cut)
+			actionButton(title: "EnDOWN",
+						 action: viewModel.exhaustion)
+			Spacer()
+		}
+
+		HStack {
+
+			Spacer()
+			actionButton(title: "HPReg",
+						 action: viewModel.healthRegen)
+			actionButton(title: "MPReg",
+						 action: viewModel.manaRegen)
 			Spacer()
 		}
 
@@ -190,23 +206,30 @@ struct RoomView: View {
 			Spacer()
 			actionButton(title: "Block",
 						 action: viewModel.block)
-			actionButton(title: "Buff",
-						 action: viewModel.buff)
+			actionButton(title: "AtUP",
+						 action: viewModel.buffAD)
+			actionButton(title: "ArmUP",
+						 action: viewModel.buffArmor)
+			actionButton(title: "Stun",
+						 action: viewModel.stun)
 			Spacer()
 		}
 		actionButton(title: "End Turn",
 					 action: viewModel.endTurn)
+		.bold(true)
 	}
+
+	// MARK: Action Button View
 
 	private func actionButton(title: String, action: @escaping () -> Void) -> some View {
 		Button(title, action: action)
 			.buttonStyle(.bordered)
-			.font(.title)
+			.font(.title2)
 			.foregroundColor(.white)
 	}
 }
 
-// MARK: Experience Bar
+// MARK: Experience Bar View
 
 struct ExperienceBar: View {
 	
@@ -234,7 +257,7 @@ struct ExperienceBar: View {
 	}
 }
 
-// MARK: Health Bar
+// MARK: Health Bar View
 
 struct HealthBar: View {
 
@@ -260,7 +283,7 @@ struct HealthBar: View {
 	}
 }
 
-// MARK: Mana Bar
+// MARK: Mana Bar View
 
 struct ManaBar: View {
 
@@ -286,23 +309,24 @@ struct ManaBar: View {
 	}
 }
 
-// MARK: Energy Bar
+// MARK: Energy Bar View
 
 struct EnergyBar: View {
-	var energy: Int // Value between 1 and 5
+	var currentEnergy: Int // Value between 1 and 5
+	var maxEnergy: Int
 
 	var body: some View {
 		HStack {
-			ForEach(0..<5) { index in
+			ForEach(0..<maxEnergy, id: \.self) { index in
 				Rectangle()
 					.frame(width: 15, height: 20)
-					.foregroundColor(index < energy ? .yellow : .gray) // Filled or empty
+					.foregroundColor(index < currentEnergy ? .yellow : .gray) // Filled or empty
 			}
 		}
 	}
 }
 
-// MARK: Effect Bar
+// MARK: Effect Bar View
 
 struct EffectBar: View {
 

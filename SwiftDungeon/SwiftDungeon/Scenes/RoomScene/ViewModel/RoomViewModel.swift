@@ -149,17 +149,50 @@ extension RoomViewModel {
 
 			effectManager.processEffectsAtTurnStart(hero)
 
+			if hero.isStunned {
+
+				DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+
+					self.gameState.isHeroTurn.toggle()
+					self.checkWinLoseCondition()
+
+					self.syncGameState()
+					self.endTurn()
+				}
+
+			} else {
+
+				gameState.isHeroTurn.toggle()
+				checkWinLoseCondition()
+
+				syncGameState()
+			}
+
 		} else if gameState.isHeroTurn {
 
 			guard let enemy = gameState.enemy else { return }
 			enemy.currentEnergy = enemy.maxEnergy
 
 			effectManager.processEffectsAtTurnStart(enemy)
-		}
-		gameState.isHeroTurn.toggle()
-		checkWinLoseCondition()
 
-		syncGameState()
+			if enemy.isStunned {
+
+				DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+					self.gameState.isHeroTurn.toggle()
+					self.checkWinLoseCondition()
+
+					self.syncGameState()
+					self.endTurn()
+				}
+
+			} else {
+
+				gameState.isHeroTurn.toggle()
+				checkWinLoseCondition()
+
+				syncGameState()
+			}
+		}
 
 	}
 
@@ -292,7 +325,7 @@ extension RoomViewModel {
 		triggerEffect(forHero: isHero, color: .blue)
 
 		let blockValue = combatManager.block(target)
-		let buff = Effect(type: .blockUP(value: blockValue), duration: 3)
+		let buff = Effect(type: .armorUP(value: blockValue), duration: 3)
 
 		effectManager.applyEffect(buff, target)
 		target.currentEnergy -= GameConfig.blockEnergyCost
@@ -321,7 +354,7 @@ extension RoomViewModel {
 		syncGameState()
 	}
 
-	func buff() {
+	func buffAD() {
 
 		guard gameState.isGameOn else { return }
 
@@ -336,7 +369,7 @@ extension RoomViewModel {
 		let isHero = gameState.isHeroTurn
 		triggerEffect(forHero: isHero, color: .yellow)
 
-		let result = combatManager.buff(target)
+		let result = combatManager.attackUP(target)
 		let buff = Effect(type: .attackUP(value: result), duration: 3)
 		effectManager.applyEffect(buff, target)
 
@@ -358,7 +391,7 @@ extension RoomViewModel {
 			hero.currentEnergy -= GameConfig.cutEnergyCost
 			let result = combatManager.cut(hero, enemy)
 			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
-			effectManager.applyEffect(debuff, hero)
+			effectManager.applyEffect(debuff, enemy)
 			triggerHit(onHero: false)
 
 		} else {
@@ -367,7 +400,7 @@ extension RoomViewModel {
 			enemy.currentEnergy -= GameConfig.cutEnergyCost
 			let result = combatManager.cut(enemy, hero)
 			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
-			effectManager.applyEffect(debuff, enemy)
+			effectManager.applyEffect(debuff, hero)
 			triggerHit(onHero: true)
 
 		}
@@ -376,6 +409,53 @@ extension RoomViewModel {
 		syncGameState()
 
 	}
+
+	func exhaustion() {
+
+	}
+
+	func healthRegen() {
+
+	}
+
+	func manaRegen() {
+
+	}
+
+	func buffArmor() {
+		
+	}
+
+	func stun() {
+
+		guard gameState.isGameOn else { return }
+		guard let hero = gameState.hero else { return }
+		guard let enemy = gameState.enemy else { return }
+
+		if gameState.isHeroTurn {
+
+			guard hero.currentEnergy >= GameConfig.stunEnergyCost else { return }
+			hero.currentEnergy = max(hero.currentEnergy - GameConfig.stunEnergyCost, 0)
+
+			let stunEffect = Effect(type: .stun, duration: GameConfig.stunDuration)
+			effectManager.applyEffect(stunEffect, enemy)
+			triggerHit(onHero: false)
+
+		} else {
+
+			guard enemy.currentEnergy >= GameConfig.cutEnergyCost else { return }
+			enemy.currentEnergy = max(enemy.currentEnergy - GameConfig.stunEnergyCost, 0)
+
+			let stunEffect = Effect(type: .stun, duration: GameConfig.stunDuration)
+			effectManager.applyEffect(stunEffect, hero)
+			triggerHit(onHero: true)
+
+		}
+		checkWinLoseCondition()
+
+		syncGameState()
+	}
+
 }
 
 // MARK: - Helpers

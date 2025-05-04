@@ -19,6 +19,7 @@ class CharacterManager {
 				  maxDamage: 5,
 				  minDamage: 2,
 				  isAffected: false,
+				  isStunned: false,
 				  activeEffects: []),
 
 		Character(name: "Zombie",
@@ -35,6 +36,7 @@ class CharacterManager {
 				  maxDamage: 6,
 				  minDamage: 3,
 				  isAffected: false,
+				  isStunned: false,
 				  activeEffects: []),
 
 		Character(name: "Golem",
@@ -51,6 +53,7 @@ class CharacterManager {
 				  maxDamage: 7,
 				  minDamage: 4,
 				  isAffected: false,
+				  isStunned: false,
 				  activeEffects: []),
 
 		Character(name: "Witch",
@@ -67,6 +70,7 @@ class CharacterManager {
 				  maxDamage: 6,
 				  minDamage: 3,
 				  isAffected: false,
+				  isStunned: false,
 				  activeEffects: []),
 
 		Character(name: "Vampire",
@@ -83,6 +87,7 @@ class CharacterManager {
 				  maxDamage: 7,
 				  minDamage: 4,
 				  isAffected: false,
+				  isStunned: false,
 				  activeEffects: []),
 		
 		Character(name: "Mummy",
@@ -99,6 +104,7 @@ class CharacterManager {
 				  maxDamage: 8,
 				  minDamage: 5,
 				  isAffected: false,
+				  isStunned: false,
 				  activeEffects: []),
 
 		Character(name: "Giant Spider",
@@ -115,6 +121,7 @@ class CharacterManager {
 				  maxDamage: 8,
 				  minDamage: 4,
 				  isAffected: false,
+				  isStunned: false,
 				  activeEffects: []),
 
 		Character(name: "Werewolf",
@@ -131,6 +138,7 @@ class CharacterManager {
 				  maxDamage: 9,
 				  minDamage: 5,
 				  isAffected: false,
+				  isStunned: false,
 				  activeEffects: []),
 
 		Character(name: "Goblin",
@@ -147,6 +155,7 @@ class CharacterManager {
 				  maxDamage: 5,
 				  minDamage: 2,
 				  isAffected: false,
+				  isStunned: false,
 				  activeEffects: []),
 
 		Character(name: "Ogre",
@@ -163,6 +172,7 @@ class CharacterManager {
 				  maxDamage: 10,
 				  minDamage: 6,
 				  isAffected: false,
+				  isStunned: false,
 				  activeEffects: []),
 
 		Character(name: "Troll",
@@ -179,6 +189,7 @@ class CharacterManager {
 				  maxDamage: 12,
 				  minDamage: 7,
 				  isAffected: false,
+				  isStunned: false,
 				  activeEffects: []),
 
 		Character(name: "Dark Knight",
@@ -195,6 +206,7 @@ class CharacterManager {
 				  maxDamage: 13,
 				  minDamage: 8,
 				  isAffected: false,
+				  isStunned: false,
 				  activeEffects: []),
 
 		Character(name: "Dragon",
@@ -211,6 +223,7 @@ class CharacterManager {
 				  maxDamage: 15,
 				  minDamage: 10,
 				  isAffected: false,
+				  isStunned: false,
 				  activeEffects: []),
 
 		Character(name: "Demon",
@@ -227,6 +240,7 @@ class CharacterManager {
 				  maxDamage: 14,
 				  minDamage: 9,
 				  isAffected: false,
+				  isStunned: false,
 				  activeEffects: []),
 
 		Character(name: "Griffin",
@@ -243,6 +257,7 @@ class CharacterManager {
 				  maxDamage: 12,
 				  minDamage: 7,
 				  isAffected: false,
+				  isStunned: false,
 				  activeEffects: [])
 	]
 
@@ -262,6 +277,7 @@ class CharacterManager {
 						  maxDamage: 3,
 						  minDamage: 2,
 						 isAffected: false,
+						 isStunned: false,
 						 activeEffects: [])
 	}
 
