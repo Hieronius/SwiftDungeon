@@ -510,5 +510,10 @@ extension RoomViewModel {
 			heroState.heroActionColor = color
 			heroState.heroActionLabel = label
 		}
+
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.29) {
+			self.enemyState.enemyActionLabel = -100
+			self.heroState.heroActionLabel = -100
+		}
 	}
 }
