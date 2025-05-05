@@ -68,6 +68,19 @@ class RoomViewModel: ObservableObject {
 
 extension RoomViewModel {
 
+	func update() {
+
+		syncGameState()
+		checkWinLoseCondition()
+
+		if gameState.isHeroTurn {
+				// Wait for player input
+				print("Waiting for player move...")
+			} else {
+				// performEnemyTurn()
+			}
+	}
+
 	func syncGameState() {
 
 		// Save/Load function can be implemented here

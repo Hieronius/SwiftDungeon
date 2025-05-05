@@ -1,5 +1,9 @@
 Current Plan
 
+- Refactor Damage Monitor
+
+1. Create Class Diagram
+2. Create 1 and 10 A4 lists about Game overall and it's design document'
 0.Add more spells
 1. Add HP/Mana regen effects, debuffs, fireboll buttons
 5. Add a special view or screen to display the effects of spells and attacks
@@ -7,6 +11,9 @@ Current Plan
 - Add accuracy
 - Add armor pen
 - Add stun effect
+- Add crit
+- Add resists
+- Add crushing blow (armor pen)
 
 // MARK: Things to add
 // Add toggles for different areas or screens to display
