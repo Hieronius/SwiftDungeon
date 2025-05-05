@@ -4,6 +4,8 @@ class RoomViewModel: ObservableObject {
 
 	// MARK: - Dependencies
 
+	// call in view - viewModel.sceneManager.open(.skills/spells)
+	let sceneUIStateManager: SceneUIStateManager
 	private let gameState: GameState
 	private let combatManager: CombatManager
 	private let characterManager: CharacterManager
@@ -21,12 +23,14 @@ class RoomViewModel: ObservableObject {
 	init(gameState: GameState,
 		 combatManager: CombatManager,
 		 characterManager: CharacterManager,
-		 effectManager: EffectManager) {
+		 effectManager: EffectManager,
+		 sceneUIStateManager: SceneUIStateManager) {
 
 		self.gameState = gameState
 		self.combatManager = combatManager
 		self.characterManager = characterManager
 		self.effectManager = effectManager
+		self.sceneUIStateManager = sceneUIStateManager
 
 		self.roomState = RoomState()
 		self.sceneState = SceneState()
