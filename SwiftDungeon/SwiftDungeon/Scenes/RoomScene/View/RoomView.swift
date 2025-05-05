@@ -27,13 +27,20 @@ struct RoomView: View {
 				}
 
 			VStack {
-				gameInfoSection()
-				Spacer()
-				characterStatsSection()
-				Spacer()
-				battleFieldSection()
-				Spacer()
-				actionButtons()
+				BorderedSection {
+					gameInfoSection()
+				}
+				BorderedSection {
+					characterStatsSection()
+				}
+					battleFieldSection()
+				BorderedSection {
+					// another actionButtons
+				}
+					actionButtons()
+				actionButton(title: "End Turn",
+							 action: viewModel.endTurn)
+				.bold(true)
 			}
 
 		}
@@ -176,6 +183,27 @@ struct RoomView: View {
 		}
 	}
 
+	// MARK: - Menu Buttons Layer
+
+	@ViewBuilder
+	private func menuButtons() -> some View {
+
+		HStack {
+
+			Spacer()
+			actionButton(title: "Skills",
+						 action: viewModel.attack)
+			actionButton(title: "Heal",
+						 action: viewModel.heal)
+			actionButton(title: "Bleed",
+						 action: viewModel.cut)
+			actionButton(title: "EnDOWN",
+						 action: viewModel.exhaustion)
+			Spacer()
+		}
+
+	}
+
 	// MARK: - Action Buttons Layer
 
 	@ViewBuilder
@@ -218,9 +246,6 @@ struct RoomView: View {
 						 action: viewModel.stun)
 			Spacer()
 		}
-		actionButton(title: "End Turn",
-					 action: viewModel.endTurn)
-		.bold(true)
 	}
 
 	// MARK: Action Button View
@@ -467,6 +492,28 @@ struct CharacterTileView: View {
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
 			shaking = false
 		}
+	}
+}
+
+// MARK: Border Section
+
+struct BorderedSection<Content: View>: View {
+	let content: Content
+
+	init(@ViewBuilder content: () -> Content) {
+		self.content = content()
+	}
+
+	var body: some View {
+		content
+			.padding()
+			.background(Color.black)
+			.overlay(
+				RoundedRectangle(cornerRadius: 8)
+					.stroke(Color.gray, lineWidth: 2)
+			)
+			.padding(.horizontal, 16)
+			.padding(.vertical, 4)
 	}
 }
 

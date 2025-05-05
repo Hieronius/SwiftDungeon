@@ -1,30 +1,33 @@
 Current Plan
 
-- Refactor Damage Monitor
+1. Add Menu buttons (toggle isInventoryOpen, isSkillsSetOpen)
+- Skills
+- Spells
+- Log
+- Inventory
+- Stats
+- Talants
+- Map
 
-1. Create Class Diagram
-2. Create 1 and 10 A4 lists about Game overall and it's design document'
-0.Add more spells
-1. Add HP/Mana regen effects, debuffs, fireboll buttons
-5. Add a special view or screen to display the effects of spells and attacks
+2. Add HP/Mana regen effects, debuffs, fireboll buttons
+
+3. Add mechanics/abilities
 
 - Add accuracy
 - Add armor pen
 - Add stun effect
 - Add crit
 - Add resists
-- Add crushing blow (armor pen)
-
-// MARK: Things to add
-// Add toggles for different areas or screens to display
-// isInventoryOpen: Bool = false
-// ifSkillSetOpen: Bool = false
-// isFightOn: Bool = false
-// and so on
-
-1. BattleLog Scene
-2. Inventory/Skills/Spells/TargetInfo Scenes
-3. Put repeated checks of mana/health/energy/hero/enemy into separate method
+- Add crushing blow (armor pen) ability
 
 
-3. add isGameOn toggle to the View and create a separate GameOverScreen so it will be presented only is toggle is true
+
+
+Optional:
+1. Create Class Diagram
+2. Create 1 and 10 A4 lists about Game overall and it's design document'
+3. Refactor view with input damage/spells
+4. Refactor combat manager to make it CombatCalculator
+5. Add rewards screen after each fight with gold, exp, items and button to get to the new room
+6. Put repeated checks of mana/health/energy/hero/enemy into separate method
+7. Create GameOverScreen
