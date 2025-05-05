@@ -14,11 +14,7 @@ class RoomViewModel: ObservableObject {
 	@Published var roomState: RoomState
 	@Published var heroState: HeroState
 	@Published var enemyState: EnemyState
-
-	// Utility
-
-	@Published var heroEffectColor: Color? = nil
-	@Published var enemyEffectColor: Color? = nil
+	@Published var sceneState: SceneState
 
 	// MARK: - Initialization
 
@@ -33,6 +29,7 @@ class RoomViewModel: ObservableObject {
 		self.effectManager = effectManager
 
 		self.roomState = RoomState()
+		self.sceneState = SceneState()
 
 		self.heroState = HeroState(
 			heroCurrentLevel: gameState.hero?.stats.level ?? 0,
@@ -487,14 +484,14 @@ extension RoomViewModel {
 
 	private func triggerEffect(forHero: Bool, color: Color) {
 		if forHero {
-			heroEffectColor = color
+			sceneState.heroEffectColor = color
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-				if self.gameState.isHeroTurn { self.heroEffectColor = nil }
+				if self.gameState.isHeroTurn { self.sceneState.heroEffectColor = nil }
 			}
 		} else {
-			enemyEffectColor = color
+			sceneState.enemyEffectColor = color
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-				if !self.gameState.isHeroTurn { self.enemyEffectColor = nil }
+				if !self.gameState.isHeroTurn { self.sceneState.enemyEffectColor = nil }
 			}
 		}
 	}

@@ -164,7 +164,7 @@ struct RoomView: View {
 				effectLabel: "\(viewModel.heroState.heroActionLabel)",
 				isActive: viewModel.roomState.isHeroTurn,
 				activeColor: .white,
-				effectColor: viewModel.heroEffectColor,
+				effectColor: viewModel.sceneState.heroEffectColor,
 				didHit: viewModel.roomState.heroWasHit,
 				effectTextColor: viewModel.heroState.heroActionColor
 			)
@@ -175,7 +175,7 @@ struct RoomView: View {
 				effectLabel: "\(viewModel.enemyState.enemyActionLabel)",
 				isActive: !viewModel.roomState.isHeroTurn,
 				activeColor: .red,
-				effectColor: viewModel.enemyEffectColor,
+				effectColor: viewModel.sceneState.enemyEffectColor,
 				didHit: viewModel.roomState.enemyWasHit,
 				effectTextColor: viewModel.enemyState.enemyActionColor
 			)
