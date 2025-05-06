@@ -13,10 +13,10 @@ class RoomViewModel: ObservableObject {
 
 	// MARK: - Published Properties
 
-	@Published var roomState: RoomState
-	@Published var heroState: HeroState
-	@Published var enemyState: EnemyState
-	@Published var sceneState: SceneState
+	@Published var roomUIState: RoomUIState
+	@Published var heroUIState: HeroUIState
+	@Published var enemyUIState: EnemyUIState
+	@Published var sceneUIState: SceneUIState
 
 	// MARK: - Initialization
 
@@ -32,10 +32,10 @@ class RoomViewModel: ObservableObject {
 		self.effectManager = effectManager
 		self.sceneUIStateManager = sceneUIStateManager
 
-		self.roomState = RoomState()
-		self.sceneState = SceneState()
+		self.roomUIState = RoomUIState()
+		self.sceneUIState = SceneUIState()
 
-		self.heroState = HeroState(
+		self.heroUIState = HeroUIState(
 			heroCurrentLevel: gameState.hero?.stats.level ?? 0,
 			heroMaxHealth: gameState.hero?.maxHealth ?? 0,
 			heroCurrentHealth: gameState.hero?.currentHealth ?? 0,
@@ -50,7 +50,7 @@ class RoomViewModel: ObservableObject {
 			heroActiveEffects: gameState.hero?.activeEffects ?? []
 		)
 
-		self.enemyState = EnemyState(
+		self.enemyUIState = EnemyUIState(
 			enemyCurrentLevel: gameState.enemy?.stats.level ?? 0,
 			enemyMaxHealth: gameState.enemy?.maxHealth ?? 0,
 			enemyCurrentHealth: gameState.enemy?.currentHealth ?? 0,
@@ -86,18 +86,18 @@ extension RoomViewModel {
 
 		// Save/Load function can be implemented here
 
-		roomState = RoomState(
+		roomUIState = RoomUIState(
 			currentRoom: roomGameState.currentRoom,
 			currentRound: roomGameState.currentRound,
 			isHeroTurn: roomGameState.isHeroTurn,
-			heroWasHit: roomState.heroWasHit,
-			enemyWasHit: roomState.enemyWasHit
+			heroWasHit: roomUIState.heroWasHit,
+			enemyWasHit: roomUIState.enemyWasHit
 		)
 
 		guard let hero = roomGameState.hero else { return }
 		guard let enemy = roomGameState.enemy else { return }
 
-		heroState = HeroState(
+		heroUIState = HeroUIState(
 			heroCurrentLevel: hero.stats.level,
 			heroMaxHealth: hero.maxHealth,
 			heroCurrentHealth: hero.currentHealth,
@@ -107,12 +107,12 @@ extension RoomViewModel {
 			heroCurrentEnergy: hero.currentEnergy,
 			heroCurrentExperience: hero.stats.currentExperience,
 			heroMaxExperience: hero.stats.maxExperience,
-			heroActionColor: heroState.heroActionColor,
-			heroActionLabel: heroState.heroActionLabel,
+			heroActionColor: heroUIState.heroActionColor,
+			heroActionLabel: heroUIState.heroActionLabel,
 			heroActiveEffects: hero.activeEffects
 		)
 
-		enemyState = EnemyState(
+		enemyUIState = EnemyUIState(
 			enemyCurrentLevel: enemy.stats.level,
 			enemyMaxHealth: enemy.maxHealth,
 			enemyCurrentHealth: enemy.currentHealth,
@@ -120,8 +120,8 @@ extension RoomViewModel {
 			enemyCurrentMana: enemy.currentMana,
 			enemyMaxEnergy: enemy.maxEnergy,
 			enemyCurrentEnergy: enemy.currentEnergy,
-			enemyActionColor: enemyState.enemyActionColor,
-			enemyActionLabel: enemyState.enemyActionLabel,
+			enemyActionColor: enemyUIState.enemyActionColor,
+			enemyActionLabel: enemyUIState.enemyActionLabel,
 			enemyActiveEffects: enemy.activeEffects
 		)
 	}
@@ -238,8 +238,8 @@ extension RoomViewModel {
 
 			roomGameState.isGameOn = false
 			roomGameState.isHeroWon = true
-			let experience = roomState.currentRoom * GameConfig.expPerRoom
-			if (heroState.heroCurrentExperience + experience) >= hero.stats.maxExperience {
+			let experience = roomUIState.currentRoom * GameConfig.expPerRoom
+			if (heroUIState.heroCurrentExperience + experience) >= hero.stats.maxExperience {
 				heroLevelUP()
 			} else {
 				hero.stats.currentExperience += experience
@@ -488,14 +488,14 @@ extension RoomViewModel {
 
 	private func triggerEffect(forHero: Bool, color: Color) {
 		if forHero {
-			sceneState.heroEffectColor = color
+			sceneUIState.heroEffectColor = color
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-				if self.roomGameState.isHeroTurn { self.sceneState.heroEffectColor = nil }
+				if self.roomGameState.isHeroTurn { self.sceneUIState.heroEffectColor = nil }
 			}
 		} else {
-			sceneState.enemyEffectColor = color
+			sceneUIState.enemyEffectColor = color
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-				if !self.roomGameState.isHeroTurn { self.sceneState.enemyEffectColor = nil }
+				if !self.roomGameState.isHeroTurn { self.sceneUIState.enemyEffectColor = nil }
 			}
 		}
 	}
@@ -503,14 +503,14 @@ extension RoomViewModel {
 	// helper to trigger a 1s “hit” animation on the target
 	private func triggerHit(onHero: Bool) {
 		if onHero {
-			roomState.heroWasHit = true
+			roomUIState.heroWasHit = true
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-				self.roomState.heroWasHit = false
+				self.roomUIState.heroWasHit = false
 			}
 		} else {
-			roomState.enemyWasHit = true
+			roomUIState.enemyWasHit = true
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-				self.roomState.enemyWasHit = false
+				self.roomUIState.enemyWasHit = false
 			}
 		}
 	}
@@ -518,16 +518,16 @@ extension RoomViewModel {
 	private func passActionVisualResult(_ color: Color, _ label: Int) {
 
 		if roomGameState.isHeroTurn {
-			enemyState.enemyActionColor = color
-			enemyState.enemyActionLabel = label
+			enemyUIState.enemyActionColor = color
+			enemyUIState.enemyActionLabel = label
 		} else {
-			heroState.heroActionColor = color
-			heroState.heroActionLabel = label
+			heroUIState.heroActionColor = color
+			heroUIState.heroActionLabel = label
 		}
 
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.29) {
-			self.enemyState.enemyActionLabel = -100
-			self.heroState.heroActionLabel = -100
+			self.enemyUIState.enemyActionLabel = -100
+			self.heroUIState.heroActionLabel = -100
 		}
 	}
 }

@@ -23,7 +23,7 @@ struct RoomView: View {
 				.edgesIgnoringSafeArea(.all)
 				.contentShape(Rectangle())
 				.onTapGesture(count: 3) {
-					viewModel.restoreCharacter(isHeroTurn: viewModel.roomState.isHeroTurn)
+					viewModel.restoreCharacter(isHeroTurn: viewModel.roomUIState.isHeroTurn)
 				}
 
 			VStack {
@@ -57,9 +57,9 @@ struct RoomView: View {
 	private func gameInfoSection() -> some View {
 		HStack {
 			Spacer()
-			infoText(label: "Current Room:", value: viewModel.roomState.currentRoom)
+			infoText(label: "Current Room:", value: viewModel.roomUIState.currentRoom)
 			Spacer()
-			infoText(label: "Current Round:", value: viewModel.roomState.currentRound)
+			infoText(label: "Current Round:", value: viewModel.roomUIState.currentRound)
 			Spacer()
 		}
 		
@@ -84,32 +84,32 @@ struct RoomView: View {
 
 			// Hero
 			characterStats(name: "Hero",
-						   level: "\(viewModel.heroState.heroCurrentLevel)",
-						   currentExperience: CGFloat(viewModel.heroState.heroCurrentExperience),
+						   level: "\(viewModel.heroUIState.heroCurrentLevel)",
+						   currentExperience: CGFloat(viewModel.heroUIState.heroCurrentExperience),
 						   maxExperience:
-							CGFloat(viewModel.heroState.heroMaxExperience),
-						   currentHealth: CGFloat(viewModel.heroState.heroCurrentHealth),
+							CGFloat(viewModel.heroUIState.heroMaxExperience),
+						   currentHealth: CGFloat(viewModel.heroUIState.heroCurrentHealth),
 						   maxHealth:
-							CGFloat(viewModel.heroState.heroMaxHealth),
-						   maxMana: CGFloat(viewModel.heroState.heroMaxMana),
-						   currentMana: CGFloat(viewModel.heroState.heroCurrentMana),
-						   currentEnergy: viewModel.heroState.heroCurrentEnergy,
-						   maxEnergy: viewModel.heroState.heroMaxEnergy,
-						   effects: viewModel.heroState.heroActiveEffects)
+							CGFloat(viewModel.heroUIState.heroMaxHealth),
+						   maxMana: CGFloat(viewModel.heroUIState.heroMaxMana),
+						   currentMana: CGFloat(viewModel.heroUIState.heroCurrentMana),
+						   currentEnergy: viewModel.heroUIState.heroCurrentEnergy,
+						   maxEnergy: viewModel.heroUIState.heroMaxEnergy,
+						   effects: viewModel.heroUIState.heroActiveEffects)
 			Spacer()
 
 			// Enemy
 			characterStats(name: "Enemy",
-						   level: "\(viewModel.enemyState.enemyCurrentLevel)",
+						   level: "\(viewModel.enemyUIState.enemyCurrentLevel)",
 						   currentExperience: 0,
 						   maxExperience: 0,
-						   currentHealth: CGFloat(viewModel.enemyState.enemyCurrentHealth),
+						   currentHealth: CGFloat(viewModel.enemyUIState.enemyCurrentHealth),
 						   maxHealth:
-							CGFloat(viewModel.enemyState.enemyMaxHealth),
-						   maxMana: CGFloat(viewModel.enemyState.enemyMaxMana), currentMana: CGFloat(viewModel.enemyState.enemyCurrentMana),
-						   currentEnergy: viewModel.enemyState.enemyCurrentEnergy,
-						   maxEnergy: viewModel.enemyState.enemyMaxEnergy,
-						   effects: viewModel.enemyState.enemyActiveEffects)
+							CGFloat(viewModel.enemyUIState.enemyMaxHealth),
+						   maxMana: CGFloat(viewModel.enemyUIState.enemyMaxMana), currentMana: CGFloat(viewModel.enemyUIState.enemyCurrentMana),
+						   currentEnergy: viewModel.enemyUIState.enemyCurrentEnergy,
+						   maxEnergy: viewModel.enemyUIState.enemyMaxEnergy,
+						   effects: viewModel.enemyUIState.enemyActiveEffects)
 		}
 	}
 
@@ -161,23 +161,23 @@ struct RoomView: View {
 			CharacterTileView(
 				baseColor: .black,
 				label:    "H",
-				effectLabel: "\(viewModel.heroState.heroActionLabel)",
-				isActive: viewModel.roomState.isHeroTurn,
+				effectLabel: "\(viewModel.heroUIState.heroActionLabel)",
+				isActive: viewModel.roomUIState.isHeroTurn,
 				activeColor: .white,
-				effectColor: viewModel.sceneState.heroEffectColor,
-				didHit: viewModel.roomState.heroWasHit,
-				effectTextColor: viewModel.heroState.heroActionColor
+				effectColor: viewModel.sceneUIState.heroEffectColor,
+				didHit: viewModel.roomUIState.heroWasHit,
+				effectTextColor: viewModel.heroUIState.heroActionColor
 			)
 			Spacer()
 			CharacterTileView(
 				baseColor: .black,
 				label:    "E",
-				effectLabel: "\(viewModel.enemyState.enemyActionLabel)",
-				isActive: !viewModel.roomState.isHeroTurn,
+				effectLabel: "\(viewModel.enemyUIState.enemyActionLabel)",
+				isActive: !viewModel.roomUIState.isHeroTurn,
 				activeColor: .red,
-				effectColor: viewModel.sceneState.enemyEffectColor,
-				didHit: viewModel.roomState.enemyWasHit,
-				effectTextColor: viewModel.enemyState.enemyActionColor
+				effectColor: viewModel.sceneUIState.enemyEffectColor,
+				didHit: viewModel.roomUIState.enemyWasHit,
+				effectTextColor: viewModel.enemyUIState.enemyActionColor
 			)
 			Spacer()
 		}

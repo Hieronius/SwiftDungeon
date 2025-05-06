@@ -17,10 +17,10 @@
 		DDA940772DBF522300837F9F /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940762DBF522300837F9F /* Character.swift */; };
 		DDA9407C2DBF538700837F9F /* CombatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9407B2DBF538700837F9F /* CombatManager.swift */; };
 		DDA9407E2DBF53E000837F9F /* CharactersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9407D2DBF53E000837F9F /* CharactersManager.swift */; };
-		DDAA040E2DC46F4400C801B4 /* RoomState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA040D2DC46F4400C801B4 /* RoomState.swift */; };
-		DDAA04102DC46F5700C801B4 /* SceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA040F2DC46F5700C801B4 /* SceneState.swift */; };
-		DDAA04122DC46F7900C801B4 /* HeroState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA04112DC46F7900C801B4 /* HeroState.swift */; };
-		DDAA04142DC46F8100C801B4 /* EnemyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA04132DC46F8100C801B4 /* EnemyState.swift */; };
+		DDAA040E2DC46F4400C801B4 /* RoomUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA040D2DC46F4400C801B4 /* RoomUIState.swift */; };
+		DDAA04102DC46F5700C801B4 /* SceneUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA040F2DC46F5700C801B4 /* SceneUIState.swift */; };
+		DDAA04122DC46F7900C801B4 /* HeroUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA04112DC46F7900C801B4 /* HeroUIState.swift */; };
+		DDAA04142DC46F8100C801B4 /* EnemyUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA04132DC46F8100C801B4 /* EnemyUIState.swift */; };
 		DDAA56E12DC881C2006E663D /* SceneUISection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA56E02DC881C2006E663D /* SceneUISection.swift */; };
 		DDAA56E32DC88279006E663D /* SceneUIStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA56E22DC88279006E663D /* SceneUIStateManager.swift */; };
 		DDAB3E4D2DC72B5800DBA1C8 /* CurrentPlan in Resources */ = {isa = PBXBuildFile; fileRef = DDAB3E4C2DC72B5800DBA1C8 /* CurrentPlan */; };
@@ -44,10 +44,10 @@
 		DDA940762DBF522300837F9F /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		DDA9407B2DBF538700837F9F /* CombatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatManager.swift; sourceTree = "<group>"; };
 		DDA9407D2DBF53E000837F9F /* CharactersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersManager.swift; sourceTree = "<group>"; };
-		DDAA040D2DC46F4400C801B4 /* RoomState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomState.swift; sourceTree = "<group>"; };
-		DDAA040F2DC46F5700C801B4 /* SceneState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneState.swift; sourceTree = "<group>"; };
-		DDAA04112DC46F7900C801B4 /* HeroState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroState.swift; sourceTree = "<group>"; };
-		DDAA04132DC46F8100C801B4 /* EnemyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyState.swift; sourceTree = "<group>"; };
+		DDAA040D2DC46F4400C801B4 /* RoomUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomUIState.swift; sourceTree = "<group>"; };
+		DDAA040F2DC46F5700C801B4 /* SceneUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneUIState.swift; sourceTree = "<group>"; };
+		DDAA04112DC46F7900C801B4 /* HeroUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroUIState.swift; sourceTree = "<group>"; };
+		DDAA04132DC46F8100C801B4 /* EnemyUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyUIState.swift; sourceTree = "<group>"; };
 		DDAA56E02DC881C2006E663D /* SceneUISection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneUISection.swift; sourceTree = "<group>"; };
 		DDAA56E22DC88279006E663D /* SceneUIStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneUIStateManager.swift; sourceTree = "<group>"; };
 		DDAB3E4C2DC72B5800DBA1C8 /* CurrentPlan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CurrentPlan; sourceTree = "<group>"; };
@@ -118,10 +118,10 @@
 		DDA9406F2DBF50E400837F9F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DDAA040D2DC46F4400C801B4 /* RoomState.swift */,
-				DDAA040F2DC46F5700C801B4 /* SceneState.swift */,
-				DDAA04112DC46F7900C801B4 /* HeroState.swift */,
-				DDAA04132DC46F8100C801B4 /* EnemyState.swift */,
+				DDAA040D2DC46F4400C801B4 /* RoomUIState.swift */,
+				DDAA040F2DC46F5700C801B4 /* SceneUIState.swift */,
+				DDAA04112DC46F7900C801B4 /* HeroUIState.swift */,
+				DDAA04132DC46F8100C801B4 /* EnemyUIState.swift */,
 				DDAA56E02DC881C2006E663D /* SceneUISection.swift */,
 			);
 			path = Model;
@@ -325,16 +325,16 @@
 				DDA940772DBF522300837F9F /* Character.swift in Sources */,
 				DDA940632DBF4FC600837F9F /* RoomView.swift in Sources */,
 				DDAB3E522DC7362A00DBA1C8 /* EffectManager.swift in Sources */,
-				DDAA04122DC46F7900C801B4 /* HeroState.swift in Sources */,
-				DDAA040E2DC46F4400C801B4 /* RoomState.swift in Sources */,
+				DDAA04122DC46F7900C801B4 /* HeroUIState.swift in Sources */,
+				DDAA040E2DC46F4400C801B4 /* RoomUIState.swift in Sources */,
 				DDA940732DBF519200837F9F /* RoomViewModel.swift in Sources */,
 				DDA9407E2DBF53E000837F9F /* CharactersManager.swift in Sources */,
 				DDA59C492DC07582007877A6 /* RoomGameState.swift in Sources */,
-				DDAA04142DC46F8100C801B4 /* EnemyState.swift in Sources */,
+				DDAA04142DC46F8100C801B4 /* EnemyUIState.swift in Sources */,
 				DDAA56E32DC88279006E663D /* SceneUIStateManager.swift in Sources */,
 				DDA940612DBF4FC600837F9F /* SwiftDungeonApp.swift in Sources */,
 				DDA940752DBF51C800837F9F /* Creature.swift in Sources */,
-				DDAA04102DC46F5700C801B4 /* SceneState.swift in Sources */,
+				DDAA04102DC46F5700C801B4 /* SceneUIState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

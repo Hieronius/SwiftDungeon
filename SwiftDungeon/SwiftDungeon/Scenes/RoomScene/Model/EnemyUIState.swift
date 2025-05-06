@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct EnemyState {
+struct EnemyUIState {
 
 	var enemyCurrentLevel: Int
 	var enemyMaxHealth: Int

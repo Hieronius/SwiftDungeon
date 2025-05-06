@@ -1,6 +1,6 @@
 import Foundation
 
-struct RoomState {
+struct RoomUIState {
 
 	var currentRoom = 1
 	var currentRound = 1

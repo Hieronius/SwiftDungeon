@@ -36,3 +36,5 @@ Optional:
 5. Add rewards screen after each fight with gold, exp, items and button to get to the new room
 6. Put repeated checks of mana/health/energy/hero/enemy into separate method
 7. Create GameOverScreen
+8. Add cleanBuffs/Debuffs/AllEffects abilities
+9. Refactor RoomGameState class and RoomState struct from Managers and RoomModule

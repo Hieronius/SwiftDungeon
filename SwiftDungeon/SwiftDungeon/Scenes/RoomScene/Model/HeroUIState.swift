@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct HeroState {
+struct HeroUIState {
 
 	var heroCurrentLevel: Int
 	var heroMaxHealth: Int
