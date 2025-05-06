@@ -31,6 +31,10 @@ class CombatManager {
 		return damage > 0 ? damage : 0
 	}
 
+	func sunderArmor(_ host: Character, _ target: Character) -> Int {
+		return 0
+	}
+
 }
 
 /*

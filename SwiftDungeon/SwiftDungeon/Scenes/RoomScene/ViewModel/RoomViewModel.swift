@@ -124,6 +124,7 @@ extension RoomViewModel {
 			enemyActionLabel: enemyUIState.enemyActionLabel,
 			enemyActiveEffects: enemy.activeEffects
 		)
+
 	}
 }
 
@@ -450,6 +451,10 @@ extension RoomViewModel {
 		
 	}
 
+	func sunderArmor() {
+		
+	}
+
 	func stun() {
 
 		guard roomGameState.isGameOn else { return }
@@ -488,10 +493,14 @@ extension RoomViewModel {
 
 	func openSkills() {
 		sceneUIStateManager.open(.skills)
+		sceneUIState.uiState = .skills
+		print(sceneUIStateManager.activeSection)
 	}
 
 	func openSpells() {
 		sceneUIStateManager.open(.spellbook)
+		sceneUIState.uiState = .spellbook
+		print(sceneUIStateManager.activeSection)
 	}
 
 	func openLog() {

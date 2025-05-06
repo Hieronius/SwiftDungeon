@@ -5,4 +5,5 @@ struct SceneUIState {
 
 	var heroEffectColor: Color? = nil
 	var enemyEffectColor: Color? = nil
+	var uiState: SceneUISection = .skills
 }

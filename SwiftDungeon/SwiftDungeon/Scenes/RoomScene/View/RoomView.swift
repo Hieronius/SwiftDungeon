@@ -6,6 +6,7 @@ struct RoomView: View {
 	
 	@StateObject private var viewModel: RoomViewModel
 	@State private var isEnemyUI = true
+
 	
 	// MARK: - Initialization
 	
@@ -40,7 +41,7 @@ struct RoomView: View {
 				.opacity(0.8)
 				.scaleEffect(0.8)
 
-				actionButtons()
+				sectionActionButtons()
 
 				Spacer()
 				actionButton(title: "End Turn",
@@ -54,6 +55,27 @@ struct RoomView: View {
 		// MARK: ENTRY POINT TO THE GAME
 		.onAppear {
 			viewModel.startFight()
+		}
+	}
+}
+
+// MARK: - Section Action Buttons
+private extension RoomView {
+
+	/// Builds the appropriate action buttons for the current UI section
+	@ViewBuilder
+	func sectionActionButtons() -> some View {
+
+		switch viewModel.sceneUIStateManager.activeSection {
+
+		case .skills:
+			buildScreen(.skills)
+		case .spellbook:
+			buildScreen(.spellbook)
+		case .equipment:
+			EmptyView()
+		default:
+			EmptyView()
 		}
 	}
 }
@@ -233,49 +255,75 @@ private extension RoomView {
 		}
 	}
 
-	// MARK: - Action Buttons Layer
+	// MARK: - Menu Screens
 
 	@ViewBuilder
-	func actionButtons() -> some View {
+	func buildScreen(_ sceneUIState: SceneUISection) -> some View {
 
-		HStack {
+		switch sceneUIState {
 
-			Spacer()
-			actionButton(title: "Attack",
-						 action: viewModel.attack)
-			actionButton(title: "Heal",
-						 action: viewModel.heal)
-			actionButton(title: "Bleed",
-						 action: viewModel.cut)
-			actionButton(title: "EnDOWN",
-						 action: viewModel.exhaustion)
-			Spacer()
-		}
+		// Skill Set
 
-		HStack {
+		case .skills:
 
-			Spacer()
-			actionButton(title: "HPReg",
-						 action: viewModel.healthRegen)
-			actionButton(title: "MPReg",
-						 action: viewModel.manaRegen)
-			Spacer()
-		}
+			VStack {
 
-		HStack {
+				HStack {
+					Spacer()
+					actionButton(title: "Attack",
+								 action: viewModel.attack)
+					actionButton(title: "Stun",
+								 action: viewModel.stun)
+					actionButton(title: "Bleed",
+								 action: viewModel.cut)
+					Spacer()
+				}
 
-			Spacer()
-			actionButton(title: "Block",
-						 action: viewModel.block)
-			actionButton(title: "AtUP",
-						 action: viewModel.buffAD)
-			actionButton(title: "ArmUP",
-						 action: viewModel.buffArmor)
-			actionButton(title: "Stun",
-						 action: viewModel.stun)
-			Spacer()
+				HStack {
+
+					Spacer()
+					actionButton(title: "Sunder",
+								 action: viewModel.sunderArmor)
+					actionButton(title: "Block",
+								 action: viewModel.block)
+					Spacer()
+				}
+			}
+
+		// Spell Book
+
+		case .spellbook:
+
+			VStack {
+
+				HStack {
+					Spacer()
+					actionButton(title: "HPReg",
+								 action: viewModel.healthRegen)
+					actionButton(title: "MPReg",
+								 action: viewModel.manaRegen)
+					actionButton(title: "Heal",
+								 action: viewModel.heal)
+					Spacer()
+				}
+				HStack {
+
+					Spacer()
+					actionButton(title: "EnDOWN",
+								 action: viewModel.exhaustion)
+					actionButton(title: "AtUP",
+								 action: viewModel.buffAD)
+					actionButton(title: "ArmUP",
+								 action: viewModel.buffArmor)
+					Spacer()
+				}
+			}
+
+		default:
+			infoText(label: "Unknown Screen", value: 911)
 		}
 	}
+
 
 	// MARK: Action Button View
 
