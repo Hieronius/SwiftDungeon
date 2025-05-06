@@ -26,6 +26,7 @@
 		DDAB3E4D2DC72B5800DBA1C8 /* CurrentPlan in Resources */ = {isa = PBXBuildFile; fileRef = DDAB3E4C2DC72B5800DBA1C8 /* CurrentPlan */; };
 		DDAB3E4F2DC72B6800DBA1C8 /* Bugs in Resources */ = {isa = PBXBuildFile; fileRef = DDAB3E4E2DC72B6800DBA1C8 /* Bugs */; };
 		DDAB3E522DC7362A00DBA1C8 /* EffectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB3E512DC7362A00DBA1C8 /* EffectManager.swift */; };
+		DDAC13322DC9E30700E42D65 /* RoomBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAC13312DC9E30700E42D65 /* RoomBuilder.swift */; };
 		DDAF16462DC5C67100D4109C /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAF16452DC5C67100D4109C /* GameConfig.swift */; };
 		DDC129F12DC25858006CBC41 /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = DDC129F02DC25858006CBC41 /* Notes */; };
 		DDC129F32DC26AF6006CBC41 /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC129F22DC26AF6006CBC41 /* Effect.swift */; };
@@ -53,6 +54,7 @@
 		DDAB3E4C2DC72B5800DBA1C8 /* CurrentPlan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CurrentPlan; sourceTree = "<group>"; };
 		DDAB3E4E2DC72B6800DBA1C8 /* Bugs */ = {isa = PBXFileReference; lastKnownFileType = text; path = Bugs; sourceTree = "<group>"; };
 		DDAB3E512DC7362A00DBA1C8 /* EffectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectManager.swift; sourceTree = "<group>"; };
+		DDAC13312DC9E30700E42D65 /* RoomBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomBuilder.swift; sourceTree = "<group>"; };
 		DDAF16452DC5C67100D4109C /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
 		DDC129F02DC25858006CBC41 /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
 		DDC129F22DC26AF6006CBC41 /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		DDAA040C2DC46EA600C801B4 /* RoomScene */ = {
 			isa = PBXGroup;
 			children = (
+				DDAC13312DC9E30700E42D65 /* RoomBuilder.swift */,
 				DDA9406F2DBF50E400837F9F /* Model */,
 				DDA940702DBF50E800837F9F /* ViewModel */,
 				DDA9406E2DBF50DE00837F9F /* View */,
@@ -332,6 +335,7 @@
 				DDA59C492DC07582007877A6 /* RoomGameState.swift in Sources */,
 				DDAA04142DC46F8100C801B4 /* EnemyUIState.swift in Sources */,
 				DDAA56E32DC88279006E663D /* SceneUIStateManager.swift in Sources */,
+				DDAC13322DC9E30700E42D65 /* RoomBuilder.swift in Sources */,
 				DDA940612DBF4FC600837F9F /* SwiftDungeonApp.swift in Sources */,
 				DDA940752DBF51C800837F9F /* Creature.swift in Sources */,
 				DDAA04102DC46F5700C801B4 /* SceneUIState.swift in Sources */,
