@@ -47,6 +47,7 @@ struct RoomView: View {
 
 				actionButtons()
 
+				Spacer()
 				actionButton(title: "End Turn",
 							 action: viewModel.endTurn)
 				.bold(true)
@@ -199,31 +200,27 @@ struct RoomView: View {
 	private func menuButtons() -> some View {
 
 		VStack {
-
 			HStack {
-
-				Spacer()
-				actionButton(title: "Skills",
+				
+				actionButton(title: "Skil",
 							 action: viewModel.openSkills)
-				actionButton(title: "Spells",
+				actionButton(title: "Spel",
 							 action: viewModel.openSpells)
-				actionButton(title: "Inventory",
+				actionButton(title: "Inv",
 							 action: viewModel.openInventory)
 				actionButton(title: "Log",
 							 action: viewModel.openLog)
-				Spacer()
+				
 			}
-
+			
 			HStack {
-
-				Spacer()
 				actionButton(title: "Map",
 							 action: viewModel.openMap)
-				actionButton(title: "Status",
+				actionButton(title: "Stat",
 							 action: viewModel.openStatus)
-				actionButton(title: "Equipment",
+				actionButton(title: "Gear",
 							 action: viewModel.openEquipment)
-				actionButton(title: "Talants",
+				actionButton(title: "Tals",
 							 action: viewModel.openTalants)
 			}
 		}
