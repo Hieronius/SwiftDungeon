@@ -7,7 +7,7 @@ struct SwiftDungeonApp: App {
 		
         WindowGroup {
 
-			let gameState = GameState()
+			let gameState = RoomGameState()
 			let combatManager = CombatManager()
 			let characterManager = CharacterManager()
 			let effectManager = EffectManager()

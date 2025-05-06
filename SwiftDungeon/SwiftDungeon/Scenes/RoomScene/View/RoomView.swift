@@ -521,7 +521,7 @@ struct BorderedSection<Content: View>: View {
 
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
-		let gameState = GameState()
+		let gameState = RoomGameState()
 		let combatManager = CombatManager()
 		let characterManager = CharacterManager()
 		let effectManager = EffectManager()

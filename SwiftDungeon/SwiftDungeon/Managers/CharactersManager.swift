@@ -263,6 +263,7 @@ class CharacterManager {
 
 
 	func setupHero() -> Character {
+		
 		return Character(name: "Hieronius",
 						 stats: Stats(),
 						  maxHealth: 100,

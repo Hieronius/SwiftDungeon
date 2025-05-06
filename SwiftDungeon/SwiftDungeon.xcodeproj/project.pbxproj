@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DDA59C492DC07582007877A6 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA59C482DC07582007877A6 /* GameState.swift */; };
+		DDA59C492DC07582007877A6 /* RoomGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA59C482DC07582007877A6 /* RoomGameState.swift */; };
 		DDA940612DBF4FC600837F9F /* SwiftDungeonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */; };
 		DDA940632DBF4FC600837F9F /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940622DBF4FC600837F9F /* RoomView.swift */; };
 		DDA940652DBF4FCD00837F9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDA940642DBF4FCD00837F9F /* Assets.xcassets */; };
@@ -33,7 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DDA59C482DC07582007877A6 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		DDA59C482DC07582007877A6 /* RoomGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGameState.swift; sourceTree = "<group>"; };
 		DDA9405D2DBF4FC600837F9F /* SwiftDungeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDungeon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDungeonApp.swift; sourceTree = "<group>"; };
 		DDA940622DBF4FC600837F9F /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 			children = (
 				DDA9407B2DBF538700837F9F /* CombatManager.swift */,
 				DDA9407D2DBF53E000837F9F /* CharactersManager.swift */,
-				DDA59C482DC07582007877A6 /* GameState.swift */,
+				DDA59C482DC07582007877A6 /* RoomGameState.swift */,
 				DDAB3E512DC7362A00DBA1C8 /* EffectManager.swift */,
 				DDAA56E22DC88279006E663D /* SceneUIStateManager.swift */,
 			);
@@ -159,8 +159,8 @@
 		DDAA040A2DC46E3400C801B4 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				DDAC13302DC9B24000E42D65 /* Protocols */,
 				DDAF16452DC5C67100D4109C /* GameConfig.swift */,
-				DDA940742DBF51C800837F9F /* Creature.swift */,
 				DDA940762DBF522300837F9F /* Character.swift */,
 				DDC129F22DC26AF6006CBC41 /* Effect.swift */,
 				DDC129F42DC27EE6006CBC41 /* Stats.swift */,
@@ -234,6 +234,14 @@
 				DDAB3E4E2DC72B6800DBA1C8 /* Bugs */,
 			);
 			path = Documentation;
+			sourceTree = "<group>";
+		};
+		DDAC13302DC9B24000E42D65 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				DDA940742DBF51C800837F9F /* Creature.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,7 +329,7 @@
 				DDAA040E2DC46F4400C801B4 /* RoomState.swift in Sources */,
 				DDA940732DBF519200837F9F /* RoomViewModel.swift in Sources */,
 				DDA9407E2DBF53E000837F9F /* CharactersManager.swift in Sources */,
-				DDA59C492DC07582007877A6 /* GameState.swift in Sources */,
+				DDA59C492DC07582007877A6 /* RoomGameState.swift in Sources */,
 				DDAA04142DC46F8100C801B4 /* EnemyState.swift in Sources */,
 				DDAA56E32DC88279006E663D /* SceneUIStateManager.swift in Sources */,
 				DDA940612DBF4FC600837F9F /* SwiftDungeonApp.swift in Sources */,

@@ -23,7 +23,7 @@ struct GameConfig {
 	// Ability Duration
 
 	static let blockDuration = 2
-	static let cutDuration = 3
+	static let bleedDuration = 3
 	static let buffDuration = 3
 	// 2 turns (Target -> Caster), not rounds
 	static let stunDuration = 2

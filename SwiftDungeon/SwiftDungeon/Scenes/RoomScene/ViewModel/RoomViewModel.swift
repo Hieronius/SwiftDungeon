@@ -6,7 +6,7 @@ class RoomViewModel: ObservableObject {
 
 	// call in view - viewModel.sceneManager.open(.skills/spells)
 	let sceneUIStateManager: SceneUIStateManager
-	private let gameState: GameState
+	private let roomGameState: RoomGameState
 	private let combatManager: CombatManager
 	private let characterManager: CharacterManager
 	private let effectManager: EffectManager
@@ -20,13 +20,13 @@ class RoomViewModel: ObservableObject {
 
 	// MARK: - Initialization
 
-	init(gameState: GameState,
+	init(gameState: RoomGameState,
 		 combatManager: CombatManager,
 		 characterManager: CharacterManager,
 		 effectManager: EffectManager,
 		 sceneUIStateManager: SceneUIStateManager) {
 
-		self.gameState = gameState
+		self.roomGameState = gameState
 		self.combatManager = combatManager
 		self.characterManager = characterManager
 		self.effectManager = effectManager
@@ -74,7 +74,7 @@ extension RoomViewModel {
 		syncGameState()
 		checkWinLoseCondition()
 
-		if gameState.isHeroTurn {
+		if roomGameState.isHeroTurn {
 				// Wait for player input
 				print("Waiting for player move...")
 			} else {
@@ -87,15 +87,15 @@ extension RoomViewModel {
 		// Save/Load function can be implemented here
 
 		roomState = RoomState(
-			currentRoom: gameState.currentRoom,
-			currentRound: gameState.currentRound,
-			isHeroTurn: gameState.isHeroTurn,
+			currentRoom: roomGameState.currentRoom,
+			currentRound: roomGameState.currentRound,
+			isHeroTurn: roomGameState.isHeroTurn,
 			heroWasHit: roomState.heroWasHit,
 			enemyWasHit: roomState.enemyWasHit
 		)
 
-		guard let hero = gameState.hero else { return }
-		guard let enemy = gameState.enemy else { return }
+		guard let hero = roomGameState.hero else { return }
+		guard let enemy = roomGameState.enemy else { return }
 
 		heroState = HeroState(
 			heroCurrentLevel: hero.stats.level,
@@ -132,11 +132,11 @@ extension RoomViewModel {
 extension RoomViewModel {
 
 	func pauseGame() {
-		gameState.isGameOn = false
+		roomGameState.isGameOn = false
 	}
 
 	func resumeGame() {
-		gameState.isGameOn = true
+		roomGameState.isGameOn = true
 	}
 }
 
@@ -146,27 +146,27 @@ extension RoomViewModel {
 
 	func startFight() {
 
-		gameState.isGameOn = true
-		gameState.isHeroTurn = true
-		gameState.isHeroWon = false
-		gameState.isGameOver = false
-		gameState.currentRound = 1
-		gameState.hero = characterManager.setupHero()
-		gameState.enemyIndex = 0
-		let position = gameState.enemyIndex
-		gameState.enemy = characterManager.spawnEnemy(at: position)
+		roomGameState.isGameOn = true
+		roomGameState.isHeroTurn = true
+		roomGameState.isHeroWon = false
+		roomGameState.isGameOver = false
+		roomGameState.currentRound = 1
+		roomGameState.hero = characterManager.setupHero()
+		roomGameState.enemyIndex = 0
+		let position = roomGameState.enemyIndex
+		roomGameState.enemy = characterManager.spawnEnemy(at: position)
 
 		syncGameState()
 	}
 
 	func endTurn() {
 
-		guard gameState.isGameOn else { return }
+		guard roomGameState.isGameOn else { return }
 
-		if !gameState.isHeroTurn {
+		if !roomGameState.isHeroTurn {
 
-			gameState.currentRound += 1
-			guard let hero = gameState.hero else { return }
+			roomGameState.currentRound += 1
+			guard let hero = roomGameState.hero else { return }
 			hero.currentEnergy = hero.maxEnergy
 
 			effectManager.processEffectsAtTurnStart(hero)
@@ -175,7 +175,7 @@ extension RoomViewModel {
 
 				DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 
-					self.gameState.isHeroTurn.toggle()
+					self.roomGameState.isHeroTurn.toggle()
 					self.checkWinLoseCondition()
 
 					self.syncGameState()
@@ -184,15 +184,15 @@ extension RoomViewModel {
 
 			} else {
 
-				gameState.isHeroTurn.toggle()
+				roomGameState.isHeroTurn.toggle()
 				checkWinLoseCondition()
 
 				syncGameState()
 			}
 
-		} else if gameState.isHeroTurn {
+		} else if roomGameState.isHeroTurn {
 
-			guard let enemy = gameState.enemy else { return }
+			guard let enemy = roomGameState.enemy else { return }
 			enemy.currentEnergy = enemy.maxEnergy
 
 			effectManager.processEffectsAtTurnStart(enemy)
@@ -200,7 +200,7 @@ extension RoomViewModel {
 			if enemy.isStunned {
 
 				DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-					self.gameState.isHeroTurn.toggle()
+					self.roomGameState.isHeroTurn.toggle()
 					self.checkWinLoseCondition()
 
 					self.syncGameState()
@@ -209,7 +209,7 @@ extension RoomViewModel {
 
 			} else {
 
-				gameState.isHeroTurn.toggle()
+				roomGameState.isHeroTurn.toggle()
 				checkWinLoseCondition()
 
 				syncGameState()
@@ -220,24 +220,24 @@ extension RoomViewModel {
 
 	func checkWinLoseCondition() {
 
-		guard let hero = gameState.hero else { return }
-		guard let enemy = gameState.enemy else { return }
+		guard let hero = roomGameState.hero else { return }
+		guard let enemy = roomGameState.enemy else { return }
 
-		if gameState.currentRoom > GameConfig.dungeonLength {
-			gameState.isGameCompleted = true
-			gameState.isGameOn = false
+		if roomGameState.currentRoom > GameConfig.dungeonLength {
+			roomGameState.isGameCompleted = true
+			roomGameState.isGameOn = false
 			return
 		}
 
 		if hero.currentHealth < 1 {
-			gameState.isGameOn = false
-			gameState.isGameOver = true
+			roomGameState.isGameOn = false
+			roomGameState.isGameOver = true
 			startFight()
 
 		} else if enemy.currentHealth < 1 {
 
-			gameState.isGameOn = false
-			gameState.isHeroWon = true
+			roomGameState.isGameOn = false
+			roomGameState.isHeroWon = true
 			let experience = roomState.currentRoom * GameConfig.expPerRoom
 			if (heroState.heroCurrentExperience + experience) >= hero.stats.maxExperience {
 				heroLevelUP()
@@ -252,16 +252,16 @@ extension RoomViewModel {
 
 	func enterNewRoom() {
 
-		gameState.currentRoom += 1
-		gameState.isGameOn = true
-		gameState.isHeroTurn = true
-		gameState.isHeroWon = false
-		gameState.isGameOver = false
-		gameState.currentRound = 1
+		roomGameState.currentRoom += 1
+		roomGameState.isGameOn = true
+		roomGameState.isHeroTurn = true
+		roomGameState.isHeroWon = false
+		roomGameState.isGameOver = false
+		roomGameState.currentRound = 1
 		restoreCharacter(isHeroTurn: true)
-		gameState.enemyIndex += 1
-		let position = gameState.enemyIndex
-		gameState.enemy = characterManager.spawnEnemy(at: position)
+		roomGameState.enemyIndex += 1
+		let position = roomGameState.enemyIndex
+		roomGameState.enemy = characterManager.spawnEnemy(at: position)
 
 		syncGameState()
 	}
@@ -273,7 +273,7 @@ extension RoomViewModel {
 
 	func heroLevelUP() {
 		
-		guard let hero = gameState.hero else { return }
+		guard let hero = roomGameState.hero else { return }
 
 		hero.stats.level += 1
 		hero.stats.maxExperience += 100
@@ -293,7 +293,7 @@ extension RoomViewModel {
 
 	func restoreCharacter(isHeroTurn: Bool) {
 
-		let target = isHeroTurn ? gameState.hero : gameState.enemy
+		let target = isHeroTurn ? roomGameState.hero : roomGameState.enemy
 		guard let target else { return }
 		target.currentHealth = target.maxHealth
 		target.currentMana = target.maxMana
@@ -309,11 +309,11 @@ extension RoomViewModel {
 
 	func attack() {
 
-		guard gameState.isGameOn else { return }
-		guard let hero = gameState.hero else { return }
-		guard let enemy = gameState.enemy else { return }
+		guard roomGameState.isGameOn else { return }
+		guard let hero = roomGameState.hero else { return }
+		guard let enemy = roomGameState.enemy else { return }
 
-		if gameState.isHeroTurn {
+		if roomGameState.isHeroTurn {
 
 			guard hero.currentEnergy >= GameConfig.attackEnergyCost else { return }
 			let result = combatManager.attack(hero, enemy)
@@ -339,13 +339,13 @@ extension RoomViewModel {
 
 	func block() {
 
-		guard gameState.isGameOn else { return }
+		guard roomGameState.isGameOn else { return }
 
-		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
+		let target = roomGameState.isHeroTurn ? roomGameState.hero : roomGameState.enemy
 		guard let target else { return }
 		guard target.currentEnergy >= GameConfig.blockEnergyCost else { return }
 
-		let isHero = gameState.isHeroTurn
+		let isHero = roomGameState.isHeroTurn
 		triggerEffect(forHero: isHero, color: .blue)
 
 		let blockValue = combatManager.block(target)
@@ -359,15 +359,15 @@ extension RoomViewModel {
 
 	func heal() {
 
-		guard gameState.isGameOn else { return }
+		guard roomGameState.isGameOn else { return }
 
-		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
+		let target = roomGameState.isHeroTurn ? roomGameState.hero : roomGameState.enemy
 		guard let target else { return }
 		guard target.currentEnergy >= GameConfig.spellEnergyCost,
 			  target.currentMana >= GameConfig.healManaCost else {
 			return
 		}
-		let isHero = gameState.isHeroTurn
+		let isHero = roomGameState.isHeroTurn
 		triggerEffect(forHero: isHero, color: .green)
 
 		let result = combatManager.heal(target)
@@ -380,9 +380,9 @@ extension RoomViewModel {
 
 	func buffAD() {
 
-		guard gameState.isGameOn else { return }
+		guard roomGameState.isGameOn else { return }
 
-		let target = gameState.isHeroTurn ? gameState.hero : gameState.enemy
+		let target = roomGameState.isHeroTurn ? roomGameState.hero : roomGameState.enemy
 		guard let target else { return }
 		guard target.currentEnergy >= GameConfig.spellEnergyCost,
 			  target.currentMana >= GameConfig.buffManaCost else {
@@ -390,7 +390,7 @@ extension RoomViewModel {
 
 		}
 
-		let isHero = gameState.isHeroTurn
+		let isHero = roomGameState.isHeroTurn
 		triggerEffect(forHero: isHero, color: .yellow)
 
 		let result = combatManager.attackUP(target)
@@ -405,11 +405,11 @@ extension RoomViewModel {
 
 	func cut() {
 
-		guard gameState.isGameOn else { return }
-		guard let hero = gameState.hero else { return }
-		guard let enemy = gameState.enemy else { return }
+		guard roomGameState.isGameOn else { return }
+		guard let hero = roomGameState.hero else { return }
+		guard let enemy = roomGameState.enemy else { return }
 
-		if gameState.isHeroTurn {
+		if roomGameState.isHeroTurn {
 
 			guard hero.currentEnergy >= GameConfig.cutEnergyCost else { return }
 			hero.currentEnergy -= GameConfig.cutEnergyCost
@@ -452,11 +452,11 @@ extension RoomViewModel {
 
 	func stun() {
 
-		guard gameState.isGameOn else { return }
-		guard let hero = gameState.hero else { return }
-		guard let enemy = gameState.enemy else { return }
+		guard roomGameState.isGameOn else { return }
+		guard let hero = roomGameState.hero else { return }
+		guard let enemy = roomGameState.enemy else { return }
 
-		if gameState.isHeroTurn {
+		if roomGameState.isHeroTurn {
 
 			guard hero.currentEnergy >= GameConfig.stunEnergyCost else { return }
 			hero.currentEnergy = max(hero.currentEnergy - GameConfig.stunEnergyCost, 0)
@@ -490,12 +490,12 @@ extension RoomViewModel {
 		if forHero {
 			sceneState.heroEffectColor = color
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-				if self.gameState.isHeroTurn { self.sceneState.heroEffectColor = nil }
+				if self.roomGameState.isHeroTurn { self.sceneState.heroEffectColor = nil }
 			}
 		} else {
 			sceneState.enemyEffectColor = color
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-				if !self.gameState.isHeroTurn { self.sceneState.enemyEffectColor = nil }
+				if !self.roomGameState.isHeroTurn { self.sceneState.enemyEffectColor = nil }
 			}
 		}
 	}
@@ -517,7 +517,7 @@ extension RoomViewModel {
 
 	private func passActionVisualResult(_ color: Color, _ label: Int) {
 
-		if gameState.isHeroTurn {
+		if roomGameState.isHeroTurn {
 			enemyState.enemyActionColor = color
 			enemyState.enemyActionLabel = label
 		} else {
