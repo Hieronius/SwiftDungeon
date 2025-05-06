@@ -1,23 +1,23 @@
 import SwiftUI
 
 struct RoomView: View {
-
+	
 	// MARK: - State Properties
-
+	
 	@StateObject private var viewModel: RoomViewModel
 	@State private var isEnemyUI = true
-
+	
 	// MARK: - Initialization
-
+	
 	init(viewModel: RoomViewModel) {
 		_viewModel = StateObject(wrappedValue: viewModel)
 	}
-
+	
 	// MARK: - Main Structure of the RoomScene
-
+	
 	var body: some View {
 		ZStack {
-
+			
 			// Make screen tappable to implement different functions
 			Color.black
 				.edgesIgnoringSafeArea(.all)
@@ -25,34 +25,44 @@ struct RoomView: View {
 				.onTapGesture(count: 3) {
 					viewModel.restoreCharacter(isHeroTurn: viewModel.roomUIState.isHeroTurn)
 				}
-
+			
 			VStack {
+
 				BorderedSection {
 					gameInfoSection()
 				}
+				.opacity(0.8)
+
 				BorderedSection {
 					characterStatsSection()
 				}
-					battleFieldSection()
+
+				battleFieldSection()
+
 				BorderedSection {
-					// another actionButtons
+					menuButtons()
 				}
-					actionButtons()
+				.opacity(0.8)
+				.scaleEffect(0.8)
+
+				actionButtons()
+
 				actionButton(title: "End Turn",
 							 action: viewModel.endTurn)
 				.bold(true)
+				.scaleEffect(1.2)
 			}
-
+			
 		}
-
+		
 		// MARK: ENTRY POINT TO THE GAME
 		.onAppear {
 			viewModel.startFight()
 		}
 	}
-
+	
 	// MARK: - Info Layer (Room & Round)
-
+	
 	@ViewBuilder
 	private func gameInfoSection() -> some View {
 		HStack {
@@ -64,24 +74,24 @@ struct RoomView: View {
 		}
 		
 	}
-
+	
 	private func infoText(label: String, value: Int) -> some View {
 		HStack {
 			Text(label)
-				.font(.title2)
+				.font(.title3)
 				.foregroundColor(.white)
 			Text("\(value)")
-				.font(.title2)
+				.font(.title3)
 				.foregroundColor(.white)
 		}
 	}
-
+	
 	// MARK: - Character Stats Layer
-
+	
 	@ViewBuilder
 	private func characterStatsSection() -> some View {
 		HStack {
-
+			
 			// Hero
 			characterStats(name: "Hero",
 						   level: "\(viewModel.heroUIState.heroCurrentLevel)",
@@ -97,7 +107,7 @@ struct RoomView: View {
 						   maxEnergy: viewModel.heroUIState.heroMaxEnergy,
 						   effects: viewModel.heroUIState.heroActiveEffects)
 			Spacer()
-
+			
 			// Enemy
 			characterStats(name: "Enemy",
 						   level: "\(viewModel.enemyUIState.enemyCurrentLevel)",
@@ -112,7 +122,7 @@ struct RoomView: View {
 						   effects: viewModel.enemyUIState.enemyActiveEffects)
 		}
 	}
-
+	
 	private func characterStats(name: String,
 								level: String,
 								currentExperience: CGFloat,
@@ -128,15 +138,15 @@ struct RoomView: View {
 			HStack {
 				ZStack {
 					Rectangle()
-						.frame(width: 30, height: 30)
+						.frame(width: 25, height: 25)
 						.foregroundColor(.gray)
 					Text(level)
 						.font(.title2)
 						.foregroundColor(.white)
 				}
-				.cornerRadius(10)
+				.cornerRadius(20)
 				Text(name)
-					.font(.title)
+					.font(.title2)
 					.bold(true)
 					.foregroundColor(.white)
 			}
@@ -151,9 +161,9 @@ struct RoomView: View {
 			EffectBar(effects: effects)
 		}
 	}
-
+	
 	// MARK: - Battle Field Layer
-
+	
 	@ViewBuilder
 	private func battleFieldSection() -> some View {
 		HStack {
@@ -182,26 +192,41 @@ struct RoomView: View {
 			Spacer()
 		}
 	}
-
+	
 	// MARK: - Menu Buttons Layer
-
+	
 	@ViewBuilder
 	private func menuButtons() -> some View {
 
-		HStack {
+		VStack {
 
-			Spacer()
-			actionButton(title: "Skills",
-						 action: viewModel.attack)
-			actionButton(title: "Heal",
-						 action: viewModel.heal)
-			actionButton(title: "Bleed",
-						 action: viewModel.cut)
-			actionButton(title: "EnDOWN",
-						 action: viewModel.exhaustion)
-			Spacer()
+			HStack {
+
+				Spacer()
+				actionButton(title: "Skills",
+							 action: viewModel.openSkills)
+				actionButton(title: "Spells",
+							 action: viewModel.openSpells)
+				actionButton(title: "Inventory",
+							 action: viewModel.openInventory)
+				actionButton(title: "Log",
+							 action: viewModel.openLog)
+				Spacer()
+			}
+
+			HStack {
+
+				Spacer()
+				actionButton(title: "Map",
+							 action: viewModel.openMap)
+				actionButton(title: "Status",
+							 action: viewModel.openStatus)
+				actionButton(title: "Equipment",
+							 action: viewModel.openEquipment)
+				actionButton(title: "Talants",
+							 action: viewModel.openTalants)
+			}
 		}
-
 	}
 
 	// MARK: - Action Buttons Layer
@@ -274,11 +299,11 @@ struct ExperienceBar: View {
 	var body: some View {
 		ZStack(alignment: .leading) {
 			Rectangle()
-				.frame(width: 100, height: 20)
+				.frame(width: 75, height: 15)
 				.foregroundColor(.gray) // Background bar
 
 			Rectangle()
-				.frame(width: experiencePercentage, height: 20) // Adjust width dynamically
+				.frame(width: experiencePercentage, height: 15) // Adjust width dynamically
 				.foregroundColor(.orange) // Health bar
 		}
 		.cornerRadius(5)
@@ -295,17 +320,17 @@ struct HealthBar: View {
 
 	private var healthPercentage: CGFloat {
 		guard maxHealth > 0 else { return 0 }
-		return (currentHealth / maxHealth) * 100
+		return (currentHealth / maxHealth) * 75
 	}
 
 	var body: some View {
 		ZStack(alignment: .leading) {
 			Rectangle()
-				.frame(width: 100, height: 20)
+				.frame(width: 75, height: 15)
 				.foregroundColor(.gray) // Background bar
 
 			Rectangle()
-				.frame(width: healthPercentage, height: 20) // Adjust width dynamically
+				.frame(width: healthPercentage, height: 15) // Adjust width dynamically
 				.foregroundColor(.red) // Health bar
 		}
 		.cornerRadius(5)
@@ -321,17 +346,17 @@ struct ManaBar: View {
 
 	private var manaPercentage: CGFloat {
 		guard maxMana > 0 else { return 0 }
-		return (currentMana / maxMana) * 100
+		return (currentMana / maxMana) * 75
 	}
 
 	var body: some View {
 		ZStack(alignment: .leading) {
 			Rectangle()
-				.frame(width: 100, height: 20)
+				.frame(width: 75, height: 15)
 				.foregroundColor(.gray) // Background bar
 
 			Rectangle()
-				.frame(width: manaPercentage, height: 20) // Adjust width dynamically
+				.frame(width: manaPercentage, height: 15) // Adjust width dynamically
 				.foregroundColor(.blue) // Mana bar
 		}
 		.cornerRadius(5)
@@ -348,7 +373,7 @@ struct EnergyBar: View {
 		HStack {
 			ForEach(0..<maxEnergy, id: \.self) { index in
 				Rectangle()
-					.frame(width: 15, height: 20)
+					.frame(width: 10, height: 15)
 					.foregroundColor(index < currentEnergy ? .yellow : .gray) // Filled or empty
 			}
 		}
@@ -370,23 +395,23 @@ struct EffectBar: View {
 			// Buff slot
 			Image(systemName: "arrow.up")
 				.foregroundColor(.cyan)
-				.font(.system(size: 20))
+				.font(.system(size: 15))
 				.opacity(hasBuff ? 1 : 0)            // always present, just invisible
-				.frame(width: 20, height: 20)        // reserve exact size
+				.frame(width: 15, height: 15)        // reserve exact size
 
 			// Debuff slot
 			Image(systemName: "arrow.down")
 				.foregroundColor(.red)
-				.font(.system(size: 20))
+				.font(.system(size: 15))
 				.opacity(hasDebuff ? 1 : 0)          // always present
-				.frame(width: 20, height: 20)        // reserve exact size
+				.frame(width: 15, height: 15)        // reserve exact size
 
 			// Stun slot
 			Image(systemName: "zzz")
 				.foregroundColor(.purple)
-				.font(.system(size: 20))
+				.font(.system(size: 15))
 				.opacity(isStunned ? 1 : 0)
-				.frame(width: 20, height: 20)
+				.frame(width: 15, height: 15)
 		}
 	}
 }

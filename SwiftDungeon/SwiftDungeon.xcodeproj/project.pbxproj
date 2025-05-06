@@ -118,11 +118,12 @@
 		DDA9406F2DBF50E400837F9F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DDAA56E22DC88279006E663D /* SceneUIStateManager.swift */,
+				DDAA56E02DC881C2006E663D /* SceneUISection.swift */,
 				DDAA040D2DC46F4400C801B4 /* RoomUIState.swift */,
 				DDAA040F2DC46F5700C801B4 /* SceneUIState.swift */,
 				DDAA04112DC46F7900C801B4 /* HeroUIState.swift */,
 				DDAA04132DC46F8100C801B4 /* EnemyUIState.swift */,
-				DDAA56E02DC881C2006E663D /* SceneUISection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -151,7 +152,6 @@
 				DDA9407D2DBF53E000837F9F /* CharactersManager.swift */,
 				DDA59C482DC07582007877A6 /* RoomGameState.swift */,
 				DDAB3E512DC7362A00DBA1C8 /* EffectManager.swift */,
-				DDAA56E22DC88279006E663D /* SceneUIStateManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";

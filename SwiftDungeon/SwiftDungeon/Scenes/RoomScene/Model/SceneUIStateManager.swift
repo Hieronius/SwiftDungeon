@@ -1,7 +1,7 @@
 import SwiftUI
 
 final class SceneUIStateManager: ObservableObject {
-	@Published var activeSection: SceneUISection = .none
+	@Published var activeSection: SceneUISection = .skills
 
 	/// Choose section to open
 	func open(_ section: SceneUISection) {

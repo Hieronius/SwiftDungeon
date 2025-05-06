@@ -482,6 +482,43 @@ extension RoomViewModel {
 
 }
 
+// MARK: - Menu Scene State
+
+extension RoomViewModel {
+
+	func openSkills() {
+		sceneUIStateManager.open(.skills)
+	}
+
+	func openSpells() {
+		sceneUIStateManager.open(.spellbook)
+	}
+
+	func openLog() {
+		sceneUIStateManager.open(.log)
+	}
+
+	func openStatus() {
+		sceneUIStateManager.open(.status)
+	}
+
+	func openEquipment() {
+		sceneUIStateManager.open(.equipment)
+	}
+
+	func openTalants() {
+		sceneUIStateManager.open(.talants)
+	}
+
+	func openMap() {
+		sceneUIStateManager.open(.map)
+	}
+
+	func openInventory() {
+		sceneUIStateManager.open(.inventory)
+	}
+}
+
 // MARK: - Helpers
 
 extension RoomViewModel {
