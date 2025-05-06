@@ -165,10 +165,10 @@ private extension RoomView {
 			HStack {
 				ZStack {
 					Rectangle()
-						.frame(width: 25, height: 25)
+						.frame(width: 20, height: 20)
 						.foregroundColor(.gray)
 					Text(level)
-						.font(.title2)
+						.font(.title3)
 						.foregroundColor(.white)
 				}
 				.cornerRadius(20)
@@ -231,9 +231,9 @@ private extension RoomView {
 		VStack {
 			HStack {
 				
-				actionButton(title: "Skil",
+				actionButton(title: "Skill",
 							 action: viewModel.openSkills)
-				actionButton(title: "Spel",
+				actionButton(title: "Spell",
 							 action: viewModel.openSpells)
 				actionButton(title: "Inv",
 							 action: viewModel.openInventory)
@@ -249,7 +249,7 @@ private extension RoomView {
 							 action: viewModel.openStatus)
 				actionButton(title: "Gear",
 							 action: viewModel.openEquipment)
-				actionButton(title: "Tals",
+				actionButton(title: "Perc",
 							 action: viewModel.openTalants)
 			}
 		}
