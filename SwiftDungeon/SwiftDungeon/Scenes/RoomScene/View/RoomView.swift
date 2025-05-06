@@ -29,11 +29,6 @@ struct RoomView: View {
 			VStack {
 
 				BorderedSection {
-					gameInfoSection()
-				}
-				.opacity(0.8)
-
-				BorderedSection {
 					characterStatsSection()
 				}
 
@@ -69,12 +64,9 @@ private extension RoomView {
 	
 	@ViewBuilder
 	func gameInfoSection() -> some View {
-		HStack {
-			Spacer()
-			infoText(label: "Current Room:", value: viewModel.roomUIState.currentRoom)
-			Spacer()
-			infoText(label: "Current Round:", value: viewModel.roomUIState.currentRound)
-			Spacer()
+		VStack {
+			infoText(label: "Room:", value: viewModel.roomUIState.currentRoom)
+			infoText(label: "Round:", value: viewModel.roomUIState.currentRound)
 		}
 		
 	}
@@ -84,6 +76,7 @@ private extension RoomView {
 			Text(label)
 				.font(.title3)
 				.foregroundColor(.white)
+
 			Text("\(value)")
 				.font(.title3)
 				.foregroundColor(.white)
@@ -101,6 +94,7 @@ private extension RoomView {
 		HStack {
 			
 			// Hero
+			Spacer()
 			characterStats(name: "Hero",
 						   level: "\(viewModel.heroUIState.heroCurrentLevel)",
 						   currentExperience: CGFloat(viewModel.heroUIState.heroCurrentExperience),
@@ -115,6 +109,8 @@ private extension RoomView {
 						   maxEnergy: viewModel.heroUIState.heroMaxEnergy,
 						   effects: viewModel.heroUIState.heroActiveEffects)
 			Spacer()
+			gameInfoSection()
+			Spacer()
 			
 			// Enemy
 			characterStats(name: "Enemy",
@@ -128,6 +124,7 @@ private extension RoomView {
 						   currentEnergy: viewModel.enemyUIState.enemyCurrentEnergy,
 						   maxEnergy: viewModel.enemyUIState.enemyMaxEnergy,
 						   effects: viewModel.enemyUIState.enemyActiveEffects)
+			Spacer()
 		}
 	}
 	
@@ -184,7 +181,7 @@ private extension RoomView {
 				label:    "H",
 				effectLabel: "\(viewModel.heroUIState.heroActionLabel)",
 				isActive: viewModel.roomUIState.isHeroTurn,
-				activeColor: .white,
+				activeColor: .yellow,
 				effectColor: viewModel.sceneUIState.heroEffectColor,
 				didHit: viewModel.roomUIState.heroWasHit,
 				effectTextColor: viewModel.heroUIState.heroActionColor

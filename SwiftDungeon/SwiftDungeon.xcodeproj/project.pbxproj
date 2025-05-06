@@ -107,6 +107,7 @@
 		DDA9405F2DBF4FC600837F9F /* SwiftDungeon */ = {
 			isa = PBXGroup;
 			children = (
+				DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */,
 				DDAB3E502DC72B7800DBA1C8 /* Documentation */,
 				DDAA040A2DC46E3400C801B4 /* Domain */,
 				DDA940782DBF530700837F9F /* Managers */,
@@ -163,7 +164,6 @@
 		DDA940712DBF50FF00837F9F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */,
 				DDA940642DBF4FCD00837F9F /* Assets.xcassets */,
 			);
 			path = Helpers;
