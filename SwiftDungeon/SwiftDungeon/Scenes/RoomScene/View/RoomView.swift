@@ -32,14 +32,17 @@ struct RoomView: View {
 				BorderedSection {
 					characterStatsSection()
 				}
+				Spacer()
 
 				battleFieldSection()
 
+				Spacer()
 				BorderedSection {
 					menuButtons()
 				}
 				.opacity(0.8)
 				.scaleEffect(0.8)
+
 
 				sectionActionButtons()
 
@@ -79,8 +82,8 @@ private extension RoomView {
 		}
 	}
 }
-	
-	// MARK: - Info Layer (Room & Round)
+
+// MARK: - Info Layer (Room & Round)
 
 private extension RoomView {
 	
@@ -106,7 +109,7 @@ private extension RoomView {
 	}
 
 }
-	
+
 // MARK: - Character Stats Layer
 
 private extension RoomView {
@@ -151,16 +154,16 @@ private extension RoomView {
 	}
 	
 	func characterStats(name: String,
-								level: String,
-								currentExperience: CGFloat,
-								maxExperience: CGFloat,
-								currentHealth: CGFloat,
-								maxHealth: CGFloat,
-								maxMana: CGFloat,
-								currentMana: CGFloat,
-								currentEnergy: Int,
-								maxEnergy: Int,
-								effects: [Effect]) -> some View {
+						level: String,
+						currentExperience: CGFloat,
+						maxExperience: CGFloat,
+						currentHealth: CGFloat,
+						maxHealth: CGFloat,
+						maxMana: CGFloat,
+						currentMana: CGFloat,
+						currentEnergy: Int,
+						maxEnergy: Int,
+						effects: [Effect]) -> some View {
 		VStack {
 			HStack {
 				ZStack {
@@ -189,8 +192,8 @@ private extension RoomView {
 		}
 	}
 }
-	
-	// MARK: - Battle Field Layer
+
+// MARK: - Battle Field Layer
 
 private extension RoomView {
 	
@@ -230,7 +233,7 @@ private extension RoomView {
 
 		VStack {
 			HStack {
-				
+				Spacer()
 				actionButton(title: "Skill",
 							 action: viewModel.openSkills)
 				actionButton(title: "Spell",
@@ -239,10 +242,12 @@ private extension RoomView {
 							 action: viewModel.openInventory)
 				actionButton(title: "Log",
 							 action: viewModel.openLog)
+				Spacer()
 				
 			}
 			
 			HStack {
+				Spacer()
 				actionButton(title: "Map",
 							 action: viewModel.openMap)
 				actionButton(title: "Stat",
@@ -251,6 +256,7 @@ private extension RoomView {
 							 action: viewModel.openEquipment)
 				actionButton(title: "Perc",
 							 action: viewModel.openTalants)
+				Spacer()
 			}
 		}
 	}
@@ -260,69 +266,68 @@ private extension RoomView {
 	@ViewBuilder
 	func buildScreen(_ sceneUIState: SceneUISection) -> some View {
 
-		switch sceneUIState {
+			switch sceneUIState {
 
-		// Skill Set
+				// Skill Set
 
-		case .skills:
+			case .skills:
+				VStack {
 
-			VStack {
+					HStack {
+						Spacer()
+						actionButton(title: "Attack",
+									 action: viewModel.attack)
+						actionButton(title: "Stun",
+									 action: viewModel.stun)
+						actionButton(title: "Bleed",
+									 action: viewModel.cut)
+						Spacer()
+					}
 
-				HStack {
-					Spacer()
-					actionButton(title: "Attack",
-								 action: viewModel.attack)
-					actionButton(title: "Stun",
-								 action: viewModel.stun)
-					actionButton(title: "Bleed",
-								 action: viewModel.cut)
-					Spacer()
+					HStack {
+
+						Spacer()
+						actionButton(title: "Sunder",
+									 action: viewModel.sunderArmor)
+						actionButton(title: "Block",
+									 action: viewModel.block)
+						Spacer()
+					}
 				}
 
-				HStack {
+				// Spell Book
 
-					Spacer()
-					actionButton(title: "Sunder",
-								 action: viewModel.sunderArmor)
-					actionButton(title: "Block",
-								 action: viewModel.block)
-					Spacer()
+			case .spellbook:
+
+				VStack {
+
+					HStack {
+						Spacer()
+						actionButton(title: "HPReg",
+									 action: viewModel.healthRegen)
+						actionButton(title: "MPReg",
+									 action: viewModel.manaRegen)
+						actionButton(title: "Heal",
+									 action: viewModel.heal)
+						Spacer()
+					}
+					HStack {
+
+						Spacer()
+						actionButton(title: "EnDOWN",
+									 action: viewModel.exhaustion)
+						actionButton(title: "AtUP",
+									 action: viewModel.buffAD)
+						actionButton(title: "ArmUP",
+									 action: viewModel.buffArmor)
+						Spacer()
+					}
 				}
+
+			default:
+				infoText(label: "Unknown Screen", value: 911)
 			}
-
-		// Spell Book
-
-		case .spellbook:
-
-			VStack {
-
-				HStack {
-					Spacer()
-					actionButton(title: "HPReg",
-								 action: viewModel.healthRegen)
-					actionButton(title: "MPReg",
-								 action: viewModel.manaRegen)
-					actionButton(title: "Heal",
-								 action: viewModel.heal)
-					Spacer()
-				}
-				HStack {
-
-					Spacer()
-					actionButton(title: "EnDOWN",
-								 action: viewModel.exhaustion)
-					actionButton(title: "AtUP",
-								 action: viewModel.buffAD)
-					actionButton(title: "ArmUP",
-								 action: viewModel.buffArmor)
-					Spacer()
-				}
-			}
-
-		default:
-			infoText(label: "Unknown Screen", value: 911)
 		}
-	}
 
 
 	// MARK: Action Button View
@@ -332,6 +337,29 @@ private extension RoomView {
 			.buttonStyle(.bordered)
 			.font(.title2)
 			.foregroundColor(.white)
+	}
+}
+
+// MARK: Fixed sized container
+
+struct FixedSizeContainer<Content: View>: View {
+	let width: CGFloat
+	let height: CGFloat
+	let content: Content
+
+	init(width: CGFloat, height: CGFloat, @ViewBuilder content: () -> Content) {
+		self.width = width
+		self.height = height
+		self.content = content()
+	}
+
+	var body: some View {
+		content
+			.frame(width: width, height: height)
+			.overlay(
+				RoundedRectangle(cornerRadius: 8)
+					.stroke(Color.gray, lineWidth: 1)
+			)
 	}
 }
 
