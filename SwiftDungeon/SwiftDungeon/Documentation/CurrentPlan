@@ -26,6 +26,7 @@ Current Plan
 
 
 100. Add enemy AI
+101. Separate an entire game flow into RoomGameManager with all kinds of managers as injections and inject it to ViewModel
 
 
 Optional:
@@ -38,3 +39,15 @@ Optional:
 7. Create GameOverScreen
 8. Add cleanBuffs/Debuffs/AllEffects abilities
 9. Refactor RoomGameState class and RoomState struct from Managers and RoomModule
+10. Create TurnStateMachine Enum and TurnStateManager to manage turns:
+
+enum TurnState {
+    case playerTurn // activate buffs/debuffs let user attack
+    case enemyTurn // activate buffs/debuffs let enemy attack
+    case transitioning // add extra effects while transition
+}
+
+final class TurnStateMachine {
+    var state: TurnState = .playerTurn
+    func advanceTurn() { ... }
+}
