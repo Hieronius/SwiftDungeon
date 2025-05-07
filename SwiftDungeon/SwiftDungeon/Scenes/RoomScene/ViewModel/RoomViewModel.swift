@@ -7,7 +7,7 @@ class RoomViewModel: ObservableObject {
 	// call in view - viewModel.sceneManager.open(.skills/spells)
 	let sceneUIStateManager: SceneUIStateManager
 	private let roomGameState: RoomGameState
-	private let combatManager: CombatManager
+	private let combatManager: ActionCalculator
 	private let characterManager: CharacterManager
 	private let effectManager: EffectManager
 
@@ -21,7 +21,7 @@ class RoomViewModel: ObservableObject {
 	// MARK: - Initialization
 
 	init(gameState: RoomGameState,
-		 combatManager: CombatManager,
+		 combatManager: ActionCalculator,
 		 characterManager: CharacterManager,
 		 effectManager: EffectManager,
 		 sceneUIStateManager: SceneUIStateManager) {

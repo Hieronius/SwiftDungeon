@@ -5,7 +5,7 @@ class RoomBuilder {
 	static func build() -> RoomView {
 
 		let gameState = RoomGameState()
-		let combatManager = CombatManager()
+		let combatManager = ActionCalculator()
 		let characterManager = CharacterManager()
 		let effectManager = EffectManager()
 		let sceneUIStateManager = SceneUIStateManager()

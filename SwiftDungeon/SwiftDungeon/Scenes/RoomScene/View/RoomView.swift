@@ -368,7 +368,7 @@ struct FixedSizeContainer<Content: View>: View {
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
 		let gameState = RoomGameState()
-		let combatManager = CombatManager()
+		let combatManager = ActionCalculator()
 		let characterManager = CharacterManager()
 		let effectManager = EffectManager()
 		let sceneUIStateManager = SceneUIStateManager()

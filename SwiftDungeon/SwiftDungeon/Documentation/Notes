@@ -53,3 +53,5 @@ I still can add Attack/Neutral/Defence stances to the game
 Attack Stance -> + 10% of melee damage, no spells/def abilities allowed (can use charge)
 Defence Stance -> + 10% of defence, no spells, attack abilities allowed (can use stun)
 Neutral Stance -> almost all abilities and magic allowed no bonus damage/def
+
+in my game we use room based dungeon map via DArkest Dungeon. No models only some kind of event. At this room we got nothing/quest/chest/trap/enemy
