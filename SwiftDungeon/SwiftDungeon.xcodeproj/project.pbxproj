@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD2D74402DCB0D83005396F3 /* WorldStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D743F2DCB0D83005396F3 /* WorldStateMachine.swift */; };
 		DDA59C492DC07582007877A6 /* RoomGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA59C482DC07582007877A6 /* RoomGameState.swift */; };
 		DDA940612DBF4FC600837F9F /* SwiftDungeonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */; };
 		DDA940632DBF4FC600837F9F /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940622DBF4FC600837F9F /* RoomView.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD2D743F2DCB0D83005396F3 /* WorldStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldStateMachine.swift; sourceTree = "<group>"; };
 		DDA59C482DC07582007877A6 /* RoomGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGameState.swift; sourceTree = "<group>"; };
 		DDA9405D2DBF4FC600837F9F /* SwiftDungeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDungeon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDungeonApp.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				DDA940742DBF51C800837F9F /* Creature.swift */,
+				DD2D743F2DCB0D83005396F3 /* WorldStateMachine.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD2D74402DCB0D83005396F3 /* WorldStateMachine.swift in Sources */,
 				DDAA56E12DC881C2006E663D /* SceneUISection.swift in Sources */,
 				DDA9407C2DBF538700837F9F /* CombatManager.swift in Sources */,
 				DDAF16462DC5C67100D4109C /* GameConfig.swift in Sources */,

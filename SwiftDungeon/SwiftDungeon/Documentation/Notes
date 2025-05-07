@@ -42,3 +42,14 @@ class GameState {
 	var combatState: CombatState
 	// etc.
 }
+
+GameStates:
+- Menu
+- Global Map
+- Local Map
+- Combat
+
+I still can add Attack/Neutral/Defence stances to the game
+Attack Stance -> + 10% of melee damage, no spells/def abilities allowed (can use charge)
+Defence Stance -> + 10% of defence, no spells, attack abilities allowed (can use stun)
+Neutral Stance -> almost all abilities and magic allowed no bonus damage/def
