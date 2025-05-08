@@ -206,6 +206,14 @@ extension RoomGameManager {
 
 extension RoomGameManager {
 
+	// MARK: Mechanic Impact
+
+	func actionImpactAndTarget() -> (Bool, Int) {
+		let impact = roomGameState.actionImpact
+		let target = roomGameState.isHeroTurn
+		return (target, impact)
+	}
+
 	// MARK: Attack
 
 	func attack() {
@@ -220,6 +228,7 @@ extension RoomGameManager {
 			let result = actionCalculator.attack(hero, enemy)
 			enemy.currentHealth = max(enemy.currentHealth - result, 0)
 			hero.currentEnergy -= GameConfig.attackEnergyCost
+			roomGameState.actionImpact = result
 			//			passActionVisualResult(.red, result)
 			//			triggerHit(onHero: false)
 
@@ -229,6 +238,7 @@ extension RoomGameManager {
 			let result = actionCalculator.attack(enemy, hero)
 			hero.currentHealth = max(hero.currentHealth - result, 0)
 			enemy.currentEnergy -= GameConfig.attackEnergyCost
+			roomGameState.actionImpact = result
 			//			passActionVisualResult(.red, result)
 			//			triggerHit(onHero: true)
 
@@ -397,4 +407,24 @@ extension RoomGameManager {
 
 	}
 
+}
+
+// MARK: Trigger Hit
+
+extension RoomGameManager {
+
+	// helper to trigger a 1s “hit” animation on the target
+	private func triggerHit(onHero: Bool) {
+		if onHero {
+			roomGameState.heroWasHit = true
+			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+				self.roomGameState.heroWasHit = false
+			}
+		} else {
+			roomGameState.enemyWasHit = true
+			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+				self.roomGameState.enemyWasHit = false
+			}
+		}
+	}
 }

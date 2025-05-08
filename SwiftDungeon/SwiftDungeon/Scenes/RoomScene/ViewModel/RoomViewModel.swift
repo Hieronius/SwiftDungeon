@@ -82,6 +82,8 @@ extension RoomViewModel {
 	func attack() {
 		roomGameManager.attack()
 		syncGameUIState()
+		getVisualImpactFromAction()
+
 	}
 
 	func stun() {
@@ -143,12 +145,14 @@ extension RoomViewModel {
 
 		// Save/Load function can be implemented here
 
+		// MARK: USING ROOMSTATEMANAGER FROM VIEW MODEL IS NOT RIGHT
+
 		roomUIState = RoomUIState(
 			currentRoom: roomGameManager.roomGameState.currentRoom,
 			currentRound: roomGameManager.roomGameState.currentRound,
 			isHeroTurn: roomGameManager.roomGameState.isHeroTurn,
-			heroWasHit: roomUIState.heroWasHit, // put to game state if no animation
-			enemyWasHit: roomUIState.enemyWasHit // put to game state if no animation
+			heroWasHit: roomGameManager.roomGameState.heroWasHit, // put to game state if no animation
+			enemyWasHit: roomGameManager.roomGameState.enemyWasHit // put to game state if no animation
 		)
 
 		guard let hero = roomGameManager.roomGameState.hero else { return }
@@ -226,9 +230,20 @@ extension RoomViewModel {
 	}
 }
 
-// MARK: - Helpers
+// MARK: - Visuals
 
 extension RoomViewModel {
+
+	// MARK: GetVisualImpactFromAction
+
+	func getVisualImpactFromAction() {
+		let actionResult = roomGameManager.actionImpactAndTarget()
+		let target = actionResult.0
+		let impact = actionResult.1
+		passActionVisualResult(target, impact)
+	}
+
+	// MARK: TriggerEffect
 
 	private func triggerEffect(forHero: Bool, color: Color) {
 		if forHero {
@@ -244,24 +259,14 @@ extension RoomViewModel {
 		}
 	}
 
-	// helper to trigger a 1s “hit” animation on the target
-	private func triggerHit(onHero: Bool) {
-		if onHero {
-			roomUIState.heroWasHit = true
-			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-				self.roomUIState.heroWasHit = false
-			}
-		} else {
-			roomUIState.enemyWasHit = true
-			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-				self.roomUIState.enemyWasHit = false
-			}
-		}
-	}
+	// MARK: PassActionVisualResult
 
-	private func passActionVisualResult(_ color: Color, _ label: Int) {
+	private func passActionVisualResult(_ target: Bool,
+										_ label: Int) {
 
-		if roomGameManager.roomGameState.isHeroTurn {
+		let color: Color = .red
+
+		if target {
 			enemyUIState.enemyActionColor = color
 			enemyUIState.enemyActionLabel = label
 		} else {

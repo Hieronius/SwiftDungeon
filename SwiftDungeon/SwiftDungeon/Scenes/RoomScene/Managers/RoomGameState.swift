@@ -17,4 +17,10 @@ class RoomGameState {
 	var enemy: Character?
 	var isHeroWon = false
 	var isHeroTurn = true
+	var heroWasHit = false
+	var enemyWasHit = false
+
+	// Actions
+
+	var actionImpact = 0
 }
