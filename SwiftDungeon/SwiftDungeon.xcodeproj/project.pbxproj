@@ -216,8 +216,8 @@
 		DDAA040C2DC46EA600C801B4 /* RoomScene */ = {
 			isa = PBXGroup;
 			children = (
-				DDAC13442DC9F2D500E42D65 /* Managers */,
 				DDAC13312DC9E30700E42D65 /* RoomBuilder.swift */,
+				DDAC13442DC9F2D500E42D65 /* Managers */,
 				DDA9406F2DBF50E400837F9F /* Model */,
 				DDA940702DBF50E800837F9F /* ViewModel */,
 				DDA9406E2DBF50DE00837F9F /* View */,

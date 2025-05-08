@@ -366,18 +366,20 @@ struct FixedSizeContainer<Content: View>: View {
 // MARK: - ContentView Previews
 
 struct ContentView_Previews: PreviewProvider {
-	static var previews: some View {
-		let gameState = RoomGameState()
-		let combatManager = ActionCalculator()
-		let characterManager = CharacterManager()
-		let effectManager = EffectManager()
-		let sceneUIStateManager = SceneUIStateManager()
-		let viewModel = RoomViewModel(gameState: gameState,
-									  combatManager: combatManager,
-									  characterManager: characterManager,
-									  effectManager: effectManager,
-									  sceneUIStateManager: sceneUIStateManager)
 
-		RoomView(viewModel: viewModel)
+	static var previews: some View {
+//		let gameState = RoomGameState()
+//		let combatManager = ActionCalculator()
+//		let characterManager = CharacterManager()
+//		let effectManager = EffectManager()
+//		let sceneUIStateManager = SceneUIStateManager()
+//		let viewModel = RoomViewModel(gameState: gameState,
+//									  combatManager: combatManager,
+//									  characterManager: characterManager,
+//									  effectManager: effectManager,
+//									  sceneUIStateManager: sceneUIStateManager)
+//
+//		RoomView(viewModel: viewModel)
+		RoomBuilder.build()
 	}
 }

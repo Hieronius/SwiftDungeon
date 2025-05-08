@@ -55,3 +55,8 @@ Defence Stance -> + 10% of defence, no spells, attack abilities allowed (can use
 Neutral Stance -> almost all abilities and magic allowed no bonus damage/def
 
 in my game we use room based dungeon map via DArkest Dungeon. No models only some kind of event. At this room we got nothing/quest/chest/trap/enemy
+
+Top part of the RoomScreen can be changes in the same way as we can change a menu. If there is no enemy put the chest/quest/event here
+
+Add different types of room with different effects for both enemies and allies
+Example: Poisoned Swamp -> damages allies and give benefits to slymes
