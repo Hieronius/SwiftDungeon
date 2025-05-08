@@ -116,7 +116,6 @@
 				DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */,
 				DDAB3E502DC72B7800DBA1C8 /* Documentation */,
 				DDAA040A2DC46E3400C801B4 /* Domain */,
-				DDA940782DBF530700837F9F /* Managers */,
 				DDAA040B2DC46E4D00C801B4 /* Scenes */,
 				DDA940712DBF50FF00837F9F /* Helpers */,
 				DDA940662DBF4FCD00837F9F /* Preview Content */,
@@ -173,19 +172,6 @@
 				DDA940642DBF4FCD00837F9F /* Assets.xcassets */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		DDA940782DBF530700837F9F /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				DDA9407B2DBF538700837F9F /* ActionCalculator.swift */,
-				DDA9407D2DBF53E000837F9F /* CharactersManager.swift */,
-				DDA59C482DC07582007877A6 /* RoomGameState.swift */,
-				DDAB3E512DC7362A00DBA1C8 /* EffectManager.swift */,
-				DD2D74412DCB1C09005396F3 /* CombatManager.swift */,
-				DD2D74432DCB1C3A005396F3 /* TurnManager.swift */,
-			);
-			path = Managers;
 			sourceTree = "<group>";
 		};
 		DDAA040A2DC46E3400C801B4 /* Domain */ = {
@@ -283,6 +269,12 @@
 			isa = PBXGroup;
 			children = (
 				DDAC13422DC9F29600E42D65 /* RoomGameManager.swift */,
+				DDA59C482DC07582007877A6 /* RoomGameState.swift */,
+				DDAB3E512DC7362A00DBA1C8 /* EffectManager.swift */,
+				DDA9407B2DBF538700837F9F /* ActionCalculator.swift */,
+				DD2D74412DCB1C09005396F3 /* CombatManager.swift */,
+				DDA9407D2DBF53E000837F9F /* CharactersManager.swift */,
+				DD2D74432DCB1C3A005396F3 /* TurnManager.swift */,
 				DDAA56E22DC88279006E663D /* SceneUIStateManager.swift */,
 			);
 			path = Managers;

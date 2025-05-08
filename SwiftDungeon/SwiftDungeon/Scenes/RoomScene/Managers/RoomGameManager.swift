@@ -145,8 +145,6 @@ extension RoomGameManager {
 			}
 			enterNewRoom()
 		}
-
-		//		syncGameState()
 	}
 
 	// MARK: Enter New Room
@@ -159,12 +157,12 @@ extension RoomGameManager {
 		roomGameState.isHeroWon = false
 		roomGameState.isGameOver = false
 		roomGameState.currentRound = 1
-		restoreCharacter(isHeroTurn: true)
+		restoreCharacter(isHeroTurn: false)
+		print("enemy index before - \(roomGameState.enemyIndex)")
 		roomGameState.enemyIndex += 1
+		print("enemy indexc after - \(roomGameState.enemyIndex)")
 		let position = roomGameState.enemyIndex
 		roomGameState.enemy = characterManager.spawnEnemy(at: position)
-
-		checkWinLoseCondition()
 	}
 }
 
