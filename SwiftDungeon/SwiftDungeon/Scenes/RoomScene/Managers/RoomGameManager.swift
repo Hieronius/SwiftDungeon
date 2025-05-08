@@ -54,7 +54,8 @@ extension RoomGameManager {
 		let position = roomGameState.enemyIndex
 		roomGameState.enemy = characterManager.spawnEnemy(at: position)
 
-		//		syncGameState()
+		checkWinLoseCondition()
+
 	}
 
 	// MARK: EndTurn
@@ -78,7 +79,6 @@ extension RoomGameManager {
 					self.roomGameState.isHeroTurn.toggle()
 					self.checkWinLoseCondition()
 
-					//					self.syncGameState()
 					self.endTurn()
 				}
 
@@ -87,7 +87,6 @@ extension RoomGameManager {
 				roomGameState.isHeroTurn.toggle()
 				checkWinLoseCondition()
 
-				//				syncGameState()
 			}
 
 		} else if roomGameState.isHeroTurn {
@@ -103,7 +102,6 @@ extension RoomGameManager {
 					self.roomGameState.isHeroTurn.toggle()
 					self.checkWinLoseCondition()
 
-					//					self.syncGameState()
 					self.endTurn()
 				}
 
@@ -112,7 +110,6 @@ extension RoomGameManager {
 				roomGameState.isHeroTurn.toggle()
 				checkWinLoseCondition()
 
-				//				syncGameState()
 			}
 		}
 
@@ -167,7 +164,7 @@ extension RoomGameManager {
 		let position = roomGameState.enemyIndex
 		roomGameState.enemy = characterManager.spawnEnemy(at: position)
 
-		//		syncGameState()
+		checkWinLoseCondition()
 	}
 }
 
@@ -192,7 +189,7 @@ extension RoomGameManager {
 		hero.minDamage += 1
 		restoreCharacter(isHeroTurn: true)
 
-		//		syncGameState()
+		checkWinLoseCondition()
 	}
 
 	func restoreCharacter(isHeroTurn: Bool) {
@@ -203,7 +200,7 @@ extension RoomGameManager {
 		target.currentMana = target.maxMana
 		target.currentEnergy = target.maxEnergy
 
-		//		syncGameState()
+		checkWinLoseCondition()
 	}
 }
 
@@ -240,7 +237,6 @@ extension RoomGameManager {
 		}
 		checkWinLoseCondition()
 
-		//		syncGameState()
 	}
 
 	// MARK: Block
@@ -262,7 +258,7 @@ extension RoomGameManager {
 		effectManager.applyEffect(buff, target)
 		target.currentEnergy -= GameConfig.blockEnergyCost
 
-		//		syncGameState()
+		checkWinLoseCondition()
 	}
 
 	// MARK: Heal
@@ -285,7 +281,7 @@ extension RoomGameManager {
 		target.currentMana -= GameConfig.healManaCost
 		target.currentEnergy -= GameConfig.spellEnergyCost
 
-		//		syncGameState()
+		checkWinLoseCondition()
 	}
 
 	// MARK: BuffAD
@@ -312,7 +308,7 @@ extension RoomGameManager {
 		target.currentMana -= GameConfig.buffManaCost
 		target.currentEnergy -= GameConfig.spellEnergyCost
 
-		//		syncGameState()
+		checkWinLoseCondition()
 	}
 
 	// MARK: Cut
@@ -344,28 +340,32 @@ extension RoomGameManager {
 		}
 		checkWinLoseCondition()
 
-		//		syncGameState()
 
 	}
 
 	func exhaustion() {
 
+		checkWinLoseCondition()
 	}
 
 	func healthRegen() {
 
+		checkWinLoseCondition()
 	}
 
 	func manaRegen() {
 
+		checkWinLoseCondition()
 	}
 
 	func buffArmor() {
 
+		checkWinLoseCondition()
 	}
 
 	func sunderArmor() {
 
+		checkWinLoseCondition()
 	}
 
 	// MARK: Stun
@@ -397,7 +397,6 @@ extension RoomGameManager {
 		}
 		checkWinLoseCondition()
 
-		//		syncGameState()
 	}
 
 }
