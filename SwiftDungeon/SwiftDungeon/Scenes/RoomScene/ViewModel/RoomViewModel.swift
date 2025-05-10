@@ -79,6 +79,8 @@ extension RoomViewModel {
 //		roomGameManager.restoreCharacter(isHeroTurn: <#T##Bool#>)
 	}
 
+	// MARK: Attack
+
 	func attack() {
 		roomGameManager.attack()
 		getVisualImpactFromAction()
@@ -89,11 +91,15 @@ extension RoomViewModel {
 		}
 	}
 
+	// MARK: Stun
+
 	func stun() {
 		roomGameManager.stun()
 		getVisualImpactFromAction()
 		syncGameUIState()
 	}
+
+	// MARK: Cut
 
 	func cut() {
 		roomGameManager.cut()
@@ -101,43 +107,60 @@ extension RoomViewModel {
 		syncGameUIState()
 	}
 
+	// MARK: Heal
+
 	func heal() {
 		roomGameManager.heal()
-//		getVisualImpactFromAction() // isn't working on caster
-//		triggerEffect(forHero: true, color: .green)
+		triggerEffect(forHero: true, color: .green)
 		syncGameUIState()
 	}
+
+	// MARK: Sunder Armor
 
 	func sunderArmor() {
 		roomGameManager.sunderArmor()
 		syncGameUIState()
 	}
 
+	// MARK: Block
+
 	func block() {
 		roomGameManager.block()
-		triggerEffect(forHero: true, color: .blue)
+		let actionImpact = roomGameManager.actionImpactAndTarget()
+		let currentTurn = actionImpact.0
+		triggerEffect(forHero: currentTurn, color: .blue)
 		syncGameUIState()
 	}
+
+	// MARK: Health Regen
 
 	func healthRegen() {
 		roomGameManager.healthRegen()
 		syncGameUIState()
 	}
 
+	// MARK: Mana Regen
+
 	func manaRegen() {
 		roomGameManager.manaRegen()
 		syncGameUIState()
 	}
+
+	// MARK: Exhausion
 
 	func exhaustion() {
 		roomGameManager.exhaustion()
 		syncGameUIState()
 	}
 
+	// MARK: BuffAD
+
 	func buffAD() {
 		roomGameManager.buffAD()
 		syncGameUIState()
 	}
+
+	// MARK: BuffArmor
 
 	func buffArmor() {
 		roomGameManager.buffArmor()
@@ -265,7 +288,7 @@ extension RoomViewModel {
 			}
 
 		} else {
-			
+
 			sceneUIState.enemyEffectColor = color
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
 				if !self.roomGameManager.roomGameState.isHeroTurn { self.sceneUIState.enemyEffectColor = nil }

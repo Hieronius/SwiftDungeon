@@ -1,6 +1,7 @@
 Current Plan
 
 1. Refactor RoomViewModel to CombatManager
+	- Pass and Display visual result in ViewModel is misleading.
 	- Create ActionManager
 	- Implement TurnManager
 

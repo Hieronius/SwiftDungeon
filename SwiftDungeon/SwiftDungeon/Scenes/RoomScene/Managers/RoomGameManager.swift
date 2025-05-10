@@ -254,14 +254,12 @@ extension RoomGameManager {
 		guard let target else { return }
 		guard target.currentEnergy >= GameConfig.blockEnergyCost else { return }
 
-		//		let isHero = roomGameState.isHeroTurn
-		//		triggerEffect(forHero: isHero, color: .blue)
-
 		let blockValue = actionCalculator.block(target)
 		let buff = Effect(type: .armorUP(value: blockValue), duration: 3)
 
 		effectManager.applyEffect(buff, target)
 		target.currentEnergy -= GameConfig.blockEnergyCost
+		
 
 		checkWinLoseCondition()
 	}
