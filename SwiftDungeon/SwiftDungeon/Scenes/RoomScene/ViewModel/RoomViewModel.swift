@@ -86,6 +86,10 @@ extension RoomViewModel {
 		}
 	}
 
+	// MARK: - Skills
+
+
+
 	// MARK: Attack
 
 	func attack() {
@@ -113,18 +117,9 @@ extension RoomViewModel {
 		resetCharacterBeingHitAndSyncGameState()
 	}
 
-	// MARK: Heal
-
-	func heal() {
-		roomGameManager.heal()
-		triggerEffect(forHero: true, color: .green)
-		syncGameUIState()
-	}
-
 	// MARK: Sunder Armor
 
 	func sunderArmor() {
-		print(roomGameManager.roomGameState.hero?.currentArmor)
 		roomGameManager.sunderArmor()
 		syncGameUIState()
 		resetCharacterBeingHitAndSyncGameState()
@@ -137,6 +132,20 @@ extension RoomViewModel {
 		let actionImpact = roomGameManager.actionImpactAndTarget()
 		let currentTurn = actionImpact.0
 		triggerEffect(forHero: currentTurn, color: .blue)
+		syncGameUIState()
+	}
+
+	// MARK: - Spells
+
+
+
+	// MARK: Heal
+
+	func heal() {
+		roomGameManager.heal()
+		let actionImpact = roomGameManager.actionImpactAndTarget()
+		let currentTurn = actionImpact.0
+		triggerEffect(forHero: currentTurn, color: .green)
 		syncGameUIState()
 	}
 
@@ -165,13 +174,20 @@ extension RoomViewModel {
 
 	func buffAD() {
 		roomGameManager.buffAD()
+		let actionImpact = roomGameManager.actionImpactAndTarget()
+		let currentTurn = actionImpact.0
+		triggerEffect(forHero: currentTurn, color: .yellow)
 		syncGameUIState()
+
 	}
 
 	// MARK: BuffArmor
 
 	func buffArmor() {
 		roomGameManager.buffArmor()
+		let actionImpact = roomGameManager.actionImpactAndTarget()
+		let currentTurn = actionImpact.0
+		triggerEffect(forHero: currentTurn, color: .yellow)
 		syncGameUIState()
 	}
 }

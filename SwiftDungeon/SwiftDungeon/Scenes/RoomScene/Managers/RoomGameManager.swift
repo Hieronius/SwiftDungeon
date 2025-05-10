@@ -399,11 +399,32 @@ extension RoomGameManager {
 
 		}
 
-		//		let isHero = roomGameState.isHeroTurn
-		//		triggerEffect(forHero: isHero, color: .yellow)
-
 		let result = actionCalculator.attackUP(target)
 		let buff = Effect(type: .attackUP(value: result), duration: 3)
+		effectManager.applyEffect(buff, target)
+
+		target.currentMana -= GameConfig.buffManaCost
+		target.currentEnergy -= GameConfig.spellEnergyCost
+
+		checkWinLoseCondition()
+	}
+
+	// MARK: BuffAD
+
+	func buffArmor() {
+
+		guard roomGameState.isGameOn else { return }
+
+		let target = roomGameState.isHeroTurn ? roomGameState.hero : roomGameState.enemy
+		guard let target else { return }
+		guard target.currentEnergy >= GameConfig.spellEnergyCost,
+			  target.currentMana >= GameConfig.buffManaCost else {
+			return
+
+		}
+
+		let result = actionCalculator.armorUP(target)
+		let buff = Effect(type: .armorUP(value: result), duration: 3)
 		effectManager.applyEffect(buff, target)
 
 		target.currentMana -= GameConfig.buffManaCost
@@ -423,11 +444,6 @@ extension RoomGameManager {
 	}
 
 	func manaRegen() {
-
-		checkWinLoseCondition()
-	}
-
-	func buffArmor() {
 
 		checkWinLoseCondition()
 	}

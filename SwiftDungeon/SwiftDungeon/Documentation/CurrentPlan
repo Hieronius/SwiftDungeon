@@ -4,6 +4,7 @@ Current Plan
 	- Pass and Display visual result in ViewModel is misleading.
 	- Implement ActionState as part of RoomGameManager
 	- Add purple effect on target of bleed/stun/debuffs
+	- Squire should not animate if not enough resources for action
 	- Create ActionManager
 	- Implement TurnManager
 
