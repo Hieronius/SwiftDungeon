@@ -3,6 +3,7 @@ Current Plan
 1. Refactor RoomViewModel to CombatManager
 	- Pass and Display visual result in ViewModel is misleading.
 	- Implement ActionState as part of RoomGameManager
+	- Add purple effect on target of bleed/stun/debuffs
 	- Create ActionManager
 	- Implement TurnManager
 

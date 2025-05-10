@@ -329,7 +329,7 @@ extension RoomGameManager {
 			let result = actionCalculator.cut(hero, enemy)
 			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
 			effectManager.applyEffect(debuff, enemy)
-			//			triggerHit(onHero: false)
+			triggerHit(onHero: false)
 
 		} else {
 
@@ -338,11 +338,10 @@ extension RoomGameManager {
 			let result = actionCalculator.cut(enemy, hero)
 			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
 			effectManager.applyEffect(debuff, hero)
-			//			triggerHit(onHero: true)
+			triggerHit(onHero: true)
 
 		}
 		checkWinLoseCondition()
-
 
 	}
 

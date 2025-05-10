@@ -79,16 +79,20 @@ extension RoomViewModel {
 //		roomGameManager.restoreCharacter(isHeroTurn: <#T##Bool#>)
 	}
 
+	func resetCharacterBeingHitAndSyncGameState() {
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+			self.roomGameManager.resetCharacterBeingHit()
+			self.syncGameUIState()
+		}
+	}
+
 	// MARK: Attack
 
 	func attack() {
 		roomGameManager.attack()
 		getVisualImpactFromAction()
 		syncGameUIState()
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-			self.roomGameManager.resetCharacterBeingHit()
-			self.syncGameUIState()
-		}
+		resetCharacterBeingHitAndSyncGameState()
 	}
 
 	// MARK: Stun
@@ -97,10 +101,7 @@ extension RoomViewModel {
 		roomGameManager.stun()
 		getVisualImpactFromAction()
 		syncGameUIState()
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-			self.roomGameManager.resetCharacterBeingHit()
-			self.syncGameUIState()
-		}
+		resetCharacterBeingHitAndSyncGameState()
 	}
 
 	// MARK: Cut
@@ -109,6 +110,7 @@ extension RoomViewModel {
 		roomGameManager.cut()
 		getVisualImpactFromAction()
 		syncGameUIState()
+		resetCharacterBeingHitAndSyncGameState()
 	}
 
 	// MARK: Heal
