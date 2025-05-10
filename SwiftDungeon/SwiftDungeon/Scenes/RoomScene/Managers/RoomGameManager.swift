@@ -386,7 +386,7 @@ extension RoomGameManager {
 
 			let stunEffect = Effect(type: .stun, duration: GameConfig.stunDuration)
 			effectManager.applyEffect(stunEffect, enemy)
-			//			triggerHit(onHero: false)
+						triggerHit(onHero: false)
 
 		} else {
 
@@ -395,7 +395,7 @@ extension RoomGameManager {
 
 			let stunEffect = Effect(type: .stun, duration: GameConfig.stunDuration)
 			effectManager.applyEffect(stunEffect, hero)
-			//			triggerHit(onHero: true)
+						triggerHit(onHero: true)
 
 		}
 		checkWinLoseCondition()
