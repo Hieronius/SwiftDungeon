@@ -1,11 +1,13 @@
 Current Plan
 
 1. Refactor RoomViewModel to CombatManager
-	- Wrap all GameManager methods in ViewModel by calling it
+	- IF YOU USE ATTACK AND STUN IT'S TRIGGER ANIMATION
 	- Deal with visual effects after hits
+	(shaking animation stops after 1 swing. No cast animation like block)
 	- Create ActionManager
-	- sync ViewModel with GameManager
 	- Implement TurnManager
+
+1.5. Add methods like applyEffect/decreaseArmor/increaseHealth to Character class or Creature protocol itself to incapsulate handling of Character State instead of giving EffectManager an ability to change target state directly
 
 2. Add HP/Mana regen effects, debuffs, fireboll buttons
 

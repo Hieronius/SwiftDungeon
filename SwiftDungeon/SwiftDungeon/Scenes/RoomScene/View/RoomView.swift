@@ -208,6 +208,7 @@ private extension RoomView {
 				isActive: viewModel.roomUIState.isHeroTurn,
 				activeColor: .yellow,
 				effectColor: viewModel.sceneUIState.heroEffectColor,
+				// TODO: heroWasHit should be called from roomUIState
 				didHit: viewModel.roomUIState.heroWasHit,
 				effectTextColor: viewModel.heroUIState.heroActionColor
 			)
@@ -368,18 +369,6 @@ struct FixedSizeContainer<Content: View>: View {
 struct ContentView_Previews: PreviewProvider {
 
 	static var previews: some View {
-//		let gameState = RoomGameState()
-//		let combatManager = ActionCalculator()
-//		let characterManager = CharacterManager()
-//		let effectManager = EffectManager()
-//		let sceneUIStateManager = SceneUIStateManager()
-//		let viewModel = RoomViewModel(gameState: gameState,
-//									  combatManager: combatManager,
-//									  characterManager: characterManager,
-//									  effectManager: effectManager,
-//									  sceneUIStateManager: sceneUIStateManager)
-//
-//		RoomView(viewModel: viewModel)
 		RoomBuilder.build()
 	}
 }

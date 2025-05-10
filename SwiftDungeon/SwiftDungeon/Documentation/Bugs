@@ -1,2 +1,5 @@
+- heroWasHit or enemyWasHit won't update correctly via sencUIState method in ViewModel
+
 
 - Effects can be stacked together with different duration
+

@@ -81,23 +81,30 @@ extension RoomViewModel {
 
 	func attack() {
 		roomGameManager.attack()
-		syncGameUIState()
 		getVisualImpactFromAction()
-
+		syncGameUIState()
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+			self.roomGameManager.resetCharacterBeingHit()
+			self.syncGameUIState()
+		}
 	}
 
 	func stun() {
 		roomGameManager.stun()
+		getVisualImpactFromAction()
 		syncGameUIState()
 	}
 
 	func cut() {
 		roomGameManager.cut()
+		getVisualImpactFromAction()
 		syncGameUIState()
 	}
 
 	func heal() {
 		roomGameManager.heal()
+//		getVisualImpactFromAction() // isn't working on caster
+//		triggerEffect(forHero: true, color: .green)
 		syncGameUIState()
 	}
 
@@ -245,6 +252,7 @@ extension RoomViewModel {
 
 	// MARK: TriggerEffect
 
+	/// Method used to add animation of the heal/block/buff abilities on the caster
 	private func triggerEffect(forHero: Bool, color: Color) {
 		if forHero {
 			sceneUIState.heroEffectColor = color

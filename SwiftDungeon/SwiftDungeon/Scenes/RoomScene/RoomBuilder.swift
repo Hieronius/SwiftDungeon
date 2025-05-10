@@ -13,8 +13,8 @@ class RoomBuilder {
 
 		let roomGameManager = RoomGameManager(roomGameState: roomGameState,
 											  actionCalculator: actionCalculator,
-										characterManager: characterManager,
-										effectManager: effectManager,
+											  characterManager: characterManager,
+											  effectManager: effectManager,
 											  turnManager: turnManager)
 
 		let viewModel = RoomViewModel(roomGameManager: roomGameManager,

@@ -206,7 +206,7 @@ extension RoomGameManager {
 
 extension RoomGameManager {
 
-	// MARK: Mechanic Impact
+	// MARK: Impact Mechanic
 
 	func actionImpactAndTarget() -> (Bool, Int) {
 		let impact = roomGameState.actionImpact
@@ -230,7 +230,7 @@ extension RoomGameManager {
 			hero.currentEnergy -= GameConfig.attackEnergyCost
 			roomGameState.actionImpact = result
 			//			passActionVisualResult(.red, result)
-			//			triggerHit(onHero: false)
+			triggerHit(onHero: false)
 
 		} else {
 
@@ -240,8 +240,7 @@ extension RoomGameManager {
 			enemy.currentEnergy -= GameConfig.attackEnergyCost
 			roomGameState.actionImpact = result
 			//			passActionVisualResult(.red, result)
-			//			triggerHit(onHero: true)
-
+			triggerHit(onHero: true)
 		}
 		checkWinLoseCondition()
 
@@ -415,16 +414,20 @@ extension RoomGameManager {
 
 	// helper to trigger a 1s “hit” animation on the target
 	private func triggerHit(onHero: Bool) {
+
 		if onHero {
 			roomGameState.heroWasHit = true
-			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-				self.roomGameState.heroWasHit = false
-			}
+
 		} else {
 			roomGameState.enemyWasHit = true
-			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-				self.roomGameState.enemyWasHit = false
-			}
 		}
+	}
+
+	/// Method to reset isEnemy/isHeroWasHit to false to refresh shaking animation
+	/// Called from ViewModel to avoid decoupling
+	func resetCharacterBeingHit() {
+
+		roomGameState.enemyWasHit = false
+		roomGameState.heroWasHit = false
 	}
 }

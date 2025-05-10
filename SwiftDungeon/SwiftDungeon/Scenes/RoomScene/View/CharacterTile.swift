@@ -71,17 +71,18 @@ struct CharacterTileView: View {
 			}
 		}
 		.frame(width: 130, height: 130)
-		.onChange(of: effectColor) { newColor in
-			internalEffect = newColor
-		}
 		.onChange(of: didHit) { hit in
 			if hit {
 				animateHit()
 			}
 		}
+		.onChange(of: effectColor) { newColor in
+			internalEffect = newColor
+		}
+
 		.onChange(of: effectLabel) { _ in
 			showEffectLabel = true
-			DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 				showEffectLabel = false
 			}
 		}
@@ -100,6 +101,7 @@ struct CharacterTileView: View {
 		shaking = true
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
 			shaking = false
+			print(shaking)
 		}
 	}
 }

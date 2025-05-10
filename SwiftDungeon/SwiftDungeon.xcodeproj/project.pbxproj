@@ -135,12 +135,12 @@
 			isa = PBXGroup;
 			children = (
 				DDA940622DBF4FC600837F9F /* RoomView.swift */,
+				DDAC133E2DC9F18000E42D65 /* CharacterTile.swift */,
 				DDAC13342DC9F08800E42D65 /* ExperienceBar.swift */,
 				DDAC13362DC9F0CA00E42D65 /* HealthBar.swift */,
 				DDAC13382DC9F0F800E42D65 /* ManaBar.swift */,
 				DDAC133A2DC9F11B00E42D65 /* EnergyBar.swift */,
 				DDAC133C2DC9F15500E42D65 /* StatusBar.swift */,
-				DDAC133E2DC9F18000E42D65 /* CharacterTile.swift */,
 				DDAC13402DC9F1A300E42D65 /* BorderedView.swift */,
 			);
 			path = View;
