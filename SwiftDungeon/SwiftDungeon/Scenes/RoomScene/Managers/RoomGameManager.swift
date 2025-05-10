@@ -214,6 +214,10 @@ extension RoomGameManager {
 		return (target, impact)
 	}
 
+	// MARK: - Actions
+
+
+
 	// MARK: Attack
 
 	func attack() {
@@ -264,6 +268,102 @@ extension RoomGameManager {
 		checkWinLoseCondition()
 	}
 
+	// MARK: Cut
+
+	func cut() {
+
+		guard roomGameState.isGameOn else { return }
+		guard let hero = roomGameState.hero else { return }
+		guard let enemy = roomGameState.enemy else { return }
+
+		if roomGameState.isHeroTurn {
+
+			guard hero.currentEnergy >= GameConfig.cutEnergyCost else { return }
+			hero.currentEnergy -= GameConfig.cutEnergyCost
+			let result = actionCalculator.cut(hero, enemy)
+			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
+			effectManager.applyEffect(debuff, enemy)
+			triggerHit(onHero: false)
+
+		} else {
+
+			guard enemy.currentEnergy >= GameConfig.cutEnergyCost else { return }
+			enemy.currentEnergy -= GameConfig.cutEnergyCost
+			let result = actionCalculator.cut(enemy, hero)
+			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
+			effectManager.applyEffect(debuff, hero)
+			triggerHit(onHero: true)
+
+		}
+		checkWinLoseCondition()
+
+	}
+
+	// MARK: Stun
+
+	func stun() {
+
+		guard roomGameState.isGameOn else { return }
+		guard let hero = roomGameState.hero else { return }
+		guard let enemy = roomGameState.enemy else { return }
+
+		if roomGameState.isHeroTurn {
+
+			guard hero.currentEnergy >= GameConfig.stunEnergyCost else { return }
+			hero.currentEnergy = max(hero.currentEnergy - GameConfig.stunEnergyCost, 0)
+
+			let stunEffect = Effect(type: .stun, duration: GameConfig.stunDuration)
+			effectManager.applyEffect(stunEffect, enemy)
+						triggerHit(onHero: false)
+
+		} else {
+
+			guard enemy.currentEnergy >= GameConfig.cutEnergyCost else { return }
+			enemy.currentEnergy = max(enemy.currentEnergy - GameConfig.stunEnergyCost, 0)
+
+			let stunEffect = Effect(type: .stun, duration: GameConfig.stunDuration)
+			effectManager.applyEffect(stunEffect, hero)
+						triggerHit(onHero: true)
+
+		}
+		checkWinLoseCondition()
+
+	}
+
+	// MARK: Sunder Armor
+
+	func sunderArmor() {
+
+		guard roomGameState.isGameOn else { return }
+		guard let hero = roomGameState.hero else { return }
+		guard let enemy = roomGameState.enemy else { return }
+
+		if roomGameState.isHeroTurn {
+
+			guard hero.currentEnergy >= GameConfig.sunderArmorCost else { return }
+			hero.currentEnergy = max(hero.currentEnergy - GameConfig.sunderArmorCost, 0)
+			let impact = actionCalculator.sunderArmor(hero, enemy)
+			let sunderEffect = Effect(type: .armorDOWN(value: impact), duration: GameConfig.sunderArmorDuration)
+			effectManager.applyEffect(sunderEffect, enemy)
+						triggerHit(onHero: false)
+
+		} else {
+
+			guard enemy.currentEnergy >= GameConfig.sunderArmorCost else { return }
+			enemy.currentEnergy = max(enemy.currentEnergy - GameConfig.sunderArmorCost, 0)
+			let impact = actionCalculator.sunderArmor(enemy, hero)
+			let sunderEffect = Effect(type: .armorDOWN(value: impact), duration: GameConfig.sunderArmorDuration)
+			effectManager.applyEffect(sunderEffect, hero)
+						triggerHit(onHero: true)
+
+		}
+		checkWinLoseCondition()
+	}
+
+	// MARK: - Spells
+
+
+
 	// MARK: Heal
 
 	func heal() {
@@ -276,8 +376,6 @@ extension RoomGameManager {
 			  target.currentMana >= GameConfig.healManaCost else {
 			return
 		}
-		//		let isHero = roomGameState.isHeroTurn
-		//		triggerEffect(forHero: isHero, color: .green)
 
 		let result = actionCalculator.heal(target)
 		target.currentHealth = min(target.currentHealth + result, target.maxHealth)
@@ -314,37 +412,6 @@ extension RoomGameManager {
 		checkWinLoseCondition()
 	}
 
-	// MARK: Cut
-
-	func cut() {
-
-		guard roomGameState.isGameOn else { return }
-		guard let hero = roomGameState.hero else { return }
-		guard let enemy = roomGameState.enemy else { return }
-
-		if roomGameState.isHeroTurn {
-
-			guard hero.currentEnergy >= GameConfig.cutEnergyCost else { return }
-			hero.currentEnergy -= GameConfig.cutEnergyCost
-			let result = actionCalculator.cut(hero, enemy)
-			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
-			effectManager.applyEffect(debuff, enemy)
-			triggerHit(onHero: false)
-
-		} else {
-
-			guard enemy.currentEnergy >= GameConfig.cutEnergyCost else { return }
-			enemy.currentEnergy -= GameConfig.cutEnergyCost
-			let result = actionCalculator.cut(enemy, hero)
-			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
-			effectManager.applyEffect(debuff, hero)
-			triggerHit(onHero: true)
-
-		}
-		checkWinLoseCondition()
-
-	}
-
 	func exhaustion() {
 
 		checkWinLoseCondition()
@@ -364,43 +431,6 @@ extension RoomGameManager {
 
 		checkWinLoseCondition()
 	}
-
-	func sunderArmor() {
-
-		checkWinLoseCondition()
-	}
-
-	// MARK: Stun
-
-	func stun() {
-
-		guard roomGameState.isGameOn else { return }
-		guard let hero = roomGameState.hero else { return }
-		guard let enemy = roomGameState.enemy else { return }
-
-		if roomGameState.isHeroTurn {
-
-			guard hero.currentEnergy >= GameConfig.stunEnergyCost else { return }
-			hero.currentEnergy = max(hero.currentEnergy - GameConfig.stunEnergyCost, 0)
-
-			let stunEffect = Effect(type: .stun, duration: GameConfig.stunDuration)
-			effectManager.applyEffect(stunEffect, enemy)
-						triggerHit(onHero: false)
-
-		} else {
-
-			guard enemy.currentEnergy >= GameConfig.cutEnergyCost else { return }
-			enemy.currentEnergy = max(enemy.currentEnergy - GameConfig.stunEnergyCost, 0)
-
-			let stunEffect = Effect(type: .stun, duration: GameConfig.stunDuration)
-			effectManager.applyEffect(stunEffect, hero)
-						triggerHit(onHero: true)
-
-		}
-		checkWinLoseCondition()
-
-	}
-
 }
 
 // MARK: Trigger Hit

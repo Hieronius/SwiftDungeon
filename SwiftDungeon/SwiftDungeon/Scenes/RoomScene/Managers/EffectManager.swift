@@ -27,7 +27,7 @@ class EffectManager {
 			target.currentHealth -= initialDamage
 
 		case .armorDOWN(value: let value):
-			target.currentArmor -= value
+			target.currentArmor = max(target.currentArmor - value, 0)
 
 		case .exhaustion(initialEnergy: let initialEnergy, _):
 			target.currentEnergy = max(target.currentEnergy - initialEnergy, 0)

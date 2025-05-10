@@ -1,6 +1,6 @@
 import Foundation
 
-struct GameConfig {
+enum GameConfig {
 
 	// Dungeon Config
 
@@ -19,6 +19,7 @@ struct GameConfig {
 	static let stunEnergyCost = 1
 	static let spellEnergyCost = 1
 	static let cutEnergyCost = 1
+	static let sunderArmorCost = 1
 
 	// Ability Duration
 
@@ -27,4 +28,5 @@ struct GameConfig {
 	static let buffDuration = 3
 	// 2 turns (Target -> Caster), not rounds
 	static let stunDuration = 2
+	static let sunderArmorDuration = 2
 }

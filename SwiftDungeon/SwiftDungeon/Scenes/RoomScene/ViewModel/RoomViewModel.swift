@@ -124,8 +124,10 @@ extension RoomViewModel {
 	// MARK: Sunder Armor
 
 	func sunderArmor() {
+		print(roomGameManager.roomGameState.hero?.currentArmor)
 		roomGameManager.sunderArmor()
 		syncGameUIState()
+		resetCharacterBeingHitAndSyncGameState()
 	}
 
 	// MARK: Block

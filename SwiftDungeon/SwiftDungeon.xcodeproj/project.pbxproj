@@ -206,9 +206,9 @@
 			isa = PBXGroup;
 			children = (
 				DDAC13312DC9E30700E42D65 /* RoomBuilder.swift */,
+				DDA940702DBF50E800837F9F /* ViewModel */,
 				DDAC13442DC9F2D500E42D65 /* Managers */,
 				DDA9406F2DBF50E400837F9F /* Model */,
-				DDA940702DBF50E800837F9F /* ViewModel */,
 				DDA9406E2DBF50DE00837F9F /* View */,
 			);
 			path = RoomScene;

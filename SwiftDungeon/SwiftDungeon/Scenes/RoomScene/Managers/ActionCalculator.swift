@@ -31,8 +31,11 @@ class ActionCalculator {
 		return damage > 0 ? damage : 0
 	}
 
+	// should be modifed to imply host stats
 	func sunderArmor(_ host: Character, _ target: Character) -> Int {
-		return 0
+		let onePercentOfArmor = Double(target.currentArmor) / 100
+		let impact = 30.0 * (onePercentOfArmor)
+		return Int(impact)
 	}
 
 }
