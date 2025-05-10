@@ -229,7 +229,6 @@ extension RoomGameManager {
 			enemy.currentHealth = max(enemy.currentHealth - result, 0)
 			hero.currentEnergy -= GameConfig.attackEnergyCost
 			roomGameState.actionImpact = result
-			//			passActionVisualResult(.red, result)
 			triggerHit(onHero: false)
 
 		} else {
@@ -239,7 +238,6 @@ extension RoomGameManager {
 			hero.currentHealth = max(hero.currentHealth - result, 0)
 			enemy.currentEnergy -= GameConfig.attackEnergyCost
 			roomGameState.actionImpact = result
-			//			passActionVisualResult(.red, result)
 			triggerHit(onHero: true)
 		}
 		checkWinLoseCondition()
