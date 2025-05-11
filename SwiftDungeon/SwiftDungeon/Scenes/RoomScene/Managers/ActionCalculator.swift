@@ -39,4 +39,19 @@ class ActionCalculator {
 		return Int(impact)
 	}
 
+	func fireball(_ host: Character, _ target: Character) -> Int {
+		let impact = host.spellPower
+		return impact
+	}
+
+	func dot(_ host: Character, _ target: Character) -> Int {
+		let impact = host.spellPower
+		return impact
+	}
+
+	func exhaustion(_ host: Character, _ target: Character) -> Int {
+		let impact = 1
+		return impact
+	}
+
 }

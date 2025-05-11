@@ -279,7 +279,7 @@ extension RoomGameManager {
 		if roomGameState.isHeroTurn {
 
 			guard hero.currentEnergy >= GameConfig.cutEnergyCost else { return }
-			hero.currentEnergy -= GameConfig.cutEnergyCost
+			hero.currentEnergy = max(hero.currentEnergy - GameConfig.cutEnergyCost, 0)
 			let result = actionCalculator.cut(hero, enemy)
 			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
 			effectManager.applyEffect(debuff, enemy)
@@ -288,7 +288,7 @@ extension RoomGameManager {
 		} else {
 
 			guard enemy.currentEnergy >= GameConfig.cutEnergyCost else { return }
-			enemy.currentEnergy -= GameConfig.cutEnergyCost
+			enemy.currentEnergy = max(enemy.currentEnergy - GameConfig.cutEnergyCost, 0)
 			let result = actionCalculator.cut(enemy, hero)
 			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
 			effectManager.applyEffect(debuff, hero)
@@ -433,8 +433,64 @@ extension RoomGameManager {
 		checkWinLoseCondition()
 	}
 
+	// MARK: Fireball
+
+	func fireball() {
+
+		guard roomGameState.isGameOn else { return }
+		guard let hero = roomGameState.hero else { return }
+		guard let enemy = roomGameState.enemy else { return }
+
+		if roomGameState.isHeroTurn {
+
+			guard hero.currentMana >= GameConfig.fireballManaCost else { return }
+			let result = actionCalculator.fireball(hero, enemy)
+			enemy.currentHealth = max(enemy.currentHealth - result, 0)
+			hero.currentMana = max(hero.currentMana - GameConfig.fireballManaCost, 0)
+			roomGameState.actionImpact = result
+			triggerHit(onHero: false)
+
+		} else {
+
+			guard enemy.currentMana >= GameConfig.fireballManaCost else { return }
+			let result = actionCalculator.fireball(enemy, hero)
+			hero.currentHealth = max(hero.currentHealth - result, 0)
+			enemy.currentMana = max(enemy.currentMana - GameConfig.fireballManaCost, 0)
+			roomGameState.actionImpact = result
+			triggerHit(onHero: true)
+		}
+		checkWinLoseCondition()
+	}
+
+	// MARK: Exhaustion
+
+	/// Target has decreased amount of current energy in next turn
 	func exhaustion() {
 
+		guard roomGameState.isGameOn else { return }
+		guard let hero = roomGameState.hero else { return }
+		guard let enemy = roomGameState.enemy else { return }
+
+		if roomGameState.isHeroTurn {
+
+			guard hero.currentMana >= GameConfig.exhaustionManaCost else { return }
+			hero.currentMana = max(hero.currentMana - GameConfig.exhaustionManaCost, 0)
+			let impact = actionCalculator.exhaustion(hero, enemy)
+			let exhaustioneffect = Effect(type: .energyDOWN(value: impact), duration: GameConfig.exhaustionDuration)
+			effectManager.applyEffect(exhaustioneffect, enemy)
+						triggerHit(onHero: false)
+
+		} else {
+
+			guard enemy.currentMana >= GameConfig.exhaustionManaCost else { return }
+			enemy.currentMana = max(enemy.currentMana - GameConfig.exhaustionManaCost, 0)
+			let impact = actionCalculator.exhaustion(enemy, hero)
+			let exhaustioneffect = Effect(type: .energyDOWN(value: impact), duration: GameConfig.exhaustionDuration)
+			effectManager.applyEffect(exhaustioneffect, hero)
+						triggerHit(onHero: true)
+
+		}
+		
 		checkWinLoseCondition()
 	}
 
@@ -446,6 +502,13 @@ extension RoomGameManager {
 	func manaRegen() {
 
 		checkWinLoseCondition()
+	}
+
+	// MARK: DoT
+
+	/// Periodic Magic Damage
+	func dot() {
+
 	}
 }
 

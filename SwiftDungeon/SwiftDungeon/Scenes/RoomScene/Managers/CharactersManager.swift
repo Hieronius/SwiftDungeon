@@ -271,7 +271,7 @@ class CharacterManager {
 						  maxMana: 100,
 						  currentMana: 100,
 						  maxEnergy: 5,
-						 spellPower: 20,
+						 spellPower: 5,
 						 currentEnergy: 5,
 						 blockValue: 5,
 						 currentArmor: 10,

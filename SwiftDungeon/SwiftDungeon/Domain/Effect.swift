@@ -24,23 +24,32 @@ enum EffectType: Equatable {
 
 	case armorDOWN(value: Int)
 	case attackDOWN(value: Int)
+	case energyDOWN(value: Int)
 	case stun
 
 	// Ticking Debuffs
 
 	case bleeding(initialDamage: Int, damagePerTurn: Int)
-	case exhaustion(initialEnergy: Int, energyPerTurn: Int)
 
 	var isDebuff: Bool {
 		switch self {
-		case .bleeding, .exhaustion, .attackDOWN, .armorDOWN, .stun: return true
+		case 	.bleeding,
+				.attackDOWN,
+				.armorDOWN,
+				.stun,
+				.energyDOWN:
+				return true
+
 		default: return false
 		}
 	}
 
 	var isTicking: Bool {
 		switch self {
-		case .healthRegen, .bleeding, .manaRegen, .exhaustion: return true
+		case 	.healthRegen,
+				.bleeding,
+				.manaRegen:
+			return true
 		default: return false
 		}
 	}

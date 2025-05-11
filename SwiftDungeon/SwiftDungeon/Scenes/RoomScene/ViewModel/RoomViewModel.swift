@@ -113,6 +113,8 @@ extension RoomViewModel {
 	func cut() {
 		roomGameManager.cut()
 		getVisualImpactFromAction()
+		let actionImpact = roomGameManager.actionImpactAndTarget()
+		let currentTurn = actionImpact.0
 		syncGameUIState()
 		resetCharacterBeingHitAndSyncGameState()
 	}
@@ -133,6 +135,18 @@ extension RoomViewModel {
 		let currentTurn = actionImpact.0
 		triggerEffect(forHero: currentTurn, color: .blue)
 		syncGameUIState()
+	}
+
+	// MARK: Attack Stance
+
+	func attackStance() {
+
+	}
+
+	// MARK: - Defence Stance
+
+	func defenceStance() {
+
 	}
 
 	// MARK: - Spells
@@ -167,7 +181,9 @@ extension RoomViewModel {
 
 	func exhaustion() {
 		roomGameManager.exhaustion()
+		getVisualImpactFromAction()
 		syncGameUIState()
+		resetCharacterBeingHitAndSyncGameState()
 	}
 
 	// MARK: BuffAD
@@ -184,11 +200,31 @@ extension RoomViewModel {
 	// MARK: BuffArmor
 
 	func buffArmor() {
+
 		roomGameManager.buffArmor()
 		let actionImpact = roomGameManager.actionImpactAndTarget()
 		let currentTurn = actionImpact.0
 		triggerEffect(forHero: currentTurn, color: .yellow)
 		syncGameUIState()
+	}
+
+	// MARK: FireBall
+
+	func fireball() {
+
+		roomGameManager.fireball()
+		getVisualImpactFromAction()
+		syncGameUIState()
+		resetCharacterBeingHitAndSyncGameState()
+	}
+
+	// MARK: DoT
+
+	func dot() {
+		roomGameManager.dot()
+		getVisualImpactFromAction()
+		syncGameUIState()
+		resetCharacterBeingHitAndSyncGameState()
 	}
 }
 

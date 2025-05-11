@@ -11,6 +11,9 @@ enum GameConfig {
 
 	static let healManaCost = 10
 	static let buffManaCost = 10
+	static let fireballManaCost = 15
+	static let dotManaCost = 15
+	static let exhaustionManaCost = 20
 
 	// Ability Energy Cost
 
@@ -29,4 +32,6 @@ enum GameConfig {
 	// 2 turns (Target -> Caster), not rounds
 	static let stunDuration = 2
 	static let sunderArmorDuration = 2
+	static let dotDuration = 3
+	static let exhaustionDuration = 2
 }

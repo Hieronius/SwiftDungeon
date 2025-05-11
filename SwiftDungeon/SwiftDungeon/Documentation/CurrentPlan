@@ -1,25 +1,28 @@
 Current Plan
 
+0. Add HP/Mana regen, dot effects
+
 1. Refactor RoomViewModel to CombatManager
-	- Pass and Display visual result in ViewModel is misleading.
-	- Implement ActionState as part of RoomGameManager
-	- Add purple effect on target of bleed/stun/debuffs
-	- Squire should not animate if not enough resources for action
 	- Create ActionManager
 	- Implement TurnManager
 
 1.5. Add methods like applyEffect/decreaseArmor/increaseHealth to Character class or Creature protocol itself to incapsulate handling of Character State instead of giving EffectManager an ability to change target state directly
 
-2. Add HP/Mana regen effects, debuffs, fireboll buttons
-
 3. Add mechanics/abilities
 
-- Add accuracy
-- Add armor pen
+- Add accuracy (current and max)
+- Add armor pen (current and max)
 - Add stun effect
-- Add crit
-- Add magic resist
-- Add crushing blow (armor pen) ability
+- Add crit (current and max)
+- Add magic resist (current and max)
+- Add couldawn for abilities (you can't use heal twice in a single turn)
+
+Optional:
+	- Pass and Display visual result in ViewModel is misleading.
+	- Implement ActionState as part of RoomGameManager
+	- Add purple effect on target of bleed/stun/debuffs
+	- Squire should not animate if not enough resources for action
+	- Add shaking effect for ticking effect in the start of the turn
 
 4. Add animation of the end of the fight
 5. Add animation of entering to the new room

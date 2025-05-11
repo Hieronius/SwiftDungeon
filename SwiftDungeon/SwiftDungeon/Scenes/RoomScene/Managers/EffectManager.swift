@@ -29,8 +29,8 @@ class EffectManager {
 		case .armorDOWN(value: let value):
 			target.currentArmor = max(target.currentArmor - value, 0)
 
-		case .exhaustion(initialEnergy: let initialEnergy, _):
-			target.currentEnergy = max(target.currentEnergy - initialEnergy, 0)
+		case .energyDOWN(value: let value):
+			target.maxEnergy -= value
 
 		case .attackDOWN(value: let value):
 			target.minDamage -= value
@@ -65,8 +65,6 @@ class EffectManager {
 				case .bleeding(_, let perTurn):
 					target.currentHealth = max(target.currentHealth - perTurn, 0)
 
-				case .exhaustion(_, let perTurn):
-					target.currentEnergy = max(target.currentEnergy - perTurn, 0)
 				default:
 					break
 				}
@@ -97,6 +95,10 @@ class EffectManager {
 				case .attackDOWN(let value):
 					target.minDamage += value
 					target.maxDamage += value
+
+				case .energyDOWN(let value):
+					target.maxEnergy += value
+					target.currentEnergy = target.maxEnergy
 
 				case .stun:
 					target.isStunned = false

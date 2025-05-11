@@ -234,7 +234,7 @@ private extension RoomView {
 
 		VStack {
 			HStack {
-				Spacer()
+//				Spacer()
 				actionButton(title: "Skill",
 							 action: viewModel.openSkills)
 				actionButton(title: "Spell",
@@ -243,12 +243,12 @@ private extension RoomView {
 							 action: viewModel.openInventory)
 				actionButton(title: "Log",
 							 action: viewModel.openLog)
-				Spacer()
+//				Spacer()
 				
 			}
 			
 			HStack {
-				Spacer()
+//				Spacer()
 				actionButton(title: "Map",
 							 action: viewModel.openMap)
 				actionButton(title: "Stat",
@@ -257,7 +257,7 @@ private extension RoomView {
 							 action: viewModel.openEquipment)
 				actionButton(title: "Perc",
 							 action: viewModel.openTalants)
-				Spacer()
+//				Spacer()
 			}
 		}
 	}
@@ -294,6 +294,16 @@ private extension RoomView {
 									 action: viewModel.block)
 						Spacer()
 					}
+
+					HStack {
+						Spacer()
+						actionButton(title: "Attack Stance",
+									 action: viewModel.attackStance)
+						actionButton(title: "Defence Stance",
+									 action: viewModel.defenceStance)
+
+						Spacer()
+					}
 				}
 
 				// Spell Book
@@ -323,6 +333,19 @@ private extension RoomView {
 									 action: viewModel.buffArmor)
 						Spacer()
 					}
+
+					HStack {
+
+						Spacer()
+						actionButton(title: "DoT",
+									 action: viewModel.dot)
+						actionButton(title: "Fireball",
+									 action: viewModel.fireball)
+						actionButton(title: "Exhaustion",
+									 action: viewModel.exhaustion)
+						Spacer()
+					}
+
 				}
 
 			default:
