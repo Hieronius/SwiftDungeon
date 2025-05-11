@@ -494,12 +494,46 @@ extension RoomGameManager {
 		checkWinLoseCondition()
 	}
 
+	// MARK: Health Regen
+
 	func healthRegen() {
+
+		guard roomGameState.isGameOn else { return }
+
+		let target = roomGameState.isHeroTurn ? roomGameState.hero : roomGameState.enemy
+		guard let target else { return }
+		guard target.currentMana >= GameConfig.healthRegenManaCost,
+		target.currentEnergy >= GameConfig.spellEnergyCost else {
+			return
+		}
+
+		let healValue = actionCalculator.healthRegen(target)
+		let buff = Effect(type: .healthRegen(initialHeal: healValue, healthPerTurn: healValue), duration: GameConfig.healthRegenDuration)
+
+		effectManager.applyEffect(buff, target)
+		target.currentMana = max(target.currentMana - GameConfig.healthRegenManaCost, 0)
+		target.currentEnergy = max(target.currentEnergy - GameConfig.spellEnergyCost, 0)
 
 		checkWinLoseCondition()
 	}
 
+	// MARK: Mana Regen
+
 	func manaRegen() {
+
+		guard roomGameState.isGameOn else { return }
+
+		let target = roomGameState.isHeroTurn ? roomGameState.hero : roomGameState.enemy
+		guard let target else { return }
+		guard target.currentMana >= GameConfig.manaRegenManaCost,
+		target.currentEnergy >= GameConfig.spellEnergyCost else { return }
+
+		let manaValue = actionCalculator.manaRegen(target)
+		let buff = Effect(type: .manaRegen(initialMana: manaValue, manaPerTurn: manaValue), duration: GameConfig.manaRegenDuration)
+
+		effectManager.applyEffect(buff, target)
+		target.currentMana = max(target.currentMana - GameConfig.healthRegenManaCost, 0)
+		target.currentEnergy = max(target.currentEnergy - GameConfig.spellEnergyCost, 0)
 
 		checkWinLoseCondition()
 	}

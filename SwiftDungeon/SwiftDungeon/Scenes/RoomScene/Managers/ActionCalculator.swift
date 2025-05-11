@@ -54,4 +54,14 @@ class ActionCalculator {
 		return impact
 	}
 
+	func healthRegen(_ host: Character) -> Int{
+		let impact = 10
+		return impact
+	}
+
+	func manaRegen(_ host: Character) -> Int {
+		let impact = 10
+		return impact
+	}
+
 }

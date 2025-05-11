@@ -59,6 +59,9 @@ class EffectManager {
 					
 				case .healthRegen(_, let perTurn):
 					target.currentHealth = min(target.currentHealth + perTurn, target.maxHealth)
+
+				case .manaRegen(_, let perTurn):
+					target.currentMana = min(target.currentMana + perTurn, target.maxMana)
 					
 					// Debuffs
 					

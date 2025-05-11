@@ -14,6 +14,8 @@ enum GameConfig {
 	static let fireballManaCost = 15
 	static let dotManaCost = 15
 	static let exhaustionManaCost = 20
+	static let healthRegenManaCost = 15
+	static let manaRegenManaCost = 15
 
 	// Ability Energy Cost
 
@@ -34,4 +36,6 @@ enum GameConfig {
 	static let sunderArmorDuration = 2
 	static let dotDuration = 3
 	static let exhaustionDuration = 2
+	static let healthRegenDuration = 3
+	static let manaRegenDuration = 3
 }

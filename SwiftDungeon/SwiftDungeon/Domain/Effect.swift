@@ -4,8 +4,6 @@ struct Effect {
 
 	let type: EffectType
 	var duration: Int
-
-
 }
 
 enum EffectType: Equatable {

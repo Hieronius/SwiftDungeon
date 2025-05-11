@@ -274,7 +274,7 @@ class CharacterManager {
 						 spellPower: 5,
 						 currentEnergy: 5,
 						 blockValue: 5,
-						 currentArmor: 10,
+						 currentArmor: 1,
 						  maxDamage: 3,
 						  minDamage: 2,
 						 isAffected: false,

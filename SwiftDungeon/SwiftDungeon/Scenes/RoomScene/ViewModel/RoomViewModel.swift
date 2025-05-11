@@ -167,6 +167,9 @@ extension RoomViewModel {
 
 	func healthRegen() {
 		roomGameManager.healthRegen()
+		let actionImpact = roomGameManager.actionImpactAndTarget()
+		let currentTurn = actionImpact.0
+		triggerEffect(forHero: currentTurn, color: .green)
 		syncGameUIState()
 	}
 
@@ -174,6 +177,9 @@ extension RoomViewModel {
 
 	func manaRegen() {
 		roomGameManager.manaRegen()
+		let actionImpact = roomGameManager.actionImpactAndTarget()
+		let currentTurn = actionImpact.0
+		triggerEffect(forHero: currentTurn, color: .blue)
 		syncGameUIState()
 	}
 
