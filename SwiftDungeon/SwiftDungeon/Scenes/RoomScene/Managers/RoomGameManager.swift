@@ -542,7 +542,31 @@ extension RoomGameManager {
 
 	/// Periodic Magic Damage
 	func dot() {
+		
+		guard roomGameState.isGameOn else { return }
+		guard let hero = roomGameState.hero else { return }
+		guard let enemy = roomGameState.enemy else { return }
 
+		if roomGameState.isHeroTurn {
+
+			guard hero.currentEnergy >= GameConfig.cutEnergyCost else { return }
+			hero.currentEnergy = max(hero.currentEnergy - GameConfig.cutEnergyCost, 0)
+			let result = actionCalculator.cut(hero, enemy)
+			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
+			effectManager.applyEffect(debuff, enemy)
+			triggerHit(onHero: false)
+
+		} else {
+
+			guard enemy.currentEnergy >= GameConfig.cutEnergyCost else { return }
+			enemy.currentEnergy = max(enemy.currentEnergy - GameConfig.cutEnergyCost, 0)
+			let result = actionCalculator.cut(enemy, hero)
+			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
+			effectManager.applyEffect(debuff, hero)
+			triggerHit(onHero: true)
+
+		}
+		checkWinLoseCondition()
 	}
 }
 

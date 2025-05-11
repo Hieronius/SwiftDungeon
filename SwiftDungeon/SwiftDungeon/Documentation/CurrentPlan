@@ -23,6 +23,9 @@ Optional:
 	- Add purple effect on target of bleed/stun/debuffs
 	- Squire should not animate if not enough resources for action
 	- Add shaking effect for ticking effect in the start of the turn
+	- refactor each method like heal() to create separate local properties for each part of the formula like:
+		let manaCost = GameConfig.spellManaCost
+		if hero.currentMana >= manaCost { cast }
 
 4. Add animation of the end of the fight
 5. Add animation of entering to the new room

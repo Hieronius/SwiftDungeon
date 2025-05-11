@@ -26,6 +26,9 @@ class EffectManager {
 		case .bleeding(let initialDamage, _):
 			target.currentHealth -= initialDamage
 
+		case .dot(let initialDamage, _):
+			target.currentHealth -= initialDamage
+
 		case .armorDOWN(value: let value):
 			target.currentArmor = max(target.currentArmor - value, 0)
 
@@ -66,6 +69,9 @@ class EffectManager {
 					// Debuffs
 					
 				case .bleeding(_, let perTurn):
+					target.currentHealth = max(target.currentHealth - perTurn, 0)
+
+				case .dot(_, let perTurn):
 					target.currentHealth = max(target.currentHealth - perTurn, 0)
 
 				default:

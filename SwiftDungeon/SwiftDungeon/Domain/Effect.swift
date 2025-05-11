@@ -28,6 +28,7 @@ enum EffectType: Equatable {
 	// Ticking Debuffs
 
 	case bleeding(initialDamage: Int, damagePerTurn: Int)
+	case dot(initialDamage: Int, damagePerTurn: Int)
 
 	var isDebuff: Bool {
 		switch self {
@@ -35,7 +36,8 @@ enum EffectType: Equatable {
 				.attackDOWN,
 				.armorDOWN,
 				.stun,
-				.energyDOWN:
+				.energyDOWN,
+				.dot:
 				return true
 
 		default: return false
@@ -46,7 +48,8 @@ enum EffectType: Equatable {
 		switch self {
 		case 	.healthRegen,
 				.bleeding,
-				.manaRegen:
+				.manaRegen,
+				.dot:
 			return true
 		default: return false
 		}
