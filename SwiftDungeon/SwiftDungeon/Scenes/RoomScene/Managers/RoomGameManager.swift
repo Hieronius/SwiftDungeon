@@ -271,32 +271,29 @@ extension RoomGameManager {
 	func cut() {
 
 		guard roomGameState.isGameOn else { return }
-		guard let hero = roomGameState.hero else { return }
-		guard let enemy = roomGameState.enemy else { return }
 
-		if roomGameState.isHeroTurn {
+		guard let host = roomGameState.isHeroTurn ?
+					roomGameState.hero:
+					roomGameState.enemy else { return }
 
-			guard hero.currentEnergy >= GameConfig.cutEnergyCost else { return }
-			hero.currentEnergy = max(hero.currentEnergy - GameConfig.cutEnergyCost, 0)
-			let result = actionCalculator.cut(hero, enemy)
-			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
-			roomGameState.actionImpact = result
-			effectManager.applyEffect(debuff, enemy)
-			triggerHit(onHero: false)
+		guard let target = !roomGameState.isHeroTurn ?
+					roomGameState.hero:
+					roomGameState.enemy else { return }
 
-		} else {
+		guard host.currentEnergy >= GameConfig.cutEnergyCost else { return }
 
-			guard enemy.currentEnergy >= GameConfig.cutEnergyCost else { return }
-			enemy.currentEnergy = max(enemy.currentEnergy - GameConfig.cutEnergyCost, 0)
-			let result = actionCalculator.cut(enemy, hero)
-			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
-			roomGameState.actionImpact = result
-			effectManager.applyEffect(debuff, hero)
-			triggerHit(onHero: true)
+		host.currentEnergy = max(host.currentEnergy - GameConfig.cutEnergyCost, 0)
 
-		}
+		let result = actionCalculator.cut(host, target)
+		let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
+
+		roomGameState.actionImpact = result
+
+		effectManager.applyEffect(debuff, target)
+
+		triggerHit(onHero: !roomGameState.isHeroTurn)
+
 		checkWinLoseCondition()
-
 	}
 
 	// MARK: Stun
@@ -596,7 +593,7 @@ extension RoomGameManager {
 			effectManager.applyEffect(debuff, hero)
 
 			roomGameState.actionImpact = result
-			
+
 			triggerHit(onHero: true)
 
 		}
