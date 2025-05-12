@@ -22,5 +22,6 @@ class RoomGameState {
 
 	// Actions
 
+	/// Result of the spell or skill, should be 0 if stun or debuff like exhaustion
 	var actionImpact = 0
 }

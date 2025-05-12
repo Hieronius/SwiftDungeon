@@ -75,17 +75,21 @@ struct CharacterTileView: View {
 			if hit {
 				animateHit()
 			}
-		}
-		.onChange(of: effectColor) { newColor in
-			internalEffect = newColor
-		}
-
-		.onChange(of: impactLabel) { _ in
 			showEffectLabel = true
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 				showEffectLabel = false
 			}
 		}
+		.onChange(of: effectColor) { newColor in
+			internalEffect = newColor
+		}
+
+//		.onChange(of: didHit) { _ in
+//			showEffectLabel = true
+//			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//				showEffectLabel = false
+//			}
+//		}
 	}
 
 	private func startPulse() {

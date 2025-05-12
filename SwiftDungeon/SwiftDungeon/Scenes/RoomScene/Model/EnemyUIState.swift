@@ -11,5 +11,6 @@ struct EnemyUIState {
 	var enemyCurrentEnergy: Int
 	var enemyActionColor: Color
 	var enemyActionLabel: Int
+	var enemyBeingHit: Bool
 	var enemyActiveEffects: [Effect]
 }

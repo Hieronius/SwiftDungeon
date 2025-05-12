@@ -38,6 +38,7 @@ class RoomViewModel: ObservableObject {
 			heroMaxExperience: roomGameManager.roomGameState.hero?.stats.maxExperience ?? 0,
 			heroActionColor: .white,
 			heroActionLabel: 99,
+			heroBeingHit: false,
 			heroActiveEffects: roomGameManager.roomGameState.hero?.activeEffects ?? []
 		)
 
@@ -51,6 +52,7 @@ class RoomViewModel: ObservableObject {
 			enemyCurrentEnergy: roomGameManager.roomGameState.enemy?.currentEnergy ?? 0,
 			enemyActionColor: .white,
 			enemyActionLabel: 100,
+			enemyBeingHit: false,
 			enemyActiveEffects: roomGameManager.roomGameState.enemy?.activeEffects ?? []
 		)
 
@@ -267,6 +269,7 @@ extension RoomViewModel {
 			heroMaxExperience: hero.stats.maxExperience,
 			heroActionColor: heroUIState.heroActionColor,
 			heroActionLabel: heroUIState.heroActionLabel,
+			heroBeingHit: heroUIState.heroBeingHit,
 			heroActiveEffects: hero.activeEffects
 		)
 
@@ -280,6 +283,7 @@ extension RoomViewModel {
 			enemyCurrentEnergy: enemy.currentEnergy,
 			enemyActionColor: enemyUIState.enemyActionColor,
 			enemyActionLabel: enemyUIState.enemyActionLabel,
+			enemyBeingHit: enemyUIState.enemyBeingHit,
 			enemyActiveEffects: enemy.activeEffects
 		)
 
@@ -376,9 +380,5 @@ extension RoomViewModel {
 			heroUIState.heroActionLabel = label
 		}
 
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.29) {
-			self.enemyUIState.enemyActionLabel = -100
-			self.heroUIState.heroActionLabel = -100
-		}
 	}
 }

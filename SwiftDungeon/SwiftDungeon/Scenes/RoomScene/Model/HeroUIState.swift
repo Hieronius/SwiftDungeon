@@ -13,5 +13,6 @@ struct HeroUIState {
 	var heroMaxExperience: Int
 	var heroActionColor: Color
 	var heroActionLabel: Int
+	var heroBeingHit: Bool
 	var heroActiveEffects: [Effect]
 }

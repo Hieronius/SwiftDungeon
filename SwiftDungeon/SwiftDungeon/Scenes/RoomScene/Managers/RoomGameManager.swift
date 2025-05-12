@@ -238,6 +238,7 @@ extension RoomGameManager {
 		let result = actionCalculator.attack(host, target)
 		target.currentHealth = max(target.currentHealth - result, 0)
 		host.currentEnergy -= GameConfig.attackEnergyCost
+
 		roomGameState.actionImpact = result
 		
 		triggerHit(onHero: !roomGameState.isHeroTurn)
@@ -279,6 +280,7 @@ extension RoomGameManager {
 			hero.currentEnergy = max(hero.currentEnergy - GameConfig.cutEnergyCost, 0)
 			let result = actionCalculator.cut(hero, enemy)
 			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
+			roomGameState.actionImpact = result
 			effectManager.applyEffect(debuff, enemy)
 			triggerHit(onHero: false)
 
@@ -288,6 +290,7 @@ extension RoomGameManager {
 			enemy.currentEnergy = max(enemy.currentEnergy - GameConfig.cutEnergyCost, 0)
 			let result = actionCalculator.cut(enemy, hero)
 			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
+			roomGameState.actionImpact = result
 			effectManager.applyEffect(debuff, hero)
 			triggerHit(onHero: true)
 
@@ -311,6 +314,7 @@ extension RoomGameManager {
 
 			let stunEffect = Effect(type: .stun, duration: GameConfig.stunDuration)
 			effectManager.applyEffect(stunEffect, enemy)
+			roomGameState.actionImpact = 0
 						triggerHit(onHero: false)
 
 		} else {
@@ -320,6 +324,7 @@ extension RoomGameManager {
 
 			let stunEffect = Effect(type: .stun, duration: GameConfig.stunDuration)
 			effectManager.applyEffect(stunEffect, hero)
+			roomGameState.actionImpact = 0
 						triggerHit(onHero: true)
 
 		}
@@ -342,6 +347,7 @@ extension RoomGameManager {
 			let impact = actionCalculator.sunderArmor(hero, enemy)
 			let sunderEffect = Effect(type: .armorDOWN(value: impact), duration: GameConfig.sunderArmorDuration)
 			effectManager.applyEffect(sunderEffect, enemy)
+			roomGameState.actionImpact = 0
 						triggerHit(onHero: false)
 
 		} else {
@@ -351,6 +357,7 @@ extension RoomGameManager {
 			let impact = actionCalculator.sunderArmor(enemy, hero)
 			let sunderEffect = Effect(type: .armorDOWN(value: impact), duration: GameConfig.sunderArmorDuration)
 			effectManager.applyEffect(sunderEffect, hero)
+			roomGameState.actionImpact = 0
 						triggerHit(onHero: true)
 
 		}
@@ -448,7 +455,9 @@ extension RoomGameManager {
 			enemy.currentHealth = max(enemy.currentHealth - result, 0)
 			hero.currentMana = max(hero.currentMana - GameConfig.fireballManaCost, 0)
 			hero.currentEnergy = max(hero.currentEnergy - GameConfig.spellEnergyCost, 0)
+
 			roomGameState.actionImpact = result
+
 			triggerHit(onHero: false)
 
 		} else {
@@ -461,7 +470,9 @@ extension RoomGameManager {
 			hero.currentHealth = max(hero.currentHealth - result, 0)
 			enemy.currentMana = max(enemy.currentMana - GameConfig.fireballManaCost, 0)
 			enemy.currentEnergy = max(enemy.currentEnergy - GameConfig.spellEnergyCost, 0)
+
 			roomGameState.actionImpact = result
+
 			triggerHit(onHero: true)
 		}
 		checkWinLoseCondition()
@@ -487,7 +498,10 @@ extension RoomGameManager {
 			let impact = actionCalculator.exhaustion(hero, enemy)
 			let exhaustioneffect = Effect(type: .energyDOWN(value: impact), duration: GameConfig.exhaustionDuration)
 			effectManager.applyEffect(exhaustioneffect, enemy)
-						triggerHit(onHero: false)
+
+			roomGameState.actionImpact = 0
+
+			triggerHit(onHero: false)
 
 		} else {
 
@@ -500,7 +514,9 @@ extension RoomGameManager {
 			let impact = actionCalculator.exhaustion(enemy, hero)
 			let exhaustioneffect = Effect(type: .energyDOWN(value: impact), duration: GameConfig.exhaustionDuration)
 			effectManager.applyEffect(exhaustioneffect, hero)
-						triggerHit(onHero: true)
+
+			roomGameState.actionImpact = 0
+			triggerHit(onHero: true)
 
 		}
 		
@@ -567,6 +583,8 @@ extension RoomGameManager {
 			let result = actionCalculator.cut(hero, enemy)
 			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
 			effectManager.applyEffect(debuff, enemy)
+
+			roomGameState.actionImpact = result
 			triggerHit(onHero: false)
 
 		} else {
@@ -576,6 +594,9 @@ extension RoomGameManager {
 			let result = actionCalculator.cut(enemy, hero)
 			let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
 			effectManager.applyEffect(debuff, hero)
+
+			roomGameState.actionImpact = result
+			
 			triggerHit(onHero: true)
 
 		}
