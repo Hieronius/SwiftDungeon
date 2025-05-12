@@ -170,6 +170,7 @@ extension RoomGameManager {
 
 extension RoomGameManager {
 
+	/// Probably should be put to the CharacterManager
 	func heroLevelUP() {
 
 		guard let hero = roomGameState.hero else { return }
@@ -223,30 +224,55 @@ extension RoomGameManager {
 	func attack() {
 
 		guard roomGameState.isGameOn else { return }
-		guard let hero = roomGameState.hero else { return }
-		guard let enemy = roomGameState.enemy else { return }
 
-		if roomGameState.isHeroTurn {
+		guard let host = roomGameState.isHeroTurn ?
+					roomGameState.hero:
+					roomGameState.enemy else { return }
 
-			guard hero.currentEnergy >= GameConfig.attackEnergyCost else { return }
-			let result = actionCalculator.attack(hero, enemy)
-			enemy.currentHealth = max(enemy.currentHealth - result, 0)
-			hero.currentEnergy -= GameConfig.attackEnergyCost
-			roomGameState.actionImpact = result
-			triggerHit(onHero: false)
+		guard let target = !roomGameState.isHeroTurn ?
+					roomGameState.hero:
+					roomGameState.enemy else { return }
 
-		} else {
+		guard host.currentEnergy >= GameConfig.attackEnergyCost else { return }
 
-			guard enemy.currentEnergy >= GameConfig.attackEnergyCost else { return }
-			let result = actionCalculator.attack(enemy, hero)
-			hero.currentHealth = max(hero.currentHealth - result, 0)
-			enemy.currentEnergy -= GameConfig.attackEnergyCost
-			roomGameState.actionImpact = result
-			triggerHit(onHero: true)
-		}
+		let result = actionCalculator.attack(host, target)
+		target.currentHealth = max(target.currentHealth - result, 0)
+		host.currentEnergy -= GameConfig.attackEnergyCost
+		roomGameState.actionImpact = result
+		
+		triggerHit(onHero: !roomGameState.isHeroTurn)
+
 		checkWinLoseCondition()
-
 	}
+
+	// MARK: Correct Initial Version
+//	func attack() {
+//
+//		guard roomGameState.isGameOn else { return }
+//		guard let hero = roomGameState.hero else { return }
+//		guard let enemy = roomGameState.enemy else { return }
+//
+//		if roomGameState.isHeroTurn {
+//
+//			guard hero.currentEnergy >= GameConfig.attackEnergyCost else { return }
+//			let result = actionCalculator.attack(hero, enemy)
+//			enemy.currentHealth = max(enemy.currentHealth - result, 0)
+//			hero.currentEnergy -= GameConfig.attackEnergyCost
+//			roomGameState.actionImpact = result
+//			triggerHit(onHero: false)
+//
+//		} else {
+//
+//			guard enemy.currentEnergy >= GameConfig.attackEnergyCost else { return }
+//			let result = actionCalculator.attack(enemy, hero)
+//			hero.currentHealth = max(hero.currentHealth - result, 0)
+//			enemy.currentEnergy -= GameConfig.attackEnergyCost
+//			roomGameState.actionImpact = result
+//			triggerHit(onHero: true)
+//		}
+//		checkWinLoseCondition()
+//
+//	}
 
 	// MARK: Block
 
@@ -570,7 +596,7 @@ extension RoomGameManager {
 	}
 }
 
-// MARK: Trigger Hit
+// MARK: Trigger/Reset TargetBeingHit
 
 extension RoomGameManager {
 

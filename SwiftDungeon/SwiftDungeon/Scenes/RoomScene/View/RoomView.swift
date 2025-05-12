@@ -204,24 +204,24 @@ private extension RoomView {
 			CharacterTileView(
 				baseColor: .black,
 				label:    "H",
-				effectLabel: "\(viewModel.heroUIState.heroActionLabel)",
+				impactLabel: "\(viewModel.heroUIState.heroActionLabel)",
 				isActive: viewModel.roomUIState.isHeroTurn,
 				activeColor: .yellow,
 				effectColor: viewModel.sceneUIState.heroEffectColor,
 				// TODO: heroWasHit should be called from roomUIState
 				didHit: viewModel.roomUIState.heroWasHit,
-				effectTextColor: viewModel.heroUIState.heroActionColor
+				impactTextColor: viewModel.heroUIState.heroActionColor
 			)
 			Spacer()
 			CharacterTileView(
 				baseColor: .black,
 				label:    "E",
-				effectLabel: "\(viewModel.enemyUIState.enemyActionLabel)",
+				impactLabel: "\(viewModel.enemyUIState.enemyActionLabel)",
 				isActive: !viewModel.roomUIState.isHeroTurn,
 				activeColor: .red,
 				effectColor: viewModel.sceneUIState.enemyEffectColor,
 				didHit: viewModel.roomUIState.enemyWasHit,
-				effectTextColor: viewModel.enemyUIState.enemyActionColor
+				impactTextColor: viewModel.enemyUIState.enemyActionColor
 			)
 			Spacer()
 		}

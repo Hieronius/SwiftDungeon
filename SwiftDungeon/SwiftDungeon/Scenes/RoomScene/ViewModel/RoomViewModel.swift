@@ -94,7 +94,7 @@ extension RoomViewModel {
 
 	func attack() {
 		roomGameManager.attack()
-		getVisualImpactFromAction()
+		getVisualImpactFromAction(color: .red)
 		syncGameUIState()
 		resetCharacterBeingHitAndSyncGameState()
 	}
@@ -103,7 +103,7 @@ extension RoomViewModel {
 
 	func stun() {
 		roomGameManager.stun()
-		getVisualImpactFromAction()
+		getVisualImpactFromAction(color: .purple)
 		syncGameUIState()
 		resetCharacterBeingHitAndSyncGameState()
 	}
@@ -112,7 +112,7 @@ extension RoomViewModel {
 
 	func cut() {
 		roomGameManager.cut()
-		getVisualImpactFromAction()
+		getVisualImpactFromAction(color: .red)
 		let actionImpact = roomGameManager.actionImpactAndTarget()
 		let currentTurn = actionImpact.0
 		syncGameUIState()
@@ -187,7 +187,7 @@ extension RoomViewModel {
 
 	func exhaustion() {
 		roomGameManager.exhaustion()
-		getVisualImpactFromAction()
+		getVisualImpactFromAction(color: .purple)
 		syncGameUIState()
 		resetCharacterBeingHitAndSyncGameState()
 	}
@@ -219,7 +219,7 @@ extension RoomViewModel {
 	func fireball() {
 
 		roomGameManager.fireball()
-		getVisualImpactFromAction()
+		getVisualImpactFromAction(color: .purple)
 		syncGameUIState()
 		resetCharacterBeingHitAndSyncGameState()
 	}
@@ -228,7 +228,7 @@ extension RoomViewModel {
 
 	func dot() {
 		roomGameManager.dot()
-		getVisualImpactFromAction()
+		getVisualImpactFromAction(color: .purple)
 		syncGameUIState()
 		resetCharacterBeingHitAndSyncGameState()
 	}
@@ -333,12 +333,12 @@ extension RoomViewModel {
 
 	// MARK: GetVisualImpactFromAction
 
-	func getVisualImpactFromAction() {
+	func getVisualImpactFromAction(color: Color) {
 
 		let actionResult: (Bool, Int) = roomGameManager.actionImpactAndTarget()
 		let target = actionResult.0
 		let impact = actionResult.1
-		passActionVisualResult(target, impact)
+		passActionVisualResult(target, impact, color)
 	}
 
 	// MARK: TriggerEffect
@@ -365,9 +365,8 @@ extension RoomViewModel {
 	// MARK: PassActionVisualResult
 
 	private func passActionVisualResult(_ target: Bool,
-										_ label: Int) {
-
-		let color: Color = .red
+										_ label: Int,
+										_ color: Color) {
 
 		if target {
 			enemyUIState.enemyActionColor = color

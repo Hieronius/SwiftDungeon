@@ -1,7 +1,5 @@
 Current Plan
 
-0. Add HP/Mana regen, dot effects
-
 1. Refactor RoomViewModel to CombatManager
 	- Create ActionManager
 	- Implement TurnManager

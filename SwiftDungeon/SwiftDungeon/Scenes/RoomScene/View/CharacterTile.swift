@@ -5,12 +5,12 @@ import SwiftUI
 struct CharacterTileView: View {
 	let baseColor: Color
 	let label: String
-	let effectLabel: String        // The number or text to show ("3", "10", etc.)
+	let impactLabel: String        // The number or text to show ("3", "10", etc.)
 	let isActive: Bool
 	let activeColor: Color
 	let effectColor: Color?
 	let didHit: Bool
-	let effectTextColor: Color?    // New: color of the label (red, green, etc.)
+	let impactTextColor: Color?    // New: color of the label (red, green, etc.)
 
 	@State private var pulse = false
 	@State private var internalEffect: Color? = nil
@@ -61,11 +61,11 @@ struct CharacterTileView: View {
 				.foregroundColor(.white)
 
 			// New: Effect text overlay (e.g. "3", "10")
-			if showEffectLabel && !effectLabel.isEmpty {
-				Text(effectLabel)
+			if showEffectLabel && !impactLabel.isEmpty {
+				Text(impactLabel)
 					.font(.title2)
 					.bold()
-					.foregroundColor(effectTextColor ?? .white)
+					.foregroundColor(impactTextColor ?? .white)
 					.offset(y: -30) // Appears above the square
 					.transition(.opacity)
 			}
@@ -80,7 +80,7 @@ struct CharacterTileView: View {
 			internalEffect = newColor
 		}
 
-		.onChange(of: effectLabel) { _ in
+		.onChange(of: impactLabel) { _ in
 			showEffectLabel = true
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 				showEffectLabel = false
@@ -101,7 +101,6 @@ struct CharacterTileView: View {
 		shaking = true
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
 			shaking = false
-			print(shaking)
 		}
 	}
 }
