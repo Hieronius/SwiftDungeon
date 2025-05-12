@@ -45,7 +45,7 @@ class ActionCalculator {
 	}
 
 	func dot(_ host: Character, _ target: Character) -> Int {
-		let impact = host.spellPower
+		let impact = host.spellPower / 2
 		return impact
 	}
 

@@ -37,7 +37,7 @@ class RoomViewModel: ObservableObject {
 			heroCurrentExperience: roomGameManager.roomGameState.hero?.stats.currentExperience ?? 0,
 			heroMaxExperience: roomGameManager.roomGameState.hero?.stats.maxExperience ?? 0,
 			heroActionColor: .white,
-			heroActionLabel: 99,
+			heroActionLabel: 0,
 			heroBeingHit: false,
 			heroActiveEffects: roomGameManager.roomGameState.hero?.activeEffects ?? []
 		)
@@ -51,7 +51,7 @@ class RoomViewModel: ObservableObject {
 			enemyMaxEnergy: roomGameManager.roomGameState.enemy?.maxEnergy ?? 0,
 			enemyCurrentEnergy: roomGameManager.roomGameState.enemy?.currentEnergy ?? 0,
 			enemyActionColor: .white,
-			enemyActionLabel: 100,
+			enemyActionLabel: 0,
 			enemyBeingHit: false,
 			enemyActiveEffects: roomGameManager.roomGameState.enemy?.activeEffects ?? []
 		)
@@ -125,6 +125,7 @@ extension RoomViewModel {
 
 	func sunderArmor() {
 		roomGameManager.sunderArmor()
+		getVisualImpactFromAction(color: .purple)
 		syncGameUIState()
 		resetCharacterBeingHitAndSyncGameState()
 	}

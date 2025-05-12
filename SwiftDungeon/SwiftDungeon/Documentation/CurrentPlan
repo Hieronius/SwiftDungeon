@@ -24,6 +24,7 @@ Optional:
 	- refactor each method like heal() to create separate local properties for each part of the formula like:
 		let manaCost = GameConfig.spellManaCost
 		if hero.currentMana >= manaCost { cast }
+	- refactor checks like isGameOn, guard host/target into separate method
 
 4. Add animation of the end of the fight
 5. Add animation of entering to the new room
