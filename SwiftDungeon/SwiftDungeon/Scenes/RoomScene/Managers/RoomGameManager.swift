@@ -245,35 +245,6 @@ extension RoomGameManager {
 		checkWinLoseCondition()
 	}
 
-	// MARK: Correct Initial Version
-//	func attack() {
-//
-//		guard roomGameState.isGameOn else { return }
-//		guard let hero = roomGameState.hero else { return }
-//		guard let enemy = roomGameState.enemy else { return }
-//
-//		if roomGameState.isHeroTurn {
-//
-//			guard hero.currentEnergy >= GameConfig.attackEnergyCost else { return }
-//			let result = actionCalculator.attack(hero, enemy)
-//			enemy.currentHealth = max(enemy.currentHealth - result, 0)
-//			hero.currentEnergy -= GameConfig.attackEnergyCost
-//			roomGameState.actionImpact = result
-//			triggerHit(onHero: false)
-//
-//		} else {
-//
-//			guard enemy.currentEnergy >= GameConfig.attackEnergyCost else { return }
-//			let result = actionCalculator.attack(enemy, hero)
-//			hero.currentHealth = max(hero.currentHealth - result, 0)
-//			enemy.currentEnergy -= GameConfig.attackEnergyCost
-//			roomGameState.actionImpact = result
-//			triggerHit(onHero: true)
-//		}
-//		checkWinLoseCondition()
-//
-//	}
-
 	// MARK: Block
 
 	func block() {
@@ -469,19 +440,27 @@ extension RoomGameManager {
 
 		if roomGameState.isHeroTurn {
 
-			guard hero.currentMana >= GameConfig.fireballManaCost else { return }
+			guard hero.currentMana >= GameConfig.fireballManaCost,
+				  hero.currentEnergy >= GameConfig.spellEnergyCost else {
+				return
+			}
 			let result = actionCalculator.fireball(hero, enemy)
 			enemy.currentHealth = max(enemy.currentHealth - result, 0)
 			hero.currentMana = max(hero.currentMana - GameConfig.fireballManaCost, 0)
+			hero.currentEnergy = max(hero.currentEnergy - GameConfig.spellEnergyCost, 0)
 			roomGameState.actionImpact = result
 			triggerHit(onHero: false)
 
 		} else {
 
-			guard enemy.currentMana >= GameConfig.fireballManaCost else { return }
+			guard enemy.currentMana >= GameConfig.fireballManaCost,
+				  enemy.currentEnergy >= GameConfig.spellEnergyCost else {
+				return
+			}
 			let result = actionCalculator.fireball(enemy, hero)
 			hero.currentHealth = max(hero.currentHealth - result, 0)
 			enemy.currentMana = max(enemy.currentMana - GameConfig.fireballManaCost, 0)
+			enemy.currentEnergy = max(enemy.currentEnergy - GameConfig.spellEnergyCost, 0)
 			roomGameState.actionImpact = result
 			triggerHit(onHero: true)
 		}
@@ -499,8 +478,12 @@ extension RoomGameManager {
 
 		if roomGameState.isHeroTurn {
 
-			guard hero.currentMana >= GameConfig.exhaustionManaCost else { return }
+			guard hero.currentMana >= GameConfig.exhaustionManaCost,
+				  hero.currentEnergy >= GameConfig.spellEnergyCost else {
+				return
+			}
 			hero.currentMana = max(hero.currentMana - GameConfig.exhaustionManaCost, 0)
+			hero.currentEnergy = max(hero.currentEnergy - GameConfig.spellEnergyCost, 0)
 			let impact = actionCalculator.exhaustion(hero, enemy)
 			let exhaustioneffect = Effect(type: .energyDOWN(value: impact), duration: GameConfig.exhaustionDuration)
 			effectManager.applyEffect(exhaustioneffect, enemy)
@@ -508,8 +491,12 @@ extension RoomGameManager {
 
 		} else {
 
-			guard enemy.currentMana >= GameConfig.exhaustionManaCost else { return }
+			guard enemy.currentMana >= GameConfig.exhaustionManaCost,
+				  enemy.currentEnergy >= GameConfig.spellEnergyCost else {
+				return
+			}
 			enemy.currentMana = max(enemy.currentMana - GameConfig.exhaustionManaCost, 0)
+			enemy.currentEnergy = max(enemy.currentEnergy - GameConfig.spellEnergyCost, 0)
 			let impact = actionCalculator.exhaustion(enemy, hero)
 			let exhaustioneffect = Effect(type: .energyDOWN(value: impact), duration: GameConfig.exhaustionDuration)
 			effectManager.applyEffect(exhaustioneffect, hero)
