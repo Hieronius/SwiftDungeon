@@ -277,7 +277,6 @@ extension RoomGameManager {
 		else { return }
 
 		let host = snapshot.host
-		let isHeroTurn = snapshot.isHeroTurn
 
 		guard host.currentEnergy >= GameConfig.blockEnergyCost else { return }
 
@@ -295,15 +294,13 @@ extension RoomGameManager {
 
 	func cut() {
 
-		guard roomGameState.isGameOn else { return }
+		guard let snapshot = roomGameState
+			.checkIsGameOneCurrentTurnHeroAndEnemy()
+		else { return }
 
-		guard let host = roomGameState.isHeroTurn ?
-					roomGameState.hero:
-					roomGameState.enemy else { return }
-
-		guard let target = !roomGameState.isHeroTurn ?
-					roomGameState.hero:
-					roomGameState.enemy else { return }
+		let host = snapshot.host
+		let target = snapshot.target
+		let isHeroTurn = snapshot.isHeroTurn
 
 		guard host.currentEnergy >= GameConfig.cutEnergyCost else { return }
 
@@ -314,7 +311,7 @@ extension RoomGameManager {
 
 		effectManager.applyEffect(debuff, target)
 
-		triggerHit(onHero: !roomGameState.isHeroTurn)
+		triggerHit(onHero: !isHeroTurn)
 
 		roomGameState.actionImpact = result
 

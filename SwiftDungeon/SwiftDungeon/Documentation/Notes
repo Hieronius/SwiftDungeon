@@ -1,5 +1,7 @@
 // Notes and ideas
 
+if you want to separate a class or a service just make it's property as privates and you will see what parts of the code requires modification to fix errors
+
 // MARK: 1 Main function start() with start/menu/welcome sound
 
 // MARK: 2 Second function update() to constantly observe our game.
