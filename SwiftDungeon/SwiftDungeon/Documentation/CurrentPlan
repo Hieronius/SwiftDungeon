@@ -4,7 +4,7 @@ Current Plan
 	- Separate guards from action methods by creating a struct like ActionResult and return it from game state without direct call from GameManager
 	- Create methods in Character class like "applyEffect/applyAction"
 	- Create ActionManager
-	- Implement TurnManager
+	- Implement TurnManager (Enum with isHero/isEnemy/Between)
 	- Renamy all god damn classes and methods from "attack" in ViewModel to "attackTargetResetBeingHitAndDisplayVisualImpact" for better readability
 
 3. Add mechanics/abilities

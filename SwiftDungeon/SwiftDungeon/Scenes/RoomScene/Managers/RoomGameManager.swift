@@ -1,5 +1,20 @@
 import Foundation
 
+/*
+
+MARK: Example of complete refactoring
+
+func customAttack() {
+	 let chars = roomGameState.checkAndReturnHeroAndEnemy -> (Hero, Enemy)
+	 let hero = char.hero
+	 let enemy = char.enemy
+
+	 ActionHandler -> struct ActionResult { }
+	 let actionResult = ActionHandler.attack(hero, enemy)
+	 roomGameState.applyActionResult(actionResult))
+}
+ */
+
 class RoomGameManager {
 
 	// MARK: - Dependencies
@@ -54,6 +69,8 @@ extension RoomGameManager {
 		roomGameState.isHeroWon = false
 		roomGameState.isGameOver = false
 		roomGameState.currentRound = 1
+		// should be refactored to "getHero()" from char manager to
+		// gameState.instantiateHero(_ hero: Char)
 		roomGameState.hero = characterManager.setupHero()
 		roomGameState.enemyIndex = 0
 		let position = roomGameState.enemyIndex
@@ -175,7 +192,7 @@ extension RoomGameManager {
 
 extension RoomGameManager {
 
-	/// Probably should be put to the CharacterManager
+	/// Probably should be put to Hero/Enemy class for self mutation
 	func heroLevelUP() {
 
 		guard let hero = roomGameState.hero else { return }
@@ -227,15 +244,13 @@ extension RoomGameManager {
 
 	func attack() {
 
-		// MARK: New one version
-
 		guard let snapshot = roomGameState
 			.checkIsGameOneCurrentTurnHeroAndEnemy()
 		else { return }
 
 		let host = snapshot.host
 		let target = snapshot.target
-		let currentTurn = snapshot.isHeroTurn
+		let isHeroTurn = snapshot.isHeroTurn
 
 		guard host.currentEnergy >= GameConfig.attackEnergyCost else { return }
 
@@ -246,7 +261,7 @@ extension RoomGameManager {
 		target.currentHealth = max(target.currentHealth - result, 0)
 		host.currentEnergy -= GameConfig.attackEnergyCost
 		
-		triggerHit(onHero: !currentTurn)
+		triggerHit(onHero: !isHeroTurn)
 
 		roomGameState.actionImpact = result
 
@@ -257,17 +272,20 @@ extension RoomGameManager {
 
 	func block() {
 
-		guard roomGameState.isGameOn else { return }
+		guard let snapshot = roomGameState
+			.checkIsGameOneCurrentTurnHeroAndEnemy()
+		else { return }
 
-		let target = roomGameState.isHeroTurn ? roomGameState.hero : roomGameState.enemy
-		guard let target else { return }
-		guard target.currentEnergy >= GameConfig.blockEnergyCost else { return }
+		let host = snapshot.host
+		let isHeroTurn = snapshot.isHeroTurn
 
-		let blockValue = actionCalculator.block(target)
+		guard host.currentEnergy >= GameConfig.blockEnergyCost else { return }
+
+		let blockValue = actionCalculator.block(host)
 		let buff = Effect(type: .armorUP(value: blockValue), duration: 3)
 
-		effectManager.applyEffect(buff, target)
-		target.currentEnergy -= GameConfig.blockEnergyCost
+		effectManager.applyEffect(buff, host)
+		host.currentEnergy -= GameConfig.blockEnergyCost
 		
 
 		checkWinLoseCondition()
