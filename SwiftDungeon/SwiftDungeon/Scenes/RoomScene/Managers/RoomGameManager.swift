@@ -459,15 +459,13 @@ extension RoomGameManager {
 
 	func fireball() {
 
-		guard roomGameState.isGameOn else { return }
+		guard let snapshot = roomGameState
+			.checkIsGameOneCurrentTurnHeroAndEnemy()
+		else { return }
 
-		guard let host = roomGameState.isHeroTurn ?
-					roomGameState.hero:
-					roomGameState.enemy else { return }
-
-		guard let target = !roomGameState.isHeroTurn ?
-					roomGameState.hero:
-					roomGameState.enemy else { return }
+		let host = snapshot.host
+		let target = snapshot.target
+		let isHeroTurn = snapshot.isHeroTurn
 
 		guard host.currentMana >= GameConfig.fireballManaCost,
 			  host.currentEnergy >= GameConfig.spellEnergyCost else {
@@ -479,7 +477,7 @@ extension RoomGameManager {
 		host.currentMana = max(host.currentMana - GameConfig.fireballManaCost, 0)
 		host.currentEnergy = max(host.currentEnergy - GameConfig.spellEnergyCost, 0)
 
-		triggerHit(onHero: !roomGameState.isHeroTurn)
+		triggerHit(onHero: !isHeroTurn)
 
 		roomGameState.actionImpact = result
 
@@ -492,15 +490,13 @@ extension RoomGameManager {
 	/// Target has decreased amount of current energy in next turn
 	func exhaustion() {
 
-		guard roomGameState.isGameOn else { return }
+		guard let snapshot = roomGameState
+			.checkIsGameOneCurrentTurnHeroAndEnemy()
+		else { return }
 
-		guard let host = roomGameState.isHeroTurn ?
-					roomGameState.hero:
-					roomGameState.enemy else { return }
-
-		guard let target = !roomGameState.isHeroTurn ?
-					roomGameState.hero:
-					roomGameState.enemy else { return }
+		let host = snapshot.host
+		let target = snapshot.target
+		let isHeroTurn = snapshot.isHeroTurn
 
 		guard host.currentMana >= GameConfig.exhaustionManaCost,
 			  host.currentEnergy >= GameConfig.spellEnergyCost else {
@@ -513,7 +509,7 @@ extension RoomGameManager {
 		let exhaustioneffect = Effect(type: .energyDOWN(value: impact), duration: GameConfig.exhaustionDuration)
 		effectManager.applyEffect(exhaustioneffect, target)
 
-		triggerHit(onHero: !roomGameState.isHeroTurn)
+		triggerHit(onHero: !isHeroTurn)
 
 		roomGameState.actionImpact = 0
 
@@ -525,21 +521,23 @@ extension RoomGameManager {
 
 	func healthRegen() {
 
-		guard roomGameState.isGameOn else { return }
+		guard let snapshot = roomGameState
+			.checkIsGameOneCurrentTurnHeroAndEnemy()
+		else { return }
 
-		let target = roomGameState.isHeroTurn ? roomGameState.hero : roomGameState.enemy
-		guard let target else { return }
-		guard target.currentMana >= GameConfig.healthRegenManaCost,
-		target.currentEnergy >= GameConfig.spellEnergyCost else {
+		let host = snapshot.host
+
+		guard host.currentMana >= GameConfig.healthRegenManaCost,
+			  host.currentEnergy >= GameConfig.spellEnergyCost else {
 			return
 		}
 
-		let healValue = actionCalculator.healthRegen(target)
+		let healValue = actionCalculator.healthRegen(host)
 		let buff = Effect(type: .healthRegen(initialHeal: healValue, healthPerTurn: healValue), duration: GameConfig.healthRegenDuration)
 
-		effectManager.applyEffect(buff, target)
-		target.currentMana = max(target.currentMana - GameConfig.healthRegenManaCost, 0)
-		target.currentEnergy = max(target.currentEnergy - GameConfig.spellEnergyCost, 0)
+		effectManager.applyEffect(buff, host)
+		host.currentMana = max(host.currentMana - GameConfig.healthRegenManaCost, 0)
+		host.currentEnergy = max(host.currentEnergy - GameConfig.spellEnergyCost, 0)
 
 		checkWinLoseCondition()
 	}
@@ -548,19 +546,21 @@ extension RoomGameManager {
 
 	func manaRegen() {
 
-		guard roomGameState.isGameOn else { return }
+		guard let snapshot = roomGameState
+			.checkIsGameOneCurrentTurnHeroAndEnemy()
+		else { return }
 
-		let target = roomGameState.isHeroTurn ? roomGameState.hero : roomGameState.enemy
-		guard let target else { return }
-		guard target.currentMana >= GameConfig.manaRegenManaCost,
-		target.currentEnergy >= GameConfig.spellEnergyCost else { return }
+		let host = snapshot.host
 
-		let manaValue = actionCalculator.manaRegen(target)
+		guard host.currentMana >= GameConfig.manaRegenManaCost,
+			  host.currentEnergy >= GameConfig.spellEnergyCost else { return }
+
+		let manaValue = actionCalculator.manaRegen(host)
 		let buff = Effect(type: .manaRegen(initialMana: manaValue, manaPerTurn: manaValue), duration: GameConfig.manaRegenDuration)
 
-		effectManager.applyEffect(buff, target)
-		target.currentMana = max(target.currentMana - GameConfig.healthRegenManaCost, 0)
-		target.currentEnergy = max(target.currentEnergy - GameConfig.spellEnergyCost, 0)
+		effectManager.applyEffect(buff, host)
+		host.currentMana = max(host.currentMana - GameConfig.healthRegenManaCost, 0)
+		host.currentEnergy = max(host.currentEnergy - GameConfig.spellEnergyCost, 0)
 
 		checkWinLoseCondition()
 	}
@@ -570,15 +570,13 @@ extension RoomGameManager {
 	/// Periodic Magic Damage
 	func dot() {
 
-		guard roomGameState.isGameOn else { return }
+		guard let snapshot = roomGameState
+			.checkIsGameOneCurrentTurnHeroAndEnemy()
+		else { return }
 
-		guard let host = roomGameState.isHeroTurn ?
-					roomGameState.hero:
-					roomGameState.enemy else { return }
-
-		guard let target = !roomGameState.isHeroTurn ?
-					roomGameState.hero:
-					roomGameState.enemy else { return }
+		let host = snapshot.host
+		let target = snapshot.target
+		let isHeroTurn = snapshot.isHeroTurn
 
 		guard host.currentMana >= GameConfig.dotManaCost,
 			  host.currentEnergy >= GameConfig.spellEnergyCost else {
@@ -592,7 +590,7 @@ extension RoomGameManager {
 		let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
 		effectManager.applyEffect(debuff, target)
 
-		triggerHit(onHero: false)
+		triggerHit(onHero: !isHeroTurn)
 
 		roomGameState.actionImpact = result
 
