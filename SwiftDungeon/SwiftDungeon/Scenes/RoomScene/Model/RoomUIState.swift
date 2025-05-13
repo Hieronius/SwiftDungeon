@@ -1,5 +1,6 @@
 import Foundation
 
+/// Visual Snapshot of RoomGameState to display
 struct RoomUIState {
 
 	var currentRoom = 1

@@ -1,5 +1,6 @@
 import SwiftUI
 
+/// Snapshot of enemy's current stats and effects
 struct EnemyUIState {
 
 	var enemyCurrentLevel: Int

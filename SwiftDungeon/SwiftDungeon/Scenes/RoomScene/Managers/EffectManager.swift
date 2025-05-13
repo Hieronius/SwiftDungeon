@@ -1,6 +1,8 @@
 import Foundation
 
 class EffectManager {
+
+	// MARK: Apply Effect
 	
 	func applyEffect(_ effect: Effect, _ target: Character) {
 		
@@ -45,7 +47,8 @@ class EffectManager {
 		target.activeEffects.append(effect)
 	}
 	
-	// 2) START OF TURN: tick & expire
+	// MARK: START OF TURN: tick & expire
+	
 	func processEffectsAtTurnStart(_ target: Character) {
 		// iterate backwards so removals don’t shift indices
 		for idx in (0..<target.activeEffects.count).reversed() {
@@ -120,8 +123,9 @@ class EffectManager {
 			}
 		}
 	}
-	
-	// convenience filters
+
+	// MARK: Clear All Effects
+
 	func clearAllEffects(_ target: Character) {
 		// revert all remaining buffs first
 		for effect in target.activeEffects {
@@ -131,6 +135,8 @@ class EffectManager {
 		}
 		target.activeEffects.removeAll()
 	}
+
+	// MARK: Clear Buffs
 	
 	func clearBuffs(_ target: Character) {
 		let (buffs, rest) = target.activeEffects.partitioned { !$0.type.isDebuff }
@@ -141,6 +147,9 @@ class EffectManager {
 		}
 		target.activeEffects = rest
 	}
+
+	// MARK: Clear Debuffs
+
 	func clearDebuffs(_ target: Character) {
 		let (debuffs, rest) = target.activeEffects.partitioned { $0.type.isDebuff }
 		debuffs.forEach {
@@ -153,8 +162,10 @@ class EffectManager {
 	}
 }
 
-// helper to split an array
+// MARK: - Extensions
+
 extension Array {
+
 	func partitioned(by isFirst: (Element) -> Bool) -> (first: [Element], second: [Element]) {
 		var a = [Element]()
 		var b = [Element]()

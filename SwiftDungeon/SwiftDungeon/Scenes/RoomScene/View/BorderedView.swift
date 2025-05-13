@@ -1,11 +1,18 @@
 import SwiftUI
 
 struct BorderedSection<Content: View>: View {
+
+	// MARK:  - Properties
+
 	let content: Content
+
+	// MARK: - Initialization
 
 	init(@ViewBuilder content: () -> Content) {
 		self.content = content()
 	}
+
+	// MARK: Body
 
 	var body: some View {
 		content

@@ -313,6 +313,7 @@ extension RoomViewModel {
 
 	func openStatus() {
 		sceneUIStateManager.open(.status)
+		// viewModel.UIState = sceneUIStateManager.setUIState
 	}
 
 	func openEquipment() {

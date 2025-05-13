@@ -2,12 +2,16 @@ import Foundation
 
 class RoomGameManager {
 
+	// MARK: - Dependencies
+
 	// Any attacks and spells should be treated as actions
 	let roomGameState: RoomGameState
 	let actionCalculator: ActionCalculator
 	let characterManager: CharacterManager
 	let effectManager: EffectManager
 	let turnManager: TurnManager
+
+	// MARK: Initialization
 
 	init(
 		roomGameState: RoomGameState,
@@ -23,6 +27,7 @@ class RoomGameManager {
 		self.turnManager = turnManager
 
 	}
+
 }
 
 // MARK: - Game Options
@@ -218,28 +223,30 @@ extension RoomGameManager {
 	// MARK: - Actions
 
 
-
 	// MARK: Attack
 
 	func attack() {
 
-		guard roomGameState.isGameOn else { return }
+		// MARK: New one version
 
-		guard let host = roomGameState.isHeroTurn ?
-					roomGameState.hero:
-					roomGameState.enemy else { return }
+		guard let snapshot = roomGameState
+			.checkIsGameOneCurrentTurnHeroAndEnemy()
+		else { return }
 
-		guard let target = !roomGameState.isHeroTurn ?
-					roomGameState.hero:
-					roomGameState.enemy else { return }
+		let host = snapshot.host
+		let target = snapshot.target
+		let currentTurn = snapshot.isHeroTurn
 
 		guard host.currentEnergy >= GameConfig.attackEnergyCost else { return }
 
 		let result = actionCalculator.attack(host, target)
+
+		// Should be refactored to avoid direct state mutation
+
 		target.currentHealth = max(target.currentHealth - result, 0)
 		host.currentEnergy -= GameConfig.attackEnergyCost
 		
-		triggerHit(onHero: !roomGameState.isHeroTurn)
+		triggerHit(onHero: !currentTurn)
 
 		roomGameState.actionImpact = result
 

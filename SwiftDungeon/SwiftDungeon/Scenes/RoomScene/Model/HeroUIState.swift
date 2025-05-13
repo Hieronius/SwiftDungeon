@@ -1,5 +1,6 @@
 import SwiftUI
 
+/// Snapshot of Hero's current stats and effects
 struct HeroUIState {
 
 	var heroCurrentLevel: Int

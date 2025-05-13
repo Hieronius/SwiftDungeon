@@ -1,10 +1,11 @@
 Current Plan
 
 1. Refactor RoomViewModel to CombatManager
+	- Separate guards from action methods by creating a struct like ActionResult and return it from game state without direct call from GameManager
+	- Create methods in Character class like "applyEffect/applyAction"
 	- Create ActionManager
 	- Implement TurnManager
-
-1.5. Add methods like applyEffect/decreaseArmor/increaseHealth to Character class or Creature protocol itself to incapsulate handling of Character State instead of giving EffectManager an ability to change target state directly
+	- Renamy all god damn classes and methods from "attack" in ViewModel to "attackTargetResetBeingHitAndDisplayVisualImpact" for better readability
 
 3. Add mechanics/abilities
 

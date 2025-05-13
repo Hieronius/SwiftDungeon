@@ -2,6 +2,8 @@ import Foundation
 
 /// CharacterManager - Manages spawning and resetting Characters
 class CharacterManager {
+
+	// MARK: Enemies
 	
 	private var enemyList: [Character] = [
 
@@ -261,6 +263,7 @@ class CharacterManager {
 				  activeEffects: [])
 	]
 
+	// MARK: Setup Hero
 
 	func setupHero() -> Character {
 		
@@ -281,6 +284,8 @@ class CharacterManager {
 						 isStunned: false,
 						 activeEffects: [])
 	}
+
+	// MARK: Spawn Enemy
 
 	func spawnEnemy(at index: Int) -> Character {
 		return enemyList[index]

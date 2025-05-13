@@ -7,7 +7,6 @@ struct RoomView: View {
 	@StateObject private var viewModel: RoomViewModel
 	@State private var isEnemyUI = true
 
-	
 	// MARK: - Initialization
 	
 	init(viewModel: RoomViewModel) {
@@ -56,6 +55,7 @@ struct RoomView: View {
 		}
 		
 		// MARK: ENTRY POINT TO THE GAME
+
 		.onAppear {
 			viewModel.startFight()
 		}
@@ -63,6 +63,7 @@ struct RoomView: View {
 }
 
 // MARK: - Section Action Buttons
+
 private extension RoomView {
 
 	/// Builds the appropriate action buttons for the current UI section
@@ -269,7 +270,7 @@ private extension RoomView {
 
 			switch sceneUIState {
 
-				// Skill Set
+				// MARK: Skill Set
 
 			case .skills:
 				VStack {
@@ -306,7 +307,7 @@ private extension RoomView {
 					}
 				}
 
-				// Spell Book
+				// MARK: Spell Book
 
 			case .spellbook:
 

@@ -53,4 +53,11 @@ class Character: Creature {
 		self.isStunned = isStunned
 		self.activeEffects = activeEffects
 	}
+
+	// func applyEffect(impact: Int) {
+	// self.health += impact * 2
+
+	// func receiveDamage
+
+	// func restoreHeath
 }

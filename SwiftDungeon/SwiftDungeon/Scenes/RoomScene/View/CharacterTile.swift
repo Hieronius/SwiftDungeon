@@ -3,6 +3,7 @@ import SwiftUI
 // MARK: Special Effects For Hero/Enemy Tiles
 
 struct CharacterTileView: View {
+	
 	let baseColor: Color
 	let label: String
 	let impactLabel: String        // The number or text to show ("3", "10", etc.)
@@ -83,13 +84,6 @@ struct CharacterTileView: View {
 		.onChange(of: effectColor) { newColor in
 			internalEffect = newColor
 		}
-
-//		.onChange(of: didHit) { _ in
-//			showEffectLabel = true
-//			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//				showEffectLabel = false
-//			}
-//		}
 	}
 
 	private func startPulse() {
