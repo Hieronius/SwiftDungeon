@@ -383,19 +383,21 @@ extension RoomGameManager {
 
 	func heal() {
 
-		guard roomGameState.isGameOn else { return }
+		guard let snapshot = roomGameState
+			.checkIsGameOneCurrentTurnHeroAndEnemy()
+		else { return }
 
-		let target = roomGameState.isHeroTurn ? roomGameState.hero : roomGameState.enemy
-		guard let target else { return }
-		guard target.currentEnergy >= GameConfig.spellEnergyCost,
-			  target.currentMana >= GameConfig.healManaCost else {
+		let host = snapshot.host
+
+		guard host.currentEnergy >= GameConfig.spellEnergyCost,
+			  host.currentMana >= GameConfig.healManaCost else {
 			return
 		}
 
-		let result = actionCalculator.heal(target)
-		target.currentHealth = min(target.currentHealth + result, target.maxHealth)
-		target.currentMana -= GameConfig.healManaCost
-		target.currentEnergy -= GameConfig.spellEnergyCost
+		let result = actionCalculator.heal(host)
+		host.currentHealth = min(host.currentHealth + result, host.maxHealth)
+		host.currentMana -= GameConfig.healManaCost
+		host.currentEnergy -= GameConfig.spellEnergyCost
 
 		checkWinLoseCondition()
 	}
