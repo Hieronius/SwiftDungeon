@@ -406,27 +406,29 @@ extension RoomGameManager {
 
 	func buffAD() {
 
-		guard roomGameState.isGameOn else { return }
+		guard let snapshot = roomGameState
+			.checkIsGameOneCurrentTurnHeroAndEnemy()
+		else { return }
 
-		let target = roomGameState.isHeroTurn ? roomGameState.hero : roomGameState.enemy
-		guard let target else { return }
-		guard target.currentEnergy >= GameConfig.spellEnergyCost,
-			  target.currentMana >= GameConfig.buffManaCost else {
+		let host = snapshot.host
+
+		guard host.currentEnergy >= GameConfig.spellEnergyCost,
+			  host.currentMana >= GameConfig.buffManaCost else {
 			return
 
 		}
 
-		let result = actionCalculator.attackUP(target)
+		let result = actionCalculator.attackUP(host)
 		let buff = Effect(type: .attackUP(value: result), duration: 3)
-		effectManager.applyEffect(buff, target)
+		effectManager.applyEffect(buff, host)
 
-		target.currentMana -= GameConfig.buffManaCost
-		target.currentEnergy -= GameConfig.spellEnergyCost
+		host.currentMana -= GameConfig.buffManaCost
+		host.currentEnergy -= GameConfig.spellEnergyCost
 
 		checkWinLoseCondition()
 	}
 
-	// MARK: BuffAD
+	// MARK: Buff Armor
 
 	func buffArmor() {
 
