@@ -349,15 +349,13 @@ extension RoomGameManager {
 
 	func sunderArmor() {
 
-		guard roomGameState.isGameOn else { return }
+		guard let snapshot = roomGameState
+			.checkIsGameOneCurrentTurnHeroAndEnemy()
+		else { return }
 
-		guard let host = roomGameState.isHeroTurn ?
-					roomGameState.hero:
-					roomGameState.enemy else { return }
-
-		guard let target = !roomGameState.isHeroTurn ?
-					roomGameState.hero:
-					roomGameState.enemy else { return }
+		let host = snapshot.host
+		let target = snapshot.target
+		let isHeroTurn = snapshot.isHeroTurn
 
 		guard host.currentEnergy >= GameConfig.sunderArmorCost else { return }
 
@@ -368,7 +366,7 @@ extension RoomGameManager {
 
 		effectManager.applyEffect(sunderEffect, target)
 
-		triggerHit(onHero: !roomGameState.isHeroTurn)
+		triggerHit(onHero: !isHeroTurn)
 
 		roomGameState.actionImpact = 0
 
