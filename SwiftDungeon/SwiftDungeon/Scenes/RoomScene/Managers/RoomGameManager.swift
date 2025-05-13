@@ -139,6 +139,7 @@ extension RoomGameManager {
 
 	// MARK: Check Win/Lose Condition
 
+	/// Method should be put to the GameState file and return bool when being called
 	func checkWinLoseCondition() {
 
 		guard let hero = roomGameState.hero else { return }
@@ -432,22 +433,24 @@ extension RoomGameManager {
 
 	func buffArmor() {
 
-		guard roomGameState.isGameOn else { return }
+		guard let snapshot = roomGameState
+			.checkIsGameOneCurrentTurnHeroAndEnemy()
+		else { return }
 
-		let target = roomGameState.isHeroTurn ? roomGameState.hero : roomGameState.enemy
-		guard let target else { return }
-		guard target.currentEnergy >= GameConfig.spellEnergyCost,
-			  target.currentMana >= GameConfig.buffManaCost else {
+		let host = snapshot.host
+
+		guard host.currentEnergy >= GameConfig.spellEnergyCost,
+			  host.currentMana >= GameConfig.buffManaCost else {
 			return
 
 		}
 
-		let result = actionCalculator.armorUP(target)
+		let result = actionCalculator.armorUP(host)
 		let buff = Effect(type: .armorUP(value: result), duration: 3)
-		effectManager.applyEffect(buff, target)
+		effectManager.applyEffect(buff, host)
 
-		target.currentMana -= GameConfig.buffManaCost
-		target.currentEnergy -= GameConfig.spellEnergyCost
+		host.currentMana -= GameConfig.buffManaCost
+		host.currentEnergy -= GameConfig.spellEnergyCost
 
 		checkWinLoseCondition()
 	}
