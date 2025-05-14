@@ -393,16 +393,13 @@ extension RoomGameManager {
 
 	func heal() {
 
-		guard let snapshot = roomGameState
-			.checkIsGameOneCurrentTurnHeroAndEnemy()
-		else { return }
+		let snapshot = roomGameState.getActualGameStateSnapshot()
 
-		let host = snapshot.host
+		let isHeroTurn = snapshot.isHeroTurn
+		guard let hero = snapshot.hero else { return }
+		guard let enemy = snapshot.enemy else { return }
 
-		guard host.currentEnergy >= GameConfig.spellEnergyCost,
-			  host.currentMana >= GameConfig.healManaCost else {
-			return
-		}
+		let host = isHeroTurn ? hero : enemy
 
 		let result = actionCalculator.heal(host)
 		host.currentHealth = min(host.currentHealth + result, host.maxHealth)
@@ -416,17 +413,13 @@ extension RoomGameManager {
 
 	func buffAD() {
 
-		guard let snapshot = roomGameState
-			.checkIsGameOneCurrentTurnHeroAndEnemy()
-		else { return }
+		let snapshot = roomGameState.getActualGameStateSnapshot()
 
-		let host = snapshot.host
+		let isHeroTurn = snapshot.isHeroTurn
+		guard let hero = snapshot.hero else { return }
+		guard let enemy = snapshot.enemy else { return }
 
-		guard host.currentEnergy >= GameConfig.spellEnergyCost,
-			  host.currentMana >= GameConfig.buffManaCost else {
-			return
-
-		}
+		let host = isHeroTurn ? hero : enemy
 
 		let result = actionCalculator.attackUP(host)
 		let buff = Effect(type: .attackUP(value: result), duration: 3)
@@ -442,11 +435,13 @@ extension RoomGameManager {
 
 	func buffArmor() {
 
-		guard let snapshot = roomGameState
-			.checkIsGameOneCurrentTurnHeroAndEnemy()
-		else { return }
+		let snapshot = roomGameState.getActualGameStateSnapshot()
 
-		let host = snapshot.host
+		let isHeroTurn = snapshot.isHeroTurn
+		guard let hero = snapshot.hero else { return }
+		guard let enemy = snapshot.enemy else { return }
+
+		let host = isHeroTurn ? hero : enemy
 
 		guard host.currentEnergy >= GameConfig.spellEnergyCost,
 			  host.currentMana >= GameConfig.buffManaCost else {
@@ -532,11 +527,13 @@ extension RoomGameManager {
 
 	func healthRegen() {
 
-		guard let snapshot = roomGameState
-			.checkIsGameOneCurrentTurnHeroAndEnemy()
-		else { return }
+		let snapshot = roomGameState.getActualGameStateSnapshot()
 
-		let host = snapshot.host
+		let isHeroTurn = snapshot.isHeroTurn
+		guard let hero = snapshot.hero else { return }
+		guard let enemy = snapshot.enemy else { return }
+
+		let host = isHeroTurn ? hero : enemy
 
 		guard host.currentMana >= GameConfig.healthRegenManaCost,
 			  host.currentEnergy >= GameConfig.spellEnergyCost else {
@@ -557,11 +554,13 @@ extension RoomGameManager {
 
 	func manaRegen() {
 
-		guard let snapshot = roomGameState
-			.checkIsGameOneCurrentTurnHeroAndEnemy()
-		else { return }
+		let snapshot = roomGameState.getActualGameStateSnapshot()
 
-		let host = snapshot.host
+		let isHeroTurn = snapshot.isHeroTurn
+		guard let hero = snapshot.hero else { return }
+		guard let enemy = snapshot.enemy else { return }
+
+		let host = isHeroTurn ? hero : enemy
 
 		guard host.currentMana >= GameConfig.manaRegenManaCost,
 			  host.currentEnergy >= GameConfig.spellEnergyCost else { return }
