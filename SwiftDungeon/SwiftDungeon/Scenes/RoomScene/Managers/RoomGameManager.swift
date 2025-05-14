@@ -498,13 +498,14 @@ extension RoomGameManager {
 	/// Target has decreased amount of current energy in next turn
 	func exhaustion() {
 
-		guard let snapshot = roomGameState
-			.checkIsGameOneCurrentTurnHeroAndEnemy()
-		else { return }
+		let snapshot = roomGameState.getActualGameStateSnapshot()
 
-		let host = snapshot.host
-		let target = snapshot.target
 		let isHeroTurn = snapshot.isHeroTurn
+		guard let hero = snapshot.hero else { return }
+		guard let enemy = snapshot.enemy else { return }
+
+		let host = isHeroTurn ? hero : enemy
+		let target = isHeroTurn ? enemy : hero
 
 		guard host.currentMana >= GameConfig.exhaustionManaCost,
 			  host.currentEnergy >= GameConfig.spellEnergyCost else {
