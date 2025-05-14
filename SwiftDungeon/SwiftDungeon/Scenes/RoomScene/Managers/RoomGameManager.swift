@@ -277,11 +277,13 @@ extension RoomGameManager {
 
 	func block() {
 
-		guard let snapshot = roomGameState
-			.checkIsGameOneCurrentTurnHeroAndEnemy()
-		else { return }
+		let snapshot = roomGameState.getActualGameStateSnapshot()
 
-		let host = snapshot.host
+		let isHeroTurn = snapshot.isHeroTurn
+		guard let hero = snapshot.hero else { return }
+		guard let enemy = snapshot.enemy else { return }
+
+		let host = isHeroTurn ? hero : enemy
 
 		guard host.currentEnergy >= GameConfig.blockEnergyCost else { return }
 
