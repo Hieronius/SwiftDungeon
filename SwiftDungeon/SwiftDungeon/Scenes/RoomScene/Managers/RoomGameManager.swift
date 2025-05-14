@@ -21,6 +21,8 @@ class RoomGameManager {
 
 	// Any attacks and spells should be treated as actions
 	let roomGameState: RoomGameState
+
+	// probably should be used by ActionHandler
 	let actionCalculator: ActionCalculator
 	let characterManager: CharacterManager
 	let effectManager: EffectManager
@@ -62,6 +64,7 @@ extension RoomGameManager {
 
 extension RoomGameManager {
 
+	// should be put to GameState
 	func startFight() {
 
 		roomGameState.isGameOn = true

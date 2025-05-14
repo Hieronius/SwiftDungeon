@@ -1,5 +1,6 @@
 import SwiftUI
 
+/// Expand GameStateSnapshot into fully embed in properties Struct CombatPrepSnapshot
 class RoomGameState {
 
 	// Room State
@@ -32,10 +33,12 @@ class RoomGameState {
 		guard let host = isHeroTurn ? hero: enemy else { return nil }
 		guard let target = isHeroTurn ? enemy: hero else { return nil }
 
-		let snapshot = CombatPrepSnapshot(isGameOn: isGameOn,
-										  isHeroTurn: isHeroTurn,
-										  host: host,
-										  target: target)
+		let snapshot = CombatPrepSnapshot(
+			isGameOn: isGameOn,
+			isHeroTurn: isHeroTurn,
+			host: host,
+			target: target
+		)
 		return snapshot
 	}
 }

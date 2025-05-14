@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DD2D74402DCB0D83005396F3 /* WorldStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D743F2DCB0D83005396F3 /* WorldStateMachine.swift */; };
-		DD2D74422DCB1C09005396F3 /* CombatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D74412DCB1C09005396F3 /* CombatManager.swift */; };
+		DD2D74422DCB1C09005396F3 /* ActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D74412DCB1C09005396F3 /* ActionHandler.swift */; };
 		DD2D74442DCB1C3A005396F3 /* TurnManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D74432DCB1C3A005396F3 /* TurnManager.swift */; };
 		DDA59C492DC07582007877A6 /* RoomGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA59C482DC07582007877A6 /* RoomGameState.swift */; };
 		DDA940612DBF4FC600837F9F /* SwiftDungeonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */; };
@@ -48,7 +48,7 @@
 
 /* Begin PBXFileReference section */
 		DD2D743F2DCB0D83005396F3 /* WorldStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldStateMachine.swift; sourceTree = "<group>"; };
-		DD2D74412DCB1C09005396F3 /* CombatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatManager.swift; sourceTree = "<group>"; };
+		DD2D74412DCB1C09005396F3 /* ActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionHandler.swift; sourceTree = "<group>"; };
 		DD2D74432DCB1C3A005396F3 /* TurnManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnManager.swift; sourceTree = "<group>"; };
 		DDA59C482DC07582007877A6 /* RoomGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGameState.swift; sourceTree = "<group>"; };
 		DDA9405D2DBF4FC600837F9F /* SwiftDungeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDungeon.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -278,7 +278,7 @@
 				DDA59C482DC07582007877A6 /* RoomGameState.swift */,
 				DDAB3E512DC7362A00DBA1C8 /* EffectManager.swift */,
 				DDA9407B2DBF538700837F9F /* ActionCalculator.swift */,
-				DD2D74412DCB1C09005396F3 /* CombatManager.swift */,
+				DD2D74412DCB1C09005396F3 /* ActionHandler.swift */,
 				DDA9407D2DBF53E000837F9F /* CharactersManager.swift */,
 				DD2D74432DCB1C3A005396F3 /* TurnManager.swift */,
 				DDAA56E22DC88279006E663D /* SceneUIStateManager.swift */,
@@ -375,7 +375,7 @@
 				DDA940632DBF4FC600837F9F /* RoomView.swift in Sources */,
 				DDAB3E522DC7362A00DBA1C8 /* EffectManager.swift in Sources */,
 				DDAA04122DC46F7900C801B4 /* HeroUIState.swift in Sources */,
-				DD2D74422DCB1C09005396F3 /* CombatManager.swift in Sources */,
+				DD2D74422DCB1C09005396F3 /* ActionHandler.swift in Sources */,
 				DDAA040E2DC46F4400C801B4 /* RoomUIState.swift in Sources */,
 				DDAC133F2DC9F18000E42D65 /* CharacterTile.swift in Sources */,
 				DDA940732DBF519200837F9F /* RoomViewModel.swift in Sources */,

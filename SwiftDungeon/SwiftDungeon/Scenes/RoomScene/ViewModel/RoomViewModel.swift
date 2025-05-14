@@ -26,6 +26,8 @@ class RoomViewModel: ObservableObject {
 		self.roomUIState = RoomUIState()
 		self.sceneUIState = SceneUIState()
 
+		// MARK: Apply getLastestGameStateSnapshot method instead
+
 		self.heroUIState = HeroUIState(
 			heroCurrentLevel: roomGameManager.roomGameState.hero?.stats.level ?? 0,
 			heroMaxHealth: roomGameManager.roomGameState.hero?.maxHealth ?? 0,

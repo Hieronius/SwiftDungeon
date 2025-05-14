@@ -1,5 +1,8 @@
 // Notes and ideas
 
+https://github.com/gilecheverria/UP_Battle_Project/blob/master/design.txt
+This link about simple file like this one with all classes/properties/methods in hierarchy to observe it's relationship and project struct. Feels bette then Mural
+
 if you want to separate a class or a service just make it's property as privates and you will see what parts of the code requires modification to fix errors
 
 // MARK: 1 Main function start() with start/menu/welcome sound
