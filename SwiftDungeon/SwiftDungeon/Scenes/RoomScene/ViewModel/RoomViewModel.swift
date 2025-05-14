@@ -28,34 +28,36 @@ class RoomViewModel: ObservableObject {
 
 		// MARK: Apply getLastestGameStateSnapshot method instead
 
+		let snapshot = roomGameManager.roomGameState.getActualGameStateSnapshot()
+
 		self.heroUIState = HeroUIState(
-			heroCurrentLevel: roomGameManager.roomGameState.hero?.stats.level ?? 0,
-			heroMaxHealth: roomGameManager.roomGameState.hero?.maxHealth ?? 0,
-			heroCurrentHealth: roomGameManager.roomGameState.hero?.currentHealth ?? 0,
-			heroMaxMana: roomGameManager.roomGameState.hero?.maxMana ?? 0,
-			heroCurrentMana: roomGameManager.roomGameState.hero?.currentMana ?? 0,
-			heroMaxEnergy: roomGameManager.roomGameState.hero?.maxEnergy ?? 0,
-			heroCurrentEnergy: roomGameManager.roomGameState.hero?.currentEnergy ?? 0,
-			heroCurrentExperience: roomGameManager.roomGameState.hero?.stats.currentExperience ?? 0,
-			heroMaxExperience: roomGameManager.roomGameState.hero?.stats.maxExperience ?? 0,
+			heroCurrentLevel: snapshot.hero?.stats.level ?? 0,
+			heroMaxHealth: snapshot.hero?.maxHealth ?? 0,
+			heroCurrentHealth: snapshot.hero?.currentHealth ?? 0,
+			heroMaxMana: snapshot.hero?.maxMana ?? 0,
+			heroCurrentMana: snapshot.hero?.currentMana ?? 0,
+			heroMaxEnergy: snapshot.hero?.maxEnergy ?? 0,
+			heroCurrentEnergy: snapshot.hero?.currentEnergy ?? 0,
+			heroCurrentExperience: snapshot.hero?.stats.currentExperience ?? 0,
+			heroMaxExperience: snapshot.hero?.stats.maxExperience ?? 0,
 			heroActionColor: .white,
 			heroActionLabel: 0,
 			heroBeingHit: false,
-			heroActiveEffects: roomGameManager.roomGameState.hero?.activeEffects ?? []
+			heroActiveEffects: snapshot.hero?.activeEffects ?? []
 		)
 
 		self.enemyUIState = EnemyUIState(
-			enemyCurrentLevel: roomGameManager.roomGameState.enemy?.stats.level ?? 0,
-			enemyMaxHealth: roomGameManager.roomGameState.enemy?.maxHealth ?? 0,
-			enemyCurrentHealth: roomGameManager.roomGameState.enemy?.currentHealth ?? 0,
-			enemyMaxMana: roomGameManager.roomGameState.enemy?.maxMana ?? 0,
-			enemyCurrentMana: roomGameManager.roomGameState.enemy?.currentMana ?? 0,
-			enemyMaxEnergy: roomGameManager.roomGameState.enemy?.maxEnergy ?? 0,
-			enemyCurrentEnergy: roomGameManager.roomGameState.enemy?.currentEnergy ?? 0,
+			enemyCurrentLevel: snapshot.enemy?.stats.level ?? 0,
+			enemyMaxHealth: snapshot.enemy?.maxHealth ?? 0,
+			enemyCurrentHealth: snapshot.enemy?.currentHealth ?? 0,
+			enemyMaxMana: snapshot.enemy?.maxMana ?? 0,
+			enemyCurrentMana: snapshot.enemy?.currentMana ?? 0,
+			enemyMaxEnergy: snapshot.enemy?.maxEnergy ?? 0,
+			enemyCurrentEnergy: snapshot.enemy?.currentEnergy ?? 0,
 			enemyActionColor: .white,
 			enemyActionLabel: 0,
 			enemyBeingHit: false,
-			enemyActiveEffects: roomGameManager.roomGameState.enemy?.activeEffects ?? []
+			enemyActiveEffects: snapshot.enemy?.activeEffects ?? []
 		)
 
 	}
@@ -249,16 +251,18 @@ extension RoomViewModel {
 
 		// MARK: USING ROOMSTATEMANAGER FROM VIEW MODEL IS NOT RIGHT
 
+		let snapshot = roomGameManager.roomGameState.getActualGameStateSnapshot()
+
 		roomUIState = RoomUIState(
-			currentRoom: roomGameManager.roomGameState.currentRoom,
-			currentRound: roomGameManager.roomGameState.currentRound,
-			isHeroTurn: roomGameManager.roomGameState.isHeroTurn,
-			heroWasHit: roomGameManager.roomGameState.heroWasHit, // put to game state if no animation
-			enemyWasHit: roomGameManager.roomGameState.enemyWasHit // put to game state if no animation
+			currentRoom: snapshot.currentRoom,
+			currentRound: snapshot.currentRound,
+			isHeroTurn: snapshot.isHeroTurn,
+			heroWasHit: snapshot.heroWasHit, // put to game state if no animation
+			enemyWasHit: snapshot.enemyWasHit // put to game state if no animation
 		)
 
-		guard let hero = roomGameManager.roomGameState.hero else { return }
-		guard let enemy = roomGameManager.roomGameState.enemy else { return }
+		guard let hero = snapshot.hero else { return }
+		guard let enemy = snapshot.enemy else { return }
 
 		heroUIState = HeroUIState(
 			heroCurrentLevel: hero.stats.level,
@@ -354,18 +358,22 @@ extension RoomViewModel {
 	/// Method used to add animation of the heal/block/buff abilities on the caster
 	private func triggerEffect(forHero: Bool, color: Color) {
 
-		if forHero {
+		// MARK: Should be refactored by using gameState.getSnapshot()
 
+		if forHero {
+			print("1.1")
 			sceneUIState.heroEffectColor = color
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-				if self.roomGameManager.roomGameState.isHeroTurn { self.sceneUIState.heroEffectColor = nil }
+				if self.roomGameManager.roomGameState.roomGameStateSnapshot.isHeroTurn { self.sceneUIState.heroEffectColor = nil }
+				print("1.2")
 			}
 
 		} else {
-
+			print("2.1")
 			sceneUIState.enemyEffectColor = color
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-				if !self.roomGameManager.roomGameState.isHeroTurn { self.sceneUIState.enemyEffectColor = nil }
+				if !self.roomGameManager.roomGameState.roomGameStateSnapshot.isHeroTurn { self.sceneUIState.enemyEffectColor = nil }
+				print("2.2")
 			}
 		}
 	}

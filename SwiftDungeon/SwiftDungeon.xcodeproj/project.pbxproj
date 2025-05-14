@@ -28,7 +28,7 @@
 		DDAA04142DC46F8100C801B4 /* EnemyUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA04132DC46F8100C801B4 /* EnemyUIState.swift */; };
 		DDAA56E12DC881C2006E663D /* SceneUISection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA56E02DC881C2006E663D /* SceneUISection.swift */; };
 		DDAA56E32DC88279006E663D /* SceneUIStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA56E22DC88279006E663D /* SceneUIStateManager.swift */; };
-		DDAACE862DD483CB00C74209 /* GameStateSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAACE852DD483CB00C74209 /* GameStateSnapshot.swift */; };
+		DDAACE862DD483CB00C74209 /* RoomGameStateSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAACE852DD483CB00C74209 /* RoomGameStateSnapshot.swift */; };
 		DDAB3E4D2DC72B5800DBA1C8 /* CurrentPlan in Resources */ = {isa = PBXBuildFile; fileRef = DDAB3E4C2DC72B5800DBA1C8 /* CurrentPlan */; };
 		DDAB3E4F2DC72B6800DBA1C8 /* Bugs in Resources */ = {isa = PBXBuildFile; fileRef = DDAB3E4E2DC72B6800DBA1C8 /* Bugs */; };
 		DDAB3E522DC7362A00DBA1C8 /* EffectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB3E512DC7362A00DBA1C8 /* EffectManager.swift */; };
@@ -70,7 +70,7 @@
 		DDAA04132DC46F8100C801B4 /* EnemyUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyUIState.swift; sourceTree = "<group>"; };
 		DDAA56E02DC881C2006E663D /* SceneUISection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneUISection.swift; sourceTree = "<group>"; };
 		DDAA56E22DC88279006E663D /* SceneUIStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneUIStateManager.swift; sourceTree = "<group>"; };
-		DDAACE852DD483CB00C74209 /* GameStateSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateSnapshot.swift; sourceTree = "<group>"; };
+		DDAACE852DD483CB00C74209 /* RoomGameStateSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGameStateSnapshot.swift; sourceTree = "<group>"; };
 		DDAB3E4C2DC72B5800DBA1C8 /* CurrentPlan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CurrentPlan; sourceTree = "<group>"; };
 		DDAB3E4E2DC72B6800DBA1C8 /* Bugs */ = {isa = PBXFileReference; lastKnownFileType = text; path = Bugs; sourceTree = "<group>"; };
 		DDAB3E512DC7362A00DBA1C8 /* EffectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectManager.swift; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 				DDAA04132DC46F8100C801B4 /* EnemyUIState.swift */,
 				DDA9DB2B2DCF309B00E181B9 /* ActionState.swift */,
 				DDA9ACBF2DD2F08C00311DDE /* CombatPrepSnapshot.swift */,
-				DDAACE852DD483CB00C74209 /* GameStateSnapshot.swift */,
+				DDAACE852DD483CB00C74209 /* RoomGameStateSnapshot.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -384,7 +384,7 @@
 				DDA940732DBF519200837F9F /* RoomViewModel.swift in Sources */,
 				DD2D74442DCB1C3A005396F3 /* TurnManager.swift in Sources */,
 				DDA9407E2DBF53E000837F9F /* CharactersManager.swift in Sources */,
-				DDAACE862DD483CB00C74209 /* GameStateSnapshot.swift in Sources */,
+				DDAACE862DD483CB00C74209 /* RoomGameStateSnapshot.swift in Sources */,
 				DDA59C492DC07582007877A6 /* RoomGameState.swift in Sources */,
 				DDAA04142DC46F8100C801B4 /* EnemyUIState.swift in Sources */,
 				DDAC13392DC9F0F800E42D65 /* ManaBar.swift in Sources */,

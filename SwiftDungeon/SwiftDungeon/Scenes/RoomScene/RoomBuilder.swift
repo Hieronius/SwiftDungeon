@@ -6,7 +6,10 @@ class RoomBuilder {
 
 		// Build Dependencies for RoomGameManager
 
-		let roomGameState = RoomGameState()
+		let roomGameStateSnapshot = RoomGameStateSnapshot()
+
+		let roomGameState = RoomGameState(
+			roomGameStateSnapshot: roomGameStateSnapshot)
 		let actionCalculator = ActionCalculator()
 		let characterManager = CharacterManager()
 		let effectManager = EffectManager()

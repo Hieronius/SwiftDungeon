@@ -1,5 +1,7 @@
 import SwiftUI
 
+// TODO: Add init to convert from RoomGameStateSnapshot
+
 /// Snapshot of Hero's current stats and effects
 struct HeroUIState {
 

@@ -5,6 +5,9 @@ Current Plan
 	- Create methods in Character class like "applyEffect/applyAction"
 	- Implement TurnManager (Enum with isHero/isEnemy/Between)
 	- Renamy all god damn classes and methods from "attack" in ViewModel to "attackTargetResetBeingHitAndDisplayVisualImpact" for better readability
+	- Put Levelhero/RestoreHero and other methods to Character class
+	- Incapsulate methods like enterNewRoom to GameState to have different state presets
+	- Add extra inits to data model structs to get from and to GameStateSnapshot data model struct for convenience 
 
 3. Add mechanics/abilities
 

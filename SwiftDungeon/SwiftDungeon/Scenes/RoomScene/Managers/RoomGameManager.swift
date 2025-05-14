@@ -1,20 +1,5 @@
 import Foundation
 
-/*
-
-MARK: Example of complete refactoring
-
-func customAttack() {
-	 let chars = roomGameState.checkAndReturnHeroAndEnemy -> (Hero, Enemy)
-	 let hero = char.hero
-	 let enemy = char.enemy
-
-	 ActionHandler -> struct ActionResult { }
-	 let actionResult = ActionHandler.attack(hero, enemy)
-	 roomGameState.applyActionResult(actionResult))
-}
- */
-
 class RoomGameManager {
 
 	// MARK: - Dependencies
@@ -52,11 +37,15 @@ class RoomGameManager {
 extension RoomGameManager {
 	
 	func pauseGame() {
-		roomGameState.isGameOn = false
+		var snapshot = roomGameState.getActualGameStateSnapshot()
+		snapshot.isGameOn = false
+		roomGameState.applyNewGameStateSnapshot(snapshot)
 	}
 	
 	func resumeGame() {
-		roomGameState.isGameOn = true
+		var snapshot = roomGameState.getActualGameStateSnapshot()
+		snapshot.isGameOn = true
+		roomGameState.applyNewGameStateSnapshot(snapshot)
 	}
 }
 
@@ -67,19 +56,24 @@ extension RoomGameManager {
 	// should be put to GameState
 	func startFight() {
 
-		roomGameState.isGameOn = true
-		roomGameState.isHeroTurn = true
-		roomGameState.isHeroWon = false
-		roomGameState.isGameOver = false
-		roomGameState.currentRound = 1
+		var snapshot = roomGameState.getActualGameStateSnapshot()
+
+		snapshot.isGameOn = true
+		snapshot.isHeroTurn = true
+		snapshot.isHeroWon = false
+		snapshot.isGameOver = false
+		snapshot.currentRound = 1
 		// should be refactored to "getHero()" from char manager to
 		// gameState.instantiateHero(_ hero: Char)
-		roomGameState.hero = characterManager.setupHero()
-		roomGameState.enemyIndex = 0
-		let position = roomGameState.enemyIndex
-		roomGameState.enemy = characterManager.spawnEnemy(at: position)
+		snapshot.hero = characterManager.setupHero()
+		snapshot.enemyIndex = 0
+		let position = snapshot.enemyIndex
+		snapshot.enemy = characterManager.spawnEnemy(at: position)
+
+		roomGameState.applyNewGameStateSnapshot(snapshot)
 
 		checkWinLoseCondition()
+
 
 	}
 
@@ -87,12 +81,14 @@ extension RoomGameManager {
 
 	func endTurn() {
 
-		guard roomGameState.isGameOn else { return }
+		var snapshot = roomGameState.getActualGameStateSnapshot()
 
-		if !roomGameState.isHeroTurn {
+		guard snapshot.isGameOn else { return }
 
-			roomGameState.currentRound += 1
-			guard let hero = roomGameState.hero else { return }
+		if !snapshot.isHeroTurn {
+
+			snapshot.currentRound += 1
+			guard let hero = snapshot.hero else { return }
 			hero.currentEnergy = hero.maxEnergy
 
 			effectManager.processEffectsAtTurnStart(hero)
@@ -101,7 +97,7 @@ extension RoomGameManager {
 
 				DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 
-					self.roomGameState.isHeroTurn.toggle()
+					snapshot.isHeroTurn.toggle()
 					self.checkWinLoseCondition()
 
 					self.endTurn()
@@ -109,14 +105,14 @@ extension RoomGameManager {
 
 			} else {
 
-				roomGameState.isHeroTurn.toggle()
+				snapshot.isHeroTurn.toggle()
 				checkWinLoseCondition()
 
 			}
 
-		} else if roomGameState.isHeroTurn {
+		} else if snapshot.isHeroTurn {
 
-			guard let enemy = roomGameState.enemy else { return }
+			guard let enemy = snapshot.enemy else { return }
 			enemy.currentEnergy = enemy.maxEnergy
 
 			effectManager.processEffectsAtTurnStart(enemy)
@@ -124,7 +120,7 @@ extension RoomGameManager {
 			if enemy.isStunned {
 
 				DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-					self.roomGameState.isHeroTurn.toggle()
+					snapshot.isHeroTurn.toggle()
 					self.checkWinLoseCondition()
 
 					self.endTurn()
@@ -132,11 +128,13 @@ extension RoomGameManager {
 
 			} else {
 
-				roomGameState.isHeroTurn.toggle()
+				snapshot.isHeroTurn.toggle()
 				checkWinLoseCondition()
 
 			}
 		}
+
+		roomGameState.applyNewGameStateSnapshot(snapshot)
 
 	}
 
@@ -145,50 +143,56 @@ extension RoomGameManager {
 	/// Method should be put to the GameState file and return bool when being called
 	func checkWinLoseCondition() {
 
-		guard let hero = roomGameState.hero else { return }
-		guard let enemy = roomGameState.enemy else { return }
+		var snapshot = roomGameState.getActualGameStateSnapshot()
 
-		if roomGameState.currentRoom > GameConfig.dungeonLength {
-			roomGameState.isGameCompleted = true
-			roomGameState.isGameOn = false
+		guard let hero = snapshot.hero else { return }
+		guard let enemy = snapshot.enemy else { return }
+
+		if snapshot.currentRoom > GameConfig.dungeonLength {
+			snapshot.isGameCompleted = true
+			snapshot.isGameOn = false
 			return
 		}
 
 		if hero.currentHealth < 1 {
-			roomGameState.isGameOn = false
-			roomGameState.isGameOver = true
+			snapshot.isGameOn = false
+			snapshot.isGameOver = true
 			startFight()
 
 		} else if enemy.currentHealth < 1 {
 
-			roomGameState.isGameOn = false
-			roomGameState.isHeroWon = true
-			let experience = roomGameState.currentRoom * GameConfig.expPerRoom
+			snapshot.isGameOn = false
+			snapshot.isHeroWon = true
+			let experience = snapshot.currentRoom * GameConfig.expPerRoom
 			if (hero.stats.currentExperience + experience) >= hero.stats.maxExperience {
 				heroLevelUP()
 			} else {
 				hero.stats.currentExperience += experience
 			}
+			roomGameState.applyNewGameStateSnapshot(snapshot)
 			enterNewRoom()
 		}
 	}
 
 	// MARK: Enter New Room
 
+	// Should be put to the GameState
 	func enterNewRoom() {
 
-		roomGameState.currentRoom += 1
-		roomGameState.isGameOn = true
-		roomGameState.isHeroTurn = true
-		roomGameState.isHeroWon = false
-		roomGameState.isGameOver = false
-		roomGameState.currentRound = 1
+		var snapshot = roomGameState.getActualGameStateSnapshot()
+
+		snapshot.currentRoom += 1
+		snapshot.isGameOn = true
+		snapshot.isHeroTurn = true
+		snapshot.isHeroWon = false
+		snapshot.isGameOver = false
+		snapshot.currentRound = 1
+		snapshot.enemyIndex += 1
+		let position = snapshot.enemyIndex
+		snapshot.enemy = characterManager.spawnEnemy(at: position)
+
 		restoreCharacter(isHeroTurn: false)
-		print("enemy index before - \(roomGameState.enemyIndex)")
-		roomGameState.enemyIndex += 1
-		print("enemy indexc after - \(roomGameState.enemyIndex)")
-		let position = roomGameState.enemyIndex
-		roomGameState.enemy = characterManager.spawnEnemy(at: position)
+		roomGameState.applyNewGameStateSnapshot(snapshot)
 	}
 }
 
@@ -199,7 +203,9 @@ extension RoomGameManager {
 	/// Probably should be put to Hero/Enemy class for self mutation
 	func heroLevelUP() {
 
-		guard let hero = roomGameState.hero else { return }
+		let snapshot = roomGameState.getActualGameStateSnapshot()
+
+		guard let hero = snapshot.hero else { return }
 
 		hero.stats.level += 1
 		hero.stats.maxExperience += 100
@@ -214,18 +220,18 @@ extension RoomGameManager {
 		hero.minDamage += 1
 		restoreCharacter(isHeroTurn: true)
 
-		checkWinLoseCondition()
+
 	}
 
 	func restoreCharacter(isHeroTurn: Bool) {
 
-		let target = isHeroTurn ? roomGameState.hero : roomGameState.enemy
+		let snapshot = roomGameState.getActualGameStateSnapshot()
+
+		let target = isHeroTurn ? snapshot.hero : snapshot.enemy
 		guard let target else { return }
 		target.currentHealth = target.maxHealth
 		target.currentMana = target.maxMana
 		target.currentEnergy = target.maxEnergy
-
-		checkWinLoseCondition()
 	}
 }
 
@@ -236,8 +242,10 @@ extension RoomGameManager {
 	// MARK: Impact Mechanic
 
 	func actionImpactAndTarget() -> (Bool, Int) {
-		let impact = roomGameState.actionImpact
-		let target = roomGameState.isHeroTurn
+
+		let snapshot = roomGameState.getActualGameStateSnapshot()
+		let impact = snapshot.actionImpact
+		let target = snapshot.isHeroTurn
 		return (target, impact)
 	}
 
@@ -248,7 +256,7 @@ extension RoomGameManager {
 
 	func attack() {
 
-		let snapshot = roomGameState.getActualGameStateSnapshot()
+		var snapshot = roomGameState.getActualGameStateSnapshot()
 
 		let isHeroTurn = snapshot.isHeroTurn
 		guard let hero = snapshot.hero else { return }
@@ -263,12 +271,16 @@ extension RoomGameManager {
 
 		// Should be refactored to avoid direct state mutation
 
+		// MARK: Probably should be added to snapshot to return
+
 		target.currentHealth = max(target.currentHealth - result, 0)
 		host.currentEnergy -= GameConfig.attackEnergyCost
-		
-		triggerHit(onHero: !isHeroTurn)
 
-		roomGameState.actionImpact = result
+		snapshot.actionImpact = result
+
+		roomGameState.applyNewGameStateSnapshot(snapshot)
+
+		triggerHit(onHero: !isHeroTurn)
 
 		checkWinLoseCondition()
 	}
@@ -292,7 +304,6 @@ extension RoomGameManager {
 
 		effectManager.applyEffect(buff, host)
 		host.currentEnergy -= GameConfig.blockEnergyCost
-		
 
 		checkWinLoseCondition()
 	}
@@ -301,7 +312,7 @@ extension RoomGameManager {
 
 	func cut() {
 
-		let snapshot = roomGameState.getActualGameStateSnapshot()
+		var snapshot = roomGameState.getActualGameStateSnapshot()
 
 		let isHeroTurn = snapshot.isHeroTurn
 		guard let hero = snapshot.hero else { return }
@@ -319,9 +330,11 @@ extension RoomGameManager {
 
 		effectManager.applyEffect(debuff, target)
 
-		triggerHit(onHero: !isHeroTurn)
+		snapshot.actionImpact = result
 
-		roomGameState.actionImpact = result
+		roomGameState.applyNewGameStateSnapshot(snapshot)
+
+		triggerHit(onHero: !isHeroTurn)
 
 		checkWinLoseCondition()
 	}
@@ -330,7 +343,7 @@ extension RoomGameManager {
 
 	func stun() {
 
-		let snapshot = roomGameState.getActualGameStateSnapshot()
+		var snapshot = roomGameState.getActualGameStateSnapshot()
 
 		let isHeroTurn = snapshot.isHeroTurn
 		guard let hero = snapshot.hero else { return }
@@ -347,9 +360,11 @@ extension RoomGameManager {
 
 		effectManager.applyEffect(stunEffect, target)
 
-		triggerHit(onHero: !isHeroTurn)
+		snapshot.actionImpact = 0
 
-		roomGameState.actionImpact = 0
+		roomGameState.applyNewGameStateSnapshot(snapshot)
+
+		triggerHit(onHero: !isHeroTurn)
 
 		checkWinLoseCondition()
 	}
@@ -358,7 +373,7 @@ extension RoomGameManager {
 
 	func sunderArmor() {
 
-		let snapshot = roomGameState.getActualGameStateSnapshot()
+		var snapshot = roomGameState.getActualGameStateSnapshot()
 
 		let isHeroTurn = snapshot.isHeroTurn
 		guard let hero = snapshot.hero else { return }
@@ -376,13 +391,13 @@ extension RoomGameManager {
 
 		effectManager.applyEffect(sunderEffect, target)
 
+		snapshot.actionImpact = impact
+
+		roomGameState.applyNewGameStateSnapshot(snapshot)
+
 		triggerHit(onHero: !isHeroTurn)
 
-		roomGameState.actionImpact = 0
-
 		checkWinLoseCondition()
-
-
 	}
 
 	// MARK: - Spells
@@ -406,6 +421,8 @@ extension RoomGameManager {
 		host.currentMana -= GameConfig.healManaCost
 		host.currentEnergy -= GameConfig.spellEnergyCost
 
+		roomGameState.applyNewGameStateSnapshot(snapshot)
+
 		checkWinLoseCondition()
 	}
 
@@ -427,6 +444,8 @@ extension RoomGameManager {
 
 		host.currentMana -= GameConfig.buffManaCost
 		host.currentEnergy -= GameConfig.spellEnergyCost
+
+		roomGameState.applyNewGameStateSnapshot(snapshot)
 
 		checkWinLoseCondition()
 	}
@@ -456,6 +475,8 @@ extension RoomGameManager {
 		host.currentMana -= GameConfig.buffManaCost
 		host.currentEnergy -= GameConfig.spellEnergyCost
 
+		roomGameState.applyNewGameStateSnapshot(snapshot)
+
 		checkWinLoseCondition()
 	}
 
@@ -463,7 +484,7 @@ extension RoomGameManager {
 
 	func fireball() {
 
-		let snapshot = roomGameState.getActualGameStateSnapshot()
+		var snapshot = roomGameState.getActualGameStateSnapshot()
 
 		let isHeroTurn = snapshot.isHeroTurn
 		guard let hero = snapshot.hero else { return }
@@ -482,9 +503,11 @@ extension RoomGameManager {
 		host.currentMana = max(host.currentMana - GameConfig.fireballManaCost, 0)
 		host.currentEnergy = max(host.currentEnergy - GameConfig.spellEnergyCost, 0)
 
-		triggerHit(onHero: !isHeroTurn)
+		snapshot.actionImpact = result
 
-		roomGameState.actionImpact = result
+		roomGameState.applyNewGameStateSnapshot(snapshot)
+
+		triggerHit(onHero: !isHeroTurn)
 
 		checkWinLoseCondition()
 
@@ -495,7 +518,7 @@ extension RoomGameManager {
 	/// Target has decreased amount of current energy in next turn
 	func exhaustion() {
 
-		let snapshot = roomGameState.getActualGameStateSnapshot()
+		var snapshot = roomGameState.getActualGameStateSnapshot()
 
 		let isHeroTurn = snapshot.isHeroTurn
 		guard let hero = snapshot.hero else { return }
@@ -515,9 +538,11 @@ extension RoomGameManager {
 		let exhaustioneffect = Effect(type: .energyDOWN(value: impact), duration: GameConfig.exhaustionDuration)
 		effectManager.applyEffect(exhaustioneffect, target)
 
-		triggerHit(onHero: !isHeroTurn)
+		snapshot.actionImpact = 0
 
-		roomGameState.actionImpact = 0
+		roomGameState.applyNewGameStateSnapshot(snapshot)
+
+		triggerHit(onHero: !isHeroTurn)
 
 		checkWinLoseCondition()
 
@@ -547,6 +572,8 @@ extension RoomGameManager {
 		host.currentMana = max(host.currentMana - GameConfig.healthRegenManaCost, 0)
 		host.currentEnergy = max(host.currentEnergy - GameConfig.spellEnergyCost, 0)
 
+		roomGameState.applyNewGameStateSnapshot(snapshot)
+
 		checkWinLoseCondition()
 	}
 
@@ -572,6 +599,8 @@ extension RoomGameManager {
 		host.currentMana = max(host.currentMana - GameConfig.healthRegenManaCost, 0)
 		host.currentEnergy = max(host.currentEnergy - GameConfig.spellEnergyCost, 0)
 
+		roomGameState.applyNewGameStateSnapshot(snapshot)
+
 		checkWinLoseCondition()
 	}
 
@@ -580,7 +609,7 @@ extension RoomGameManager {
 	/// Periodic Magic Damage
 	func dot() {
 
-		let snapshot = roomGameState.getActualGameStateSnapshot()
+		var snapshot = roomGameState.getActualGameStateSnapshot()
 
 		let isHeroTurn = snapshot.isHeroTurn
 		guard let hero = snapshot.hero else { return }
@@ -601,9 +630,11 @@ extension RoomGameManager {
 		let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
 		effectManager.applyEffect(debuff, target)
 
-		triggerHit(onHero: !isHeroTurn)
+		snapshot.actionImpact = result
 
-		roomGameState.actionImpact = result
+		roomGameState.applyNewGameStateSnapshot(snapshot)
+
+		triggerHit(onHero: !isHeroTurn)
 
 		checkWinLoseCondition()
 	}
@@ -617,19 +648,27 @@ extension RoomGameManager {
 	// helper to trigger a 1s “hit” animation on the target
 	private func triggerHit(onHero: Bool) {
 
+		var snapshot = roomGameState.getActualGameStateSnapshot()
+
 		if onHero {
-			roomGameState.heroWasHit = true
+			snapshot.heroWasHit = true
 
 		} else {
-			roomGameState.enemyWasHit = true
+			snapshot.enemyWasHit = true
 		}
+
+		roomGameState.applyNewGameStateSnapshot(snapshot)
 	}
 
 	/// Method to reset isEnemy/isHeroWasHit to false to refresh shaking animation
 	/// Called from ViewModel to avoid decoupling
 	func resetCharacterBeingHit() {
 
-		roomGameState.enemyWasHit = false
-		roomGameState.heroWasHit = false
+		var snapshot = roomGameState.getActualGameStateSnapshot()
+
+		snapshot.enemyWasHit = false
+		snapshot.heroWasHit = false
+
+		roomGameState.applyNewGameStateSnapshot(snapshot)
 	}
 }

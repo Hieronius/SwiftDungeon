@@ -1,6 +1,6 @@
 import Foundation
 
-struct GameStateSnapshot {
+struct RoomGameStateSnapshot {
 
 	// Room State
 
