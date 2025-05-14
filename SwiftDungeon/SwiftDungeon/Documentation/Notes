@@ -65,3 +65,8 @@ Top part of the RoomScreen can be changes in the same way as we can change a men
 
 Add different types of room with different effects for both enemies and allies
 Example: Poisoned Swamp -> damages allies and give benefits to slymes
+
+Now i have relationship like:
+RoomGameState -> extractSnapshot -> use in RoomGameManager/RoomViewModel
+
+Any actions should be wrapped to RoomGameStateSnapshot and to be applyed to GameState back
