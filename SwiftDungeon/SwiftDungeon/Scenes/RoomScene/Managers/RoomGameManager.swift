@@ -252,7 +252,7 @@ extension RoomGameManager {
 	// MARK: - Actions
 
 
-	// MARK: Attack A New One
+	// MARK: Attack
 
 	func attack() {
 
@@ -327,12 +327,14 @@ extension RoomGameManager {
 
 		host.currentEnergy = max(host.currentEnergy - GameConfig.cutEnergyCost, 0)
 
-		let result = actionCalculator.cut(host, target)
-		let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
+		let result = actionHandler.cut(host, target)
+		let impact = result.impact
+
+		let debuff = Effect(type: .bleeding(initialDamage: impact, damagePerTurn: impact), duration: 3)
 
 		effectManager.applyEffect(debuff, target)
 
-		snapshot.actionImpact = result
+		snapshot.actionImpact = impact
 
 		roomGameState.applyNewGameStateSnapshot(snapshot)
 
@@ -387,7 +389,10 @@ extension RoomGameManager {
 		guard host.currentEnergy >= GameConfig.sunderArmorCost else { return }
 
 		host.currentEnergy = max(host.currentEnergy - GameConfig.sunderArmorCost, 0)
-		let impact = actionCalculator.sunderArmor(host, target)
+
+		let result = actionHandler.sunderArmor(host, target)
+		let impact = result.impact
+
 		let sunderEffect = Effect(type: .armorDOWN(value: impact),
 								  duration: GameConfig.sunderArmorDuration)
 

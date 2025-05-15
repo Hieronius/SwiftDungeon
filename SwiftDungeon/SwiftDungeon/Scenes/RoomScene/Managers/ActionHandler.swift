@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - ActionResult
+
 /// Should be refactored and placed into separate file
 struct ActionResult {
 
@@ -11,14 +13,26 @@ struct ActionResult {
 	let log: [String]
 }
 
+// MARK: - ActionHandler
+
 /// Handles attacks, spells, item use or interactions with the world.
-class ActionHandler {
+final class ActionHandler {
+
+	// MARK: - Dependencies
 
 	var actionCalculator: ActionCalculator
+
+	// MARK: - Initialization
 
 	init(actionCalculator: ActionCalculator) {
 		self.actionCalculator = actionCalculator
 	}
+
+	// MARK: - Actions
+
+
+
+	// MARK: Attack
 
 	func attack(_ host: Character, _ target: Character) -> ActionResult {
 		
@@ -31,6 +45,8 @@ class ActionHandler {
 							log: [])
 	}
 
+	// MARK: Block
+
 	func block(_ host: Character) -> ActionResult {
 
 		let blockValue = actionCalculator.block(host)
@@ -38,14 +54,52 @@ class ActionHandler {
 		return ActionResult(didHit: true,
 							isCritical: false,
 							impact: blockValue,
-							effects: [],
-							log: [])
+							effects: [], // armorUP effect can be added
+							log: []) // "armor has been increased by \("blockValue")
 
 	}
+
+	// MARK: Cut
+
+	func cut(_ host: Character, _ target: Character) -> ActionResult {
+
+		let damage = actionCalculator.cut(host, target)
+
+		return ActionResult(didHit: true,
+							isCritical: false,
+							impact: damage,
+							effects: [], // bleeding effect can be added
+							log: []) // "\(target) lost \(damage) of hp due to bleeding
+	}
+
+	// MARK: Stun
+
+	/// Should be refactored to replace raw data from RoomGameManager
+	func stun(_ host: Character, target: Character) -> ActionResult {
+
+		ActionResult(didHit: true, isCritical: false, impact: 0, effects: [], log: [])
+	}
+
+	// MARK: Sunder Armor
+
+	func sunderArmor(_ host: Character, _ target: Character) -> ActionResult {
+
+		let armorValue = actionCalculator.sunderArmor(host, target)
+
+		return ActionResult(didHit: true,
+							isCritical: false,
+							impact: armorValue,
+							effects: [],
+							log: [])
+	}
+
+	// MARK: - Spells
 
 	func heal() {
 
 	}
+
+	// MARK: - Items
 
 	func useItem() {
 

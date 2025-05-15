@@ -1,7 +1,9 @@
 import Foundation
 
 /// Calculates a specific impact of specific action, skill or spell
-class ActionCalculator {
+final class ActionCalculator {
+
+	// MARK: - Actions
 
 	// MARK: Attack
 
@@ -17,6 +19,26 @@ class ActionCalculator {
 	func block(_ caster: Character) -> Int {
 		caster.currentArmor + caster.blockValue
 	}
+
+	// MARK: Cut
+
+	func cut(_ host: Character, _ target: Character) -> Int {
+		let damage = (Int.random(in: host.minDamage...host.maxDamage) - target.currentArmor) / 2
+		return damage > 0 ? damage : 0
+	}
+
+	// MARK: Sunder Armor
+
+	// should be modifed to imply host stats
+	func sunderArmor(_ host: Character, _ target: Character) -> Int {
+		let onePercentOfArmor = Double(target.currentArmor) / 100
+		let impact = 30.0 * (onePercentOfArmor)
+		return Int(impact)
+	}
+
+	// MARK: - Spells
+
+
 
 	// MARK: Heal
 
@@ -35,22 +57,6 @@ class ActionCalculator {
 
 	func armorUP(_ caster: Character) -> Int {
 		caster.spellPower / 5
-	}
-
-	// MARK: Cut
-
-	func cut(_ host: Character, _ target: Character) -> Int {
-		let damage = (Int.random(in: host.minDamage...host.maxDamage) - target.currentArmor) / 2
-		return damage > 0 ? damage : 0
-	}
-
-	// MARK: Sunder Armor
-
-	// should be modifed to imply host stats
-	func sunderArmor(_ host: Character, _ target: Character) -> Int {
-		let onePercentOfArmor = Double(target.currentArmor) / 100
-		let impact = 30.0 * (onePercentOfArmor)
-		return Int(impact)
 	}
 
 	// MARK: Fireball
