@@ -123,10 +123,96 @@ final class ActionHandler {
 							log: [])
 	}
 
+	// MARK: ArmorUP
+
+	func armorUP(_ host: Character) -> ActionResult {
+
+		let armorValue = actionCalculator.armorUP(host)
+
+		return ActionResult(didHit: true,
+							isCritical: false,
+							impact: armorValue,
+							effects: [],
+							log: [])
+	}
+
+	// MARK: Fireball
+
+	func fireball(_ host: Character, _ target: Character) -> ActionResult {
+
+		let damage = actionCalculator.fireball(host, target)
+
+		return ActionResult(didHit: true,
+							isCritical: false,
+							impact: damage,
+							effects: [],
+							log: [])
+	}
+
+	// MARK: Exhaustion
+
+	func exhaustion(_ host: Character, _ target: Character) -> ActionResult {
+
+		let energyValue = actionCalculator.exhaustion(host, target)
+
+		return ActionResult(didHit: true,
+							isCritical: false,
+							impact: energyValue,
+							effects: [],
+							log: [])
+	}
+
+	// MARK: HealthRegen
+
+	func healthRegen(_ host: Character) -> ActionResult {
+
+		let healthValue = actionCalculator.healthRegen(host)
+
+		return ActionResult(didHit: true,
+							isCritical: false,
+							impact: healthValue,
+							effects: [],
+							log: [])
+	}
+
+	// MARK: ManaRegen
+
+	func manaRegen(_ host: Character) -> ActionResult {
+
+		let manaValue = actionCalculator.manaRegen(host)
+
+		return ActionResult(didHit: true,
+							isCritical: false,
+							impact: manaValue,
+							effects: [],
+							log: [])
+	}
+
+	// MARK: DoT
+
+	func dot(_ host: Character, _ target: Character) -> ActionResult {
+
+		let damage = actionCalculator.dot(host, target)
+
+		return ActionResult(didHit: true,
+							isCritical: false,
+							impact: damage,
+							effects: [],
+							log: [])
+	}
+
 	// MARK: - Items
 
 	func useItem() {
 
+	}
+
+	func usePotion() {
+
+	}
+
+	func openChest() {
+		
 	}
 
 	// add more

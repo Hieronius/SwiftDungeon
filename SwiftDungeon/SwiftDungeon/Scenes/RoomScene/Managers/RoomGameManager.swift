@@ -435,7 +435,7 @@ extension RoomGameManager {
 		checkWinLoseCondition()
 	}
 
-	// MARK: BuffAD
+	// MARK: AttackUP
 
 	func attackUP() {
 
@@ -461,9 +461,9 @@ extension RoomGameManager {
 		checkWinLoseCondition()
 	}
 
-	// MARK: Buff Armor
+	// MARK: ArmorUP
 
-	func buffArmor() {
+	func armorUP() {
 
 		let snapshot = roomGameState.getActualGameStateSnapshot()
 
@@ -479,8 +479,10 @@ extension RoomGameManager {
 
 		}
 
-		let result = actionCalculator.armorUP(host)
-		let buff = Effect(type: .armorUP(value: result), duration: 3)
+		let result = actionHandler.armorUP(host)
+		let impact = result.impact
+
+		let buff = Effect(type: .armorUP(value: impact), duration: 3)
 		effectManager.applyEffect(buff, host)
 
 		host.currentMana -= GameConfig.buffManaCost
@@ -509,12 +511,14 @@ extension RoomGameManager {
 			return
 		}
 
-		let result = actionCalculator.fireball(host, target)
-		target.currentHealth = max(target.currentHealth - result, 0)
+		let result = actionHandler.fireball(host, target)
+		let impact = result.impact
+
+		target.currentHealth = max(target.currentHealth - impact, 0)
 		host.currentMana = max(host.currentMana - GameConfig.fireballManaCost, 0)
 		host.currentEnergy = max(host.currentEnergy - GameConfig.spellEnergyCost, 0)
 
-		snapshot.actionImpact = result
+		snapshot.actionImpact = impact
 
 		roomGameState.applyNewGameStateSnapshot(snapshot)
 
@@ -545,7 +549,10 @@ extension RoomGameManager {
 
 		host.currentMana = max(host.currentMana - GameConfig.exhaustionManaCost, 0)
 		host.currentEnergy = max(host.currentEnergy - GameConfig.spellEnergyCost, 0)
-		let impact = actionCalculator.exhaustion(host, target)
+
+		let result = actionHandler.exhaustion(host, target)
+		let impact = result.impact
+
 		let exhaustioneffect = Effect(type: .energyDOWN(value: impact), duration: GameConfig.exhaustionDuration)
 		effectManager.applyEffect(exhaustioneffect, target)
 
@@ -576,8 +583,10 @@ extension RoomGameManager {
 			return
 		}
 
-		let healValue = actionCalculator.healthRegen(host)
-		let buff = Effect(type: .healthRegen(initialHeal: healValue, healthPerTurn: healValue), duration: GameConfig.healthRegenDuration)
+		let result = actionHandler.healthRegen(host)
+		let impact = result.impact
+
+		let buff = Effect(type: .healthRegen(initialHeal: impact, healthPerTurn: impact), duration: GameConfig.healthRegenDuration)
 
 		effectManager.applyEffect(buff, host)
 		host.currentMana = max(host.currentMana - GameConfig.healthRegenManaCost, 0)
@@ -603,8 +612,10 @@ extension RoomGameManager {
 		guard host.currentMana >= GameConfig.manaRegenManaCost,
 			  host.currentEnergy >= GameConfig.spellEnergyCost else { return }
 
-		let manaValue = actionCalculator.manaRegen(host)
-		let buff = Effect(type: .manaRegen(initialMana: manaValue, manaPerTurn: manaValue), duration: GameConfig.manaRegenDuration)
+		let result = actionHandler.manaRegen(host)
+		let impact = result.impact
+
+		let buff = Effect(type: .manaRegen(initialMana: impact, manaPerTurn: impact), duration: GameConfig.manaRegenDuration)
 
 		effectManager.applyEffect(buff, host)
 		host.currentMana = max(host.currentMana - GameConfig.healthRegenManaCost, 0)
@@ -637,11 +648,12 @@ extension RoomGameManager {
 		host.currentEnergy = max(host.currentEnergy - GameConfig.spellEnergyCost, 0)
 		host.currentMana = max(host.currentMana - GameConfig.dotManaCost, 0)
 
-		let result = actionCalculator.dot(host, target)
-		let debuff = Effect(type: .bleeding(initialDamage: result, damagePerTurn: result), duration: 3)
+		let result = actionHandler.dot(host, target)
+		let impact = result.impact
+		let debuff = Effect(type: .bleeding(initialDamage: impact, damagePerTurn: impact), duration: 3)
 		effectManager.applyEffect(debuff, target)
 
-		snapshot.actionImpact = result
+		snapshot.actionImpact = impact
 
 		roomGameState.applyNewGameStateSnapshot(snapshot)
 

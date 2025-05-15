@@ -214,7 +214,7 @@ extension RoomViewModel {
 
 	func buffArmor() {
 
-		roomGameManager.buffArmor()
+		roomGameManager.armorUP()
 		let actionImpact = roomGameManager.actionImpactAndTarget()
 		let currentTurn = actionImpact.0
 		triggerEffect(forHero: currentTurn, color: .yellow)
