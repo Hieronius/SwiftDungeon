@@ -10,7 +10,9 @@ class RoomBuilder {
 
 		let roomGameState = RoomGameState(
 			roomGameStateSnapshot: roomGameStateSnapshot)
+
 		let actionCalculator = ActionCalculator()
+		let actionHandler = ActionHandler(actionCalculator: actionCalculator)
 		let characterManager = CharacterManager()
 		let effectManager = EffectManager()
 		let turnManager = TurnManager()
@@ -19,6 +21,7 @@ class RoomBuilder {
 
 		let roomGameManager = RoomGameManager(
 			roomGameState: roomGameState,
+			actionHandler: actionHandler,
 			actionCalculator: actionCalculator,
 			characterManager: characterManager,
 			effectManager: effectManager,

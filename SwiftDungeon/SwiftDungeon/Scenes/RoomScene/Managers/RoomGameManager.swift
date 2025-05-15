@@ -4,10 +4,8 @@ class RoomGameManager {
 
 	// MARK: - Dependencies
 
-	// Any attacks and spells should be treated as actions
 	let roomGameState: RoomGameState
-
-	// probably should be used by ActionHandler
+	let actionHandler: ActionHandler
 	let actionCalculator: ActionCalculator
 	let characterManager: CharacterManager
 	let effectManager: EffectManager
@@ -17,12 +15,14 @@ class RoomGameManager {
 
 	init(
 		roomGameState: RoomGameState,
+		actionHandler: ActionHandler,
 		actionCalculator: ActionCalculator,
 		characterManager: CharacterManager,
 		effectManager: EffectManager,
 		turnManager: TurnManager
 	) {
 		self.roomGameState = roomGameState
+		self.actionHandler = actionHandler
 		self.actionCalculator = actionCalculator
 		self.characterManager = characterManager
 		self.effectManager = effectManager
@@ -252,7 +252,7 @@ extension RoomGameManager {
 	// MARK: - Actions
 
 
-	// MARK: Attack
+	// MARK: Attack A New One
 
 	func attack() {
 
@@ -267,16 +267,17 @@ extension RoomGameManager {
 
 		guard host.currentEnergy >= GameConfig.attackEnergyCost else { return }
 
-		let result = actionCalculator.attack(host, target)
+		let result = actionHandler.attack(host, target)
+		let damage = result.impact
 
 		// Should be refactored to avoid direct state mutation
 
 		// MARK: Probably should be added to snapshot to return
 
-		target.currentHealth = max(target.currentHealth - result, 0)
+		target.currentHealth = max(target.currentHealth - damage, 0)
 		host.currentEnergy -= GameConfig.attackEnergyCost
 
-		snapshot.actionImpact = result
+		snapshot.actionImpact = damage
 
 		roomGameState.applyNewGameStateSnapshot(snapshot)
 
@@ -284,6 +285,40 @@ extension RoomGameManager {
 
 		checkWinLoseCondition()
 	}
+
+
+	// MARK: Attack Original One
+
+//	func attack() {
+//
+//		var snapshot = roomGameState.getActualGameStateSnapshot()
+//
+//		let isHeroTurn = snapshot.isHeroTurn
+//		guard let hero = snapshot.hero else { return }
+//		guard let enemy = snapshot.enemy else { return }
+//
+//		let host = isHeroTurn ? hero : enemy
+//		let target = isHeroTurn ? enemy : hero
+//
+//		guard host.currentEnergy >= GameConfig.attackEnergyCost else { return }
+//
+//		let result = actionCalculator.attack(host, target)
+//
+//		// Should be refactored to avoid direct state mutation
+//
+//		// MARK: Probably should be added to snapshot to return
+//
+//		target.currentHealth = max(target.currentHealth - result, 0)
+//		host.currentEnergy -= GameConfig.attackEnergyCost
+//
+//		snapshot.actionImpact = result
+//
+//		roomGameState.applyNewGameStateSnapshot(snapshot)
+//
+//		triggerHit(onHero: !isHeroTurn)
+//
+//		checkWinLoseCondition()
+//	}
 
 	// MARK: Block
 

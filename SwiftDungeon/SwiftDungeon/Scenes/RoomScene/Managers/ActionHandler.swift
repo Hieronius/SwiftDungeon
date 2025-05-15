@@ -6,11 +6,12 @@ struct ActionResult {
 	// refactor
 	let didHit: Bool
 	let isCritical: Bool
-	let damage: Int
+	let impact: Int
 	let effects: [Effect]
 	let log: [String]
 }
 
+/// Handles attacks, spells, item use or interactions with the world.
 class ActionHandler {
 
 	var actionCalculator: ActionCalculator
@@ -19,11 +20,26 @@ class ActionHandler {
 		self.actionCalculator = actionCalculator
 	}
 
-//	func attack(host: Character, target: Character) -> ActionResult {
-//
-//	}
+	func attack(_ host: Character, _ target: Character) -> ActionResult {
+		
+		let damage = actionCalculator.attack(host, target)
 
-	func block() {
+		return ActionResult(didHit: true,
+							isCritical: false,
+							impact: damage,
+							effects: [],
+							log: [])
+	}
+
+	func block(_ host: Character) -> ActionResult {
+
+		let blockValue = actionCalculator.block(host)
+
+		return ActionResult(didHit: true,
+							isCritical: false,
+							impact: blockValue,
+							effects: [],
+							log: [])
 
 	}
 

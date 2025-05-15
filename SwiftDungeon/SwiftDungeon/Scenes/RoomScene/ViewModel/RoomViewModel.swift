@@ -361,19 +361,15 @@ extension RoomViewModel {
 		// MARK: Should be refactored by using gameState.getSnapshot()
 
 		if forHero {
-			print("1.1")
 			sceneUIState.heroEffectColor = color
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
 				if self.roomGameManager.roomGameState.roomGameStateSnapshot.isHeroTurn { self.sceneUIState.heroEffectColor = nil }
-				print("1.2")
 			}
 
 		} else {
-			print("2.1")
 			sceneUIState.enemyEffectColor = color
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
 				if !self.roomGameManager.roomGameState.roomGameStateSnapshot.isHeroTurn { self.sceneUIState.enemyEffectColor = nil }
-				print("2.2")
 			}
 		}
 	}
