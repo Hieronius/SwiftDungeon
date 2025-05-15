@@ -285,7 +285,7 @@ extension RoomGameManager {
 
 		checkWinLoseCondition()
 	}
-	
+
 	// MARK: Block
 
 	func block() {
@@ -300,7 +300,8 @@ extension RoomGameManager {
 
 		guard host.currentEnergy >= GameConfig.blockEnergyCost else { return }
 
-		let blockValue = actionCalculator.block(host)
+		let result = actionHandler.block(host)
+		let blockValue = result.impact
 		let buff = Effect(type: .armorUP(value: blockValue), duration: 3)
 
 		effectManager.applyEffect(buff, host)
