@@ -285,41 +285,7 @@ extension RoomGameManager {
 
 		checkWinLoseCondition()
 	}
-
-
-	// MARK: Attack Original One
-
-//	func attack() {
-//
-//		var snapshot = roomGameState.getActualGameStateSnapshot()
-//
-//		let isHeroTurn = snapshot.isHeroTurn
-//		guard let hero = snapshot.hero else { return }
-//		guard let enemy = snapshot.enemy else { return }
-//
-//		let host = isHeroTurn ? hero : enemy
-//		let target = isHeroTurn ? enemy : hero
-//
-//		guard host.currentEnergy >= GameConfig.attackEnergyCost else { return }
-//
-//		let result = actionCalculator.attack(host, target)
-//
-//		// Should be refactored to avoid direct state mutation
-//
-//		// MARK: Probably should be added to snapshot to return
-//
-//		target.currentHealth = max(target.currentHealth - result, 0)
-//		host.currentEnergy -= GameConfig.attackEnergyCost
-//
-//		snapshot.actionImpact = result
-//
-//		roomGameState.applyNewGameStateSnapshot(snapshot)
-//
-//		triggerHit(onHero: !isHeroTurn)
-//
-//		checkWinLoseCondition()
-//	}
-
+	
 	// MARK: Block
 
 	func block() {
