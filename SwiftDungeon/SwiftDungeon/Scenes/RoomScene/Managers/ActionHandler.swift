@@ -95,8 +95,32 @@ final class ActionHandler {
 
 	// MARK: - Spells
 
-	func heal() {
 
+
+	// MARK: Heal
+
+	func heal(_ host: Character) -> ActionResult {
+
+		let healValue = actionCalculator.heal(host)
+
+		return ActionResult(didHit: true,
+							isCritical: false,
+							impact: healValue,
+							effects: [],
+							log: [])
+	}
+
+	// MARK: AttackUP
+
+	func attackUP(_ host: Character) -> ActionResult {
+
+		let attackValue = actionCalculator.attackUP(host)
+
+		return ActionResult(didHit: true,
+							isCritical: false,
+							impact: attackValue,
+							effects: [],
+							log: [])
 	}
 
 	// MARK: - Items

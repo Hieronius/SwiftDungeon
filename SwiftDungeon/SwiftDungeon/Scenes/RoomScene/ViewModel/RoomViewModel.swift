@@ -202,7 +202,7 @@ extension RoomViewModel {
 	// MARK: BuffAD
 
 	func buffAD() {
-		roomGameManager.buffAD()
+		roomGameManager.attackUP()
 		let actionImpact = roomGameManager.actionImpactAndTarget()
 		let currentTurn = actionImpact.0
 		triggerEffect(forHero: currentTurn, color: .yellow)

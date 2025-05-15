@@ -423,8 +423,10 @@ extension RoomGameManager {
 
 		let host = isHeroTurn ? hero : enemy
 
-		let result = actionCalculator.heal(host)
-		host.currentHealth = min(host.currentHealth + result, host.maxHealth)
+		let result = actionHandler.heal(host)
+		let healValue = result.impact
+
+		host.currentHealth = min(host.currentHealth + healValue, host.maxHealth)
 		host.currentMana -= GameConfig.healManaCost
 		host.currentEnergy -= GameConfig.spellEnergyCost
 
@@ -435,7 +437,7 @@ extension RoomGameManager {
 
 	// MARK: BuffAD
 
-	func buffAD() {
+	func attackUP() {
 
 		let snapshot = roomGameState.getActualGameStateSnapshot()
 
@@ -445,8 +447,10 @@ extension RoomGameManager {
 
 		let host = isHeroTurn ? hero : enemy
 
-		let result = actionCalculator.attackUP(host)
-		let buff = Effect(type: .attackUP(value: result), duration: 3)
+		let result = actionHandler.attackUP(host)
+		let impact = result.impact
+
+		let buff = Effect(type: .attackUP(value: impact), duration: 3)
 		effectManager.applyEffect(buff, host)
 
 		host.currentMana -= GameConfig.buffManaCost
