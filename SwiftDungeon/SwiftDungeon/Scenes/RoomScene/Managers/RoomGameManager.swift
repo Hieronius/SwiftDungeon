@@ -219,9 +219,8 @@ extension RoomGameManager {
 
 		let target = isHeroTurn ? snapshot.hero : snapshot.enemy
 		guard let target else { return }
-		target.currentHealth = target.maxHealth
-		target.currentMana = target.maxMana
-		target.currentEnergy = target.maxEnergy
+
+		target.restoreCharacter()
 	}
 }
 

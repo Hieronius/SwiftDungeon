@@ -72,6 +72,12 @@ class Character: Creature {
 
 	}
 
+	func restoreCharacter() {
+		currentHealth = maxHealth
+		currentMana = maxMana
+		currentEnergy = maxEnergy
+	}
+
 	// func applyEffect(impact: Int) {
 	// self.health += impact * 2
 
