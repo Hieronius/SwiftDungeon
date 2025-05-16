@@ -1,5 +1,7 @@
 import SwiftUI
 
+// MARK: Initial Point of the App
+
 @main
 struct SwiftDungeonApp: App {
 

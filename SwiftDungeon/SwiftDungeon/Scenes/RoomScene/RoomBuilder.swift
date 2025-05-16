@@ -1,5 +1,8 @@
 import SwiftUI
 
+// TODO: Should be refactored to separate dependencies initialization in a single place like app starting point and pass it to any needed modules
+
+
 class RoomBuilder {
 
 	static func build() -> RoomView {

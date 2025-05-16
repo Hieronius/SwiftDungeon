@@ -4,8 +4,12 @@ enum GameConfig {
 
 	// Dungeon Config
 
-	static let dungeonLength = 14
-	static let expPerRoom = 50
+	enum DungeonConfig {
+		
+		static let dungeonLength = 14
+		static let expPerRoom = 50
+		
+	}
 
 	// Ability Mana Cost
 

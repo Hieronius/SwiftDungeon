@@ -268,8 +268,8 @@
 		DDAC13302DC9B24000E42D65 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				DDA940742DBF51C800837F9F /* Creature.swift */,
 				DD2D743F2DCB0D83005396F3 /* WorldStateMachine.swift */,
+				DDA940742DBF51C800837F9F /* Creature.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";

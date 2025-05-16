@@ -148,7 +148,7 @@ extension RoomGameManager {
 		guard let hero = snapshot.hero else { return }
 		guard let enemy = snapshot.enemy else { return }
 
-		if snapshot.currentRoom > GameConfig.dungeonLength {
+		if snapshot.currentRoom > GameConfig.DungeonConfig.dungeonLength {
 			snapshot.isGameCompleted = true
 			snapshot.isGameOn = false
 			return
@@ -163,7 +163,7 @@ extension RoomGameManager {
 
 			snapshot.isGameOn = false
 			snapshot.isHeroWon = true
-			let experience = snapshot.currentRoom * GameConfig.expPerRoom
+			let experience = snapshot.currentRoom * GameConfig.DungeonConfig.expPerRoom
 			if (hero.stats.currentExperience + experience) >= hero.stats.maxExperience {
 				heroLevelUP()
 			} else {
