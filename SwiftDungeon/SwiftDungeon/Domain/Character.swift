@@ -54,6 +54,24 @@ class Character: Creature {
 		self.activeEffects = activeEffects
 	}
 
+	func heroLevelUP() {
+
+		stats.level += 1
+		stats.maxExperience += 100
+		stats.currentExperience = 1
+		stats.strength += 2
+		stats.agility += 2
+		stats.vitality += 2
+		stats.intellect += 1
+		maxHealth += 10
+		maxMana += 10
+		maxDamage += 1
+		minDamage += 1
+//		restoreCharacter(isHeroTurn: true)
+
+
+	}
+
 	// func applyEffect(impact: Int) {
 	// self.health += impact * 2
 

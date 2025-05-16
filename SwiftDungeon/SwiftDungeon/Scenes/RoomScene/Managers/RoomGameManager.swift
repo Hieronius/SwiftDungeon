@@ -207,17 +207,7 @@ extension RoomGameManager {
 
 		guard let hero = snapshot.hero else { return }
 
-		hero.stats.level += 1
-		hero.stats.maxExperience += 100
-		hero.stats.currentExperience = 1
-		hero.stats.strength += 2
-		hero.stats.agility += 2
-		hero.stats.vitality += 2
-		hero.stats.intellect += 1
-		hero.maxHealth += 10
-		hero.maxMana += 10
-		hero.maxDamage += 1
-		hero.minDamage += 1
+		hero.heroLevelUP()
 		restoreCharacter(isHeroTurn: true)
 
 

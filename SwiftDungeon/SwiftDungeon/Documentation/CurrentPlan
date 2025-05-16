@@ -1,9 +1,8 @@
 Current Plan
 
 1. Refactor RoomViewModel and separate CombatManager
-	- Create ActionHandler 1️⃣
-	- May be EffectManager should be renamed to EffectHandler and put to ActionHandler as it's dependency 2️⃣
 	- Create methods in Character class like "applyEffect/applyAction"
+	- May be EffectManager should be renamed to EffectHandler and put to ActionHandler as it's dependency 2️⃣
 	- Implement TurnManager (Enum with isHero/isEnemy/Between)
 	- Renamy all god damn classes and methods from "attack" in ViewModel to "attackTargetResetBeingHitAndDisplayVisualImpact" for better readability
 	- Put Levelhero/RestoreHero and other methods to Character class
@@ -37,6 +36,7 @@ Optional:
 
 100. Add enemy AI
 101. Separate an entire game flow into RoomGameManager with all kinds of managers as injections and inject it to ViewModel
+102. Refactor ModuleBuilder to make it flexiable and accordingly to Dependency Injection	
 
 
 Optional:
