@@ -1,6 +1,8 @@
 import SwiftUI
 
+/// Entity to manage what menu button was pressed to display the content
 final class SceneUIStateManager: ObservableObject {
+
 	@Published var activeSection: SceneUISection = .skills
 
 	/// Choose section to open

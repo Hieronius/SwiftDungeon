@@ -19,10 +19,12 @@ struct RoomView: View {
 		ZStack {
 			
 			// Make screen tappable to implement different functions
+
 			Color.black
 				.edgesIgnoringSafeArea(.all)
 				.contentShape(Rectangle())
 				.onTapGesture(count: 3) {
+
 					viewModel.restoreCharacter(isHeroTurn: viewModel.roomUIState.isHeroTurn)
 				}
 			
@@ -42,7 +44,6 @@ struct RoomView: View {
 				.opacity(0.8)
 				.scaleEffect(0.8)
 
-
 				sectionActionButtons()
 
 				Spacer()
@@ -54,7 +55,7 @@ struct RoomView: View {
 			
 		}
 		
-		// MARK: ENTRY POINT TO THE GAME
+		// MARK: ENTRY POINT OF THE GAME
 
 		.onAppear {
 			viewModel.startFight()
@@ -209,7 +210,6 @@ private extension RoomView {
 				isActive: viewModel.roomUIState.isHeroTurn,
 				activeColor: .yellow,
 				effectColor: viewModel.sceneUIState.heroEffectColor,
-				// TODO: heroWasHit should be called from roomUIState
 				didHit: viewModel.roomUIState.heroWasHit,
 				impactTextColor: viewModel.heroUIState.heroActionColor
 			)
@@ -358,6 +358,7 @@ private extension RoomView {
 	// MARK: Action Button View
 
 	func actionButton(title: String, action: @escaping () -> Void) -> some View {
+
 		Button(title, action: action)
 			.buttonStyle(.bordered)
 			.font(.title2)
@@ -368,6 +369,7 @@ private extension RoomView {
 // MARK: Fixed sized container
 
 struct FixedSizeContainer<Content: View>: View {
+	
 	let width: CGFloat
 	let height: CGFloat
 	let content: Content

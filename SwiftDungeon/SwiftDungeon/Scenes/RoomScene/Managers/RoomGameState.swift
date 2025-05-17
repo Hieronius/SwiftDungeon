@@ -1,7 +1,10 @@
 import SwiftUI
 
-/// Expand GameStateSnapshot into fully embed in properties Struct CombatPrepSnapshot
-class RoomGameState {
+//protocol IState {
+//	var snapshot { get set }
+//}
+
+final class RoomGameState {
 
 	var roomGameStateSnapshot: RoomGameStateSnapshot
 
@@ -11,9 +14,8 @@ class RoomGameState {
 
 	// MARK: Extract Game State Snapshot
 
-
-	// MARK: ERROR HERE. SOMETHING WRONG WITH SYNC
 	func getActualGameStateSnapshot() -> RoomGameStateSnapshot {
+		
 		return self.roomGameStateSnapshot
 	}
 

@@ -1,5 +1,5 @@
 import Foundation
 
-class TurnManager {
+final class TurnManager {
 	
 }

@@ -1,6 +1,6 @@
 import SwiftUI
 
-class RoomViewModel: ObservableObject {
+final class RoomViewModel: ObservableObject {
 
 	// MARK: - Dependencies
 
@@ -345,6 +345,7 @@ extension RoomViewModel {
 
 	// MARK: GetVisualImpactFromAction
 
+	/// Method to display a specific number of impact on the target such as attack/spell/effect damage done
 	func getVisualImpactFromAction(color: Color) {
 
 		let actionResult: (Bool, Int) = roomGameManager.actionImpactAndTarget()
@@ -355,7 +356,7 @@ extension RoomViewModel {
 
 	// MARK: TriggerEffect
 
-	/// Method used to add animation of the heal/block/buff abilities on the caster
+	/// Method used to add animation of the heal/block/buff abilities on the caster (by paining the whole square with a specific color green/yellow/blue
 	private func triggerEffect(forHero: Bool, color: Color) {
 
 		// MARK: Should be refactored by using gameState.getSnapshot()
@@ -376,6 +377,7 @@ extension RoomViewModel {
 
 	// MARK: PassActionVisualResult
 
+	/// Specific method to update UI accordingly to type of the action been made
 	private func passActionVisualResult(_ target: Bool,
 										_ label: Int,
 										_ color: Color) {

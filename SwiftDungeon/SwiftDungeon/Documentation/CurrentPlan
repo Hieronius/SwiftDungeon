@@ -1,13 +1,11 @@
 Current Plan
 
-1. Refactor RoomViewModel and separate CombatManager
-	- Create methods in Character class like "applyEffect/applyAction"
-	- May be EffectManager should be renamed to EffectHandler and put to ActionHandler as it's dependency 2️⃣
-	- Implement TurnManager (Enum with isHero/isEnemy/Between)
-	- Renamy all god damn classes and methods from "attack" in ViewModel to "attackTargetResetBeingHitAndDisplayVisualImpact" for better readability
-	- Put Levelhero/RestoreHero and other methods to Character class
-	- Incapsulate methods like enterNewRoom to GameState to have different state presets
-	- Add extra inits to data model structs to get from and to GameStateSnapshot data model struct for convenience
+
+2. - Implement AppCoordinator
+   - Implement ModuleBuilder
+   - Implement WorldStateMachine
+   - Resolve NavigationStackProblem
+
 
 3. Add mechanics/abilities
 

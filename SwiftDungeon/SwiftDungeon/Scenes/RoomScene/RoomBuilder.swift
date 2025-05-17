@@ -5,6 +5,25 @@ import SwiftUI
 
 class RoomBuilder {
 
+	// Dependencies
+
+//	let roomGameStateSnapshot = RoomGameStateSnapshot()
+//
+//	let roomGameState = RoomGameState(
+//		roomGameStateSnapshot: roomGameStateSnapshot)
+//
+//	let actionCalculator = ActionCalculator()
+//	let actionHandler = ActionHandler(actionCalculator: actionCalculator)
+//	let characterManager = CharacterManager()
+//	let effectManager = EffectManager()
+//	let turnManager = TurnManager()
+
+
+	// init(dependencies)
+
+	// buildRoom()
+	// buildDungeon()
+
 	static func build() -> RoomView {
 
 		// Build Dependencies for RoomGameManager
@@ -25,7 +44,6 @@ class RoomBuilder {
 		let roomGameManager = RoomGameManager(
 			roomGameState: roomGameState,
 			actionHandler: actionHandler,
-			actionCalculator: actionCalculator,
 			characterManager: characterManager,
 			effectManager: effectManager,
 			turnManager: turnManager

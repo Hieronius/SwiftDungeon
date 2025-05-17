@@ -1,7 +1,7 @@
 import Foundation
 
 /// CharacterManager - Manages spawning and resetting Characters
-class CharacterManager {
+final class CharacterManager {
 
 	// MARK: Enemies
 	

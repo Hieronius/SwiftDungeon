@@ -31,6 +31,7 @@ enum EffectType: Equatable {
 	case dot(initialDamage: Int, damagePerTurn: Int)
 
 	var isDebuff: Bool {
+
 		switch self {
 		case 	.bleeding,
 				.attackDOWN,
@@ -45,6 +46,7 @@ enum EffectType: Equatable {
 	}
 
 	var isTicking: Bool {
+		
 		switch self {
 		case 	.healthRegen,
 				.bleeding,

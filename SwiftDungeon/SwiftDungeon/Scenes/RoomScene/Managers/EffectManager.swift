@@ -1,6 +1,6 @@
 import Foundation
 
-class EffectManager {
+final class EffectManager {
 
 	// MARK: Apply Effect
 	

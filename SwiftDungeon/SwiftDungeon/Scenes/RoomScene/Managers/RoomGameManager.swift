@@ -1,12 +1,11 @@
 import Foundation
 
-class RoomGameManager {
+final class RoomGameManager {
 
 	// MARK: - Dependencies
 
 	let roomGameState: RoomGameState
 	let actionHandler: ActionHandler
-	let actionCalculator: ActionCalculator
 	let characterManager: CharacterManager
 	let effectManager: EffectManager
 	let turnManager: TurnManager
@@ -16,14 +15,12 @@ class RoomGameManager {
 	init(
 		roomGameState: RoomGameState,
 		actionHandler: ActionHandler,
-		actionCalculator: ActionCalculator,
 		characterManager: CharacterManager,
 		effectManager: EffectManager,
 		turnManager: TurnManager
 	) {
 		self.roomGameState = roomGameState
 		self.actionHandler = actionHandler
-		self.actionCalculator = actionCalculator
 		self.characterManager = characterManager
 		self.effectManager = effectManager
 		self.turnManager = turnManager
@@ -53,7 +50,6 @@ extension RoomGameManager {
 
 extension RoomGameManager {
 
-	// should be put to GameState
 	func startFight() {
 
 		var snapshot = roomGameState.getActualGameStateSnapshot()
@@ -63,8 +59,6 @@ extension RoomGameManager {
 		snapshot.isHeroWon = false
 		snapshot.isGameOver = false
 		snapshot.currentRound = 1
-		// should be refactored to "getHero()" from char manager to
-		// gameState.instantiateHero(_ hero: Char)
 		snapshot.hero = characterManager.setupHero()
 		snapshot.enemyIndex = 0
 		let position = snapshot.enemyIndex
@@ -73,8 +67,6 @@ extension RoomGameManager {
 		roomGameState.applyNewGameStateSnapshot(snapshot)
 
 		checkWinLoseCondition()
-
-
 	}
 
 	// MARK: EndTurn
