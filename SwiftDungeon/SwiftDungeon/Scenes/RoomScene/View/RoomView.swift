@@ -27,7 +27,15 @@ struct RoomView: View {
 
 					viewModel.restoreCharacter(isHeroTurn: viewModel.roomUIState.isHeroTurn)
 				}
-			
+
+			if viewModel.roomUIState.isHeroTurn {
+				Text("Hero Turn")
+					.opacity(0.5)
+			} else {
+				Text("Enemy Turn")
+					.opacity(0.5)
+			}
+
 			VStack {
 
 				BorderedSection {
