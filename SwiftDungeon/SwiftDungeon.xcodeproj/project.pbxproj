@@ -41,6 +41,7 @@
 		DDAC13412DC9F1A300E42D65 /* BorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAC13402DC9F1A300E42D65 /* BorderedView.swift */; };
 		DDAC13432DC9F29600E42D65 /* RoomGameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAC13422DC9F29600E42D65 /* RoomGameManager.swift */; };
 		DDACC5602DD8490C00549907 /* Turn.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDACC55F2DD8490C00549907 /* Turn.swift */; };
+		DDACC5622DD855EB00549907 /* HighlightAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDACC5612DD855EA00549907 /* HighlightAnimation.swift */; };
 		DDAF16462DC5C67100D4109C /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAF16452DC5C67100D4109C /* GameConfig.swift */; };
 		DDC129F12DC25858006CBC41 /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = DDC129F02DC25858006CBC41 /* Notes */; };
 		DDC129F32DC26AF6006CBC41 /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC129F22DC26AF6006CBC41 /* Effect.swift */; };
@@ -83,6 +84,7 @@
 		DDAC13402DC9F1A300E42D65 /* BorderedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedView.swift; sourceTree = "<group>"; };
 		DDAC13422DC9F29600E42D65 /* RoomGameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGameManager.swift; sourceTree = "<group>"; };
 		DDACC55F2DD8490C00549907 /* Turn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Turn.swift; sourceTree = "<group>"; };
+		DDACC5612DD855EA00549907 /* HighlightAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightAnimation.swift; sourceTree = "<group>"; };
 		DDAF16452DC5C67100D4109C /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
 		DDC129F02DC25858006CBC41 /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
 		DDC129F22DC26AF6006CBC41 /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				DDAC133A2DC9F11B00E42D65 /* EnergyBar.swift */,
 				DDAC133C2DC9F15500E42D65 /* StatusBar.swift */,
 				DDAC13402DC9F1A300E42D65 /* BorderedView.swift */,
+				DDACC5612DD855EA00549907 /* HighlightAnimation.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				DDA940732DBF519200837F9F /* RoomViewModel.swift in Sources */,
 				DDACC5602DD8490C00549907 /* Turn.swift in Sources */,
 				DD2D74442DCB1C3A005396F3 /* TurnManager.swift in Sources */,
+				DDACC5622DD855EB00549907 /* HighlightAnimation.swift in Sources */,
 				DDA9407E2DBF53E000837F9F /* CharactersManager.swift in Sources */,
 				DDAACE862DD483CB00C74209 /* RoomGameStateSnapshot.swift in Sources */,
 				DDA59C492DC07582007877A6 /* RoomGameState.swift in Sources */,

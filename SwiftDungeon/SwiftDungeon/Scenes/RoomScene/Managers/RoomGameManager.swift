@@ -125,7 +125,6 @@ extension RoomGameManager {
 
 			}
 		}
-
 		roomGameState.applyNewGameStateSnapshot(snapshot)
 
 	}
@@ -139,6 +138,10 @@ extension RoomGameManager {
 
 		guard let hero = snapshot.hero else { return }
 		guard let enemy = snapshot.enemy else { return }
+
+		if snapshot.isEnteredNewRoom == true {
+			resetIsEnteredNewRoom()
+		}
 
 		if snapshot.currentRoom > GameConfig.DungeonConfig.dungeonLength {
 			snapshot.isGameCompleted = true
@@ -180,6 +183,7 @@ extension RoomGameManager {
 		snapshot.isGameOver = false
 		snapshot.currentRound = 1
 		snapshot.enemyIndex += 1
+		snapshot.isEnteredNewRoom = true
 		let position = snapshot.enemyIndex
 		snapshot.enemy = characterManager.spawnEnemy(at: position)
 
@@ -662,6 +666,16 @@ extension RoomGameManager {
 		}
 
 		roomGameState.applyNewGameStateSnapshot(snapshot)
+	}
+
+	/// Method to reset a property isEnteredNewRoom after completing the previous one
+	func resetIsEnteredNewRoom() {
+		var snapshot = roomGameState.getActualGameStateSnapshot()
+
+		snapshot.isEnteredNewRoom = false
+
+		roomGameState.applyNewGameStateSnapshot(snapshot)
+
 	}
 
 	/// Method to reset isEnemy/isHeroWasHit to false to refresh shaking animation

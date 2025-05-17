@@ -28,12 +28,26 @@ struct RoomView: View {
 					viewModel.restoreCharacter(isHeroTurn: viewModel.roomUIState.isHeroTurn)
 				}
 
-			if viewModel.roomUIState.isHeroTurn {
-				Text("Hero Turn")
-					.opacity(0.5)
-			} else {
-				Text("Enemy Turn")
-					.opacity(0.5)
+			// Animation to play when enter new room
+
+			if viewModel.roomUIState.isEnteredNewRoom {
+				Text("Entered New Room")
+					.font(.title2)
+			}
+
+			HighlightBorders(animate: viewModel.roomUIState.isEnteredNewRoom)
+
+			// Label to display of which turn is right now
+
+			if !viewModel.roomUIState.isEnteredNewRoom {
+
+				if viewModel.roomUIState.isHeroTurn{
+					Text("Hero Turn")
+						.opacity(0.5)
+				} else {
+					Text("Enemy Turn")
+						.opacity(0.5)
+				}
 			}
 
 			VStack {

@@ -85,6 +85,13 @@ extension RoomViewModel {
 //		roomGameManager.restoreCharacter(isHeroTurn: <#T##Bool#>)
 	}
 
+	func resetIsEnteredNewRoom() {
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+			self.roomGameManager.resetIsEnteredNewRoom()
+			self.syncGameUIState()
+		}
+	}
+
 	func resetCharacterBeingHitAndSyncGameState() {
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
 			self.roomGameManager.resetCharacterBeingHit()
@@ -256,6 +263,7 @@ extension RoomViewModel {
 		roomUIState = RoomUIState(
 			currentRoom: snapshot.currentRoom,
 			currentRound: snapshot.currentRound,
+			isEnteredNewRoom: snapshot.isEnteredNewRoom,
 			isHeroTurn: snapshot.isHeroTurn,
 			heroWasHit: snapshot.heroWasHit, // put to game state if no animation
 			enemyWasHit: snapshot.enemyWasHit // put to game state if no animation
