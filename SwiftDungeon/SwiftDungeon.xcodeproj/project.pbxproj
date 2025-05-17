@@ -122,12 +122,12 @@
 			isa = PBXGroup;
 			children = (
 				DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */,
+				DDA74FEE2DD7C1DC002FABD6 /* AppCoordinator.swift */,
 				DDAB3E502DC72B7800DBA1C8 /* Documentation */,
 				DDAA040A2DC46E3400C801B4 /* Domain */,
 				DDAA040B2DC46E4D00C801B4 /* Scenes */,
 				DDA940712DBF50FF00837F9F /* Helpers */,
 				DDA940662DBF4FCD00837F9F /* Preview Content */,
-				DDA74FEE2DD7C1DC002FABD6 /* AppCoordinator.swift */,
 			);
 			path = SwiftDungeon;
 			sourceTree = "<group>";
@@ -165,7 +165,6 @@
 				DDAA04112DC46F7900C801B4 /* HeroUIState.swift */,
 				DDAA04132DC46F8100C801B4 /* EnemyUIState.swift */,
 				DDAACE852DD483CB00C74209 /* RoomGameStateSnapshot.swift */,
-				DDACC55F2DD8490C00549907 /* Turn.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,6 +193,7 @@
 				DDA940762DBF522300837F9F /* Character.swift */,
 				DDC129F22DC26AF6006CBC41 /* Effect.swift */,
 				DDC129F42DC27EE6006CBC41 /* Stats.swift */,
+				DDACC55F2DD8490C00549907 /* Turn.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -201,11 +201,12 @@
 		DDAA040B2DC46E4D00C801B4 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				DDAA04152DC4879E00C801B4 /* MainMenuScene */,
+				DDACC5632DD8632D00549907 /* WorldMapScene */,
 				DDAA04192DC48AD700C801B4 /* CampScene */,
 				DDAA04182DC487BA00C801B4 /* TownScene */,
 				DDAA04172DC487B100C801B4 /* CorridorScene */,
 				DDAA04162DC487A400C801B4 /* DungeonScene */,
-				DDAA04152DC4879E00C801B4 /* MenuScene */,
 				DDAA040C2DC46EA600C801B4 /* RoomScene */,
 			);
 			path = Scenes;
@@ -223,11 +224,11 @@
 			path = RoomScene;
 			sourceTree = "<group>";
 		};
-		DDAA04152DC4879E00C801B4 /* MenuScene */ = {
+		DDAA04152DC4879E00C801B4 /* MainMenuScene */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = MenuScene;
+			path = MainMenuScene;
 			sourceTree = "<group>";
 		};
 		DDAA04162DC487A400C801B4 /* DungeonScene */ = {
@@ -290,6 +291,13 @@
 				DDAA56E22DC88279006E663D /* SceneUIStateManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		DDACC5632DD8632D00549907 /* WorldMapScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WorldMapScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -455,7 +463,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -509,7 +517,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -535,6 +543,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -564,6 +573,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

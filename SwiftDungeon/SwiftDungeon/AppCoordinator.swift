@@ -1,20 +1,21 @@
-//
-//  AppCoordinator.swift
-//  SwiftDungeon
-//
-//  Created by Арсентий Халимовский on 16.05.2025.
-//
-
 import Foundation
 
-// class AppCoordinator {
+protocol AppCoordinatorProtocol {
 
-	// let roomBuilder()
-	// let mainMenuBuilder
+}
 
-	// init(roomBuilder: RoomBuilder) {
+final class AppCoordinator: AppCoordinatorProtocol {
+
+	// MARK: Dependencies
+
+	let roomBuilder: RoomBuilder
+//	let mainMenuBuilder: MainMenuBuilder
+
+	init(roomBuilder: RoomBuilder) {
+
+		self.roomBuilder = roomBuilder
+	}
 
 
-	//
 
-//}
+}

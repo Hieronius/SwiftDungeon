@@ -204,9 +204,6 @@ extension RoomGameManager {
 		guard let hero = snapshot.hero else { return }
 
 		hero.heroLevelUP()
-		restoreCharacter(isHeroTurn: true)
-
-
 	}
 
 	func restoreCharacter(isHeroTurn: Bool) {

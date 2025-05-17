@@ -318,7 +318,6 @@ extension RoomViewModel {
 	func openSpells() {
 		sceneUIStateManager.open(.spellbook)
 		sceneUIState.uiState = .spellbook
-		print(sceneUIStateManager.activeSection)
 	}
 
 	func openLog() {

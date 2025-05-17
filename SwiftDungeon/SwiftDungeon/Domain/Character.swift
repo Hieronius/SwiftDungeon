@@ -67,7 +67,7 @@ class Character: Creature {
 		maxMana += 10
 		maxDamage += 1
 		minDamage += 1
-//		restoreCharacter(isHeroTurn: true)
+		restoreCharacter()
 
 
 	}
