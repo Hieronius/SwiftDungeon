@@ -18,6 +18,7 @@ struct DungeonView: View {
 
 	var body: some View {
 
-		return Text("Dungeon Here")
+		Text("Dungeon Here")
+			.navigationBarBackButtonHidden(true)
 	}
 }

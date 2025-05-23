@@ -18,6 +18,7 @@ struct WorldView: View {
 
 	var body: some View {
 
-		return Text("World Here")
+		Text("World Here")
+			.navigationBarBackButtonHidden(true)
 	}
 }

@@ -71,7 +71,8 @@ struct MenuView: View {
 					WorldBuilder.build()
 
 				default:
-					DetailView(item: item)
+//					DetailView(item: item)
+					EmptyView()
 				}
 			}
 		}

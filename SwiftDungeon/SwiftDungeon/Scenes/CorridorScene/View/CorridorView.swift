@@ -18,6 +18,7 @@ struct CorridorView: View {
 
 	var body: some View {
 
-		return Text("Corridor Here")
+		Text("Corridor Here")
+			.navigationBarBackButtonHidden(true)
 	}
 }

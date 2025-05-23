@@ -76,6 +76,7 @@ struct RoomView: View {
 			}
 			
 		}
+		.navigationBarBackButtonHidden(true)
 		
 		// MARK: ENTRY POINT OF THE GAME
 
@@ -114,6 +115,13 @@ private extension RoomView {
 	@ViewBuilder
 	func gameInfoSection() -> some View {
 		VStack {
+			
+			actionButton(title: "Menu") {
+				print("put return button here")
+			}
+			.opacity(0.8)
+			.scaleEffect(0.8)
+
 			infoText(label: "Room:", value: viewModel.roomUIState.currentRoom)
 			infoText(label: "Round:", value: viewModel.roomUIState.currentRound)
 		}

@@ -18,6 +18,7 @@ struct TownView: View {
 
 	var body: some View {
 
-		return Text("Town Here")
+		Text("Town Here")
+			.navigationBarBackButtonHidden(true)
 	}
 }

@@ -266,10 +266,10 @@
 		DDAA04162DC487A400C801B4 /* DungeonScene */ = {
 			isa = PBXGroup;
 			children = (
+				DDAA4C3D2DE0730D0007E5DA /* DungeonBuilder.swift */,
 				DDAA4C382DE072970007E5DA /* Model */,
 				DDAA4C372DE072920007E5DA /* ViewModel */,
 				DDAA4C362DE0728E0007E5DA /* View */,
-				DDAA4C3D2DE0730D0007E5DA /* DungeonBuilder.swift */,
 			);
 			path = DungeonScene;
 			sourceTree = "<group>";
