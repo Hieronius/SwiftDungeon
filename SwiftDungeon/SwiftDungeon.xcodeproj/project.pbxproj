@@ -26,6 +26,9 @@
 		DDAA04102DC46F5700C801B4 /* SceneUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA040F2DC46F5700C801B4 /* SceneUIState.swift */; };
 		DDAA04122DC46F7900C801B4 /* HeroUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA04112DC46F7900C801B4 /* HeroUIState.swift */; };
 		DDAA04142DC46F8100C801B4 /* EnemyUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA04132DC46F8100C801B4 /* EnemyUIState.swift */; };
+		DDAA4C1C2DE06C0E0007E5DA /* CorridorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA4C1B2DE06C0E0007E5DA /* CorridorViewModel.swift */; };
+		DDAA4C1E2DE06C1B0007E5DA /* CorridorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA4C1D2DE06C1B0007E5DA /* CorridorView.swift */; };
+		DDAA4C232DE06E1F0007E5DA /* CorridorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA4C222DE06E1F0007E5DA /* CorridorBuilder.swift */; };
 		DDAA56E12DC881C2006E663D /* SceneUISection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA56E02DC881C2006E663D /* SceneUISection.swift */; };
 		DDAA56E32DC88279006E663D /* SceneUIStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA56E22DC88279006E663D /* SceneUIStateManager.swift */; };
 		DDAACE862DD483CB00C74209 /* RoomGameStateSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAACE852DD483CB00C74209 /* RoomGameStateSnapshot.swift */; };
@@ -72,6 +75,9 @@
 		DDAA040F2DC46F5700C801B4 /* SceneUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneUIState.swift; sourceTree = "<group>"; };
 		DDAA04112DC46F7900C801B4 /* HeroUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroUIState.swift; sourceTree = "<group>"; };
 		DDAA04132DC46F8100C801B4 /* EnemyUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyUIState.swift; sourceTree = "<group>"; };
+		DDAA4C1B2DE06C0E0007E5DA /* CorridorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorridorViewModel.swift; sourceTree = "<group>"; };
+		DDAA4C1D2DE06C1B0007E5DA /* CorridorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorridorView.swift; sourceTree = "<group>"; };
+		DDAA4C222DE06E1F0007E5DA /* CorridorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorridorBuilder.swift; sourceTree = "<group>"; };
 		DDAA56E02DC881C2006E663D /* SceneUISection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneUISection.swift; sourceTree = "<group>"; };
 		DDAA56E22DC88279006E663D /* SceneUIStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneUIStateManager.swift; sourceTree = "<group>"; };
 		DDAACE852DD483CB00C74209 /* RoomGameStateSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGameStateSnapshot.swift; sourceTree = "<group>"; };
@@ -210,7 +216,6 @@
 			children = (
 				DDAA04152DC4879E00C801B4 /* MainMenuScene */,
 				DDACC5632DD8632D00549907 /* WorldMapScene */,
-				DDAA04192DC48AD700C801B4 /* CampScene */,
 				DDAA04182DC487BA00C801B4 /* TownScene */,
 				DDAA04172DC487B100C801B4 /* CorridorScene */,
 				DDAA04162DC487A400C801B4 /* DungeonScene */,
@@ -250,6 +255,10 @@
 		DDAA04172DC487B100C801B4 /* CorridorScene */ = {
 			isa = PBXGroup;
 			children = (
+				DDAA4C222DE06E1F0007E5DA /* CorridorBuilder.swift */,
+				DDAA4C1F2DE06DFC0007E5DA /* Model */,
+				DDAA4C202DE06DFF0007E5DA /* View */,
+				DDAA4C212DE06E040007E5DA /* ViewModel */,
 			);
 			path = CorridorScene;
 			sourceTree = "<group>";
@@ -261,11 +270,27 @@
 			path = TownScene;
 			sourceTree = "<group>";
 		};
-		DDAA04192DC48AD700C801B4 /* CampScene */ = {
+		DDAA4C1F2DE06DFC0007E5DA /* Model */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = CampScene;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DDAA4C202DE06DFF0007E5DA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DDAA4C1D2DE06C1B0007E5DA /* CorridorView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DDAA4C212DE06E040007E5DA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DDAA4C1B2DE06C0E0007E5DA /* CorridorViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		DDAB3E502DC72B7800DBA1C8 /* Documentation */ = {
@@ -385,6 +410,7 @@
 				DD2D74402DCB0D83005396F3 /* WorldStateMachine.swift in Sources */,
 				DDAA56E12DC881C2006E663D /* SceneUISection.swift in Sources */,
 				DDA74FEF2DD7C1DC002FABD6 /* AppCoordinator.swift in Sources */,
+				DDAA4C232DE06E1F0007E5DA /* CorridorBuilder.swift in Sources */,
 				DDA9407C2DBF538700837F9F /* ActionCalculator.swift in Sources */,
 				DDAF16462DC5C67100D4109C /* GameConfig.swift in Sources */,
 				DDAC133D2DC9F15500E42D65 /* StatusBar.swift in Sources */,
@@ -398,6 +424,7 @@
 				DDA940632DBF4FC600837F9F /* RoomView.swift in Sources */,
 				DDAB3E522DC7362A00DBA1C8 /* EffectManager.swift in Sources */,
 				DDAA04122DC46F7900C801B4 /* HeroUIState.swift in Sources */,
+				DDAA4C1C2DE06C0E0007E5DA /* CorridorViewModel.swift in Sources */,
 				DDACC5652DD87E5900549907 /* MainMenuView.swift in Sources */,
 				DD2D74422DCB1C09005396F3 /* ActionHandler.swift in Sources */,
 				DDAA040E2DC46F4400C801B4 /* RoomUIState.swift in Sources */,
@@ -405,6 +432,7 @@
 				DDA940732DBF519200837F9F /* RoomViewModel.swift in Sources */,
 				DDACC5602DD8490C00549907 /* Turn.swift in Sources */,
 				DD2D74442DCB1C3A005396F3 /* TurnManager.swift in Sources */,
+				DDAA4C1E2DE06C1B0007E5DA /* CorridorView.swift in Sources */,
 				DDACC5622DD855EB00549907 /* HighlightAnimation.swift in Sources */,
 				DDA9407E2DBF53E000837F9F /* CharactersManager.swift in Sources */,
 				DDAACE862DD483CB00C74209 /* RoomGameStateSnapshot.swift in Sources */,

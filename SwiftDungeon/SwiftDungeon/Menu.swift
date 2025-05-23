@@ -59,7 +59,7 @@ struct MenuView: View {
 					RoomBuilder.build()
 
 				case "Corridor":
-					EmptyView()
+					CorridorBuilder.build()
 
 				case "Dungeon":
 					EmptyView()

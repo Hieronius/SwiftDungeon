@@ -1,10 +1,10 @@
 Current Plan
 
 
-2. - Implement AppCoordinator
-   - Implement ModuleBuilder
-   - Implement WorldStateMachine
-   - Resolve NavigationStackProblem (Use NavigationStack)
+2.  - Resolve NavigationStackProblem (Use NavigationStack)
+	- Implement AppCoordinator
+    - Implement ModuleBuilder
+    - Implement WorldStateMachine
 
 
 3. Add mechanics/abilities

@@ -70,3 +70,5 @@ Now i have relationship like:
 RoomGameState -> extractSnapshot -> use in RoomGameManager/RoomViewModel
 
 Any actions should be wrapped to RoomGameStateSnapshot and to be applyed to GameState back
+
+Combine Room and Corridor to create a unique chain of events and encounters
