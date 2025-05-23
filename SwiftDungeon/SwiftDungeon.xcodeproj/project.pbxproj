@@ -29,6 +29,9 @@
 		DDAA4C1C2DE06C0E0007E5DA /* CorridorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA4C1B2DE06C0E0007E5DA /* CorridorViewModel.swift */; };
 		DDAA4C1E2DE06C1B0007E5DA /* CorridorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA4C1D2DE06C1B0007E5DA /* CorridorView.swift */; };
 		DDAA4C232DE06E1F0007E5DA /* CorridorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA4C222DE06E1F0007E5DA /* CorridorBuilder.swift */; };
+		DDAA4C252DE0700D0007E5DA /* TownBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA4C242DE0700D0007E5DA /* TownBuilder.swift */; };
+		DDAA4C2A2DE070600007E5DA /* TownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA4C292DE070600007E5DA /* TownViewModel.swift */; };
+		DDAA4C2C2DE0706A0007E5DA /* TownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA4C2B2DE0706A0007E5DA /* TownView.swift */; };
 		DDAA56E12DC881C2006E663D /* SceneUISection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA56E02DC881C2006E663D /* SceneUISection.swift */; };
 		DDAA56E32DC88279006E663D /* SceneUIStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA56E22DC88279006E663D /* SceneUIStateManager.swift */; };
 		DDAACE862DD483CB00C74209 /* RoomGameStateSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAACE852DD483CB00C74209 /* RoomGameStateSnapshot.swift */; };
@@ -78,6 +81,9 @@
 		DDAA4C1B2DE06C0E0007E5DA /* CorridorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorridorViewModel.swift; sourceTree = "<group>"; };
 		DDAA4C1D2DE06C1B0007E5DA /* CorridorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorridorView.swift; sourceTree = "<group>"; };
 		DDAA4C222DE06E1F0007E5DA /* CorridorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorridorBuilder.swift; sourceTree = "<group>"; };
+		DDAA4C242DE0700D0007E5DA /* TownBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TownBuilder.swift; sourceTree = "<group>"; };
+		DDAA4C292DE070600007E5DA /* TownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TownViewModel.swift; sourceTree = "<group>"; };
+		DDAA4C2B2DE0706A0007E5DA /* TownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TownView.swift; sourceTree = "<group>"; };
 		DDAA56E02DC881C2006E663D /* SceneUISection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneUISection.swift; sourceTree = "<group>"; };
 		DDAA56E22DC88279006E663D /* SceneUIStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneUIStateManager.swift; sourceTree = "<group>"; };
 		DDAACE852DD483CB00C74209 /* RoomGameStateSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGameStateSnapshot.swift; sourceTree = "<group>"; };
@@ -257,8 +263,8 @@
 			children = (
 				DDAA4C222DE06E1F0007E5DA /* CorridorBuilder.swift */,
 				DDAA4C1F2DE06DFC0007E5DA /* Model */,
-				DDAA4C202DE06DFF0007E5DA /* View */,
 				DDAA4C212DE06E040007E5DA /* ViewModel */,
+				DDAA4C202DE06DFF0007E5DA /* View */,
 			);
 			path = CorridorScene;
 			sourceTree = "<group>";
@@ -266,6 +272,10 @@
 		DDAA04182DC487BA00C801B4 /* TownScene */ = {
 			isa = PBXGroup;
 			children = (
+				DDAA4C242DE0700D0007E5DA /* TownBuilder.swift */,
+				DDAA4C262DE070320007E5DA /* Model */,
+				DDAA4C272DE070390007E5DA /* ViewModel */,
+				DDAA4C282DE0703E0007E5DA /* View */,
 			);
 			path = TownScene;
 			sourceTree = "<group>";
@@ -291,6 +301,29 @@
 				DDAA4C1B2DE06C0E0007E5DA /* CorridorViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DDAA4C262DE070320007E5DA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DDAA4C272DE070390007E5DA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DDAA4C292DE070600007E5DA /* TownViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DDAA4C282DE0703E0007E5DA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DDAA4C2B2DE0706A0007E5DA /* TownView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		DDAB3E502DC72B7800DBA1C8 /* Documentation */ = {
@@ -415,6 +448,7 @@
 				DDAF16462DC5C67100D4109C /* GameConfig.swift in Sources */,
 				DDAC133D2DC9F15500E42D65 /* StatusBar.swift in Sources */,
 				DDC129F52DC27EE6006CBC41 /* Stats.swift in Sources */,
+				DDAA4C2A2DE070600007E5DA /* TownViewModel.swift in Sources */,
 				DDAC13412DC9F1A300E42D65 /* BorderedView.swift in Sources */,
 				DDACC5672DD87E6500549907 /* MainMenuViewModel.swift in Sources */,
 				DDC129F32DC26AF6006CBC41 /* Effect.swift in Sources */,
@@ -422,6 +456,8 @@
 				DDAC13352DC9F08800E42D65 /* ExperienceBar.swift in Sources */,
 				DDAC13372DC9F0CA00E42D65 /* HealthBar.swift in Sources */,
 				DDA940632DBF4FC600837F9F /* RoomView.swift in Sources */,
+				DDAA4C2C2DE0706A0007E5DA /* TownView.swift in Sources */,
+				DDAA4C252DE0700D0007E5DA /* TownBuilder.swift in Sources */,
 				DDAB3E522DC7362A00DBA1C8 /* EffectManager.swift in Sources */,
 				DDAA04122DC46F7900C801B4 /* HeroUIState.swift in Sources */,
 				DDAA4C1C2DE06C0E0007E5DA /* CorridorViewModel.swift in Sources */,

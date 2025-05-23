@@ -65,7 +65,7 @@ struct MenuView: View {
 					EmptyView()
 
 				case "Town":
-					EmptyView()
+					TownBuilder.build()
 
 				case "World":
 					EmptyView()
