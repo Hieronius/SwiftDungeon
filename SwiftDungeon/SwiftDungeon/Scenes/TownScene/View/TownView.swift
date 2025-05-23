@@ -1,11 +1,11 @@
 import SwiftUI
 
-/// `View` of CorridorScene module
+/// `View` of Town module
 struct TownView: View {
 
 	// MARK: - Dependencies
 
-	/// `ViewModel` of CorridorScene
+	/// `ViewModel` of TownModule
 	@StateObject private var viewModel: TownViewModel
 
 	// MARK: - Initialization
