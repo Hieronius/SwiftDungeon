@@ -35,6 +35,9 @@
 		DDAA4C312DE071B00007E5DA /* WorldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA4C302DE071B00007E5DA /* WorldViewModel.swift */; };
 		DDAA4C332DE071CA0007E5DA /* WorldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA4C322DE071CA0007E5DA /* WorldView.swift */; };
 		DDAA4C352DE0724E0007E5DA /* WorldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA4C342DE0724E0007E5DA /* WorldBuilder.swift */; };
+		DDAA4C3A2DE072A90007E5DA /* DungeonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA4C392DE072A90007E5DA /* DungeonView.swift */; };
+		DDAA4C3C2DE072E40007E5DA /* DungeonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA4C3B2DE072E40007E5DA /* DungeonViewModel.swift */; };
+		DDAA4C3E2DE0730D0007E5DA /* DungeonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA4C3D2DE0730D0007E5DA /* DungeonBuilder.swift */; };
 		DDAA56E12DC881C2006E663D /* SceneUISection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA56E02DC881C2006E663D /* SceneUISection.swift */; };
 		DDAA56E32DC88279006E663D /* SceneUIStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA56E22DC88279006E663D /* SceneUIStateManager.swift */; };
 		DDAACE862DD483CB00C74209 /* RoomGameStateSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAACE852DD483CB00C74209 /* RoomGameStateSnapshot.swift */; };
@@ -90,6 +93,9 @@
 		DDAA4C302DE071B00007E5DA /* WorldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldViewModel.swift; sourceTree = "<group>"; };
 		DDAA4C322DE071CA0007E5DA /* WorldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldView.swift; sourceTree = "<group>"; };
 		DDAA4C342DE0724E0007E5DA /* WorldBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldBuilder.swift; sourceTree = "<group>"; };
+		DDAA4C392DE072A90007E5DA /* DungeonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonView.swift; sourceTree = "<group>"; };
+		DDAA4C3B2DE072E40007E5DA /* DungeonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonViewModel.swift; sourceTree = "<group>"; };
+		DDAA4C3D2DE0730D0007E5DA /* DungeonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonBuilder.swift; sourceTree = "<group>"; };
 		DDAA56E02DC881C2006E663D /* SceneUISection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneUISection.swift; sourceTree = "<group>"; };
 		DDAA56E22DC88279006E663D /* SceneUIStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneUIStateManager.swift; sourceTree = "<group>"; };
 		DDAACE852DD483CB00C74209 /* RoomGameStateSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGameStateSnapshot.swift; sourceTree = "<group>"; };
@@ -260,6 +266,10 @@
 		DDAA04162DC487A400C801B4 /* DungeonScene */ = {
 			isa = PBXGroup;
 			children = (
+				DDAA4C382DE072970007E5DA /* Model */,
+				DDAA4C372DE072920007E5DA /* ViewModel */,
+				DDAA4C362DE0728E0007E5DA /* View */,
+				DDAA4C3D2DE0730D0007E5DA /* DungeonBuilder.swift */,
 			);
 			path = DungeonScene;
 			sourceTree = "<group>";
@@ -349,6 +359,29 @@
 			sourceTree = "<group>";
 		};
 		DDAA4C2F2DE071940007E5DA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DDAA4C362DE0728E0007E5DA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DDAA4C392DE072A90007E5DA /* DungeonView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DDAA4C372DE072920007E5DA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DDAA4C3B2DE072E40007E5DA /* DungeonViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DDAA4C382DE072970007E5DA /* Model */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -486,6 +519,8 @@
 				DDACC5672DD87E6500549907 /* MainMenuViewModel.swift in Sources */,
 				DDAA4C312DE071B00007E5DA /* WorldViewModel.swift in Sources */,
 				DDC129F32DC26AF6006CBC41 /* Effect.swift in Sources */,
+				DDAA4C3E2DE0730D0007E5DA /* DungeonBuilder.swift in Sources */,
+				DDAA4C3A2DE072A90007E5DA /* DungeonView.swift in Sources */,
 				DDA940772DBF522300837F9F /* Character.swift in Sources */,
 				DDAC13352DC9F08800E42D65 /* ExperienceBar.swift in Sources */,
 				DDAC13372DC9F0CA00E42D65 /* HealthBar.swift in Sources */,
@@ -509,6 +544,7 @@
 				DDAACE862DD483CB00C74209 /* RoomGameStateSnapshot.swift in Sources */,
 				DDA59C492DC07582007877A6 /* RoomGameState.swift in Sources */,
 				DDA9EF162DD99800004ED19D /* Menu.swift in Sources */,
+				DDAA4C3C2DE072E40007E5DA /* DungeonViewModel.swift in Sources */,
 				DDAA04142DC46F8100C801B4 /* EnemyUIState.swift in Sources */,
 				DDAC13392DC9F0F800E42D65 /* ManaBar.swift in Sources */,
 				DDAA56E32DC88279006E663D /* SceneUIStateManager.swift in Sources */,

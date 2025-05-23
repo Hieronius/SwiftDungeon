@@ -62,13 +62,13 @@ struct MenuView: View {
 					CorridorBuilder.build()
 
 				case "Dungeon":
-					EmptyView()
+					DungeonBuilder.build()
 
 				case "Town":
 					TownBuilder.build()
 
 				case "World":
-					EmptyView()
+					WorldBuilder.build()
 
 				default:
 					DetailView(item: item)
