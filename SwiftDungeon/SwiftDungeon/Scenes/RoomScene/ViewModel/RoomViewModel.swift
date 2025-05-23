@@ -346,6 +346,20 @@ extension RoomViewModel {
 	}
 }
 
+// MARK: - Hashable
+
+extension RoomViewModel: Hashable {
+	static func == (lhs: RoomViewModel, rhs: RoomViewModel) -> Bool {
+		lhs.roomUIState.isHeroTurn == rhs.roomUIState.isHeroTurn
+	}
+
+	func hash(into hasher: inout Hasher) {
+		hasher.combine(self.roomUIState.isHeroTurn)
+	   }
+
+
+}
+
 // MARK: - Visuals
 
 extension RoomViewModel {

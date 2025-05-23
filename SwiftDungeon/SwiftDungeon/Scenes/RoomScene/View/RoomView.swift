@@ -144,35 +144,41 @@ private extension RoomView {
 			
 			// Hero
 			Spacer()
-			characterStats(name: "Hero",
-						   level: "\(viewModel.heroUIState.heroCurrentLevel)",
-						   currentExperience: CGFloat(viewModel.heroUIState.heroCurrentExperience),
-						   maxExperience:
-							CGFloat(viewModel.heroUIState.heroMaxExperience),
-						   currentHealth: CGFloat(viewModel.heroUIState.heroCurrentHealth),
-						   maxHealth:
-							CGFloat(viewModel.heroUIState.heroMaxHealth),
-						   maxMana: CGFloat(viewModel.heroUIState.heroMaxMana),
-						   currentMana: CGFloat(viewModel.heroUIState.heroCurrentMana),
-						   currentEnergy: viewModel.heroUIState.heroCurrentEnergy,
-						   maxEnergy: viewModel.heroUIState.heroMaxEnergy,
-						   effects: viewModel.heroUIState.heroActiveEffects)
+			characterStats(
+
+				name: "Hero",
+				level: "\(viewModel.heroUIState.heroCurrentLevel)",
+				currentExperience: CGFloat(viewModel.heroUIState.heroCurrentExperience),
+				maxExperience:
+					CGFloat(viewModel.heroUIState.heroMaxExperience),
+				currentHealth: CGFloat(viewModel.heroUIState.heroCurrentHealth),
+				maxHealth:
+					CGFloat(viewModel.heroUIState.heroMaxHealth),
+				maxMana: CGFloat(viewModel.heroUIState.heroMaxMana),
+				currentMana: CGFloat(viewModel.heroUIState.heroCurrentMana),
+				currentEnergy: viewModel.heroUIState.heroCurrentEnergy,
+				maxEnergy: viewModel.heroUIState.heroMaxEnergy,
+				effects: viewModel.heroUIState.heroActiveEffects
+			)
 			Spacer()
 			gameInfoSection()
 			Spacer()
 			
 			// Enemy
-			characterStats(name: "Enemy",
-						   level: "\(viewModel.enemyUIState.enemyCurrentLevel)",
-						   currentExperience: 0,
-						   maxExperience: 0,
-						   currentHealth: CGFloat(viewModel.enemyUIState.enemyCurrentHealth),
-						   maxHealth:
-							CGFloat(viewModel.enemyUIState.enemyMaxHealth),
-						   maxMana: CGFloat(viewModel.enemyUIState.enemyMaxMana), currentMana: CGFloat(viewModel.enemyUIState.enemyCurrentMana),
-						   currentEnergy: viewModel.enemyUIState.enemyCurrentEnergy,
-						   maxEnergy: viewModel.enemyUIState.enemyMaxEnergy,
-						   effects: viewModel.enemyUIState.enemyActiveEffects)
+			characterStats(
+
+				name: "Enemy",
+				level: "\(viewModel.enemyUIState.enemyCurrentLevel)",
+				currentExperience: 0,
+				maxExperience: 0,
+				currentHealth: CGFloat(viewModel.enemyUIState.enemyCurrentHealth),
+				maxHealth:
+					CGFloat(viewModel.enemyUIState.enemyMaxHealth),
+				maxMana: CGFloat(viewModel.enemyUIState.enemyMaxMana), currentMana: CGFloat(viewModel.enemyUIState.enemyCurrentMana),
+				currentEnergy: viewModel.enemyUIState.enemyCurrentEnergy,
+				maxEnergy: viewModel.enemyUIState.enemyMaxEnergy,
+				effects: viewModel.enemyUIState.enemyActiveEffects
+			)
 			Spacer()
 		}
 	}

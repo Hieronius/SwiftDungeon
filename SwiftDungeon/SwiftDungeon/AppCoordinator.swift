@@ -2,6 +2,9 @@ import Foundation
 
 protocol AppCoordinatorProtocol {
 
+	func push(_ path: any Hashable)
+	func popLast()
+
 }
 
 final class AppCoordinator: AppCoordinatorProtocol {
@@ -16,6 +19,14 @@ final class AppCoordinator: AppCoordinatorProtocol {
 		self.roomBuilder = roomBuilder
 	}
 
+
+	func push(_ path: any Hashable) {
+
+	}
+	
+	func popLast() {
+
+	}
 
 
 }
