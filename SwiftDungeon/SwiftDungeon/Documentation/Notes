@@ -72,3 +72,13 @@ RoomGameState -> extractSnapshot -> use in RoomGameManager/RoomViewModel
 Any actions should be wrapped to RoomGameStateSnapshot and to be applyed to GameState back
 
 Combine Room and Corridor to create a unique chain of events and encounters
+
+State machine should own all other states
+When you enter a specific screen specific state should be pushed on top of the State Stack
+When game session ends or app been killed by CPU only WorldState should be upload to SaveManager
+
+Instead of Stress analogue from DarkestDungeon i can use something like Moral. When hero enter the dungeon he get normal one like 50%. If hero meet rewards, solves puzzles or slane the enemy moral should rise. And the opposite is true. Moral should affect turns, energy and effect of the actions.
+
+May be i should add a special energy for each Dungeon run as a Tile's sequence like let's say 15. So user can go to any place 15 times back and forward. It will motivate user to predict and plan his routine
+
+May be i need a special EventManager as well to react on type of the events of each tiles

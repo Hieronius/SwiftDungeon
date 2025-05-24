@@ -12,7 +12,7 @@ struct MenuItem: Identifiable, Hashable {
 	let title: String
 }
 
-// MARK: Menu Items
+// MARK: Menu Items should be put in view model
 
 /// All Possible Menu Options
 let menuItems = [
@@ -71,7 +71,6 @@ struct MenuView: View {
 					WorldBuilder.build()
 
 				default:
-//					DetailView(item: item)
 					EmptyView()
 				}
 			}

@@ -5,6 +5,7 @@ struct RoomView: View {
 	// MARK: - State Properties
 	
 	@StateObject private var viewModel: RoomViewModel
+	@Environment(\.dismiss) var dismiss
 	@State private var isEnemyUI = true
 
 	// MARK: - Initialization
@@ -115,9 +116,9 @@ private extension RoomView {
 	@ViewBuilder
 	func gameInfoSection() -> some View {
 		VStack {
-			
+
 			actionButton(title: "Menu") {
-				print("put return button here")
+				dismiss()
 			}
 			.opacity(0.8)
 			.scaleEffect(0.8)

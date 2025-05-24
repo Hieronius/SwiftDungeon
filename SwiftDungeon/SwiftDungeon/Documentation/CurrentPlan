@@ -1,7 +1,11 @@
 Current Plan
 
 
-2.  - Resolve NavigationStackProblem (Use NavigationStack)
+2.	- Implement CorridorView
+	- Implement DungeonView with tiles
+	- Implement TownView
+	- Implement WorldView
+	- Resolve NavigationStackProblem (Use NavigationStack)
 	- Implement AppCoordinator
     - Implement ModuleBuilder
     - Implement WorldStateMachine
