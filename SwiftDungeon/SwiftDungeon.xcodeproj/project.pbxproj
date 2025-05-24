@@ -16,6 +16,8 @@
 		DDA810CC2DE17EF9000A2349 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA810CB2DE17EF9000A2349 /* Tile.swift */; };
 		DDA810CE2DE17F35000A2349 /* TileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA810CD2DE17F35000A2349 /* TileType.swift */; };
 		DDA810D02DE17FCD000A2349 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA810CF2DE17FCD000A2349 /* EventType.swift */; };
+		DDA810D32DE18CAF000A2349 /* DungeonGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA810D22DE18CAF000A2349 /* DungeonGameState.swift */; };
+		DDA810D52DE18CBD000A2349 /* DungeonGameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA810D42DE18CBD000A2349 /* DungeonGameManager.swift */; };
 		DDA940612DBF4FC600837F9F /* SwiftDungeonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */; };
 		DDA940632DBF4FC600837F9F /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940622DBF4FC600837F9F /* RoomView.swift */; };
 		DDA940652DBF4FCD00837F9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDA940642DBF4FCD00837F9F /* Assets.xcassets */; };
@@ -77,6 +79,8 @@
 		DDA810CB2DE17EF9000A2349 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		DDA810CD2DE17F35000A2349 /* TileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileType.swift; sourceTree = "<group>"; };
 		DDA810CF2DE17FCD000A2349 /* EventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventType.swift; sourceTree = "<group>"; };
+		DDA810D22DE18CAF000A2349 /* DungeonGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonGameState.swift; sourceTree = "<group>"; };
+		DDA810D42DE18CBD000A2349 /* DungeonGameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonGameManager.swift; sourceTree = "<group>"; };
 		DDA9405D2DBF4FC600837F9F /* SwiftDungeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDungeon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDungeonApp.swift; sourceTree = "<group>"; };
 		DDA940622DBF4FC600837F9F /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
@@ -140,6 +144,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DDA810D12DE18C8C000A2349 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				DDA810D42DE18CBD000A2349 /* DungeonGameManager.swift */,
+				DDA810C92DE17E68000A2349 /* DungeonMapGenerator.swift */,
+				DDA810D22DE18CAF000A2349 /* DungeonGameState.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		DDA940542DBF4FC600837F9F = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				DDAA4C3D2DE0730D0007E5DA /* DungeonBuilder.swift */,
+				DDA810D12DE18C8C000A2349 /* Managers */,
 				DDAA4C382DE072970007E5DA /* Model */,
 				DDAA4C372DE072920007E5DA /* ViewModel */,
 				DDAA4C362DE0728E0007E5DA /* View */,
@@ -392,7 +407,6 @@
 		DDAA4C382DE072970007E5DA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DDA810C92DE17E68000A2349 /* DungeonMapGenerator.swift */,
 				DDA810CB2DE17EF9000A2349 /* Tile.swift */,
 				DDA810CD2DE17F35000A2349 /* TileType.swift */,
 				DDA810CF2DE17FCD000A2349 /* EventType.swift */,
@@ -541,6 +555,7 @@
 				DDA940632DBF4FC600837F9F /* RoomView.swift in Sources */,
 				DDAA4C2C2DE0706A0007E5DA /* TownView.swift in Sources */,
 				DDAA4C252DE0700D0007E5DA /* TownBuilder.swift in Sources */,
+				DDA810D52DE18CBD000A2349 /* DungeonGameManager.swift in Sources */,
 				DDAB3E522DC7362A00DBA1C8 /* EffectManager.swift in Sources */,
 				DDAA04122DC46F7900C801B4 /* HeroUIState.swift in Sources */,
 				DDAA4C1C2DE06C0E0007E5DA /* CorridorViewModel.swift in Sources */,
@@ -554,6 +569,7 @@
 				DDAA4C1E2DE06C1B0007E5DA /* CorridorView.swift in Sources */,
 				DDACC5622DD855EB00549907 /* HighlightAnimation.swift in Sources */,
 				DDA810D02DE17FCD000A2349 /* EventType.swift in Sources */,
+				DDA810D32DE18CAF000A2349 /* DungeonGameState.swift in Sources */,
 				DDA9407E2DBF53E000837F9F /* CharactersManager.swift in Sources */,
 				DDAA4C332DE071CA0007E5DA /* WorldView.swift in Sources */,
 				DDAACE862DD483CB00C74209 /* RoomGameStateSnapshot.swift in Sources */,

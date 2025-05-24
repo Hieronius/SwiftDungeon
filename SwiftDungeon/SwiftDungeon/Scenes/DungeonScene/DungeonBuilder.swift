@@ -5,7 +5,11 @@ class DungeonBuilder {
 
 	static func build() -> DungeonView {
 
-		let viewModel = DungeonViewModel()
+		/// Game Tiles Generator for Dungeon Level
+		let dungeonMapGenerator = DungeonMapGenerator()
+		let viewModel = DungeonViewModel(
+			dungeonMapGenerator: dungeonMapGenerator
+		)
 
 		return DungeonView(viewModel: viewModel)
 	}
