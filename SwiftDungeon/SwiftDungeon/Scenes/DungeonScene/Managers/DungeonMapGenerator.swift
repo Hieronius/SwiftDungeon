@@ -2,8 +2,6 @@ import Foundation
 
 /*
  MARK: - Plan to implement Tiles
- 2. Generate different types of tiles (.empty/room/corridor)
- 3. Generate different sets of map
  4. Create a single TileViewBlock with constant size so each tile would fill it in costant distance between each other to immitate a real map
  5. Implement Scroll View to scroll the map
  */

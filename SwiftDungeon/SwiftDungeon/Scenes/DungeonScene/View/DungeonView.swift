@@ -48,11 +48,15 @@ struct DungeonView: View {
 		.navigationBarBackButtonHidden(true)
 	}
 
+	// TODO: Transform to struct TileView
 	// MARK: Tile Button View
 
 	func TileButton(tile: Tile, action: @escaping () -> Void) -> some View {
 
 		var title: String
+		var opacityRatio: CGFloat = 1.0
+
+		if tile.type == .empty { opacityRatio = 0.5 }
 
 		switch tile.type {
 		case .room:
@@ -67,6 +71,7 @@ struct DungeonView: View {
 			.buttonStyle(.bordered)
 			.font(.title2)
 			.foregroundColor(.white)
+			.opacity(opacityRatio)
 	}
 }
 
