@@ -20,13 +20,13 @@ struct DungeonMapGenerator {
 
 		// 1. Populate matrix with empty tiles
 
-		var defaultTile = Tile(
+		let defaultTile = Tile(
 			type: .empty,
 			isExplored: false,
 			events: []
 		)
 
-		var map: [[Tile]] = Array(repeating: Array(repeating: 									   defaultTile,
+		var map: [[Tile]] = Array(repeating: Array(repeating: defaultTile,
 												   count: rowsSize),
 								  count: columnsSize)
 

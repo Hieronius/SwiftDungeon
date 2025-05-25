@@ -6,6 +6,8 @@ Current Plan
 		1. Display Tiles Matrix
 		2. Create Tile View
 		3. Separate explored/empty tiles
+		4. Create constant size tiles with scroll view
+		
 	- Implement CorridorView
 	- Implement TownView
 	- Implement WorldView

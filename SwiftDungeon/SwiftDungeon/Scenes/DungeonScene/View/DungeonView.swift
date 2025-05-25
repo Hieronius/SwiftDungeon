@@ -27,8 +27,13 @@ struct DungeonView: View {
 
 	var body: some View {
 
-		// TODO: Use forEach for rows and columns
-		// TODO: Create TileView as Struct with row/col properties
+		getDungeonMap()
+		
+		.navigationBarBackButtonHidden(true)
+	}
+
+	@ViewBuilder
+	func getDungeonMap() -> some View {
 
 		VStack {
 
@@ -40,18 +45,17 @@ struct DungeonView: View {
 
 						let tile = viewModel.dungeonMap[row][col]
 
-						TileButton(tile: tile) { print("taped the tile") }
+						getTileButton(tile: tile) { print("taped the tile") }
 					}
 				}
 			}
 		}
-		.navigationBarBackButtonHidden(true)
 	}
 
 	// TODO: Transform to struct TileView
 	// MARK: Tile Button View
 
-	func TileButton(tile: Tile, action: @escaping () -> Void) -> some View {
+	func getTileButton(tile: Tile, action: @escaping () -> Void) -> some View {
 
 		var title: String
 		var opacityRatio: CGFloat = 1.0
@@ -60,14 +64,15 @@ struct DungeonView: View {
 
 		switch tile.type {
 		case .room:
-			title = "Room"
+			title = "R"
 		case .corridor:
-			title = "Corr"
+			title = "C"
 		case .empty:
-			title = "Empt"
+			title = "E"
 		}
 
 		return Button(title, action: action)
+			.frame(width: 50, height: 50)
 			.buttonStyle(.bordered)
 			.font(.title2)
 			.foregroundColor(.white)
