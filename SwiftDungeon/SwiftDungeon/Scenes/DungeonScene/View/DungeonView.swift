@@ -27,16 +27,62 @@ struct DungeonView: View {
 
 	var body: some View {
 
-		Text("Dungeon Here")
-
 		// TODO: Use forEach for rows and columns
 		// TODO: Create TileView as Struct with row/col properties
 
 		VStack {
-			ForEach(viewModel.dungeonMap, id: \.self) {
-				Text("TILE")
+
+			ForEach(viewModel.dungeonMap.indices, id: \.self) { row in
+
+				HStack {
+
+					ForEach(viewModel.dungeonMap[row].indices, id: \.self) { col in
+
+						let tile = viewModel.dungeonMap[row][col]
+
+						TileButton(tile: tile) { print("taped the tile") }
+					}
+				}
 			}
 		}
-			.navigationBarBackButtonHidden(true)
+		.navigationBarBackButtonHidden(true)
+	}
+
+	// MARK: Tile Button View
+
+	func TileButton(tile: Tile, action: @escaping () -> Void) -> some View {
+
+		var title: String
+
+		switch tile.type {
+		case .room:
+			title = "Room"
+		case .corridor:
+			title = "Corr"
+		case .empty:
+			title = "Empt"
+		}
+
+		return Button(title, action: action)
+			.buttonStyle(.bordered)
+			.font(.title2)
+			.foregroundColor(.white)
+	}
+}
+
+struct TileView: View {
+
+	let row: Int
+	let column: Int
+	let isExplored: Bool
+	let heroPosition: Bool
+
+	var body: some View {
+
+		Button("Tile") { print("Tile pressed") }
+			.buttonStyle(.bordered)
+			.font(.title2)
+			.foregroundColor(.white)
+		
 	}
 }

@@ -3,7 +3,7 @@ import Foundation
 /// Each `Tile` should have it's own type of event
 enum EventType {
 
-	/// User can try to disarm the trap and get some points or get some damage is failed
+	/// User can try to disarm the trap and get some points or get some damage if failed
 	case trap
 
 	/// User encounter an enemy from array of level enemies

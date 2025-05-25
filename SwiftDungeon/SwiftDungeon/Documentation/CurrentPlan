@@ -1,8 +1,12 @@
 Current Plan
 
 
-2.	- Implement CorridorView
+2.
 	- Implement DungeonView with tiles
+		1. Display Tiles Matrix
+		2. Create Tile View
+		3. Separate explored/empty tiles
+	- Implement CorridorView
 	- Implement TownView
 	- Implement WorldView
 	- Resolve NavigationStackProblem (Use NavigationStack)

@@ -27,6 +27,7 @@ final class DungeonViewModel: ObservableObject {
 
 	init(dungeonMapGenerator: DungeonMapGenerator) {
 		self.dungeonMapGenerator = dungeonMapGenerator
+		generateMap()
 	}
 
 	// MARK: Methods
