@@ -96,6 +96,10 @@ final class DungeonViewModel: ObservableObject {
 	/// Method to check is destination tile is neighbour vertically or horizontally
 	func checkIfDirectionValid(_ row: Int, _ col: Int) -> Bool {
 
+		let tileType = dungeonMap[row][col].type
+
+		guard tileType != .empty else { return false }
+
 		if (row - heroPosition.row == 1 && col == heroPosition.col ||
 			heroPosition.row - row == 1 && col == heroPosition.col)
 			||
