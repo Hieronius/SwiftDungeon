@@ -28,7 +28,7 @@ final class DungeonViewModel: ObservableObject {
 	/// Tuple property to identify Hero position on the Map matrix.
 	///
 	/// Should be put to DungeonManager
-	@Published var heroPosition = (0, 0)
+	@Published var heroPosition = (row: 0, col: 0)
 
 	/// Actual Dungeon Map full of Tiles
 	///
@@ -47,6 +47,7 @@ final class DungeonViewModel: ObservableObject {
 
 
 	// MARK: Sync UI with Current Dungeon State Snapshot
+
 	/// Get actual state snapshot and update UI
 	func syncDungeonStateSnapshot() {
 
@@ -54,16 +55,50 @@ final class DungeonViewModel: ObservableObject {
 
 
 	// MARK: GenerateMap
+
 	/// Should be put to DungeonGameManager and only being called here without passing arguments
 	func generateMap() {
 		dungeonMap = dungeonMapGenerator.generateMap(currentDungeonLevel)
 	}
 
 
-	// MARK: Move Hero
-	/// Method to define Hero movement logic
-	func moveHero() {
+	// MARK: Handle Tapped Direction
 
+	/// Method to define Hero movement logic based on tapped direction if it's valid to move
+	func handleTappedDirection(_ row: Int, _ col: Int) {
+
+		/*
+		 TODO:
+		 1. Implement movement inside the matrix ✅
+		 2. Calculate starting point based on each given map
+		 3. Implement UI movement on the map
+		 4. Sync the game changes with UI (put an emojie to define hero position)
+		 */
+
+		if checkIfDirectionValid(row, col) {
+			heroPosition = (row, col)
+			print("New Hero Position is \(row), \(col)")
+
+		} else {
+			print("failed attempt to move")
+		}
+	}
+
+	// MARK: Check If Direction Valid
+
+	/// Method to check is destination tile is neighbour vertically or horizontally
+	func checkIfDirectionValid(_ row: Int, _ col: Int) -> Bool {
+
+		if (row - heroPosition.row == 1 && col == heroPosition.col ||
+			heroPosition.row - row == 1 && col == heroPosition.col)
+			||
+			(col - heroPosition.col == 1 && row == heroPosition.row ||
+			 heroPosition.col - col == 1 && row == heroPosition.row) {
+			return true
+
+		} else {
+			return false
+		}
 	}
 
 

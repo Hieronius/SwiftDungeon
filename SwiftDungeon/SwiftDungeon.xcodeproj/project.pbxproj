@@ -148,8 +148,8 @@
 			isa = PBXGroup;
 			children = (
 				DDA810D42DE18CBD000A2349 /* DungeonGameManager.swift */,
-				DDA810C92DE17E68000A2349 /* DungeonMapGenerator.swift */,
 				DDA810D22DE18CAF000A2349 /* DungeonGameState.swift */,
+				DDA810C92DE17E68000A2349 /* DungeonMapGenerator.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
