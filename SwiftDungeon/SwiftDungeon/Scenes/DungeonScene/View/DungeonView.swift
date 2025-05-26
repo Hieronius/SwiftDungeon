@@ -96,7 +96,9 @@ struct DungeonView: View {
 		var title: String
 		var opacityRatio: CGFloat = 1.0
 
-		if tile.type == .empty { opacityRatio = 0.5 }
+		// Just turn this property to 0 for complete hidden state of the button
+
+		if tile.type == .empty { opacityRatio = 0.1 }
 
 		switch tile.type {
 		case .room:
