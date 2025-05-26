@@ -67,17 +67,23 @@ final class RoomViewModel: ObservableObject {
 
 extension RoomViewModel {
 
+	// MARK: Start Fight
+
 	func startFight() {
 
 		roomGameManager.startFight()
 		syncGameUIState()
 	}
+
+	// MARK: End Turn
 	
 	func endTurn() {
 
 		roomGameManager.endTurn()
 		syncGameUIState()
 	}
+
+	// MARK: Restore Character
 	
 	func restoreCharacter(isHeroTurn: Bool) {
 
@@ -85,12 +91,16 @@ extension RoomViewModel {
 //		roomGameManager.restoreCharacter(isHeroTurn: <#T##Bool#>)
 	}
 
+	// MARK: Reset isEnteredNewRoom property
+
 	func resetIsEnteredNewRoom() {
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
 			self.roomGameManager.resetIsEnteredNewRoom()
 			self.syncGameUIState()
 		}
 	}
+
+	// // MARK: Reset characterBeingHit property
 
 	func resetCharacterBeingHitAndSyncGameState() {
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {

@@ -5,6 +5,8 @@ struct RoomView: View {
 	// MARK: - State Properties
 	
 	@StateObject private var viewModel: RoomViewModel
+
+	/// Property to allow to dismiss the screen after entering to via NavigationLink and NavigationStack
 	@Environment(\.dismiss) var dismiss
 	@State private var isEnemyUI = true
 

@@ -82,3 +82,5 @@ Instead of Stress analogue from DarkestDungeon i can use something like Moral. W
 May be i should add a special energy for each Dungeon run as a Tile's sequence like let's say 15. So user can go to any place 15 times back and forward. It will motivate user to predict and plan his routine
 
 May be i need a special EventManager as well to react on type of the events of each tiles
+
+The game should be entirely free and for offline playing

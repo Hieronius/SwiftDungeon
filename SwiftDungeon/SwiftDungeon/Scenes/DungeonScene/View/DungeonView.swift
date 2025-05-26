@@ -7,6 +7,7 @@ import SwiftUI
  - Display Hero label
  - Display types of special events if hero has an ability to scan
  - Implement a tile as Button and make it inactive if it's not neighbour of user's tile. If active - put user tile in it
+ - Implement some UI like Energy, current level, current dungeon and so on
  */
 
 /// `View` of DungeonScene module
@@ -16,6 +17,11 @@ struct DungeonView: View {
 
 	/// `ViewModel` of DungeonScene
 	@StateObject private var viewModel: DungeonViewModel
+
+	// MARK: - Properties
+
+	/// Property to allow to dismiss the screen after entering to via NavigationLink and NavigationStack
+	@Environment(\.dismiss) var dismiss
 
 	// MARK: - Initialization
 
@@ -27,10 +33,26 @@ struct DungeonView: View {
 
 	var body: some View {
 
+		actionButton(title: "Menu") {
+			dismiss()
+		}
+
 		getDungeonMap()
 		
 		.navigationBarBackButtonHidden(true)
 	}
+
+	// MARK: Action Button
+
+	func actionButton(title: String, action: @escaping () -> Void) -> some View {
+
+		Button(title, action: action)
+			.buttonStyle(.bordered)
+			.font(.title2)
+			.foregroundColor(.white)
+	}
+
+	// MARK: Get Dungeon Map
 
 	@ViewBuilder
 	func getDungeonMap() -> some View {
