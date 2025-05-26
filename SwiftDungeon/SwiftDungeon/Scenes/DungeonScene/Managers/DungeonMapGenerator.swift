@@ -21,6 +21,8 @@ struct DungeonMapGenerator {
 		// 1. Populate matrix with empty tiles
 
 		let defaultTile = Tile(
+			row: 0,
+			col: 0,
 			type: .empty,
 			isExplored: false,
 			events: []
@@ -34,7 +36,7 @@ struct DungeonMapGenerator {
 
 		for row in 0..<map.count {
 			for col in 0..<map[row].count {
-				map[row][col] = generateTile()
+				map[row][col] = generateTile(row, col)
 			}
 		}
 
@@ -42,18 +44,34 @@ struct DungeonMapGenerator {
 	}
 
 	/// Method to generate a random tile like .empty/.room/.corridor
-	func generateTile() -> Tile {
+	func generateTile(_ row: Int, _ col: Int) -> Tile {
 
 		let random = Int.random(in: 1...3)
 		switch random {
 		case 1:
-			return Tile(type: .room, isExplored: false, events: [])
+			return Tile(row: row,
+						col: col,
+						type: .room,
+						isExplored: false,
+						events: [])
 		case 2:
-			return Tile(type: .corridor, isExplored: false, events: [])
+			return Tile(row: row,
+						col: col,
+						type: .corridor,
+						isExplored: false,
+						events: [])
 		case 3:
-			return Tile(type: .empty, isExplored: false, events: [])
+			return Tile(row: row,
+						col: col,
+						type: .empty,
+						isExplored: false,
+						events: [])
 		default:
-			return Tile(type: .empty, isExplored: false, events: [])
+			return Tile(row: row,
+						col: col,
+						type: .empty,
+						isExplored: false,
+						events: [])
 		}
 	}
 }

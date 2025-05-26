@@ -6,6 +6,12 @@ struct Tile: Identifiable {
 	/// A unique identifier for each tile
 	let id = UUID()
 
+	/// Row position on the map
+	let row: Int
+
+	/// Column position on the map
+	let col: Int
+
 	/// Corridor or Room or any other types we create in the future
 	var type: TileType
 

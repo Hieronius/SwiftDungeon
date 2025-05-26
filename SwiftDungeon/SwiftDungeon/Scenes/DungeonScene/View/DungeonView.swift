@@ -33,11 +33,17 @@ struct DungeonView: View {
 
 	var body: some View {
 
+		Spacer()
+
 		actionButton(title: "Menu") {
 			dismiss()
 		}
 
+		Spacer()
+
 		getDungeonMap()
+
+		Spacer()
 		
 		.navigationBarBackButtonHidden(true)
 	}
@@ -68,11 +74,9 @@ struct DungeonView: View {
 						let tile = viewModel.dungeonMap[row][col]
 
 						getTileButton(tile: tile) {
+
 							viewModel.handleTappedDirection(row, col)
-							if viewModel.heroPosition.0 == row &&
-								viewModel.heroPosition.1 == col {
-								print("hero is here")
-							}
+
 							print("taped the tile")
 
 						}
@@ -87,7 +91,8 @@ struct DungeonView: View {
 
 	func getTileButton(tile: Tile, action: @escaping () -> Void) -> some View {
 
-		var isHeroIn = false
+		let isHeroPosition = viewModel.checkIfHeroPositionTile(tile.row, tile.col)
+		let tileColor: Color = isHeroPosition ? .orange : .white
 		var title: String
 		var opacityRatio: CGFloat = 1.0
 
@@ -106,7 +111,7 @@ struct DungeonView: View {
 			.frame(width: 50, height: 50)
 			.buttonStyle(.bordered)
 			.font(.title2)
-			.foregroundColor(.white)
+			.foregroundColor(tileColor)
 			.opacity(opacityRatio)
 	}
 }

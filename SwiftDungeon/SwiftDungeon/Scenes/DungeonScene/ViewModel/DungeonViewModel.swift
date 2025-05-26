@@ -61,6 +61,13 @@ final class DungeonViewModel: ObservableObject {
 		dungeonMap = dungeonMapGenerator.generateMap(currentDungeonLevel)
 	}
 
+	// MARK: Check If Tile IsHeroPosition
+
+	/// Method should compare current tile and hero coordinates
+	func checkIfHeroPositionTile(_ row: Int, _ col: Int) -> Bool {
+		heroPosition == (row, col)
+	}
+
 
 	// MARK: Handle Tapped Direction
 
