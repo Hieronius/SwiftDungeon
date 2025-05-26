@@ -78,9 +78,13 @@ final class DungeonViewModel: ObservableObject {
 		 TODO:
 		 1. Implement movement inside the matrix ✅
 		 2. Calculate starting point based on each given map
-		 3. Implement UI movement on the map
-		 4. Sync the game changes with UI (put an emojie to define hero position)
+		 3. Implement UI movement on the map ✅
+		 4. Hide empty tiles from the map
+		 5. Rewrite tile creation code as TileView
+		 5. Sync the game changes with UI (put an emojie to define hero position)
 		 */
+
+		// If valid -> move hero position to a new coordinate
 
 		if checkIfDirectionValid(row, col) {
 			heroPosition = (row, col)
@@ -96,9 +100,13 @@ final class DungeonViewModel: ObservableObject {
 	/// Method to check is destination tile is neighbour vertically or horizontally
 	func checkIfDirectionValid(_ row: Int, _ col: Int) -> Bool {
 
+		// If empty tile -> return false
+
 		let tileType = dungeonMap[row][col].type
 
 		guard tileType != .empty else { return false }
+
+		// Movement valid only if only X or Y axis coordinate change by 1
 
 		if (row - heroPosition.row == 1 && col == heroPosition.col ||
 			heroPosition.row - row == 1 && col == heroPosition.col)
