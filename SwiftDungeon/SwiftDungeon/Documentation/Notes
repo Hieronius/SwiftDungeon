@@ -84,3 +84,9 @@ May be i should add a special energy for each Dungeon run as a Tile's sequence l
 May be i need a special EventManager as well to react on type of the events of each tiles
 
 The game should be entirely free and for offline playing
+
+// MARK: Navigation In SwiftUI
+
+ https://github.com/will-lumley/swiftui-navigation-example/blob/main/Navigator/ViewModel/FirstContentViewModel.swift
+
+ https://levelup.gitconnected.com/using-a-navigationstack-with-mvvm-and-swiftui-36617c9f9147

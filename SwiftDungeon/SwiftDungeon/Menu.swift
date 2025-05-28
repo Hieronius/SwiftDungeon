@@ -53,19 +53,29 @@ struct MenuView: View {
 
 				switch item.title {
 
+					// MARK: RoomBuilder
+
 				case "Room":
 					// **Don’t return a NavigationStack here**,
 					// just the view content
 					RoomBuilder.build()
 
+					// MARK: CorridorBuilder
+
 				case "Corridor":
 					CorridorBuilder.build()
+
+					// MARK: DungeonBuilder
 
 				case "Dungeon":
 					DungeonBuilder.build()
 
+					// MARK: TownBuilder
+
 				case "Town":
 					TownBuilder.build()
+
+					// MARK: WorldBuilder
 
 				case "World":
 					WorldBuilder.build()

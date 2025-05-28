@@ -2,11 +2,12 @@ import SwiftUI
 
 /*
  MARK: Features to Implement
- - Display DungeonMap of Game Tiles
+
+ - Transform method getTile to struct TileView
+ - Implement different shape of the room and corridor
  - Display Explored/Unexplored tiles in black/gray colors
  - Display Hero label
  - Display types of special events if hero has an ability to scan
- - Implement a tile as Button and make it inactive if it's not neighbour of user's tile. If active - put user tile in it
  - Implement some UI like Energy, current level, current dungeon and so on
  */
 
@@ -91,6 +92,7 @@ struct DungeonView: View {
 
 	func getTileButton(tile: Tile, action: @escaping () -> Void) -> some View {
 
+		// If starting point is empty it should not be the starting point
 		let isHeroPosition = viewModel.checkIfHeroPositionTile(tile.row, tile.col)
 		let tileColor: Color = isHeroPosition ? .orange : .white
 		var title: String

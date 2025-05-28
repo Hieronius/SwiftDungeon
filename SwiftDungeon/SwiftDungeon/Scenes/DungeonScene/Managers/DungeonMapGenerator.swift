@@ -2,8 +2,9 @@ import Foundation
 
 /*
  MARK: - Plan to implement Tiles
- 4. Create a single TileViewBlock with constant size so each tile would fill it in costant distance between each other to immitate a real map
- 5. Implement Scroll View to scroll the map
+ 1. Create a single TileViewBlock with constant size so each tile would fill it in costant distance between each other to immitate a real map
+ 2. Implement Scroll View to scroll the map
+ 3. Implement random generation of different structures of Corridor/Room tile sets
  */
 
 /// An entity to generate a unique set of tiles for each dungeon level

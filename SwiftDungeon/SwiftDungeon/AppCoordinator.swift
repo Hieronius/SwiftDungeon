@@ -9,15 +9,19 @@ protocol AppCoordinatorProtocol {
 
 final class AppCoordinator: AppCoordinatorProtocol {
 
-	// MARK: Dependencies
+	// MARK: - Dependencies
 
 	let roomBuilder: RoomBuilder
 //	let mainMenuBuilder: MainMenuBuilder
+
+	// MARK: - Initialization
 
 	init(roomBuilder: RoomBuilder) {
 
 		self.roomBuilder = roomBuilder
 	}
+
+	// MARK: - Public Methods
 
 
 	func push(_ path: any Hashable) {
