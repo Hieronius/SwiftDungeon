@@ -2,7 +2,6 @@ import SwiftUI
 
 /*
  MARK: Features To Implement
- - TODO: Think about Hero's movements method
  - Create DungeonManager to keep track of State, Generation and Events similar to RoomGameManager
  - DungeonState to keep track on explored part of the map
  - Create DungeonUIState as Published struct to replace multiple properties in DungeonViewModel
@@ -18,7 +17,6 @@ final class DungeonViewModel: ObservableObject {
 
 	/// Game Tiles Generator
 	let dungeonMapGenerator: DungeonMapGenerator
-
 
 	// MARK: - Properties
 
@@ -42,7 +40,7 @@ final class DungeonViewModel: ObservableObject {
 		generateMap()
 	}
 
-	// MARK: Methods
+	// MARK: - Methods
 
 
 
@@ -108,11 +106,16 @@ final class DungeonViewModel: ObservableObject {
 
 		// Movement valid only if only X or Y axis coordinate change by 1
 
-		if (row - heroPosition.row == 1 && col == heroPosition.col ||
-			heroPosition.row - row == 1 && col == heroPosition.col)
-			||
-			(col - heroPosition.col == 1 && row == heroPosition.row ||
-			 heroPosition.col - col == 1 && row == heroPosition.row) {
+		let isTopDirectionValid = (row - heroPosition.row == 1 && col == heroPosition.col)
+		let isBotDirectionValid = (heroPosition.row - row == 1 && col == heroPosition.col)
+		let isLeftDirectionValid = (col - heroPosition.col == 1 &&  row == heroPosition.row)
+		let isRightDirectionValid = (heroPosition.col - col == 1 && row == heroPosition.row)
+
+		// Check each of all four possible directions
+
+		if (isTopDirectionValid || isBotDirectionValid) ||
+			(isLeftDirectionValid || isRightDirectionValid) {
+
 			return true
 
 		} else {

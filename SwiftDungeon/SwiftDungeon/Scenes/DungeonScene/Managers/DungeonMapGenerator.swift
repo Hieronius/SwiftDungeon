@@ -3,7 +3,7 @@ import Foundation
 /*
  MARK: - Plan to implement Tiles
  1. Create a single TileViewBlock with constant size so each tile would fill it in costant distance between each other to immitate a real map
- 2. Implement Scroll View to scroll the map
+ 2. Implement Scroll View to scroll the map (scale size, may be)
  3. Implement random generation of different structures of Corridor/Room tile sets
  */
 
@@ -48,7 +48,9 @@ struct DungeonMapGenerator {
 	func generateTile(_ row: Int, _ col: Int) -> Tile {
 
 		let random = Int.random(in: 1...3)
+
 		switch random {
+			
 		case 1:
 			return Tile(row: row,
 						col: col,

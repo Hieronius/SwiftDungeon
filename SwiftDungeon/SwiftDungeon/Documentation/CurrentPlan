@@ -3,8 +3,6 @@ Current Plan
 
 2.
 	- Implement DungeonView with tiles
-		1. Display Tiles Matrix
-		2. Create Tile View
 		3. Separate explored/empty tiles
 		4. Create constant size tiles with scroll view
 		
