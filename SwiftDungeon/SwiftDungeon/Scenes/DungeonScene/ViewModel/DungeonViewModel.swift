@@ -67,17 +67,22 @@ final class DungeonViewModel: ObservableObject {
 
 	// MARK: SpawnHero
 
+	/// Method traverse dungeon map in reversed order and put hero at the first non empty tile
 	func spawnHero() {
+
+		// map size
 
 		let n = dungeonMap.count
 		let m = dungeonMap[0].count
 
+		// map traversing
+
 		for row in (0..<n).reversed() {
 			for col in (0..<m).reversed() {
-				if dungeonMap[row][col].type != .empty && !isHeroAppeard {
+				let tile = dungeonMap[row][col]
+				if tile.type != .empty && !isHeroAppeard {
 					heroPosition = (row, col)
 					isHeroAppeard = true
-					print(heroPosition)
 				}
 			}
 		}
@@ -99,7 +104,7 @@ final class DungeonViewModel: ObservableObject {
 		/*
 		 TODO:
 		 1. Implement movement inside the matrix ✅
-		 2. Calculate starting point based on each given map
+		 2. Calculate starting point based on each given map ✅
 		 3. Implement UI movement on the map ✅
 		 4. Hide empty tiles from the map ✅
 		 5. Rewrite tile creation code as TileView
@@ -109,6 +114,12 @@ final class DungeonViewModel: ObservableObject {
 		// If valid -> move hero position to a new coordinate
 
 		if checkIfDirectionValid(row, col) {
+
+			// mark previous tile of the hero position as explored
+			dungeonMap[heroPosition.row][heroPosition.col].isExplored = true
+
+			// move hero to the new position
+			
 			heroPosition = (row, col)
 			print("New Hero Position is \(row), \(col)")
 

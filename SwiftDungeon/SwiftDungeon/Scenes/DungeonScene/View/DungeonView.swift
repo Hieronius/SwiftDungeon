@@ -94,8 +94,10 @@ struct DungeonView: View {
 	func getTileButton(tile: Tile, action: @escaping () -> Void) -> some View {
 
 		// If starting point is empty it should not be the starting point
+
+		let originalBackgroundColor: Color = tile.isExplored ? .gray : .white
 		let isHeroPosition = viewModel.checkIfHeroPositionTile(tile.row, tile.col)
-		let tileColor: Color = isHeroPosition ? .orange : .white
+		let tileColor: Color = isHeroPosition ? .orange : originalBackgroundColor
 		var title: String
 		var opacityRatio: CGFloat = 1.0
 
