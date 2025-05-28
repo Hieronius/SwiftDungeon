@@ -23,6 +23,9 @@ final class DungeonViewModel: ObservableObject {
 	/// Should be put to DungeonManager
 	var currentDungeonLevel = 1
 
+	/// We use this property to spawn our hero in non empty Tile and set it to true to avoid respawn
+	@Published var isHeroAppeard = false
+
 	/// Tuple property to identify Hero position on the Map matrix.
 	///
 	/// Should be put to DungeonManager
@@ -37,7 +40,10 @@ final class DungeonViewModel: ObservableObject {
 
 	init(dungeonMapGenerator: DungeonMapGenerator) {
 		self.dungeonMapGenerator = dungeonMapGenerator
+
+		// TODO: Generate and Spawn Hero Methods runs 3 times. FIX
 		generateMap()
+		spawnHero()
 	}
 
 	// MARK: - Methods
@@ -59,6 +65,24 @@ final class DungeonViewModel: ObservableObject {
 		dungeonMap = dungeonMapGenerator.generateMap(currentDungeonLevel)
 	}
 
+	// MARK: SpawnHero
+
+	func spawnHero() {
+
+		let n = dungeonMap.count
+		let m = dungeonMap[0].count
+
+		for row in (0..<n).reversed() {
+			for col in (0..<m).reversed() {
+				if dungeonMap[row][col].type != .empty && !isHeroAppeard {
+					heroPosition = (row, col)
+					isHeroAppeard = true
+					print(heroPosition)
+				}
+			}
+		}
+	}
+
 	// MARK: Check If Tile IsHeroPosition
 
 	/// Method should compare current tile and hero coordinates
@@ -77,7 +101,7 @@ final class DungeonViewModel: ObservableObject {
 		 1. Implement movement inside the matrix ✅
 		 2. Calculate starting point based on each given map
 		 3. Implement UI movement on the map ✅
-		 4. Hide empty tiles from the map
+		 4. Hide empty tiles from the map ✅
 		 5. Rewrite tile creation code as TileView
 		 5. Sync the game changes with UI (put an emojie to define hero position)
 		 */

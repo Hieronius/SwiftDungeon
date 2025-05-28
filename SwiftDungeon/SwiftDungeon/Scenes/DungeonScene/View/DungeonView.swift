@@ -9,6 +9,7 @@ import SwiftUI
  - Display Hero label
  - Display types of special events if hero has an ability to scan
  - Implement some UI like Energy, current level, current dungeon and so on
+ - Implement method to scale map up and down instead of scroll
  */
 
 /// `View` of DungeonScene module
