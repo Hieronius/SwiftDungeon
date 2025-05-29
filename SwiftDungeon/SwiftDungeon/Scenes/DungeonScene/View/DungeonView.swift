@@ -3,6 +3,8 @@ import SwiftUI
 /*
  MARK: Features to Implement
 
+ 1. Create a single TileViewBlock with constant size so each tile would fill it in costant distance between each other to immitate a real map
+ 2. Implement Scroll View to scroll the map (scale size, may be)
  - Transform method getTile to struct TileView
  - Implement different shape of the room and corridor
  - Display Explored/Unexplored tiles in black/gray colors
