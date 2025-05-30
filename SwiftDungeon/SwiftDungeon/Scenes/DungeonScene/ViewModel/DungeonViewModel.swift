@@ -43,7 +43,7 @@ final class DungeonViewModel: ObservableObject {
 
 		// TODO: Generate and Spawn Hero Methods runs 3 times. FIX
 //		generateMap()
-		let level = dungeonMapGenerator.dungeonLevel1
+		let level = dungeonMapGenerator.dungeonlevel2
 		dungeonMap = dungeonMapGenerator.parseDungeonLevel(level)
 		spawnHero()
 	}

@@ -29,26 +29,42 @@ struct DungeonMapGenerator {
 	/// 2 level - 4 x 3 = 12 tiles
 	var dungeonlevel2: [[String]] = [
 
-
+		["R", "R", "R"],
+		["C", "E", "C"],
+		["C", "C", "C"],
+		["E", "R", "E"]
 
 	]
 
 	/// 3 level - 4 x 4 = 16 tiles
-	var deungeonLevel3: [[String]] = [
+	var dungeonLevel3: [[String]] = [
 
-
+		["E", "E", "E", "E"],
+		["E", "E", "E", "E"],
+		["E", "E", "E", "E"],
+		["E", "E", "E", "E"]
 	]
 
 
 	/// 4 level - 4 x 5 = 20 tiles
 	var dungeonlevel4: [[String]] = [
 
+		["E", "E", "E", "E"],
+		["E", "E", "E", "E"],
+		["E", "E", "E", "E"],
+		["E", "E", "E", "E"],
+		["E", "E", "E", "E"]
 
 	]
 
 	/// 5 level - 5 x 5 = 25 tiles
 	var dungeonLevel5: [[String]] = [
 
+		["E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E"],
 
 	]
 
@@ -56,12 +72,25 @@ struct DungeonMapGenerator {
 	var dungeonLevel6: [[String]] = [
 
 
+		["E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E"],
+
 	]
 
 
 	/// 7 level - 6 x 6 = 36 tiles
 	var dungeonLevel7: [[String]] = [
 
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"]
 
 	]
 
@@ -69,6 +98,12 @@ struct DungeonMapGenerator {
 	/// 8 level - 6 x 6 = 36 tiles
 	var dungeonLevel8: [[String]] = [
 
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"]
 
 	]
 
@@ -76,6 +111,12 @@ struct DungeonMapGenerator {
 	/// 9 level - 6 x 6 = 36 tiles
 	var dungeonLevel9: [[String]] = [
 
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"]
 
 	]
 
@@ -83,6 +124,12 @@ struct DungeonMapGenerator {
 	/// 10 level - 6 x 6 = 36 tiles
 	var dungeonLevel10: [[String]] = [
 
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"],
+		["E", "E", "E", "E", "E", "E"]
 
 	]
 
@@ -115,10 +162,11 @@ struct DungeonMapGenerator {
 		)
 
 		var level: [[Tile]] = Array(repeating: Array(repeating: defaultTile,
-													 count: rows),
-								 count: cols)
+													 count: cols),
+								 count: rows)
 
 		for row in 0..<rows {
+			print(row)
 
 			for col in 0..<cols {
 
