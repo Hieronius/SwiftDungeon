@@ -1,5 +1,17 @@
 import SwiftUI
 
+/*
+ Ingame Menu
+
+ 1. Menu -> Room
+ 2. Room -> IngameMenu (inventory, room, map, skills)
+ 3. IngameMenu -> Inventory
+ 4. Inventory -> room (pop(2))
+
+ 4.1. Inventory -> map
+ 5. map -> room(pop(3)
+ */
+
 // MARK: - MenuItem
 
 /// Struct to define a single MenuItem
