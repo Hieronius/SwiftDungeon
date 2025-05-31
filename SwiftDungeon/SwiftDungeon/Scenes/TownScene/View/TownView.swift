@@ -20,11 +20,64 @@ struct TownView: View {
 
 	var body: some View {
 
+		Spacer()
+
 		actionButton(title: "Menu") {
 			dismiss()
 		}
 
-		Text("Town Here")
+		Spacer()
+
+		HStack {
+
+			Spacer()
+
+			VStack {
+
+				Spacer()
+				actionButton(title: "Alchemy") {
+					print("entered alchemy shop")
+				}
+
+				Spacer()
+
+				actionButton(title: "Forge") {
+					print("entered blacksmith shop")
+				}
+
+				Spacer()
+
+				actionButton(title: "Training") {
+					print("entered training centre")
+				}
+
+				Spacer()
+			}
+
+			Spacer()
+
+			VStack {
+
+				Spacer()
+
+				actionButton(title: "Consumabales") {
+					print("entered grocery store")
+				}
+
+				Spacer()
+
+				actionButton(title: "Quest") {
+					print("entered adventure guild")
+				}
+
+				Spacer()
+			}
+
+			Spacer()
+		}
+
+		Spacer()
+
 			.navigationBarBackButtonHidden(true)
 	}
 

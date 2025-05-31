@@ -56,6 +56,7 @@ struct MenuView: View {
 				NavigationLink(item.title, value: item)
 			}
 			.navigationTitle("Main Menu")
+			.navigationBarTitleDisplayMode(. inline)
 
 			// Define data type for navigation destination and pass it through the closure
 
