@@ -32,12 +32,16 @@ final class RoomGameManager {
 // MARK: - Game Options
 
 extension RoomGameManager {
+
+	// MARK: PauseGame
 	
 	func pauseGame() {
 		var snapshot = roomGameState.getActualGameStateSnapshot()
 		snapshot.isGameOn = false
 		roomGameState.applyNewGameStateSnapshot(snapshot)
 	}
+
+	// MARK: ResumeGame
 	
 	func resumeGame() {
 		var snapshot = roomGameState.getActualGameStateSnapshot()
@@ -49,6 +53,8 @@ extension RoomGameManager {
 // MARK: - Game Flow States
 
 extension RoomGameManager {
+
+	// MARK: StartFight
 
 	func startFight() {
 

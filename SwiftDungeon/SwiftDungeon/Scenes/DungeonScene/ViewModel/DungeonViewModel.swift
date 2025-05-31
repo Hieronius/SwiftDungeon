@@ -43,7 +43,7 @@ final class DungeonViewModel: ObservableObject {
 
 		// TODO: Generate and Spawn Hero Methods runs 3 times. FIX
 //		generateMap()
-		let level = dungeonMapGenerator.dungeonlevel2
+		let level = dungeonMapGenerator.dungeonLevel10
 		dungeonMap = dungeonMapGenerator.parseDungeonLevel(level)
 		spawnHero()
 	}
@@ -82,7 +82,7 @@ final class DungeonViewModel: ObservableObject {
 		for row in (0..<n).reversed() {
 			for col in (0..<m).reversed() {
 				let tile = dungeonMap[row][col]
-				if tile.type != .empty && !isHeroAppeard {
+				if tile.type == .room && !isHeroAppeard {
 					heroPosition = (row, col)
 					isHeroAppeard = true
 				}

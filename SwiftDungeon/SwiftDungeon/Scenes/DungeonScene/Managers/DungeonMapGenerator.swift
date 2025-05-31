@@ -27,7 +27,7 @@ struct DungeonMapGenerator {
 	]
 
 	/// 2 level - 4 x 3 = 12 tiles
-	var dungeonlevel2: [[String]] = [
+	var dungeonLevel2: [[String]] = [
 
 		["R", "R", "R"],
 		["C", "E", "C"],
@@ -39,21 +39,20 @@ struct DungeonMapGenerator {
 	/// 3 level - 4 x 4 = 16 tiles
 	var dungeonLevel3: [[String]] = [
 
-		["E", "E", "E", "E"],
-		["E", "E", "E", "E"],
-		["E", "E", "E", "E"],
-		["E", "E", "E", "E"]
+		["R", "C", "R", "C"],
+		["C", "E", "E", "R"],
+		["C", "C", "E", "C"],
+		["E", "R", "E", "R"]
 	]
 
-
 	/// 4 level - 4 x 5 = 20 tiles
-	var dungeonlevel4: [[String]] = [
+	var dungeonLevel4: [[String]] = [
 
-		["E", "E", "E", "E"],
-		["E", "E", "E", "E"],
-		["E", "E", "E", "E"],
-		["E", "E", "E", "E"],
-		["E", "E", "E", "E"]
+		["R", "C", "E", "E"],
+		["E", "R", "C", "R"],
+		["E", "E", "E", "C"],
+		["C", "C", "C", "R"],
+		["R", "E", "E", "E"]
 
 	]
 
@@ -61,75 +60,71 @@ struct DungeonMapGenerator {
 	var dungeonLevel5: [[String]] = [
 
 		["E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E"],
+		["R", "C", "C", "C", "E"],
+		["C", "E", "E", "R", "C"],
+		["R", "C", "C", "E", "R"],
+		["E", "E", "R", "E", "E"],
 
 	]
 
 	/// 6 level - 6 x 5 = 30 tiles
 	var dungeonLevel6: [[String]] = [
 
-
-		["E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E"],
+		["E", "E", "R", "C", "R"],
+		["E", "E", "C", "E", "C"],
+		["E", "R", "C", "E", "C"],
+		["E", "C", "E", "R", "C"],
+		["R", "C", "E", "C", "E"],
+		["E", "E", "E", "C", "R"],
 
 	]
-
 
 	/// 7 level - 6 x 6 = 36 tiles
 	var dungeonLevel7: [[String]] = [
 
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"]
+		["E", "R", "C", "C", "E", "R"],
+		["E", "C", "E", "R", "E", "C"],
+		["R", "C", "E", "C", "C", "R"],
+		["C", "E", "E", "E", "E", "E"],
+		["C", "E", "R", "C", "C", "E"],
+		["R", "C", "C", "E", "R", "E"]
 
 	]
-
 
 	/// 8 level - 6 x 6 = 36 tiles
 	var dungeonLevel8: [[String]] = [
 
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"],
+		["R", "C", "C", "C", "C", "R"],
+		["C", "E", "E", "E", "E", "C"],
+		["C", "R", "E", "E", "C", "R"],
+		["E", "C", "E", "R", "C", "E"],
+		["R", "C", "E", "E", "E", "E"],
 		["E", "E", "E", "E", "E", "E"]
 
 	]
 
-
-	/// 9 level - 6 x 6 = 36 tiles
+	/// 9 level - 6 x 7 = 42 tiles
 	var dungeonLevel9: [[String]] = [
 
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"]
+		["R", "C", "C", "E", "C", "R"],
+		["C", "E", "C", "E", "C", "E"],
+		["C", "E", "C", "E", "C", "E"],
+		["C", "E", "C", "C", "C", "E"],
+		["C", "E", "E", "E", "E", "E"],
+		["C", "C", "C", "C", "C", "R"]
 
 	]
-
 
 	/// 10 level - 6 x 6 = 36 tiles
 	var dungeonLevel10: [[String]] = [
 
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"],
-		["E", "E", "E", "E", "E", "E"]
+		["E", "R", "R", "C", "E", "E"],
+		["R", "C", "E", "C", "C", "R"],
+		["E", "E", "E", "E", "E", "C"],
+		["C", "R", "C", "C", "E", "C"],
+		["C", "E", "E", "C", "C", "R"],
+		["R", "C", "C", "E", "E", "E"],
+		["E", "E", "R", "E", "E", "E"]
 
 	]
 
@@ -166,7 +161,6 @@ struct DungeonMapGenerator {
 								 count: rows)
 
 		for row in 0..<rows {
-			print(row)
 
 			for col in 0..<cols {
 
@@ -185,37 +179,29 @@ struct DungeonMapGenerator {
 
 		switch type {
 
-		case "R": return Tile(
-			row: row,
-			col: col,
-			type: .room,
-			isExplored: false,
-			events: []
-		)
+		case "R": return Tile(row: row,
+							  col: col,
+							  type: .room,
+							  isExplored: false,
+							  events: [])
 
-		case "C": return Tile(
-			row: row,
-			col: col,
-			type: .corridor,
-			isExplored: false,
-			events: []
-		)
+		case "C": return Tile(row: row,
+							  col: col,
+							  type: .corridor,
+							  isExplored: false,
+							  events: [])
 
-		case "E": return Tile(
-			row: row,
-			col: col,
-			type: .empty,
-			isExplored: false,
-			events: []
-		)
+		case "E": return Tile(row: row,
+							  col: col,
+							  type: .empty,
+							  isExplored: false,
+							  events: [])
 
-		default: return Tile(
-			row: row,
-			col: col,
-			type: .empty,
-			isExplored: false,
-			events: []
-		)
+		default: return Tile(row: row,
+							 col: col,
+							 type: .empty,
+							 isExplored: false,
+							 events: [])
 
 		}
 	}
@@ -240,13 +226,11 @@ struct DungeonMapGenerator {
 		// 1. Populate matrix with empty tiles
 		// In other words it's just am empty rectangle of all possible space filled with empty rooms to work with
 
-		let defaultTile = Tile(
-			row: 0,
-			col: 0,
-			type: .empty,
-			isExplored: false,
-			events: []
-		)
+		let defaultTile = Tile(row: 0,
+							   col: 0,
+							   type: .empty,
+							   isExplored: false,
+							   events: [])
 
 		var map: [[Tile]] = Array(repeating: Array(repeating: defaultTile,
 												   count: rowsSize),
