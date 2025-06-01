@@ -1,5 +1,8 @@
 import SwiftUI
 
+/// `ViewModel` of the Room Module
+///
+/// Connects an actial Room logic `RoomGameManager` and `UI`
 final class RoomViewModel: ObservableObject {
 
 	// MARK: - Dependencies

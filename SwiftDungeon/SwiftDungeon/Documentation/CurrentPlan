@@ -1,6 +1,13 @@
 Current Plan
 
 
-1. Refactor MenuModule
-2. Refactor DungeonModule
+1. Refactor DungeonMap Module
+	- View won't change the color of explored tiles
+2. Connect DungeonMapModule with RoomModule
+
+
+100. Model Navigation as Data (see my Menu Module)
+	You don't need Coordinator because it's antipattern
+
+101. All dependencies should be defined and created in CompositionRoot - AppDependencies class at the start of the app so they can be passed to screens for creation. IT'S NOT A DI CONTAINER BECAUSE IT'S RESOLVED DURING COMPILATION STAGE AND NOT A RUNTIME AS SWIFTJECT AND OTHER SUPPOSED TO BE
 

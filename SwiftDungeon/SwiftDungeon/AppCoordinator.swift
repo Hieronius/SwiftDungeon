@@ -1,5 +1,6 @@
 import Foundation
 
+/// Protocol of the Main Coordinator of the game
 protocol AppCoordinatorProtocol {
 
 	func push(_ path: any Hashable)
@@ -7,6 +8,7 @@ protocol AppCoordinatorProtocol {
 
 }
 
+/// Main Coordinator of the App
 final class AppCoordinator: AppCoordinatorProtocol {
 
 	// MARK: - Dependencies

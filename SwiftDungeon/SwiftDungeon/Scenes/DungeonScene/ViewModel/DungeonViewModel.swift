@@ -15,13 +15,10 @@ final class DungeonViewModel: ObservableObject {
 
 	// MARK: - Dependencies
 
-	/// Game Tiles Generator
-	let dungeonMapGenerator: DungeonMapGenerator
+	/// Manager of orchestrate User movements at the map with all kinds of events
+	let dungeonGameManager: DungeonGameManager
 
 	// MARK: - Properties
-
-	/// Should be put to DungeonManager
-	var currentDungeonLevel = 1
 
 	/// We use this property to spawn our hero in non empty Tile and set it to true to avoid respawn
 	@Published var isHeroAppeard = false
@@ -38,14 +35,10 @@ final class DungeonViewModel: ObservableObject {
 
 	// MARK: - Initialization
 
-	init(dungeonMapGenerator: DungeonMapGenerator) {
-		self.dungeonMapGenerator = dungeonMapGenerator
+	init(dungeonGameManager: DungeonGameManager) {
+		self.dungeonGameManager = dungeonGameManager
 
-		// TODO: Generate and Spawn Hero Methods runs 3 times. FIX
-//		generateMap()
-		let level = dungeonMapGenerator.dungeonLevel10
-		dungeonMap = dungeonMapGenerator.parseDungeonLevel(level)
-		spawnHero()
+		self.syncDungeonStateSnapshot()
 	}
 
 	// MARK: - Methods
@@ -57,107 +50,29 @@ final class DungeonViewModel: ObservableObject {
 	/// Get actual state snapshot and update UI
 	func syncDungeonStateSnapshot() {
 
-	}
+		let snapshot = dungeonGameManager.dungeonGameState.getActualGameStateSnapshot()
+		self.heroPosition = snapshot.heroPosition
+		self.dungeonMap = snapshot.dungeonMap
+		self.isHeroAppeard = snapshot.isHeroAppeard
 
-
-	// MARK: GenerateMap
-
-	/// Should be put to DungeonGameManager and only being called here without passing arguments
-	func generateMap() {
-		dungeonMap = dungeonMapGenerator.generateMap(currentDungeonLevel)
-	}
-
-	// MARK: SpawnHero
-
-	/// Method traverse dungeon map in reversed order and put hero at the first non empty tile
-	func spawnHero() {
-
-		// map size
-
-		let n = dungeonMap.count
-		let m = dungeonMap[0].count
-
-		// map traversing
-
-		for row in (0..<n).reversed() {
-			for col in (0..<m).reversed() {
-				let tile = dungeonMap[row][col]
-				if tile.type == .room && !isHeroAppeard {
-					heroPosition = (row, col)
-					isHeroAppeard = true
-				}
-			}
-		}
 	}
 
 	// MARK: Check If Tile IsHeroPosition
 
 	/// Method should compare current tile and hero coordinates
 	func checkIfHeroPositionTile(_ row: Int, _ col: Int) -> Bool {
-		heroPosition == (row, col)
-	}
 
+		let heroPosition = dungeonGameManager.passHeroPosition()
+		return heroPosition == (row, col)
+	}
 
 	// MARK: Handle Tapped Direction
 
-	/// Method to define Hero movement logic based on tapped direction if it's valid to move
+	/// Should be binded to Tile button action and just call dungeon game manager to handle things
 	func handleTappedDirection(_ row: Int, _ col: Int) {
 
-		/*
-		 TODO:
-		 1. Implement movement inside the matrix ✅
-		 2. Calculate starting point based on each given map ✅
-		 3. Implement UI movement on the map ✅
-		 4. Hide empty tiles from the map ✅
-		 5. Rewrite tile creation code as TileView
-		 5. Sync the game changes with UI (put an emojie to define hero position)
-		 */
-
-		// If valid -> move hero position to a new coordinate
-
-		if checkIfDirectionValid(row, col) {
-
-			// mark previous tile of the hero position as explored
-			dungeonMap[heroPosition.row][heroPosition.col].isExplored = true
-
-			// move hero to the new position
-			
-			heroPosition = (row, col)
-			print("New Hero Position is \(row), \(col)")
-
-		} else {
-			print("failed attempt to move")
-		}
-	}
-
-	// MARK: Check If Direction Valid
-
-	/// Method to check is destination tile is neighbour vertically or horizontally
-	func checkIfDirectionValid(_ row: Int, _ col: Int) -> Bool {
-
-		// If empty tile -> return false
-
-		let tileType = dungeonMap[row][col].type
-
-		guard tileType != .empty else { return false }
-
-		// Movement valid only if only X or Y axis coordinate change by 1
-
-		let isTopDirectionValid = (row - heroPosition.row == 1 && col == heroPosition.col)
-		let isBotDirectionValid = (heroPosition.row - row == 1 && col == heroPosition.col)
-		let isLeftDirectionValid = (col - heroPosition.col == 1 &&  row == heroPosition.row)
-		let isRightDirectionValid = (heroPosition.col - col == 1 && row == heroPosition.row)
-
-		// Check each of all four possible directions
-
-		if (isTopDirectionValid || isBotDirectionValid) ||
-			(isLeftDirectionValid || isRightDirectionValid) {
-
-			return true
-
-		} else {
-			return false
-		}
+		dungeonGameManager.handleTappedDirection(row, col)
+		syncDungeonStateSnapshot()
 	}
 
 

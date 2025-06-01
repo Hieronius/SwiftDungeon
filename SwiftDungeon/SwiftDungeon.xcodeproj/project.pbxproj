@@ -18,6 +18,8 @@
 		DDA810D02DE17FCD000A2349 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA810CF2DE17FCD000A2349 /* EventType.swift */; };
 		DDA810D32DE18CAF000A2349 /* DungeonGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA810D22DE18CAF000A2349 /* DungeonGameState.swift */; };
 		DDA810D52DE18CBD000A2349 /* DungeonGameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA810D42DE18CBD000A2349 /* DungeonGameManager.swift */; };
+		DDA813392DEC07C300212169 /* DungeonScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA813382DEC07C300212169 /* DungeonScheme.swift */; };
+		DDA8133B2DEC0AAC00212169 /* DungeonGameStateSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA8133A2DEC0AAC00212169 /* DungeonGameStateSnapshot.swift */; };
 		DDA940612DBF4FC600837F9F /* SwiftDungeonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */; };
 		DDA940632DBF4FC600837F9F /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA940622DBF4FC600837F9F /* RoomView.swift */; };
 		DDA940652DBF4FCD00837F9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDA940642DBF4FCD00837F9F /* Assets.xcassets */; };
@@ -81,6 +83,8 @@
 		DDA810CF2DE17FCD000A2349 /* EventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventType.swift; sourceTree = "<group>"; };
 		DDA810D22DE18CAF000A2349 /* DungeonGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonGameState.swift; sourceTree = "<group>"; };
 		DDA810D42DE18CBD000A2349 /* DungeonGameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonGameManager.swift; sourceTree = "<group>"; };
+		DDA813382DEC07C300212169 /* DungeonScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonScheme.swift; sourceTree = "<group>"; };
+		DDA8133A2DEC0AAC00212169 /* DungeonGameStateSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonGameStateSnapshot.swift; sourceTree = "<group>"; };
 		DDA9405D2DBF4FC600837F9F /* SwiftDungeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDungeon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDungeonApp.swift; sourceTree = "<group>"; };
 		DDA940622DBF4FC600837F9F /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 				DDA810D42DE18CBD000A2349 /* DungeonGameManager.swift */,
 				DDA810D22DE18CAF000A2349 /* DungeonGameState.swift */,
 				DDA810C92DE17E68000A2349 /* DungeonMapGenerator.swift */,
+				DDA813382DEC07C300212169 /* DungeonScheme.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -410,6 +415,7 @@
 				DDA810CB2DE17EF9000A2349 /* Tile.swift */,
 				DDA810CD2DE17F35000A2349 /* TileType.swift */,
 				DDA810CF2DE17FCD000A2349 /* EventType.swift */,
+				DDA8133A2DEC0AAC00212169 /* DungeonGameStateSnapshot.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -543,6 +549,7 @@
 				DDAC133D2DC9F15500E42D65 /* StatusBar.swift in Sources */,
 				DDC129F52DC27EE6006CBC41 /* Stats.swift in Sources */,
 				DDAA4C2A2DE070600007E5DA /* TownViewModel.swift in Sources */,
+				DDA813392DEC07C300212169 /* DungeonScheme.swift in Sources */,
 				DDAC13412DC9F1A300E42D65 /* BorderedView.swift in Sources */,
 				DDACC5672DD87E6500549907 /* MainMenuViewModel.swift in Sources */,
 				DDAA4C312DE071B00007E5DA /* WorldViewModel.swift in Sources */,
@@ -556,6 +563,7 @@
 				DDAA4C2C2DE0706A0007E5DA /* TownView.swift in Sources */,
 				DDAA4C252DE0700D0007E5DA /* TownBuilder.swift in Sources */,
 				DDA810D52DE18CBD000A2349 /* DungeonGameManager.swift in Sources */,
+				DDA8133B2DEC0AAC00212169 /* DungeonGameStateSnapshot.swift in Sources */,
 				DDAB3E522DC7362A00DBA1C8 /* EffectManager.swift in Sources */,
 				DDAA04122DC46F7900C801B4 /* HeroUIState.swift in Sources */,
 				DDAA4C1C2DE06C0E0007E5DA /* CorridorViewModel.swift in Sources */,

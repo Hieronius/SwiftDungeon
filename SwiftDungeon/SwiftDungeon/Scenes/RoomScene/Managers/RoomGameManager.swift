@@ -1,5 +1,6 @@
 import Foundation
 
+/// Main entity to manage combat and events inside the Room encounter
 final class RoomGameManager {
 
 	// MARK: - Dependencies
