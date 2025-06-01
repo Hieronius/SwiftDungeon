@@ -35,7 +35,8 @@ final class DungeonGameManager {
 
 		var snapshot = dungeonGameState.getActualGameStateSnapshot()
 		let level = snapshot.currentDungeonlevel
-		snapshot.dungeonMap = dungeonMapGenerator.generateMap(level)
+		let levelScheme = dungeonScheme.dungeonLevel1
+		snapshot.dungeonMap = dungeonMapGenerator.parseDungeonLevel(levelScheme)
 		dungeonGameState.applyNewGameStateSnapshot(snapshot)
 	}
 
@@ -95,16 +96,13 @@ final class DungeonGameManager {
 		// If valid -> move hero position to a new coordinate
 
 		var snapshot = dungeonGameState.getActualGameStateSnapshot()
-		var map = snapshot.dungeonMap
 		let heroPosition = snapshot.heroPosition
 
 		if checkIfDirectionValid(row, col) {
 
-			// mark previous tile of the hero position as explored
-			map[heroPosition.row][heroPosition.col].isExplored = true
-
 			// move hero to the new position
 
+			snapshot.dungeonMap[heroPosition.row][heroPosition.col].isExplored = true
 			snapshot.heroPosition = (row, col)
 
 			dungeonGameState.applyNewGameStateSnapshot(snapshot)

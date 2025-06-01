@@ -2,7 +2,8 @@ Current Plan
 
 
 1. Refactor DungeonMap Module
-	- View won't change the color of explored tiles
+	
+	
 2. Connect DungeonMapModule with RoomModule
 
 
