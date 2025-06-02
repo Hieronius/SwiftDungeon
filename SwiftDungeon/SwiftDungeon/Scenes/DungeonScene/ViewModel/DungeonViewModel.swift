@@ -21,7 +21,7 @@ final class DungeonViewModel: ObservableObject {
 	init(dungeonGameManager: DungeonGameManager) {
 		self.dungeonGameManager = dungeonGameManager
 
-		self.syncDungeonStateSnapshot()
+		self.syncDungeonStateUISnapshot()
 	}
 
 	// MARK: - Methods
@@ -31,7 +31,7 @@ final class DungeonViewModel: ObservableObject {
 	// MARK: Sync UI with Current Dungeon State Snapshot
 
 	/// Get actual state snapshot and update UI
-	func syncDungeonStateSnapshot() {
+	func syncDungeonStateUISnapshot() {
 
 		let snapshot = dungeonGameManager.dungeonGameState.getActualGameStateSnapshot()
 		self.heroPosition = snapshot.heroPosition
@@ -53,7 +53,7 @@ final class DungeonViewModel: ObservableObject {
 	func handleTappedDirection(_ row: Int, _ col: Int) {
 
 		dungeonGameManager.handleTappedDirection(row, col)
-		syncDungeonStateSnapshot()
+		syncDungeonStateUISnapshot()
 	}
 
 

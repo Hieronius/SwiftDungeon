@@ -83,16 +83,6 @@ final class DungeonGameManager {
 	/// Method to define Hero movement logic based on tapped direction if it's valid to move
 	func handleTappedDirection(_ row: Int, _ col: Int) {
 
-		/*
-		 TODO:
-		 1. Implement movement inside the matrix ✅
-		 2. Calculate starting point based on each given map ✅
-		 3. Implement UI movement on the map ✅
-		 4. Hide empty tiles from the map ✅
-		 5. Rewrite tile creation code as TileView
-		 5. Sync the game changes with UI (put an emojie to define hero position)
-		 */
-
 		// If valid -> move hero position to a new coordinate
 
 		var snapshot = dungeonGameState.getActualGameStateSnapshot()

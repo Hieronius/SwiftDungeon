@@ -1,1 +1,3 @@
-
+It's ok to use ViewModel as mediator between View and Business logic such as DungeonManager
+DungeonManager does know nothing about View
+DungeonView does know nothing about DungeonManager
