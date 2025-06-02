@@ -1,13 +1,15 @@
 Current Plan
 
-
 1. Refactor DungeonMap Module
-	
-	
-2. Connect DungeonMapModule with RoomModule
+	- Decouple Logic and View
+
+2. Refactor Room Module
+	- Decouple Logic and View
+
+3. Connect DungeonMapModule with RoomModule
 
 
-100. Model Navigation as Data (see my Menu Module)
+100. Model Navigation as Data (see my Menu Module and Path)
 	You don't need Coordinator because it's antipattern
 
 101. All dependencies should be defined and created in CompositionRoot - AppDependencies class at the start of the app so they can be passed to screens for creation. IT'S NOT A DI CONTAINER BECAUSE IT'S RESOLVED DURING COMPILATION STAGE AND NOT A RUNTIME AS SWIFTJECT AND OTHER SUPPOSED TO BE

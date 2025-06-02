@@ -6,8 +6,7 @@ import SwiftUI
  1. Create a single TileViewBlock with constant size so each tile would fill it in costant distance between each other to immitate a real map
  2. Implement Scroll View to scroll the map (scale size, may be)
  - Transform method getTile to struct TileView
- - Implement different shape of the room and corridor
- - Display Explored/Unexplored tiles in black/gray colors
+ - Implement different shape of the room and corridorr
  - Display Hero label
  - Display types of special events if hero has an ability to scan
  - Implement some UI like Energy, current level, current dungeon and so on
@@ -98,7 +97,7 @@ struct DungeonView: View {
 		// If starting point is empty it should not be the starting point
 
 		let originalBackgroundColor: Color = tile.isExplored ? .gray : .white
-		let isHeroPosition = viewModel.checkIfHeroPositionTile(tile.row, tile.col)
+		let isHeroPosition = tile.isHeroPosition(viewModel.heroPosition)
 		let tileColor: Color = isHeroPosition ? .orange : originalBackgroundColor
 		var title: String
 		var opacityRatio: CGFloat = 1.0

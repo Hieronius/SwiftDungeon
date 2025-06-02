@@ -20,5 +20,11 @@ struct Tile: Identifiable {
 
 	/// A single or multiple events such as Enemy -> Quest -> Reward
 	var events:  [EventType]
+}
 
+extension Tile {
+	
+	func isHeroPosition(_ heroPosition: (Int, Int)) -> Bool {
+		return (self.row, self.col) == heroPosition
+	}
 }

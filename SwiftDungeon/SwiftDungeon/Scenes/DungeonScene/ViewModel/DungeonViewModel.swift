@@ -1,15 +1,5 @@
 import SwiftUI
 
-/*
- MARK: Features To Implement
- - Create DungeonManager to keep track of State, Generation and Events similar to RoomGameManager
- - DungeonState to keep track on explored part of the map
- - Create DungeonUIState as Published struct to replace multiple properties in DungeonViewModel
- - Keep track on current User position to display hero label and scan for surroundings
-
- */
-
-
 /// `ViewModel` of DungeonScene to connect DungeonManager business logic with UI
 final class DungeonViewModel: ObservableObject {
 
@@ -20,17 +10,10 @@ final class DungeonViewModel: ObservableObject {
 
 	// MARK: - Properties
 
-	/// We use this property to spawn our hero in non empty Tile and set it to true to avoid respawn
-	@Published var isHeroAppeard = false
+	/// Tuple property to identify Hero position on the Map matrix on the Screen
+	@Published var heroPosition: (row: Int, col: Int) = (0, 0)
 
-	/// Tuple property to identify Hero position on the Map matrix.
-	///
-	/// Should be put to DungeonManager
-	@Published var heroPosition = (row: 0, col: 0)
-
-	/// Actual Dungeon Map full of Tiles
-	///
-	/// Should be put to DungeonManager and binded to UI
+	/// Actual Dungeon Map full of Tiles displayed by UI
 	@Published var dungeonMap: [[Tile]] = []
 
 	// MARK: - Initialization
@@ -53,8 +36,6 @@ final class DungeonViewModel: ObservableObject {
 		let snapshot = dungeonGameManager.dungeonGameState.getActualGameStateSnapshot()
 		self.heroPosition = snapshot.heroPosition
 		self.dungeonMap = snapshot.dungeonMap
-		self.isHeroAppeard = snapshot.isHeroAppeard
-
 	}
 
 	// MARK: Check If Tile IsHeroPosition

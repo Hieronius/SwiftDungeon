@@ -1,12 +1,5 @@
 import Foundation
 
-/*
- MARK: - Plan to implement Tiles
- 1. Implement 10 different sets of predefines maps and just use random or level specific property to load the level accordingly without any random generation code
- - How about a defined set of empty/corridors/rooms which should be affected by current level?
- - May be we also should construct the whole map in size or even an emoty ones and only after to decide how to fill it?
- */
-
 // MARK: - DungeonMapGenerator
 
 /// An entity to generate a unique set of tiles for each dungeon level

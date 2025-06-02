@@ -170,7 +170,7 @@ extension RoomViewModel {
 
 	}
 
-	// MARK: - Defence Stance
+	// MARK: Defence Stance
 
 	func defenceStance() {
 
