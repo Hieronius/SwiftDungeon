@@ -86,14 +86,6 @@ extension RoomViewModel {
 		syncGameUIState()
 	}
 
-	// MARK: Restore Character
-	
-	func restoreCharacter(isHeroTurn: Bool) {
-
-		// Refactor to remove arguments input in view model
-//		roomGameManager.restoreCharacter(isHeroTurn: <#T##Bool#>)
-	}
-
 	// MARK: Reset isEnteredNewRoom property
 
 	func resetIsEnteredNewRoom() {
@@ -103,7 +95,7 @@ extension RoomViewModel {
 		}
 	}
 
-	// // MARK: Reset characterBeingHit property
+	// MARK: Reset characterBeingHit property
 
 	func resetCharacterBeingHitAndSyncGameState() {
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -325,7 +317,6 @@ extension RoomViewModel {
 	func openSkills() {
 		sceneUIStateManager.open(.skills)
 		sceneUIState.uiState = .skills
-		print(sceneUIStateManager.activeSection)
 	}
 
 	func openSpells() {
@@ -339,7 +330,6 @@ extension RoomViewModel {
 
 	func openStatus() {
 		sceneUIStateManager.open(.status)
-		// viewModel.UIState = sceneUIStateManager.setUIState
 	}
 
 	func openEquipment() {
