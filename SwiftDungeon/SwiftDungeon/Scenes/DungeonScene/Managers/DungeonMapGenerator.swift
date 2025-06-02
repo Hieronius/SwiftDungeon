@@ -56,7 +56,7 @@ struct DungeonMapGenerator {
 							  col: col,
 							  type: .room,
 							  isExplored: false,
-							  events: [])
+							  events: [.enemy])
 
 		case "C": return Tile(row: row,
 							  col: col,

@@ -1,12 +1,8 @@
 Current Plan
 
-1. Refactor DungeonMap Module
-	- Decouple Logic and View
-
-2. Refactor Room Module
-	- Decouple Logic and View
-
-3. Connect DungeonMapModule with RoomModule
+1. Connect DungeonMapModule with RoomModule
+	- Create enemy event inside the room
+	- Create a trigger to enter room when user encounter it
 
 
 100. Model Navigation as Data (see my Menu Module and Path)

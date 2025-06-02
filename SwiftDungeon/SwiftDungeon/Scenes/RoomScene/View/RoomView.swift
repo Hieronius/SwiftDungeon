@@ -28,7 +28,7 @@ struct RoomView: View {
 				.contentShape(Rectangle())
 				.onTapGesture(count: 3) {
 
-					viewModel.restoreCharacter(isHeroTurn: viewModel.roomUIState.isHeroTurn)
+					// place to extra action by multiple tapping of the screen
 				}
 
 			// Animation to play when enter new room
