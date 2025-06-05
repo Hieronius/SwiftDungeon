@@ -41,6 +41,11 @@ let menuItems = [
 /// Menu with different options to choose such as `Room`/`Dungeon` and so on
 struct MenuView: View {
 
+	/// Place to store our actual Navigation Stack
+	///
+	/// Use to push/pop screens to create different combinations like transition from DungeonMap to Room
+	@State private var path = NavigationPath()
+
 	/// An array of menu items to track
 	var items: [MenuItem]
 

@@ -5,12 +5,12 @@ final class DungeonViewModel: ObservableObject {
 
 	// MARK: - Dependencies
 
-	/// Manager of orchestrate User movements at the map with all kinds of events
+	/// Manager to orchestrate User movements at the map with all kinds of events
 	let dungeonGameManager: DungeonGameManager
 
 	// MARK: - Properties
 
-	/// Tuple property to identify Hero position on the Map matrix on the Screen
+	/// Tuple property to identify Hero position on the Map matrix on the Screen (UI)
 	@Published var heroPosition: (row: Int, col: Int) = (0, 0)
 
 	/// Actual Dungeon Map full of Tiles displayed by UI
@@ -33,6 +33,7 @@ final class DungeonViewModel: ObservableObject {
 	/// Get actual state snapshot and update UI
 	func syncDungeonStateUISnapshot() {
 
+		// TODO: Should call only dungeonGameManager without it's dependencies
 		let snapshot = dungeonGameManager.dungeonGameState.getActualGameStateSnapshot()
 		self.heroPosition = snapshot.heroPosition
 		self.dungeonMap = snapshot.dungeonMap

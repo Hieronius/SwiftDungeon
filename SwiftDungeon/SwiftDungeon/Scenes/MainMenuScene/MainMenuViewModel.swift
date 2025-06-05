@@ -26,21 +26,3 @@ final class MainMenuViewModel: ObservableObject, Identifiable {
 //		}()
 
 }
-
-// MARK: - NavigationCoordinator
-
-extension MainMenuViewModel: AppCoordinatorProtocol {
-
-	public func push(_ path: any Hashable) {
-		DispatchQueue.main.async { [weak self] in
-			self?.paths.append(path)
-		}
-	}
-
-	public func popLast() {
-		DispatchQueue.main.async { [weak self] in
-			self?.paths.removeLast()
-		}
-	}
-
-}

@@ -2,14 +2,14 @@ import Foundation
 
 // MARK: - DungeonMapGenerator
 
-/// An entity to generate a unique set of tiles for each dungeon level
+/// An entity to parse an existing dungeon level scheme or generate a unique set of tiles for each dungeon level
 struct DungeonMapGenerator {
 
 	// MARK: - Methods
 
 
 
-	// MARK: Parsing of DungeonScheme
+	// MARK: - Parsing of DungeonScheme
 	
 
 
@@ -31,7 +31,7 @@ struct DungeonMapGenerator {
 
 		var level: [[Tile]] = Array(repeating: Array(repeating: defaultTile,
 													 count: cols),
-								 count: rows)
+									count: rows)
 
 		for row in 0..<rows {
 

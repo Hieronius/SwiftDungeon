@@ -98,6 +98,11 @@ final class DungeonGameManager {
 			dungeonGameState.applyNewGameStateSnapshot(snapshot)
 			print("New Hero Position is \(row), \(col)")
 
+			if snapshot.dungeonMap[snapshot.heroPosition.row][snapshot.heroPosition.col].events.contains(.enemy) {
+				print("We are under attack!")
+				print(snapshot.heroPosition)
+			}
+
 		} else {
 			print("failed attempt to move")
 		}

@@ -15,8 +15,6 @@ struct SwiftDungeonApp: App {
 
 			MenuView(items: menuItems)
 
-			// AppCordinator.assembly(screen: .MainScreen)
-
 			// MainMenu(option: Options)
 
 			// switch MainMenuoption
