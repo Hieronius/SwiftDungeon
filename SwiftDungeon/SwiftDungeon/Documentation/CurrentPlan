@@ -1,5 +1,7 @@
 Current Plan
 
+0. Refactor MenuView into clean MVVM Module
+
 1. Connect DungeonMapModule with RoomModule
 	- Create enemy event inside the room
 		- When you press the button with R at the map "Room Screen" should be triggered

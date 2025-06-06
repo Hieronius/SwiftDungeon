@@ -13,7 +13,7 @@ struct SwiftDungeonApp: App {
 
         WindowGroup {
 
-			MenuView(items: menuItems)
+			MenuBuilder.build()
 
 			// MainMenu(option: Options)
 
