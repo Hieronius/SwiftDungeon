@@ -27,7 +27,7 @@ struct MenuView: View {
 
 		// MARK: NavigationStack
 
-		NavigationStack {
+		NavigationStack(path: $path) {
 
 			// Display MenuItems in the form of the List
 
@@ -45,7 +45,8 @@ struct MenuView: View {
 
 					// MARK: RoomBuilder
 
-				case .room: RoomBuilder.build()
+				case .room:
+					RoomBuilder.build()
 
 					// MARK: CorridorBuilder
 
