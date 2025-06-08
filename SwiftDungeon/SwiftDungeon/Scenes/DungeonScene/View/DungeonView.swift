@@ -38,6 +38,10 @@ struct DungeonView: View {
 
 		Spacer()
 
+		actionButton(title: "To the Room!") {
+			
+		}
+
 		actionButton(title: "Menu") {
 			dismiss()
 		}

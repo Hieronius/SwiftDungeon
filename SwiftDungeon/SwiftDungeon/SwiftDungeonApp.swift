@@ -5,30 +5,18 @@ import SwiftUI
 @main
 struct SwiftDungeonApp: App {
 
-	// MARK: - Dependencies
+	// MARK: Compositional Root accordingly to Mark Seeman
 
+	let appDependencies = AppDependencies()
 
 	// MARK: - Body
+	
     var body: some Scene {
 
         WindowGroup {
 
-			MenuBuilder.build()
+			appDependencies.buildMenu()
 
-			// MainMenu(option: Options)
-
-			// switch MainMenuoption
-
-			// case newGame:
-			// RoomBuilder.build(.Dungeon(dungeonManager: dungeonManager)
-
-			// case town:
-			// RoomBuilder.build(.Town(dungeonManager: dungeon)
-
-			// case dungeon:
-			// RoomBuilder.build(.Dungeon(dungeonManager: roomScreen.dungeonManager)
-
-//			RoomBuilder.build()
         }
     }
 }

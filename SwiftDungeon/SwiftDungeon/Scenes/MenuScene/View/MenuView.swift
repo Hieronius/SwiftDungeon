@@ -13,7 +13,7 @@ struct MenuView: View {
 	/// Place to store our actual Navigation Stack
 	///
 	/// Use to push/pop screens to create different combinations like transition from DungeonMap to Room
-	@State private var path = NavigationPath()
+	// @State private var path = NavigationPath()
 
 	// MARK: - Initialization
 
@@ -27,7 +27,7 @@ struct MenuView: View {
 
 		// MARK: NavigationStack
 
-		NavigationStack(path: $path) {
+		NavigationStack(path: $viewModel.path) {
 
 			// Display MenuItems in the form of the List
 
@@ -45,8 +45,7 @@ struct MenuView: View {
 
 					// MARK: RoomBuilder
 
-				case .room:
-					RoomBuilder.build()
+				case .room: viewModel.buildRoom()
 
 					// MARK: CorridorBuilder
 
@@ -54,7 +53,7 @@ struct MenuView: View {
 
 					// MARK: DungeonBuilder
 
-				case .dungeon: DungeonBuilder.build()
+				case .dungeon: viewModel.buildDungeon()
 
 					// MARK: TownBuilder
 

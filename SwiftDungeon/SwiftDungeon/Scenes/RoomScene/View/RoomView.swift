@@ -428,12 +428,3 @@ struct FixedSizeContainer<Content: View>: View {
 			)
 	}
 }
-
-// MARK: - ContentView Previews
-
-struct ContentView_Previews: PreviewProvider {
-
-	static var previews: some View {
-		RoomBuilder.build()
-	}
-}

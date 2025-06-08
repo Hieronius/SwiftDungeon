@@ -7,6 +7,7 @@ final class DungeonViewModel: ObservableObject {
 
 	/// Manager to orchestrate User movements at the map with all kinds of events
 	let dungeonGameManager: DungeonGameManager
+	let navigationManager: NavigationManager
 
 	// MARK: - Properties
 
@@ -18,8 +19,11 @@ final class DungeonViewModel: ObservableObject {
 
 	// MARK: - Initialization
 
-	init(dungeonGameManager: DungeonGameManager) {
+	init(dungeonGameManager: DungeonGameManager,
+		navigationManager: NavigationManager) {
+
 		self.dungeonGameManager = dungeonGameManager
+		self.navigationManager = navigationManager
 
 		self.syncDungeonStateUISnapshot()
 	}

@@ -1,6 +1,8 @@
 Current Plan
 
-0. Refactor MenuView into clean MVVM Module
+0. Add buttons in Dungeon/Room to process difference operations such as "jump from Dungeon to Room/Corridor" and so on
+	- Create NavigationManager and inject it to all my screens via constructor injection to follow Seeman principles
+	- Create CompositionRoot (AppDependecies)
 
 1. Connect DungeonMapModule with RoomModule
 	- Create enemy event inside the room
