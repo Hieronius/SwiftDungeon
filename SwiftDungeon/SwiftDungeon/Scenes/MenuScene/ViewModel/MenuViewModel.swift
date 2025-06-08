@@ -42,11 +42,34 @@ final class MenuViewModel: ObservableObject {
 
 extension MenuViewModel {
 
-	func buildDungeon() -> some View {
-		appDependencies.buildDungeon()
-	}
+	// MARK: Build Room
 
 	func buildRoom() -> some View {
 		appDependencies.buildRoom()
 	}
+
+	// MARK: Build Corridor
+
+	func buildCorridor() -> some View {
+		appDependencies.buildCorridor()
+	}
+
+	// MARK: Build Dungeon
+
+	func buildDungeon() -> some View {
+		appDependencies.buildDungeon()
+	}
+
+	// MARK: Build Town
+
+	func buildTown() -> some View {
+		appDependencies.buildTown()
+	}
+
+	// MARK: Build World
+
+	func buildWorld() -> some View {
+		appDependencies.buildWorld()
+	}
+
 }

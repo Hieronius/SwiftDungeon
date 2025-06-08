@@ -98,4 +98,43 @@ final class AppDependencies {
 		return RoomView(viewModel: viewModel)
 	}
 
+	// MARK: Build Town
+
+	func buildTown() -> TownView {
+
+		let navigationManager = buildNavigationManager()
+
+		let viewModel = TownViewModel(
+			navigationManager: navigationManager
+		)
+
+		return TownView(viewModel: viewModel)
+	}
+
+	// MARK: Build World
+
+	func buildWorld() -> WorldView {
+
+		let navigationManager = buildNavigationManager()
+
+		let viewModel = WorldViewModel(
+			navigationManager: navigationManager
+		)
+
+		return WorldView(viewModel: viewModel)
+	}
+
+	// MARK: Build Corridor
+
+	func buildCorridor() -> CorridorView {
+
+		let navigationManager = buildNavigationManager()
+
+		let viewModel = CorridorViewModel(
+			navigationManager: navigationManager
+		)
+
+		return CorridorView(viewModel: viewModel)
+	}
+
 }

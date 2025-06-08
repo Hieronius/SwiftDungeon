@@ -49,7 +49,7 @@ struct MenuView: View {
 
 					// MARK: CorridorBuilder
 
-				case .corridor: CorridorBuilder.build()
+				case .corridor: viewModel.buildCorridor()
 
 					// MARK: DungeonBuilder
 
@@ -57,11 +57,11 @@ struct MenuView: View {
 
 					// MARK: TownBuilder
 
-				case .town: TownBuilder.build()
+				case .town: viewModel.buildTown()
 
 					// MARK: WorldBuilder
 
-				case .world: WorldBuilder.build()
+				case .world: viewModel.buildWorld()
 
 				}
 			}
