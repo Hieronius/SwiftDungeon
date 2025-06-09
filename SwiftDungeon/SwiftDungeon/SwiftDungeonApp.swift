@@ -11,12 +11,12 @@ struct SwiftDungeonApp: App {
 
 	// MARK: - Body
 	
-    var body: some Scene {
+	var body: some Scene {
 
-        WindowGroup {
+		WindowGroup {
 
 			appDependencies.buildMenu()
 
-        }
-    }
+		}
+	}
 }
