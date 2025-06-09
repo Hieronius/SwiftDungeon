@@ -29,34 +29,6 @@ final class AppDependencies {
 		return view
 	}
 
-	// MARK: Build Dungeon
-
-	func buildDungeon() -> DungeonView {
-
-		let dungeonGameStateSnapshot = DungeonGameStateSnapshot()
-
-		let dungeonGameState = DungeonGameState(dungeonGameStateSnapshot: dungeonGameStateSnapshot)
-
-		let dungeonMapGenerator = DungeonMapGenerator()
-
-		let dungeonScheme = DungeonScheme()
-
-		let dungeonGameManager = DungeonGameManager(
-			dungeonGameState: dungeonGameState,
-			dungeonMapGenerator: dungeonMapGenerator,
-			dungeonScheme: dungeonScheme
-		)
-
-		let navigationManager = buildNavigationManager()
-
-		let viewModel = DungeonViewModel(
-			dungeonGameManager: dungeonGameManager,
-			navigationManager: navigationManager
-		)
-
-		return DungeonView(viewModel: viewModel)
-	}
-
 	// MARK: Build Room
 
 	func buildRoom() -> RoomView {
@@ -98,6 +70,47 @@ final class AppDependencies {
 		return RoomView(viewModel: viewModel)
 	}
 
+	// MARK: Build Corridor
+
+	func buildCorridor() -> CorridorView {
+
+		let navigationManager = buildNavigationManager()
+
+		let viewModel = CorridorViewModel(
+			navigationManager: navigationManager
+		)
+
+		return CorridorView(viewModel: viewModel)
+	}
+
+	// MARK: Build Dungeon
+
+	func buildDungeon() -> DungeonView {
+
+		let dungeonGameStateSnapshot = DungeonGameStateSnapshot()
+
+		let dungeonGameState = DungeonGameState(dungeonGameStateSnapshot: dungeonGameStateSnapshot)
+
+		let dungeonMapGenerator = DungeonMapGenerator()
+
+		let dungeonScheme = DungeonScheme()
+
+		let dungeonGameManager = DungeonGameManager(
+			dungeonGameState: dungeonGameState,
+			dungeonMapGenerator: dungeonMapGenerator,
+			dungeonScheme: dungeonScheme
+		)
+
+		let navigationManager = buildNavigationManager()
+
+		let viewModel = DungeonViewModel(
+			dungeonGameManager: dungeonGameManager,
+			navigationManager: navigationManager
+		)
+
+		return DungeonView(viewModel: viewModel)
+	}
+
 	// MARK: Build Town
 
 	func buildTown() -> TownView {
@@ -123,18 +136,4 @@ final class AppDependencies {
 
 		return WorldView(viewModel: viewModel)
 	}
-
-	// MARK: Build Corridor
-
-	func buildCorridor() -> CorridorView {
-
-		let navigationManager = buildNavigationManager()
-
-		let viewModel = CorridorViewModel(
-			navigationManager: navigationManager
-		)
-
-		return CorridorView(viewModel: viewModel)
-	}
-
 }
