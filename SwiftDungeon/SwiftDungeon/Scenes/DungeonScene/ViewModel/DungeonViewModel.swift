@@ -64,6 +64,14 @@ extension DungeonViewModel {
 		let snapshot = dungeonGameManager.dungeonGameState.getActualGameStateSnapshot()
 		self.heroPosition = snapshot.heroPosition
 		self.dungeonMap = snapshot.dungeonMap
+
+		// MARK: If encountered enemy -> move to Room
+
+		if snapshot.enemyEncounteredFlag {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+				self.pushRoom()
+			}
+		}
 	}
 
 	// MARK: Check If Tile IsHeroPosition
@@ -82,15 +90,5 @@ extension DungeonViewModel {
 
 		dungeonGameManager.handleTappedDirection(row, col)
 		syncDungeonStateUISnapshot()
-
-		// If encountered an enemy jump to Room to fight
-		if dungeonGameManager.isEnemyEncountered() {
-			DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-				self.pushRoom()
-			}
-		}
-
 	}
-
-
 }

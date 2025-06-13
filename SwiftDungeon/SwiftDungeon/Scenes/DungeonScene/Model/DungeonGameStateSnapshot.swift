@@ -7,4 +7,5 @@ struct DungeonGameStateSnapshot {
 	var dungeonMap: [[Tile]] = []
 	var heroPosition: (row: Int, col: Int) = (0, 0)
 	var isHeroAppeard = false
+	var enemyEncounteredFlag = false
 }
