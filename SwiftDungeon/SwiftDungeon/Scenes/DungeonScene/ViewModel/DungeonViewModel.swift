@@ -45,9 +45,9 @@ extension DungeonViewModel {
 		navigationManager.pop()
 	}
 
-	// MARK: JumpToRoom
+	// MARK: PushToRoom
 
-	func pushDungeon() {
+	func pushRoom() {
 		popScreen()
 		navigationManager.push(.room)
 	}
@@ -82,6 +82,14 @@ extension DungeonViewModel {
 
 		dungeonGameManager.handleTappedDirection(row, col)
 		syncDungeonStateUISnapshot()
+
+		// If encountered an enemy jump to Room to fight
+		if dungeonGameManager.isEnemyEncountered() {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+				self.pushRoom()
+			}
+		}
+
 	}
 
 

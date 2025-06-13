@@ -97,8 +97,8 @@ struct DungeonMapGenerator {
 		// Define overall tiles pool and for empty/corridor/room to keep track of while filling dungeon with objects
 
 		let mapSize = rowsSize * columnsSize // for 10*10 = 100
-		var roomsPool = Int(Double(mapSize) * 0.15) // 15 % of the possible tiles
-		var corridorsPool = Int(Double(mapSize) * 0.35) // 35 % of the possible tiles
+		let roomsPool = Int(Double(mapSize) * 0.15) // 15 % of the possible tiles
+		let corridorsPool = Int(Double(mapSize) * 0.35) // 35 % of the possible tiles
 
 		// 1. Populate matrix with empty tiles
 		// In other words it's just am empty rectangle of all possible space filled with empty rooms to work with

@@ -9,6 +9,7 @@ struct RoomGameStateSnapshot {
 	var isGameOver = false
 	var isGameCompleted = false
 	var isEnteredNewRoom = false
+	var enemyDefeatedFlag = false
 	var currentRound = 0
 	var currentRoom = 1
 

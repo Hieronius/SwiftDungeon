@@ -171,8 +171,14 @@ extension RoomGameManager {
 			} else {
 				hero.stats.currentExperience += experience
 			}
+
+			// enterNewRoom() for non stop testing of multiple enemy encounters
+//			enterNewRoom()
+
+			// pushDungeon to go back after success in defeating enemy
+			snapshot.enemyDefeatedFlag = true
 			roomGameState.applyNewGameStateSnapshot(snapshot)
-			enterNewRoom()
+
 		}
 	}
 

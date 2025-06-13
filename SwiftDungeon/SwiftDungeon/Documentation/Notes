@@ -1,7 +1,3 @@
-It's ok to use ViewModel as mediator between View and Business logic such as DungeonManager
-DungeonManager does know nothing about View
-DungeonView does know nothing about DungeonManager
-
 
 I can generate randomly not via DungeonMapGenerator but by something like randomDungeonSchemeGenerator to get something like:
 
@@ -18,11 +14,11 @@ MyApp/
 │  ├─ Package.swift
 │  ├─ Sources/
 │  │  └─ App/
-│  │     ├─ AppDependencies.swift
+│  │     ├─ CompositionRoot.swift
 │  │     └─ SwiftDungeonApp.swift
 │  └─ Tests/
 │     └─ AppTests/
-│        └─ AppDependenciesTests.swift
+│        └─ CompositionRoot.swift
 ├─ Features/
 │  ├─ WorldFeature/
 │  │  ├─ Package.swift

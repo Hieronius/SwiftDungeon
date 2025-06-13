@@ -409,10 +409,10 @@
 		DDAA4C382DE072970007E5DA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DDA8133A2DEC0AAC00212169 /* DungeonGameStateSnapshot.swift */,
 				DDA810CB2DE17EF9000A2349 /* Tile.swift */,
 				DDA810CD2DE17F35000A2349 /* TileType.swift */,
 				DDA810CF2DE17FCD000A2349 /* EventType.swift */,
-				DDA8133A2DEC0AAC00212169 /* DungeonGameStateSnapshot.swift */,
 				DDAB0C642DED6B75000D1E33 /* EventResult.swift */,
 			);
 			path = Model;

@@ -9,6 +9,10 @@ final class DungeonGameManager {
 	let dungeonMapGenerator: DungeonMapGenerator
 	let dungeonScheme: DungeonScheme
 
+	// MARK: - Properties
+
+	private var enemyEncounteredFlag: Bool = false
+
 	// MARK: - Initialization
 
 	init(
@@ -101,11 +105,20 @@ final class DungeonGameManager {
 			if snapshot.dungeonMap[snapshot.heroPosition.row][snapshot.heroPosition.col].events.contains(.enemy) {
 				print("We are under attack!")
 				print(snapshot.heroPosition)
+
+				// Pass the flag that enemy has been met
+				enemyEncounteredFlag = true
+				
 			}
 
 		} else {
 			print("failed attempt to move")
 		}
+	}
+
+	/// Method to expose current state of enemy presence
+	func isEnemyEncountered() -> Bool {
+		return enemyEncounteredFlag
 	}
 
 	// MARK: Check If Direction Valid

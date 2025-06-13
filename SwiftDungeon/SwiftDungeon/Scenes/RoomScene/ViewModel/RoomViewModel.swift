@@ -89,7 +89,7 @@ extension RoomViewModel {
 
 	// MARK: JumpToDungeon
 
-	func jumpToDungeon() {
+	func pushDungeon() {
 		popScreen()
 		navigationManager.push(.dungeon)
 	}
@@ -335,6 +335,14 @@ extension RoomViewModel {
 			enemyBeingHit: enemyUIState.enemyBeingHit,
 			enemyActiveEffects: enemy.activeEffects
 		)
+
+		// MARK: - Transition to Dungeon if enemy has been defeated
+
+		if snapshot.enemyDefeatedFlag {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+				self.pushDungeon()
+			}
+		}
 
 	}
 }

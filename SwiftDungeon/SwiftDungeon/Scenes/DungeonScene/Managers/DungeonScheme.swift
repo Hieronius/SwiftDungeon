@@ -1,5 +1,17 @@
 import Foundation
 
+/*
+ MARK: Characters Transcription
+
+ "R" - Room
+ "C" - Corridor
+ "E" - Empty Spot
+ "F" - Fight with Enemy
+ "G" - Item/Gold/Chest
+ "Q" - Quest/Riddle
+ 
+ */
+
 /// Set of hardcoded DungeonLevel schemes to be parsed by DungeonMapGenerator
 struct DungeonScheme {
 

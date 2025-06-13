@@ -4,4 +4,5 @@ import Foundation
 struct EventResult {
 
 	let result: String
+	
 }
