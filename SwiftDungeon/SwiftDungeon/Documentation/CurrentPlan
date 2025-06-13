@@ -1,8 +1,9 @@
 Current Plan
 
-0. Add buttons in Dungeon/Room to process difference operations such as "jump from Dungeon to Room/Corridor" and so on
-	- Create NavigationManager and inject it to all my screens via constructor injection to follow Seeman principles
-	- Create CompositionRoot (AppDependecies)
+0. Implement Navigation Logic from Navigation app
+	- Replace "MenuItems" with AppScreen Enum alike the NavigationApp
+	- Make AppScreen Identifiable and Hashable
+	- Instead of NavigationLinks there should be buttons with methods "viewModel.pushRoom" which should contain compositionRoot.buildRoom method
 
 1. Connect DungeonMapModule with RoomModule
 	- Create enemy event inside the room

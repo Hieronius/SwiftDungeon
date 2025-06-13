@@ -1,25 +1,24 @@
 import Foundation
 
 /// An entity to create a comprehensive list of screens to navigation between for our `NavigationManager`
-enum AppScreen: Hashable {
+enum AppScreen: String, Hashable, Identifiable {
 
-	/// Main Menu of the game
-	case menu
+	var id: AppScreen { self }
 
 	/// Room encounter during dungeon exploration
-	case room
+	case room = "Room"
 
 	/// Corridor encounter during dungeon exploration
-	case corridor
+	case corridor = "Corridor"
 
 	/// Dungeon or Dungeon Map location during dungeon exploration
-	case dungeon
+	case dungeon = "Dungeon"
 
 	/// Town screen outside the dungeon with merchant, blacksmith and so on
-	case town
+	case town = "Town"
 
 	/// World map screen with all kinds of lands and dungeons to choose
-	case world
+	case world = "World"
 }
 
 

@@ -8,7 +8,7 @@ final class MenuViewModel: ObservableObject {
 	/// `Compositional Root` of the app with preconstructed (predefined dependencies graph)
 	///
 	/// Think about it not like a complete graph but like of the list of cooking recepies you have on hand. What to put and how to cook instead of complete dish.
-	private let appDependencies: AppDependencies
+	private let compositionRoot: CompositionRoot
 
 	/// Dependency to control Navigation Flow across the app
 	private let navigationManager: NavigationManager
@@ -18,23 +18,21 @@ final class MenuViewModel: ObservableObject {
 	/// `NavigationPath` property to be used by UI to update when NavigationManager.path did change
 	@Published var path: NavigationPath
 
-	/// All Possible Menu Options exposed to View to observe
-	@Published var menuItems = [
+	// MARK: - Initialization
 
-		MenuItem(type: .room),
-		MenuItem(type: .corridor),
-		MenuItem(type: .dungeon),
-		MenuItem(type: .town),
-		MenuItem(type: .world)
-	]
-
-	init(appDependencies: AppDependencies,
+	init(appDependencies: CompositionRoot,
 		 navigationManager: NavigationManager) {
 		
-		self.appDependencies = appDependencies
+		self.compositionRoot = appDependencies
 		self.navigationManager = navigationManager
 
-		self.path = navigationManager.getPath()
+		// MARK: This code makes Navigation Stack to work normally with Push/Pop but be cautious
+
+		// Observe navigationManager.path updates
+		self.path = navigationManager.path
+		navigationManager.$path
+			.receive(on: DispatchQueue.main)
+			.assign(to: &$path)
 	}
 }
 
@@ -42,34 +40,70 @@ final class MenuViewModel: ObservableObject {
 
 extension MenuViewModel {
 
+	// MARK: PushRoom
+
+	func pushRoom() {
+		navigationManager.push(.room)
+	}
+
+	// MARK: PushCorridor
+
+	func pushCorridor() {
+		navigationManager.push(.corridor)
+	}
+
+	// MARK: PushDungeon
+
+	func pushDungeon() {
+		navigationManager.push(.dungeon)
+	}
+
+	// MARK: PushTown
+
+	func pushTown() {
+		navigationManager.push(.town)
+	}
+
+	// MARK: PushWorld
+
+	func pushWorld() {
+		navigationManager.push(.world)
+	}
+}
+
+// MARK: - Screen Creation
+
+extension MenuViewModel {
+
 	// MARK: Build Room
 
 	func buildRoom() -> some View {
-		appDependencies.buildRoom()
+		compositionRoot.buildRoom()
+
 	}
 
 	// MARK: Build Corridor
 
 	func buildCorridor() -> some View {
-		appDependencies.buildCorridor()
+		compositionRoot.buildCorridor()
 	}
 
 	// MARK: Build Dungeon
 
 	func buildDungeon() -> some View {
-		appDependencies.buildDungeon()
+		compositionRoot.buildDungeon()
 	}
 
 	// MARK: Build Town
 
 	func buildTown() -> some View {
-		appDependencies.buildTown()
+		compositionRoot.buildTown()
 	}
 
 	// MARK: Build World
 
 	func buildWorld() -> some View {
-		appDependencies.buildWorld()
+		compositionRoot.buildWorld()
 	}
 
 }

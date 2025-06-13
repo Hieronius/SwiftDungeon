@@ -1,8 +1,9 @@
 import Foundation
 
+/// An entity to control game config to provide more freedome for testing of the app
 enum GameConfig {
 
-	// Dungeon Config
+	// MARK: Dungeon Config
 
 	enum DungeonConfig {
 		
@@ -11,7 +12,7 @@ enum GameConfig {
 		
 	}
 
-	// Ability Mana Cost
+	// MARK: Ability Mana Cost
 
 	static let healManaCost = 10
 	static let buffManaCost = 10
@@ -21,7 +22,7 @@ enum GameConfig {
 	static let healthRegenManaCost = 15
 	static let manaRegenManaCost = 15
 
-	// Ability Energy Cost
+	// MARK: Ability Energy Cost
 
 	static let attackEnergyCost = 1
 	static let blockEnergyCost = 1
@@ -30,7 +31,7 @@ enum GameConfig {
 	static let cutEnergyCost = 1
 	static let sunderArmorCost = 1
 
-	// Ability Duration
+	// MARK: Ability Duration
 
 	// 2 turns (Target -> Caster), not rounds
 

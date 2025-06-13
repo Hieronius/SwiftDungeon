@@ -6,8 +6,6 @@ struct RoomView: View {
 	
 	@StateObject private var viewModel: RoomViewModel
 
-	/// Property to allow to dismiss the screen after entering to via NavigationLink and NavigationStack
-	@Environment(\.dismiss) var dismiss
 	@State private var isEnemyUI = true
 
 	// MARK: - Initialization
@@ -120,7 +118,7 @@ private extension RoomView {
 		VStack {
 
 			actionButton(title: "Menu") {
-				dismiss()
+				viewModel.popScreen()
 			}
 			.opacity(0.8)
 			.scaleEffect(0.8)

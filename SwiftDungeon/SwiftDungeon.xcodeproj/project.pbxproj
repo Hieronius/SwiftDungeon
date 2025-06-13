@@ -50,7 +50,7 @@
 		DDAB3E4D2DC72B5800DBA1C8 /* CurrentPlan in Resources */ = {isa = PBXBuildFile; fileRef = DDAB3E4C2DC72B5800DBA1C8 /* CurrentPlan */; };
 		DDAB3E4F2DC72B6800DBA1C8 /* Bugs in Resources */ = {isa = PBXBuildFile; fileRef = DDAB3E4E2DC72B6800DBA1C8 /* Bugs */; };
 		DDAB3E522DC7362A00DBA1C8 /* EffectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB3E512DC7362A00DBA1C8 /* EffectManager.swift */; };
-		DDAB5C112DF3FD0600E97269 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB5C102DF3FD0600E97269 /* AppDependencies.swift */; };
+		DDAB5C112DF3FD0600E97269 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB5C102DF3FD0600E97269 /* CompositionRoot.swift */; };
 		DDAB5C132DF3FD2E00E97269 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB5C122DF3FD2E00E97269 /* NavigationManager.swift */; };
 		DDAB5C152DF400A900E97269 /* AppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB5C142DF400A900E97269 /* AppScreen.swift */; };
 		DDAC13352DC9F08800E42D65 /* ExperienceBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAC13342DC9F08800E42D65 /* ExperienceBar.swift */; };
@@ -61,11 +61,9 @@
 		DDAC133F2DC9F18000E42D65 /* CharacterTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAC133E2DC9F18000E42D65 /* CharacterTile.swift */; };
 		DDAC13412DC9F1A300E42D65 /* BorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAC13402DC9F1A300E42D65 /* BorderedView.swift */; };
 		DDAC13432DC9F29600E42D65 /* RoomGameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAC13422DC9F29600E42D65 /* RoomGameManager.swift */; };
-		DDAC67532DF2CAD0005C6984 /* MenuType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAC67522DF2CAD0005C6984 /* MenuType.swift */; };
 		DDACC5602DD8490C00549907 /* Turn.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDACC55F2DD8490C00549907 /* Turn.swift */; };
 		DDACC5622DD855EB00549907 /* HighlightAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDACC5612DD855EA00549907 /* HighlightAnimation.swift */; };
 		DDACC5652DD87E5900549907 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDACC5642DD87E5900549907 /* MenuViewModel.swift */; };
-		DDACC5672DD87E6500549907 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDACC5662DD87E6500549907 /* MenuItem.swift */; };
 		DDAF16462DC5C67100D4109C /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAF16452DC5C67100D4109C /* GameConfig.swift */; };
 		DDC129F12DC25858006CBC41 /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = DDC129F02DC25858006CBC41 /* Notes */; };
 		DDC129F32DC26AF6006CBC41 /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC129F22DC26AF6006CBC41 /* Effect.swift */; };
@@ -117,7 +115,7 @@
 		DDAB3E4C2DC72B5800DBA1C8 /* CurrentPlan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CurrentPlan; sourceTree = "<group>"; };
 		DDAB3E4E2DC72B6800DBA1C8 /* Bugs */ = {isa = PBXFileReference; lastKnownFileType = text; path = Bugs; sourceTree = "<group>"; };
 		DDAB3E512DC7362A00DBA1C8 /* EffectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectManager.swift; sourceTree = "<group>"; };
-		DDAB5C102DF3FD0600E97269 /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
+		DDAB5C102DF3FD0600E97269 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		DDAB5C122DF3FD2E00E97269 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		DDAB5C142DF400A900E97269 /* AppScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScreen.swift; sourceTree = "<group>"; };
 		DDAC13342DC9F08800E42D65 /* ExperienceBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceBar.swift; sourceTree = "<group>"; };
@@ -128,11 +126,9 @@
 		DDAC133E2DC9F18000E42D65 /* CharacterTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterTile.swift; sourceTree = "<group>"; };
 		DDAC13402DC9F1A300E42D65 /* BorderedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedView.swift; sourceTree = "<group>"; };
 		DDAC13422DC9F29600E42D65 /* RoomGameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGameManager.swift; sourceTree = "<group>"; };
-		DDAC67522DF2CAD0005C6984 /* MenuType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuType.swift; sourceTree = "<group>"; };
 		DDACC55F2DD8490C00549907 /* Turn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Turn.swift; sourceTree = "<group>"; };
 		DDACC5612DD855EA00549907 /* HighlightAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightAnimation.swift; sourceTree = "<group>"; };
 		DDACC5642DD87E5900549907 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
-		DDACC5662DD87E6500549907 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		DDAF16452DC5C67100D4109C /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
 		DDC129F02DC25858006CBC41 /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
 		DDC129F22DC26AF6006CBC41 /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
@@ -182,9 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */,
-				DDAB5C102DF3FD0600E97269 /* AppDependencies.swift */,
+				DDAB5C102DF3FD0600E97269 /* CompositionRoot.swift */,
 				DDAB5C122DF3FD2E00E97269 /* NavigationManager.swift */,
-				DDAB5C142DF400A900E97269 /* AppScreen.swift */,
 				DDAB3E502DC72B7800DBA1C8 /* Documentation */,
 				DDAA040A2DC46E3400C801B4 /* Domain */,
 				DDAA040B2DC46E4D00C801B4 /* Scenes */,
@@ -265,11 +260,11 @@
 			isa = PBXGroup;
 			children = (
 				DDAA04152DC4879E00C801B4 /* MenuScene */,
-				DDACC5632DD8632D00549907 /* WorldScene */,
-				DDAA04182DC487BA00C801B4 /* TownScene */,
+				DDAA040C2DC46EA600C801B4 /* RoomScene */,
 				DDAA04172DC487B100C801B4 /* CorridorScene */,
 				DDAA04162DC487A400C801B4 /* DungeonScene */,
-				DDAA040C2DC46EA600C801B4 /* RoomScene */,
+				DDAA04182DC487BA00C801B4 /* TownScene */,
+				DDACC5632DD8632D00549907 /* WorldScene */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -277,8 +272,8 @@
 		DDAA040C2DC46EA600C801B4 /* RoomScene */ = {
 			isa = PBXGroup;
 			children = (
-				DDA940702DBF50E800837F9F /* ViewModel */,
 				DDAC13442DC9F2D500E42D65 /* Managers */,
+				DDA940702DBF50E800837F9F /* ViewModel */,
 				DDA9406F2DBF50E400837F9F /* Model */,
 				DDA9406E2DBF50DE00837F9F /* View */,
 			);
@@ -460,8 +455,7 @@
 		DDAC674F2DF2C933005C6984 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DDACC5662DD87E6500549907 /* MenuItem.swift */,
-				DDAC67522DF2CAD0005C6984 /* MenuType.swift */,
+				DDAB5C142DF400A900E97269 /* AppScreen.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -565,7 +559,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDAC67532DF2CAD0005C6984 /* MenuType.swift in Sources */,
 				DDA810CC2DE17EF9000A2349 /* Tile.swift in Sources */,
 				DDAB5C132DF3FD2E00E97269 /* NavigationManager.swift in Sources */,
 				DD2D74402DCB0D83005396F3 /* WorldStateMachine.swift in Sources */,
@@ -578,14 +571,13 @@
 				DDAA4C2A2DE070600007E5DA /* TownViewModel.swift in Sources */,
 				DDA813392DEC07C300212169 /* DungeonScheme.swift in Sources */,
 				DDAC13412DC9F1A300E42D65 /* BorderedView.swift in Sources */,
-				DDACC5672DD87E6500549907 /* MenuItem.swift in Sources */,
 				DDAA4C312DE071B00007E5DA /* WorldViewModel.swift in Sources */,
 				DDC129F32DC26AF6006CBC41 /* Effect.swift in Sources */,
 				DDAA4C3A2DE072A90007E5DA /* DungeonView.swift in Sources */,
 				DDA940772DBF522300837F9F /* Character.swift in Sources */,
 				DDAC13352DC9F08800E42D65 /* ExperienceBar.swift in Sources */,
 				DDAB0C632DED6700000D1E33 /* ActionResult.swift in Sources */,
-				DDAB5C112DF3FD0600E97269 /* AppDependencies.swift in Sources */,
+				DDAB5C112DF3FD0600E97269 /* CompositionRoot.swift in Sources */,
 				DDAC13372DC9F0CA00E42D65 /* HealthBar.swift in Sources */,
 				DDA940632DBF4FC600837F9F /* RoomView.swift in Sources */,
 				DDAA4C2C2DE0706A0007E5DA /* TownView.swift in Sources */,

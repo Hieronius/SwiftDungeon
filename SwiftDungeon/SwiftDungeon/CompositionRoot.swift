@@ -3,15 +3,14 @@ import SwiftUI
 /// `Composition Root` or initial set of all app dependencies accordingly to Seeman's book "Dependency Injection"
 ///
 /// We use static method to resolve dependecies because it's more predictable and stable than just an init
-final class AppDependencies {
+final class CompositionRoot {
 
-	// MARK: Build NavigationManager
+	/// Shared entity to control navigation flow and `NavigationStack` across the app
+	private let navigationManager = NavigationManager()
 
-	/// Static method to construct dependency, set of dependencies or the whole screens/modules
-	func buildNavigationManager() -> NavigationManager {
-
-		let navigationManager = NavigationManager()
-		return navigationManager
+	/// Method to return current navigation manager
+	func getNavigationManager() -> NavigationManager {
+		self.navigationManager
 	}
 
 	// MARK: Build Menu
@@ -19,7 +18,7 @@ final class AppDependencies {
 	/// Universal method to construct MenuScene with all required dependencies
 	func buildMenu() -> some View {
 
-		let navigationManager = buildNavigationManager()
+		let navigationManager = getNavigationManager()
 		let viewModel = MenuViewModel(
 			appDependencies: self,
 			navigationManager: navigationManager
@@ -60,8 +59,11 @@ final class AppDependencies {
 
 		let sceneUIStateManager = SceneUIStateManager()
 
+		let navigationManager = getNavigationManager()
+
 		let viewModel = RoomViewModel(
 			roomGameManager: roomGameManager,
+			navigationManager: navigationManager,
 			sceneUIStateManager: sceneUIStateManager
 		)
 
@@ -74,7 +76,7 @@ final class AppDependencies {
 
 	func buildCorridor() -> CorridorView {
 
-		let navigationManager = buildNavigationManager()
+		let navigationManager = getNavigationManager()
 
 		let viewModel = CorridorViewModel(
 			navigationManager: navigationManager
@@ -101,7 +103,7 @@ final class AppDependencies {
 			dungeonScheme: dungeonScheme
 		)
 
-		let navigationManager = buildNavigationManager()
+		let navigationManager = getNavigationManager()
 
 		let viewModel = DungeonViewModel(
 			dungeonGameManager: dungeonGameManager,
@@ -115,7 +117,7 @@ final class AppDependencies {
 
 	func buildTown() -> TownView {
 
-		let navigationManager = buildNavigationManager()
+		let navigationManager = getNavigationManager()
 
 		let viewModel = TownViewModel(
 			navigationManager: navigationManager
@@ -128,7 +130,7 @@ final class AppDependencies {
 
 	func buildWorld() -> WorldView {
 
-		let navigationManager = buildNavigationManager()
+		let navigationManager = getNavigationManager()
 
 		let viewModel = WorldViewModel(
 			navigationManager: navigationManager

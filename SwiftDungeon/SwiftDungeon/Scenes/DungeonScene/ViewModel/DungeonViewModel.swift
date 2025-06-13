@@ -7,6 +7,8 @@ final class DungeonViewModel: ObservableObject {
 
 	/// Manager to orchestrate User movements at the map with all kinds of events
 	let dungeonGameManager: DungeonGameManager
+
+	/// Manager to control navigation flow
 	let navigationManager: NavigationManager
 
 	// MARK: - Properties
@@ -20,19 +22,40 @@ final class DungeonViewModel: ObservableObject {
 	// MARK: - Initialization
 
 	init(dungeonGameManager: DungeonGameManager,
-		navigationManager: NavigationManager) {
+		 navigationManager: NavigationManager) {
 
 		self.dungeonGameManager = dungeonGameManager
 		self.navigationManager = navigationManager
 
 		self.syncDungeonStateUISnapshot()
 	}
+}
 
-	// MARK: - Methods
+// MARK: - Methods
 
 
 
-	// MARK: Sync UI with Current Dungeon State Snapshot
+// MARK: - Navigation
+
+extension DungeonViewModel {
+
+	// MARK: PopScreen
+
+	func popScreen() {
+		navigationManager.pop()
+	}
+
+	// MARK: JumpToRoom
+
+	func pushDungeon() {
+		popScreen()
+		navigationManager.push(.room)
+	}
+}
+
+// MARK: Sync UI with Current Dungeon State Snapshot
+
+extension DungeonViewModel {
 
 	/// Get actual state snapshot and update UI
 	func syncDungeonStateUISnapshot() {

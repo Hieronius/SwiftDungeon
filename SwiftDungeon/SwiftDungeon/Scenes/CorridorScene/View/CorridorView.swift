@@ -18,7 +18,26 @@ struct CorridorView: View {
 
 	var body: some View {
 
-		Text("Corridor Here")
-			.navigationBarBackButtonHidden(true)
+		VStack {
+			Button("Menu") {
+				viewModel.popScreen()
+			}
+			Button("Go to Room") {
+				viewModel.pushRoom()
+			}
+			Button("Go to Dungeon") {
+				viewModel.pushDungeon()
+			}
+			Button("Go to Town") {
+				viewModel.pushTown()
+			}
+			Button("Go to Town") {
+				viewModel.pushTown()
+			}
+			Button("Go to World") {
+				viewModel.pushWorld()
+			}
+		}
+		.navigationBarBackButtonHidden(true)
 	}
 }

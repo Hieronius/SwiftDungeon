@@ -7,9 +7,14 @@ final class RoomViewModel: ObservableObject {
 
 	// MARK: - Dependencies
 
-	// call in view - viewModel.openInventory()
-	let sceneUIStateManager: SceneUIStateManager
+	/// An entity to control an entire Room encounter (turn, enemies, effects and such)
 	let roomGameManager: RoomGameManager
+
+	/// Manager to control navigation flow
+	let navigationManager: NavigationManager
+
+	/// Room - dedicated manager to control UI state with in the screen
+	let sceneUIStateManager: SceneUIStateManager
 
 	// MARK: - Published Properties
 
@@ -21,11 +26,13 @@ final class RoomViewModel: ObservableObject {
 	// MARK: - Initialization
 
 	init(roomGameManager: RoomGameManager,
+		 navigationManager: NavigationManager,
 		 sceneUIStateManager: SceneUIStateManager) {
 
 		self.roomGameManager = roomGameManager
+		self.navigationManager = navigationManager
 		self.sceneUIStateManager = sceneUIStateManager
-
+		
 		self.roomUIState = RoomUIState()
 		self.sceneUIState = SceneUIState()
 
@@ -66,7 +73,29 @@ final class RoomViewModel: ObservableObject {
 	}
 }
 
-// MARK: Methods to wrap and pass to View
+// MARK: - Methods
+
+
+
+// MARK: - Navigation
+
+extension RoomViewModel {
+
+	// MARK: PopScreen
+
+	func popScreen() {
+		navigationManager.pop()
+	}
+
+	// MARK: JumpToDungeon
+
+	func jumpToDungeon() {
+		popScreen()
+		navigationManager.push(.dungeon)
+	}
+}
+
+// MARK: - Room Game Logic
 
 extension RoomViewModel {
 
@@ -347,20 +376,6 @@ extension RoomViewModel {
 	func openInventory() {
 		sceneUIStateManager.open(.inventory)
 	}
-}
-
-// MARK: - Hashable
-
-extension RoomViewModel: Hashable {
-	static func == (lhs: RoomViewModel, rhs: RoomViewModel) -> Bool {
-		lhs.roomUIState.isHeroTurn == rhs.roomUIState.isHeroTurn
-	}
-
-	func hash(into hasher: inout Hasher) {
-		hasher.combine(self.roomUIState.isHeroTurn)
-	   }
-
-
 }
 
 // MARK: - Visuals

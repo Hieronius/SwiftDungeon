@@ -39,11 +39,11 @@ struct DungeonView: View {
 		Spacer()
 
 		actionButton(title: "To the Room!") {
-			
+			viewModel.pushDungeon()
 		}
 
 		actionButton(title: "Menu") {
-			dismiss()
+			viewModel.popScreen()
 		}
 
 		Spacer()

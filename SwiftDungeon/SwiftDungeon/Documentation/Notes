@@ -9,3 +9,49 @@ I can generate randomly not via DungeonMapGenerator but by something like random
 "RE" - mean Room with Enemy
 "RR" - mean Room with Reward
 and so on
+
+
+Example of Modular architecture with each feature being a package
+
+MyApp/
+├─ App/
+│  ├─ Package.swift
+│  ├─ Sources/
+│  │  └─ App/
+│  │     ├─ AppDependencies.swift
+│  │     └─ SwiftDungeonApp.swift
+│  └─ Tests/
+│     └─ AppTests/
+│        └─ AppDependenciesTests.swift
+├─ Features/
+│  ├─ WorldFeature/
+│  │  ├─ Package.swift
+│  │  ├─ Sources/
+│  │  │  └─ WorldFeature/
+│  │  │     ├─ Domain/
+│  │  │     │  ├─ Character.swift
+│  │  │     │  └─ WorldProtocols.swift
+│  │  │     ├─ ViewModel/
+│  │  │     │  └─ WorldViewModel.swift
+│  │  │     ├─ View/
+│  │  │     │  └─ WorldView.swift
+│  │  │     └─ WorldFeatureFactory.swift
+│  │  └─ Tests/
+│  │     └─ WorldFeatureTests/
+│  │        └─ WorldViewModelTests.swift
+│  └─ DungeonFeature/
+│     ├─ Package.swift
+│     ├─ Sources/
+│     │  └─ DungeonFeature/
+│     │     ├─ Domain/
+│     │     │  ├─ DungeonMap.swift
+│     │     │  └─ DungeonProtocols.swift
+│     │     ├─ ViewModel/
+│     │     │  └─ DungeonViewModel.swift
+│     │     ├─ View/
+│     │     │  └─ DungeonView.swift
+│     │     └─ DungeonFeatureFactory.swift
+│     └─ Tests/
+│        └─ DungeonFeatureTests/
+│           └─ DungeonViewModelTests.swift
+└─ README.md

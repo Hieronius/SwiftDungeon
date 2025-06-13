@@ -7,7 +7,7 @@ struct SwiftDungeonApp: App {
 
 	// MARK: Compositional Root accordingly to Mark Seeman
 
-	let appDependencies = AppDependencies()
+	let appDependencies = CompositionRoot()
 
 	// MARK: - Body
 	

@@ -8,13 +8,6 @@ struct MenuView: View {
 	/// `ViewModel` for MenuView to observe
 	@StateObject private var viewModel: MenuViewModel
 
-	// MARK: - Properties
-
-	/// Place to store our actual Navigation Stack
-	///
-	/// Use to push/pop screens to create different combinations like transition from DungeonMap to Room
-	// @State private var path = NavigationPath()
-
 	// MARK: - Initialization
 
 	init(viewModel: MenuViewModel) {
@@ -29,19 +22,37 @@ struct MenuView: View {
 
 		NavigationStack(path: $viewModel.path) {
 
-			// Display MenuItems in the form of the List
+			// Display Screens in the form of the List
 
-			List(viewModel.menuItems) { item in
-				NavigationLink(item.title, value: item)
+			// 1. Push the Screen
+
+			List {
+				Button("Room") {
+					viewModel.pushRoom()
+				}
+				Button("Corridor") {
+					viewModel.pushCorridor()
+				}
+				Button("Dungeon") {
+					viewModel.pushDungeon()
+				}
+				Button("Town") {
+					viewModel.pushTown()
+				}
+				Button("World") {
+					viewModel.pushWorld()
+				}
 			}
 			.navigationTitle("Main Menu")
 			.navigationBarTitleDisplayMode(.inline)
 
 			// Define data type for navigation destination and pass it through the closure
 
-			.navigationDestination(for: MenuItem.self) { item in
+			.navigationDestination(for: AppScreen.self) { screen in
 
-				switch item.type {
+				// 2. Build the screen accordingly to it's type
+
+				switch screen {
 
 					// MARK: RoomBuilder
 
