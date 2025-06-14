@@ -21,11 +21,6 @@ struct DungeonView: View {
 	/// `ViewModel` of DungeonScene
 	@StateObject private var viewModel: DungeonViewModel
 
-	// MARK: - Properties
-
-	/// Property to allow to dismiss the screen after entering to via NavigationLink and NavigationStack
-	@Environment(\.dismiss) var dismiss
-
 	// MARK: - Initialization
 
 	init(viewModel: DungeonViewModel) {

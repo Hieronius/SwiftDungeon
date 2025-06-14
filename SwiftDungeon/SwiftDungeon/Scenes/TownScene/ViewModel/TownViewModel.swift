@@ -12,3 +12,12 @@ final class TownViewModel: ObservableObject {
 		self.navigationManager = navigationManager
 	}
 }
+
+// MARK: - Navigation
+
+extension TownViewModel {
+	
+	func popScreen() {
+		navigationManager.pop()
+	}
+}

@@ -13,3 +13,12 @@ final class WorldViewModel: ObservableObject {
 		self.navigationManager = navigationManager
 	}
 }
+
+// MARK: - Navigation
+
+extension WorldViewModel {
+
+	func popScreen() {
+		navigationManager.pop()
+	}
+}

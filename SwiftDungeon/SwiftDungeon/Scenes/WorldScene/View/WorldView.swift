@@ -7,7 +7,6 @@ struct WorldView: View {
 
 	/// `ViewModel` of World Scene
 	@StateObject private var viewModel: WorldViewModel
-	@Environment(\.dismiss) var dismiss
 
 	// MARK: - Initialization
 
@@ -24,7 +23,7 @@ struct WorldView: View {
 		Spacer()
 
 		actionButton(title: "Menu") {
-			dismiss()
+			viewModel.popScreen()
 		}
 
 		Spacer()

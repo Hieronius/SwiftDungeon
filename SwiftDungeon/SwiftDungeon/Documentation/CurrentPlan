@@ -1,13 +1,6 @@
 Current Plan
 
-1. Connect DungeonMapModule with RoomModule
-	- Create enemy event inside the room
-		- When you press the button with R at the map "Room Screen" should be triggered
-	- Create a trigger to enter room when user encounter it
 
 
-100. Model Navigation as Data (see my Menu Module and Path)
-	You don't need Coordinator because it's antipattern
 
-101. All dependencies should be defined and created in CompositionRoot - AppDependencies class at the start of the app so they can be passed to screens for creation. IT'S NOT A DI CONTAINER BECAUSE IT'S RESOLVED DURING COMPILATION STAGE AND NOT A RUNTIME AS SWIFTJECT AND OTHER SUPPOSED TO BE
 

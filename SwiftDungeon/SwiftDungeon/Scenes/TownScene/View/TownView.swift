@@ -7,8 +7,6 @@ struct TownView: View {
 
 	/// `ViewModel` of TownScene
 	@StateObject private var viewModel: TownViewModel
-	/// Property to allow to dismiss the screen after entering to via NavigationLink and NavigationStack
-	@Environment(\.dismiss) var dismiss
 
 	// MARK: - Initialization
 
@@ -23,7 +21,7 @@ struct TownView: View {
 		Spacer()
 
 		actionButton(title: "Menu") {
-			dismiss()
+			viewModel.popScreen()
 		}
 
 		Spacer()
