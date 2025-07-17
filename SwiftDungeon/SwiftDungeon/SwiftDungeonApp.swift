@@ -7,7 +7,7 @@ struct SwiftDungeonApp: App {
 
 	// MARK: Compositional Root accordingly to Mark Seeman
 
-	let appDependencies = CompositionRoot()
+	let compositionRoot = CompositionRoot()
 
 	// MARK: - Body
 	
@@ -15,7 +15,7 @@ struct SwiftDungeonApp: App {
 
 		WindowGroup {
 
-			appDependencies.buildMenu()
+			compositionRoot.buildMenu()
 
 		}
 	}

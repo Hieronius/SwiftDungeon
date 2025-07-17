@@ -2,7 +2,7 @@ import SwiftUI
 
 /// `Composition Root` or initial set of all app dependencies accordingly to Seeman's book "Dependency Injection"
 ///
-/// We use static method to resolve dependecies because it's more predictable and stable than just an init
+/// We use static method to resolve dependecies because it's more predictable and stable than just in an init
 final class CompositionRoot {
 
 	/// Shared entity to control navigation flow and `NavigationStack` across the app
@@ -20,6 +20,7 @@ final class CompositionRoot {
 
 		let navigationManager = getNavigationManager()
 		let viewModel = MenuViewModel(
+			// TODO: Rename appDependencies to CompositionRoot to avoid missnaming
 			appDependencies: self,
 			navigationManager: navigationManager
 		)

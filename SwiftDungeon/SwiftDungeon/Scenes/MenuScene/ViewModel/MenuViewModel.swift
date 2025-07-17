@@ -29,6 +29,7 @@ final class MenuViewModel: ObservableObject {
 		// MARK: This code makes Navigation Stack to work normally with Push/Pop but be cautious
 
 		// Observe navigationManager.path updates
+		
 		self.path = navigationManager.path
 		navigationManager.$path
 			.receive(on: DispatchQueue.main)

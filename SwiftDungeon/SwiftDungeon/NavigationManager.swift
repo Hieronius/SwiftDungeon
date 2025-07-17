@@ -7,7 +7,7 @@ final class NavigationManager {
 
 	// MARK: - Properties
 
-	/// NavigationStack to hold screens on the screens
+	/// NavigationStack to hold screens
 	///
 	/// May be should be `private` to avoid direct access by the owners (viewModels)
 	/// May be should not be `@Published` to avoid exposing

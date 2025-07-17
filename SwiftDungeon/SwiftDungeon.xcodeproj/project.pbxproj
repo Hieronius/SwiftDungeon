@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD2D74402DCB0D83005396F3 /* WorldStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D743F2DCB0D83005396F3 /* WorldStateMachine.swift */; };
 		DD2D74422DCB1C09005396F3 /* ActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D74412DCB1C09005396F3 /* ActionHandler.swift */; };
 		DD2D74442DCB1C3A005396F3 /* TurnManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D74432DCB1C3A005396F3 /* TurnManager.swift */; };
 		DDA59C492DC07582007877A6 /* RoomGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA59C482DC07582007877A6 /* RoomGameState.swift */; };
@@ -71,7 +70,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DD2D743F2DCB0D83005396F3 /* WorldStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldStateMachine.swift; sourceTree = "<group>"; };
 		DD2D74412DCB1C09005396F3 /* ActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionHandler.swift; sourceTree = "<group>"; };
 		DD2D74432DCB1C3A005396F3 /* TurnManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnManager.swift; sourceTree = "<group>"; };
 		DDA59C482DC07582007877A6 /* RoomGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomGameState.swift; sourceTree = "<group>"; };
@@ -431,7 +429,6 @@
 		DDAC13302DC9B24000E42D65 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				DD2D743F2DCB0D83005396F3 /* WorldStateMachine.swift */,
 				DDA940742DBF51C800837F9F /* Creature.swift */,
 			);
 			path = Protocols;
@@ -561,7 +558,6 @@
 			files = (
 				DDA810CC2DE17EF9000A2349 /* Tile.swift in Sources */,
 				DDAB5C132DF3FD2E00E97269 /* NavigationManager.swift in Sources */,
-				DD2D74402DCB0D83005396F3 /* WorldStateMachine.swift in Sources */,
 				DDA810CA2DE17E68000A2349 /* DungeonMapGenerator.swift in Sources */,
 				DDAA56E12DC881C2006E663D /* SceneUISection.swift in Sources */,
 				DDA9407C2DBF538700837F9F /* ActionCalculator.swift in Sources */,
