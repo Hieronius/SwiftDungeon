@@ -20,10 +20,10 @@ final class MenuViewModel: ObservableObject {
 
 	// MARK: - Initialization
 
-	init(appDependencies: CompositionRoot,
+	init(compositionRoot: CompositionRoot,
 		 navigationManager: NavigationManager) {
 		
-		self.compositionRoot = appDependencies
+		self.compositionRoot = compositionRoot
 		self.navigationManager = navigationManager
 
 		// MARK: This code makes Navigation Stack to work normally with Push/Pop but be cautious
