@@ -106,7 +106,6 @@ extension RoomGameManager {
 
 				snapshot.isHeroTurn.toggle()
 				checkWinLoseCondition()
-
 			}
 
 		} else if snapshot.isHeroTurn {
@@ -129,7 +128,6 @@ extension RoomGameManager {
 
 				snapshot.isHeroTurn.toggle()
 				checkWinLoseCondition()
-
 			}
 		}
 		roomGameState.applyNewGameStateSnapshot(snapshot)
