@@ -1,5 +1,6 @@
 import Foundation
 
+// TODO: Put different sets of stats/chars into separate Structs
 class Character: Creature {
 
 	let name: String

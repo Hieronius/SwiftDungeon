@@ -63,8 +63,12 @@ final class ActionHandler {
 
 	/// Should be refactored to replace raw data from RoomGameManager
 	func stun(_ host: Character, target: Character) -> ActionResult {
-
-		ActionResult(didHit: true, isCritical: false, impact: 0, effects: [], log: [])
+		
+		return ActionResult(didHit: true,
+							isCritical: false,
+							impact: 0,
+							effects: [],
+							log: [])
 	}
 
 	// MARK: Sunder Armor

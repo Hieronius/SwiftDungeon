@@ -175,10 +175,8 @@
 		DDA9405F2DBF4FC600837F9F /* SwiftDungeon */ = {
 			isa = PBXGroup;
 			children = (
-				DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */,
-				DDAB5C102DF3FD0600E97269 /* CompositionRoot.swift */,
-				DDAB5C122DF3FD2E00E97269 /* NavigationManager.swift */,
 				DDAB3E502DC72B7800DBA1C8 /* Documentation */,
+				DDF35AE12E28CEB10083F007 /* AppFoundation */,
 				DDAA040A2DC46E3400C801B4 /* Domain */,
 				DDAA040B2DC46E4D00C801B4 /* Scenes */,
 				DDA940712DBF50FF00837F9F /* Helpers */,
@@ -481,6 +479,16 @@
 				DDAA4C2D2DE071860007E5DA /* View */,
 			);
 			path = WorldScene;
+			sourceTree = "<group>";
+		};
+		DDF35AE12E28CEB10083F007 /* AppFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				DDA940602DBF4FC600837F9F /* SwiftDungeonApp.swift */,
+				DDAB5C102DF3FD0600E97269 /* CompositionRoot.swift */,
+				DDAB5C122DF3FD2E00E97269 /* NavigationManager.swift */,
+			);
+			path = AppFoundation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

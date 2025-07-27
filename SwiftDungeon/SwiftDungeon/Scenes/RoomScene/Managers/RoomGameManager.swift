@@ -25,7 +25,6 @@ final class RoomGameManager {
 		self.characterManager = characterManager
 		self.effectManager = effectManager
 		self.turnManager = turnManager
-
 	}
 
 }
@@ -37,6 +36,7 @@ extension RoomGameManager {
 	// MARK: PauseGame
 	
 	func pauseGame() {
+		
 		var snapshot = roomGameState.getActualGameStateSnapshot()
 		snapshot.isGameOn = false
 		roomGameState.applyNewGameStateSnapshot(snapshot)
@@ -45,6 +45,7 @@ extension RoomGameManager {
 	// MARK: ResumeGame
 	
 	func resumeGame() {
+		
 		var snapshot = roomGameState.getActualGameStateSnapshot()
 		snapshot.isGameOn = true
 		roomGameState.applyNewGameStateSnapshot(snapshot)
