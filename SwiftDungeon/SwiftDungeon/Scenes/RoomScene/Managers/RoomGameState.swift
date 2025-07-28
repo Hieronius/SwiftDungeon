@@ -1,12 +1,5 @@
 import SwiftUI
 
-//protocol IState {
-//	var snapshot { get set }
-
-// getActualGameStateSnapshot()
-// applyNewGameStateSnapshot()
-//}
-
 /// Main entity to manage Room encounter game state by passing and applying current game state snapshot
 final class RoomGameState {
 
