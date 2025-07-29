@@ -9,6 +9,7 @@ final class ActionCalculator {
 
 	/// Calculates average from host min/max damage and subtracting target's current armor
 	func attack(_ host: Character, _ target: Character) -> Int {
+		
 		let damage = Int.random(in: host.minDamage...host.maxDamage) - target.currentArmor
 		return damage > 0 ? damage : 0
 	}
@@ -23,6 +24,7 @@ final class ActionCalculator {
 	// MARK: Cut
 
 	func cut(_ host: Character, _ target: Character) -> Int {
+		
 		let damage = (Int.random(in: host.minDamage...host.maxDamage) - target.currentArmor) / 2
 		return damage > 0 ? damage : 0
 	}
@@ -31,6 +33,7 @@ final class ActionCalculator {
 
 	// should be modifed to imply host stats
 	func sunderArmor(_ host: Character, _ target: Character) -> Int {
+		
 		let onePercentOfArmor = Double(target.currentArmor) / 100
 		let impact = 30.0 * (onePercentOfArmor)
 		return Int(impact)
@@ -62,6 +65,7 @@ final class ActionCalculator {
 	// MARK: Fireball
 
 	func fireball(_ host: Character, _ target: Character) -> Int {
+		
 		let impact = host.spellPower
 		return impact
 	}
@@ -69,6 +73,7 @@ final class ActionCalculator {
 	// MARK: Dot
 
 	func dot(_ host: Character, _ target: Character) -> Int {
+		
 		let impact = host.spellPower / 2
 		return impact
 	}
@@ -76,13 +81,15 @@ final class ActionCalculator {
 	// MARK: Exhaustion
 
 	func exhaustion(_ host: Character, _ target: Character) -> Int {
+		
 		let impact = 1
 		return impact
 	}
 
 	// MARK: Health Regen
 
-	func healthRegen(_ host: Character) -> Int{
+	func healthRegen(_ host: Character) -> Int {
+		
 		let impact = 10
 		return impact
 	}
@@ -90,6 +97,7 @@ final class ActionCalculator {
 	// MARK: Mana Regen
 
 	func manaRegen(_ host: Character) -> Int {
+		
 		let impact = 10
 		return impact
 	}
