@@ -23,7 +23,6 @@ final class CompositionRoot {
 			compositionRoot: self,
 			navigationManager: navigationManager
 		)
-		print("ARE YOU FUCKING HERE?")
 		let view = MenuView(viewModel: viewModel)
 		return view
 	}
