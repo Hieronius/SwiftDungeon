@@ -16,7 +16,6 @@ struct SwiftDungeonApp: App {
 		WindowGroup {
 
 			compositionRoot.buildMenu()
-
 		}
 	}
 }
